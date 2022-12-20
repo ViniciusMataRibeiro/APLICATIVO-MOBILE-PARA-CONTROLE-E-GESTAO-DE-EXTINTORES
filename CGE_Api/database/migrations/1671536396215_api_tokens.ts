@@ -1,5 +1,4 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
-import { DateTime } from 'luxon'
 
 export default class extends BaseSchema {
   protected tableName = 'api_tokens'
@@ -12,7 +11,7 @@ export default class extends BaseSchema {
       table.string('type').notNullable()
       table.string('token', 64).notNullable().unique()
       table.timestamp('expires_at', { useTz: true }).nullable()
-      table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(DateTime.now)
+      table.timestamp('created_at', { useTz: true }).notNullable()
     })
   }
 
