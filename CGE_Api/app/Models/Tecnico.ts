@@ -9,6 +9,9 @@ export default class Tecnico extends BaseModel {
   @column()
   public userId: number
 
+  @column()
+  public empresa_id: number
+
   @hasOne(() => Empresa,{
     foreignKey: 'empresa_id',
     localKey: 'id',
