@@ -14,6 +14,11 @@ export default class Empresa extends BaseModel {
   @column()
   public telefone: string
 
+  @column()
+  public online: boolean
+
+  @column()
+  public bloqueado: boolean
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime

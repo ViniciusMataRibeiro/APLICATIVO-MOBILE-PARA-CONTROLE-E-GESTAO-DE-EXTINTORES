@@ -12,6 +12,8 @@ export default class extends BaseSeeder {
     await Empresa.create({
       nome: 'Empresa',
       telefone: '35 9 9999-9999',
+      online: true,
+      bloqueado: false,
       userId: user.id,
     })
   }
