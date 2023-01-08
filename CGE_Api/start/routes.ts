@@ -10,6 +10,8 @@ Route.post('/tecnico/cadastro/:id', 'TecnicosController.store');
 Route.group(() => {
   Route.get('auth/me', 'AuthController.me');
 
+  Route.get('/Tecnicos', 'TecnicosController.index');
+
   Route.put('/empresa', 'EmpresasController.update');
 }).middleware('auth');
 

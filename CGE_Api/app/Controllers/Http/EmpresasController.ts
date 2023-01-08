@@ -7,6 +7,26 @@ import EditEmpresaValidator from 'App/Validators/EditEmpresaValidator';
 
 export default class EmpresasController {
 
+    public async index({ response, auth }: HttpContextContract) {
+        try {
+            const userAuth = await auth.use('api').authenticate();
+
+        if (userAuth.tipo != 'admin') {
+            return response.badRequest({
+                message: 'Este Usuário não tem acesso a essa rota',
+            });
+        }
+
+        const empresa = await Empresa.query().where('bloqueado', false);
+
+        return response.ok(empresa);
+        } catch {
+            return response.badRequest({
+                message: 'Erro ao listar Empresas',
+            });
+        }
+    }
+
     public async store({ request, response }: HttpContextContract) {
         const payload = await request.validate(CreateEmpresaValidator);
 
@@ -69,4 +89,29 @@ export default class EmpresasController {
         }
     }
 
+    public async destroy({ response, params }: HttpContextContract) {
+        try {
+            const empresa = await Empresa.findByOrFail("id", params.id);
+
+            if (empresa) {
+                empresa.merge({
+                    bloqueado: true,
+                });
+                await empresa.save();
+
+                return response.ok({
+                    message: 'Empresa deletada com sucesso',
+                });
+            }else{
+                return response.badRequest({
+                    message: 'Empresa não encontrada',
+                });
+            }
+
+        } catch {
+            return response.badRequest({
+                message: 'Erro ao deletar Empresa',
+            });
+        }
+    }
 }

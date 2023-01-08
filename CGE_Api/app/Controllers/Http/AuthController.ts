@@ -17,10 +17,10 @@ export default class AuthController {
                 case 'tecnicos':
                     expira = '30days';
                     break;
-                case 'empresas':
+                case 'empresa':
                     expira = '7days';
                     break;
-                case 'admins':
+                case 'admin':
                     expira = '1day';
                     break;
                 default:
