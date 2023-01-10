@@ -32,16 +32,14 @@ export default class TecnicosController {
             tipo: 'tecnico',
         });
 
-        const IdEmpresa = params.id;
-
-        if (!IdEmpresa) {
+        if (!params.id) {
             return response.badRequest({
                 message: 'Empresa não encontrada',
             });
         }
 
         try {
-            const empresa = await Empresa.query().where('id', IdEmpresa).firstOrFail();
+            const empresa = await Empresa.query().where('id', params.id).firstOrFail();
             const tecnico = await Tecnico.create({
                 nome: payload.nome,
                 userId: user.id,
