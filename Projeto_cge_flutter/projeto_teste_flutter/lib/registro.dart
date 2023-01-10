@@ -5,6 +5,12 @@ class Registro extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Registro de Empresa'),
+        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+      ),
+    );
   }
 }
