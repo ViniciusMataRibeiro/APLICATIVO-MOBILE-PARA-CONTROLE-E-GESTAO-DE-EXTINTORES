@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_teste_flutter/registro.dart';
+import 'registro.dart';
+
 
 void main() {
   runApp(const MyApp());

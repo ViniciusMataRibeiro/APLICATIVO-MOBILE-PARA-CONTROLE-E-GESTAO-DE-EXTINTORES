@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:projeto_teste_flutter/widget/BlockButton.dart';
+import 'widget/blockButton.dart';
+
 
 class Login extends StatelessWidget {
   const Login({super.key});
