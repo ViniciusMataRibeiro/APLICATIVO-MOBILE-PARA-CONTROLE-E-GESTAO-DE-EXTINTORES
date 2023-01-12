@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.cge.projeto_teste_flutter">
    <application
-        android:label="projeto_teste_flutter"
+        android:label="CGE"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
