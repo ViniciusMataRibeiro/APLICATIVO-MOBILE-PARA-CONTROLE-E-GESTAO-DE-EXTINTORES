@@ -34,8 +34,10 @@ class ExtintorPage extends GetView<ExtintorController> {
               for (var i = 0; i < 10; i++) ...[
                 Container(
                   margin: const EdgeInsets.all(3.0),
-                  padding: const EdgeInsets.all(3.0),
+                  padding: const EdgeInsets.all(5.0),
                   child: Card(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
                     surfaceTintColor: const Color.fromARGB(255, 201, 201, 201),
                     child: Column(
                       children: [
@@ -57,13 +59,16 @@ class ExtintorPage extends GetView<ExtintorController> {
                                     Row(
                                       children: const [
                                         Icon(Icons.circle,
-                                            size: 25, color: Colors.green),
+                                            size: 20, color: Colors.green),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
                                         Expanded(
                                           child: Text('Data de Vencimento',
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontSize: 17,
-                                                color: Colors.black45,
+                                                color: Color.fromARGB(255, 78, 78, 78),
                                               )),
                                         ),
                                       ],
@@ -71,27 +76,16 @@ class ExtintorPage extends GetView<ExtintorController> {
                                     Row(
                                       children: const [
                                         Icon(Icons.circle,
-                                            size: 25, color: Colors.green),
-                                        Expanded(
-                                          child: Text('Pressão do Extintor',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontSize: 17,
-                                                color: Colors.black45,
-                                              )),
+                                            size: 20, color: Colors.green),
+                                        SizedBox(
+                                          width: 3,
                                         ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: const [
-                                        Icon(Icons.circle,
-                                            size: 25, color: Colors.green),
                                         Expanded(
                                           child: Text('Última Inspeção',
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontSize: 17,
-                                                color: Colors.black45,
+                                                color: Color.fromARGB(255, 78, 78, 78),
                                               )),
                                         ),
                                       ],
@@ -99,13 +93,16 @@ class ExtintorPage extends GetView<ExtintorController> {
                                     Row(
                                       children: const [
                                         Icon(Icons.circle,
-                                            size: 25, color: Colors.green),
+                                            size: 20, color: Colors.green),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
                                         Expanded(
                                           child: Text('Informações do Extintor',
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontSize: 17,
-                                                color: Colors.black45,
+                                                color: Color.fromARGB(255, 78, 78, 78),
                                               )),
                                         ),
                                       ],
@@ -126,16 +123,6 @@ class ExtintorPage extends GetView<ExtintorController> {
                                           'assets/image/Classe-${letra[i]}.jpg',
                                           fit: BoxFit.cover,
                                           height: 80,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: ClipRRect(
-                                        child: Image.asset(
-                                          'assets/image/QRCode.png',
-                                          fit: BoxFit.cover,
-                                          height: 90,
                                         ),
                                       ),
                                     ),

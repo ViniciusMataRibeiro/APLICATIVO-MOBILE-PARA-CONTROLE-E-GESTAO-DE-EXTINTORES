@@ -14,7 +14,7 @@ class DashboardPage extends GetView<DashboardController> {
             onDestinationSelected: controller.changePage,
             height: 60,
             selectedIndex: controller.currentPage.value,
-            backgroundColor: Colors.red,
+            backgroundColor: const Color.fromARGB(255, 247, 20, 3),
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             destinations: const [
               NavigationDestination(
