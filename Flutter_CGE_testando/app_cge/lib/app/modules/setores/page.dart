@@ -30,6 +30,8 @@ class SetorPage extends GetView<SetorController> {
                   margin: const EdgeInsets.all(3.0),
                   padding: const EdgeInsets.all(3.0),
                   child: Card(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
                     surfaceTintColor: const Color.fromARGB(255, 201, 201, 201),
                     child: Column(
                       children: [
@@ -45,18 +47,21 @@ class SetorPage extends GetView<SetorController> {
                           children: [
                             Expanded(
                               child: SizedBox(
-                                child: Column(
+                                child: Column(                                 
                                   children: [
                                     Row(
                                       children: const [
                                         Icon(Icons.circle,
-                                            size: 25, color: Colors.green),
+                                            size: 20, color: Colors.green,),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
                                         Expanded(
                                           child: Text('Extintores Funcional',
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
-                                                fontSize: 17,
-                                                color: Colors.black45,
+                                                fontSize: 16,
+                                                color: Color.fromARGB(255, 78, 78, 78),
                                               )),
                                         ),
                                       ],
@@ -64,14 +69,17 @@ class SetorPage extends GetView<SetorController> {
                                     Row(
                                       children: const [
                                         Icon(Icons.circle,
-                                            size: 25,
-                                            color: Colors.greenAccent),
+                                            size: 20,
+                                            color: Colors.yellow),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
                                         Expanded(
                                           child: Text('Extintores a Vencer',
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
-                                                fontSize: 17,
-                                                color: Colors.black45,
+                                                fontSize: 16,
+                                                color: Color.fromARGB(255, 78, 78, 78),
                                               )),
                                         ),
                                       ],
@@ -79,14 +87,17 @@ class SetorPage extends GetView<SetorController> {
                                     Row(
                                       children: const [
                                         Icon(Icons.circle,
-                                            size: 25,
-                                            color: Colors.yellowAccent),
+                                            size: 20,
+                                            color: Colors.red),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
                                         Expanded(
                                           child: Text('Extintores Vencidos',
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
-                                                fontSize: 17,
-                                                color: Colors.black45,
+                                                fontSize: 16,
+                                                color: Color.fromARGB(255, 78, 78, 78),                                               
                                               )),
                                         ),
                                       ],
@@ -98,9 +109,8 @@ class SetorPage extends GetView<SetorController> {
                             Expanded(
                               child: SizedBox(
                                 height: 150,
-                                width: 120,
                                 child: Container(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(7.0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10.0),
                                     child: Image.network(

@@ -7,12 +7,6 @@ class LoginPage extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Login',
-            style: TextStyle(
-                fontSize: 25,
-                color: Colors.white,
-                fontStyle: FontStyle.italic)),
         backgroundColor: const Color.fromARGB(255, 175, 31, 21),
       ),
       body: Center(
@@ -27,7 +21,7 @@ class LoginPage extends GetView<LoginController> {
                 child: Container(
                   height: 140,
                   width: 140,
-                  margin: const EdgeInsets.only(top: 80),
+                  margin: const EdgeInsets.only(top: 50),
                   decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/image/cge.jpeg'),
