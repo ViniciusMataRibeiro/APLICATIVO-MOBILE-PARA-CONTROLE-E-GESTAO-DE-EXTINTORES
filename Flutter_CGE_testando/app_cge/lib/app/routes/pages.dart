@@ -8,11 +8,18 @@ import 'package:app_cge/app/modules/login/binding.dart';
 import 'package:app_cge/app/modules/login/page.dart';
 import 'package:app_cge/app/modules/perfil/binding.dart';
 import 'package:app_cge/app/modules/perfil/page.dart';
+import 'package:app_cge/app/modules/splash/binding.dart';
+import 'package:app_cge/app/modules/splash/page.dart';
 import 'package:app_cge/app/routes/routes.dart';
 import 'package:get/get.dart';
 
 abstract class AppPages {
   static final pages = [
+    GetPage(
+      name: Routes.inicial,
+      page: () => SplashPage(),
+      binding: SplashBinding(),
+    ),
     GetPage(
       name: Routes.dashboard,
       page: () => DashboardPage(),

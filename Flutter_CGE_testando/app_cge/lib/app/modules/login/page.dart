@@ -40,6 +40,7 @@ class LoginPage extends GetView<LoginController> {
                 padding: const EdgeInsets.all(8),
                 child: Form(
                   child: TextFormField(
+                    controller: controller.emailController,
                     style: const TextStyle(fontSize: 18, color: Colors.white),
                     keyboardType: TextInputType.emailAddress,
                     cursorColor: Colors.white,
@@ -64,6 +65,7 @@ class LoginPage extends GetView<LoginController> {
                 margin: const EdgeInsets.only(top: 5, left: 25, right: 25),
                 padding: const EdgeInsets.all(8),
                 child: Obx(() => TextFormField(
+                      controller: controller.passwordController,
                       style: const TextStyle(fontSize: 18, color: Colors.white),
                       obscureText: controller.showPassword.value,
                       cursorColor: Colors.white,
@@ -106,7 +108,7 @@ class LoginPage extends GetView<LoginController> {
                       const EdgeInsets.symmetric(vertical: 8.0, horizontal: 50),
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.toNamed('/dashboard');
+                      controller.goTologin();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 175, 31, 21),
