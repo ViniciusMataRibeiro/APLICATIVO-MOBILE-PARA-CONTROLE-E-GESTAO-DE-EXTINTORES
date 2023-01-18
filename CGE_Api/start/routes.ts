@@ -3,6 +3,8 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.post('/login', 'AuthController.login');
 Route.post('/logout', 'AuthController.logout');
 
+ Route.post('/empresa/cadastro', 'EmpresasController.store');
+
 Route.group(() => {
   Route.get('auth/me', 'AuthController.me');
 
@@ -12,7 +14,6 @@ Route.group(() => {
   Route.delete('/tecnico/:id', 'TecnicosController.destroy');
 
   Route.get('/Empresas', 'EmpresasController.index');
-  Route.post('/empresa/cadastro', 'EmpresasController.store');
   Route.put('/empresa', 'EmpresasController.update');
   Route.delete('/empresa/:id', 'EmpresasController.destroy');
 }).middleware('auth');
