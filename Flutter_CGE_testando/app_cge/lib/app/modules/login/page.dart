@@ -6,9 +6,6 @@ class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
-      ),
       body: Center(
         child: Container(
           decoration: const BoxDecoration(

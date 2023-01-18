@@ -21,7 +21,7 @@ main() async {
 
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: Routes.login,
+    initialRoute: Routes.inicial,
     theme: themeData,
     defaultTransition: Transition.fade,
     getPages: AppPages.pages,

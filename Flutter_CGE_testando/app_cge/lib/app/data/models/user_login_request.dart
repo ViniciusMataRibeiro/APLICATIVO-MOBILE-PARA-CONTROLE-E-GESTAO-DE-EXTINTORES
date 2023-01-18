@@ -8,7 +8,7 @@ class UserLoginRequestModel {
   });
 
   Map<String, dynamic> toJson() => {
-        'email': email,
-        'password': password,
+        'email': email.toString(),
+        'password': password.toString(),
       };
 }
