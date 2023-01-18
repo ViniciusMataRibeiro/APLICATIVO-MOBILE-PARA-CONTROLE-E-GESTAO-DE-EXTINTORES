@@ -1,4 +1,5 @@
 import 'package:app_cge/app/core/theme/app_theme.dart';
+import 'package:app_cge/app/data/provider/api.dart';
 import 'package:app_cge/app/routes/pages.dart';
 import 'package:app_cge/app/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 
 main() {
+
+  Get.put<Api>(Api());
+
   Intl.defaultLocale = 'pt_BR';
 
   runApp(GetMaterialApp(

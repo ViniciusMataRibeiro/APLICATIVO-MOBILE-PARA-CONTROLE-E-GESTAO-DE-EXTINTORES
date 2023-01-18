@@ -1,3 +1,4 @@
+import 'package:app_cge/app/routes/routes.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
@@ -5,5 +6,9 @@ class LoginController extends GetxController {
 
   void toggleShowPassword() {
     showPassword.value = !showPassword.value;
+  }
+
+  void goTologin() {
+    Get.toNamed(Routes.login);
   }
 }
