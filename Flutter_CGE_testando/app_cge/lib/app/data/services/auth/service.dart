@@ -8,8 +8,18 @@ class AuthService extends GetxService {
   final _configService = Get.find<ConfigService>();
   final AuthRepository _repository;
   final user = Rxn<UserModel>();
+  bool get isLogged => user.value != null;
 
   AuthService(this._repository);
+
+  @override
+  void onInit() async {
+    if (_configService.token != null) {
+      await _getUser();
+    }
+
+    super.onInit();
+  }
 
   Future<void> login(UserLoginRequestModel userLoginRequest) async {
     var userLoginResponse = await _repository.login(userLoginRequest);
@@ -19,9 +29,15 @@ class AuthService extends GetxService {
     print(userLoginResponse.token);
   }
 
+  Future<void> logout() async {
+    await _configService.removeToken();
+    user.value = null;
+  }
+
   Future _getUser() {
-    return _repository.getUser().then((value) {
-      user.value = value;
-    });
+    return _repository.getUser()
+      .then((value) {
+        user.value = value;
+      });
   }
 }

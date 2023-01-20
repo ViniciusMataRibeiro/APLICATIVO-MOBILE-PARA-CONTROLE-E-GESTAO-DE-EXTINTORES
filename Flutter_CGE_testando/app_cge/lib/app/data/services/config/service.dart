@@ -17,6 +17,10 @@ class ConfigService extends GetxService {
   Future<void> saveToken(String token) {
     return box.write(ConfigKeys.token.toString(), token);
   }
+
+  Future<void> removeToken() {
+    return box.remove(ConfigKeys.token.toString());
+  }
 }
 
 enum ConfigKeys { token }

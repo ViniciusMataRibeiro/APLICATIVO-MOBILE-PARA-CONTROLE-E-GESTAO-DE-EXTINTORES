@@ -12,12 +12,12 @@ class Api extends GetConnect {
 
   @override
   void onInit() {
-    httpClient.baseUrl = "http://127.0.0.1:3333/";
+    httpClient.baseUrl = "http://192.168.0.134:3333/";
 
     httpClient.addRequestModifier((Request request) {
       request.headers['Accept'] = 'application/json';
       request.headers['Content-Type'] = 'application/json';
-
+      
       return request;
     });
 
@@ -40,6 +40,8 @@ class Api extends GetConnect {
       case 202:
       case 204:
         return response;
+      case 422:
+        throw response.body['errors'].first['message'];
       default:
         throw 'Ocorreu um erro';
     }
