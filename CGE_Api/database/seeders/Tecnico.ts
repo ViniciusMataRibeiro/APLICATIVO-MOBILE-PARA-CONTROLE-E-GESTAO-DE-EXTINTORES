@@ -14,7 +14,7 @@ export default class extends BaseSeeder {
       nome: 'Tecnico',
       online: true,
       bloqueado: false,
-      empresaId: 1,
+      empresa_id: 1,
       userId: user.id,
     })
   }
