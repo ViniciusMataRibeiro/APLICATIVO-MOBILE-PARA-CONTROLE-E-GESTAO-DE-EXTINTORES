@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:app_cge/app/modules/extintores/controller.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';

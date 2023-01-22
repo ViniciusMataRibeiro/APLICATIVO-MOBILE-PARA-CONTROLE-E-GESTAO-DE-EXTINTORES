@@ -25,11 +25,11 @@ class AuthService extends GetxService {
     var userLoginResponse = await _repository.login(userLoginRequest);
     await _configService.saveToken(userLoginResponse.token);
     await _getUser();
-
-    print(userLoginResponse.token);
+    await logout();
   }
 
   Future<void> logout() async {
+    _repository.logout();
     await _configService.removeToken();
     user.value = null;
   }

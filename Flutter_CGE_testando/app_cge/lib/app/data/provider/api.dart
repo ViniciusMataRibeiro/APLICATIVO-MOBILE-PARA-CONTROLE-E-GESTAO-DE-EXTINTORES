@@ -1,61 +1,52 @@
 import 'dart:convert';
-
 import 'package:app_cge/app/data/models/user.dart';
 import 'package:app_cge/app/data/models/user_login_request.dart';
 import 'package:app_cge/app/data/models/user_login_response.dart';
-import 'package:app_cge/app/data/services/config/service.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/request/request.dart';
+import 'package:http/http.dart' as http;
 
-class Api extends GetConnect {
+import '../services/config/service.dart';
+
+class Api {
   final _configService = Get.find<ConfigService>();
+  final baseUrl = "http://192.168.0.134:3333";
 
-  @override
-  void onInit() {
-    httpClient.baseUrl = "http://192.168.0.134:3333/";
-
-    httpClient.addRequestModifier((Request request) {
-      request.headers['Accept'] = 'application/json';
-      request.headers['Content-Type'] = 'application/json';
-      
-      return request;
-    });
-
-    httpClient.addAuthenticator((Request request) {
-      var token = _configService.token;
-      var headers = {'Authorization': 'Bearer $token'};
-
-      request.headers.addAll(headers);
-      return request;
-    });
-
-    super.onInit();
-  }
-
-  Response _errorHandler(Response response) {
-    print(response.bodyString);
-
-    switch (response.statusCode) {
-      case 200:
-      case 202:
-      case 204:
-        return response;
-      case 422:
-        throw response.body['errors'].first['message'];
-      default:
-        throw 'Ocorreu um erro';
+  Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
+    var url = Uri.parse("$baseUrl/login");
+    var response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: jsonEncode(data.toJson()));
+    if (response.statusCode == 200) {
+      return UserLoginResponseModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed');
     }
   }
 
-  Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
-    var response = _errorHandler(await post('login', jsonEncode(data)));
-
-    return UserLoginResponseModel.fromJson(response.body);
+  Future<UserModel> getUser() async {
+    var url = Uri.parse("$baseUrl/auth/me");
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization': 'Bearer ${_configService.token}'
+    });
+    if (response.statusCode == 200) {
+      return UserModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed');
+    }
   }
 
-  Future<UserModel> getUser() async {
-    var response = _errorHandler(await get('auth/me'));
-
-    return UserModel.fromJson(response.body);
+  Future<void> logout() async {
+    var url = Uri.parse("$baseUrl/logout?token=${_configService.token}");
+    var response = await http.post(url);
+    if (response.statusCode == 200) {
+      return;
+    } else {
+      throw Exception('Failed');
+    }
   }
 }

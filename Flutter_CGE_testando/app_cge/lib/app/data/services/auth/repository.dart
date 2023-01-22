@@ -13,4 +13,6 @@ class AuthRepository {
       _api.login(userLoginRequest);
 
   Future<UserModel> getUser() => _api.getUser();
+
+  Future<void> logout() => _api.logout();
 }
