@@ -29,8 +29,6 @@ class Api {
   Future<UserModel> getUser() async {
     var url = Uri.parse("$baseUrl/auth/me");
     var response = await http.get(url, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
       'authorization': 'Bearer ${_configService.token}'
     });
     if (response.statusCode == 200) {
