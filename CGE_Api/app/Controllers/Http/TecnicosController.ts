@@ -1,4 +1,4 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Database from '@ioc:Adonis/Lucid/Database';
 import Empresa from 'App/Models/Empresa';
 import Tecnico from 'App/Models/Tecnico';
@@ -23,23 +23,19 @@ export default class TecnicosController {
         }
     }
 
-    public async store({ request, response, params }: HttpContextContract) {
+    public async store({ request, response, auth }: HttpContextContract) {
         const payload = await request.validate(CreateTecnicoValidator);
-
-        const user = await User.create({
-            email: payload.email,
-            password: payload.password,
-            tipo: 'tecnico',
-        });
-
-        if (!params.id) {
-            return response.badRequest({
-                message: 'Empresa não encontrada',
-            });
-        }
-
         try {
-            const empresa = await Empresa.query().where('id', params.id).firstOrFail();
+            const userAuth = await auth.use('api').authenticate();
+
+            const empresa = await Empresa.findByOrFail("user_id", userAuth.id);
+
+            const user = await User.create({
+                email: payload.email,
+                password: payload.password,
+                tipo: 'tecnico',
+            });
+
             const tecnico = await Tecnico.create({
                 nome: payload.nome,
                 userId: user.id,

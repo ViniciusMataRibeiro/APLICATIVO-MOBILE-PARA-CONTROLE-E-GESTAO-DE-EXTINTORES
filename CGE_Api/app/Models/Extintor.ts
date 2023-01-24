@@ -36,6 +36,9 @@ export default class Extintor extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  @column.dateTime()
+  public deletedAt: DateTime
+
   @hasMany(() => Manutencoe, {
     foreignKey: 'extintor_id',
     localKey: 'id',

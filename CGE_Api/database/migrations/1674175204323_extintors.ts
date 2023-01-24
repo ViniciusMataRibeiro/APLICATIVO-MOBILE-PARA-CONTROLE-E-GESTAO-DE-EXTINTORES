@@ -15,7 +15,7 @@ export default class extends BaseSchema {
       table.boolean('ativo').notNullable().defaultTo(true)
       table.string('descricao', 255).notNullable()
       table.timestamps(true, true)
-      table.timestamp('deleted_at').notNullable()
+      table.timestamp('deleted_at').nullable()
     })
   }
 

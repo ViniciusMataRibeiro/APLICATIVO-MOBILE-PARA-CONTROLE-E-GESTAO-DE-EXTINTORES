@@ -1,4 +1,4 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Database from '@ioc:Adonis/Lucid/Database';
 import Empresa from 'App/Models/Empresa';
 import EnderecoEmpresa from 'App/Models/EnderecoEmpresa';
@@ -11,9 +11,9 @@ export default class EnderecoEmpresasController {
             const userAuth = await auth.use('api').authenticate();
 
             const empresa = await Empresa.findByOrFail("user_id", userAuth.id);
-            const endreco = await Database.query().select('*').from('endereco_empresas').where('empresa_id', empresa.id);
+            const endereco = await Database.query().select('*').from('endereco_empresas').where('empresa_id', empresa.id);
 
-            return response.ok(endreco);
+            return response.ok(endereco);
         } catch (error) {
             return response.badRequest({
                 message: 'Erro ao buscar Endereço',
@@ -21,18 +21,14 @@ export default class EnderecoEmpresasController {
         }
     }
 
-    public async store({ request, response, params }: HttpContextContract) {
+    public async store({ request, response, auth }: HttpContextContract) {
         const payload = await request.validate(CreateEnderecoEmpresaValidator);
-
-        if (!params.id) {
-            return response.badRequest({
-                message: 'Empresa não encontrada',
-            })
-        }
-
         try {
+            const userAuth = await auth.use('api').authenticate();
+            const empresa = await Empresa.findByOrFail("user_id", userAuth.id);
+
             const endereco = await EnderecoEmpresa.create({
-                empresa_id: params.id,
+                empresa_id: empresa.id,
                 cep: payload.cep,
                 rua: payload.rua,
                 numero: payload.numero,

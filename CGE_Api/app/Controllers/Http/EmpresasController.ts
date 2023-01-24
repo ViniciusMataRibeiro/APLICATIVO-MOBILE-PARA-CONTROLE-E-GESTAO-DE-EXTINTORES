@@ -1,8 +1,8 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Database from '@ioc:Adonis/Lucid/Database';
 import Empresa from 'App/Models/Empresa';
 import User from 'App/Models/User';
-import CreateEmpresaValidator from 'App/Validators/CreateEmpresaValidator'
+import CreateEmpresaValidator from 'App/Validators/CreateEmpresaValidator';
 import EditEmpresaValidator from 'App/Validators/EditEmpresaValidator';
 
 export default class EmpresasController {

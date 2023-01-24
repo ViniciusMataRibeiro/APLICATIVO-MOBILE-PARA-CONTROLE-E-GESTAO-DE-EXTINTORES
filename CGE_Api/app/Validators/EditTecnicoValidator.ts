@@ -8,7 +8,6 @@ export default class EditTecnicoValidator {
     user_id: this.ctx.auth.user!.id,
   })
 
-
   public schema = schema.create({
     nome: schema.string({ trim: true }, [
       rules.minLength(3),

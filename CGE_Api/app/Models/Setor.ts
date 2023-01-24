@@ -24,8 +24,8 @@ export default class Setor extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @column.dateTime({ autoCreate: true })
-  public deletedAt: DateTime
+  @column.dateTime()
+  public deletedAt: DateTime | null
 
   @hasMany(() => Extintor, {
     foreignKey: 'setor_id',
