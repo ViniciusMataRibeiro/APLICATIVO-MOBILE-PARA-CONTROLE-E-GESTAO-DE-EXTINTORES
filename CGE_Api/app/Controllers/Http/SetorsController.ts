@@ -28,11 +28,11 @@ export default class SetorsController {
             const tecnico = await Tecnico.findByOrFail("user_id", userAuth.id);
             const setor = await Setor.create({
                 nome: payload.nome,
-                descricao : payload.descricao,
+                descricao: payload.descricao,
                 ativo: payload.ativo,
                 empresa_id: tecnico.empresa_id,
             });
-    
+
             return response.ok({
                 id: setor.id,
                 nome: setor.nome,
@@ -49,10 +49,10 @@ export default class SetorsController {
 
         try {
             const setor = await Setor.findByOrFail("id", payload.id);
-           
+
             setor.merge({
                 nome: payload.nome,
-                descricao : payload.descricao == null ? setor.descricao : payload.descricao,
+                descricao: payload.descricao == null ? setor.descricao : payload.descricao,
                 ativo: payload.ativo,
             });
 

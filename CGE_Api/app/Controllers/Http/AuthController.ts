@@ -33,10 +33,10 @@ export default class AuthController {
                 name: user.serialize().email,
             });
 
-            response.ok({ 
+            response.ok({
                 token: token.token,
                 expires_at: token.expiresAt,
-            } );
+            });
         } catch {
             return response.badRequest({ message: 'Invalid email/password' });
         }

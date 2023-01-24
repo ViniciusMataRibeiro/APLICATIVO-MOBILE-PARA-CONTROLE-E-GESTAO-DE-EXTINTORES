@@ -11,15 +11,15 @@ export default class EmpresasController {
         try {
             const userAuth = await auth.use('api').authenticate();
 
-        if (userAuth.tipo != 'admin') {
-            return response.badRequest({
-                message: 'Este Usuário não tem acesso a essa rota',
-            });
-        }
+            if (userAuth.tipo != 'admin') {
+                return response.badRequest({
+                    message: 'Este Usuário não tem acesso a essa rota',
+                });
+            }
 
-        const empresa = await Empresa.query().where('bloqueado', false);
+            const empresa = await Empresa.query().where('bloqueado', false);
 
-        return response.ok(empresa);
+            return response.ok(empresa);
         } catch {
             return response.badRequest({
                 message: 'Erro ao listar Empresas',
@@ -102,7 +102,7 @@ export default class EmpresasController {
                 return response.ok({
                     message: 'Empresa deletada com sucesso',
                 });
-            }else{
+            } else {
                 return response.badRequest({
                     message: 'Empresa não encontrada',
                 });
