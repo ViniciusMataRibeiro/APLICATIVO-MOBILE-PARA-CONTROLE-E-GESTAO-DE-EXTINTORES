@@ -62,8 +62,7 @@ class SetorPage extends GetView<SetorController> {
                                               style: TextStyle(
                                                 fontSize: 16,
                                                 color: Color.fromARGB(255, 78, 78, 78),
-                                              )),
-                                        ),
+                                              )),),
                                       ],
                                     ),
                                     Row(
