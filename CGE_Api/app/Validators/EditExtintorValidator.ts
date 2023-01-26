@@ -18,13 +18,9 @@ export default class EditExtintorValidator {
       rules.unsigned(),
     ]),
 
-    validadeCasco: schema.date({
-      format: 'dd-MM-yyyy',
-    }),
+    validadeCasco: schema.date({}),
 
-    proximaManutencao: schema.date({
-      format: 'dd-MM-yyyy',
-    }),
+    proximaManutencao: schema.date({}),
 
     ativo: schema.boolean(),
 
