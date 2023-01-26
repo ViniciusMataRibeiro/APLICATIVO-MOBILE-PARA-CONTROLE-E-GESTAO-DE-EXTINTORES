@@ -16,10 +16,10 @@ export default class Extintor extends BaseModel {
   public tamanho: number
 
   @column()
-  public validadeCasco: DateTime
+  public validadeCasco: Date
 
   @column()
-  public proximaManutencao: DateTime
+  public proximaManutencao: Date
 
   @column()
   public ativo: boolean
@@ -28,7 +28,7 @@ export default class Extintor extends BaseModel {
   public setor_id: number
 
   @column()
-  public descricao: string
+  public descricao: string | null
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

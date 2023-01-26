@@ -83,6 +83,10 @@ export default class EmpresasController {
 
             //finalizar transação
             await trx.commit();
+
+            return response.ok({
+                message: 'Empresa atualizada com sucesso',
+            });
         } catch (error) {
             await trx.rollback();
             return response.badRequest(error);

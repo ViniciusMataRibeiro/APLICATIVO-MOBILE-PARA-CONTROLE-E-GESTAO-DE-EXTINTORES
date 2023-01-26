@@ -10,8 +10,7 @@ export default class CreateSetorValidator {
       rules.minLength(3),
       rules.maxLength(50),
     ]),
-    descricao: schema.string({ trim: true }, [
-      rules.required(),
+    descricao: schema.string.nullableAndOptional({ trim: true }, [
       rules.minLength(3),
       rules.maxLength(50),
     ]),

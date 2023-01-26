@@ -13,7 +13,7 @@ export default class Setor extends BaseModel {
   public nome: string
 
   @column()
-  public descricao: string
+  public descricao: string | null
 
   @column()
   public ativo: boolean
