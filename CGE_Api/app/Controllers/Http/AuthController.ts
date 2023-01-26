@@ -37,7 +37,7 @@ export default class AuthController {
                 token: token.token,
                 expires_at: token.expiresAt,
             });
-        } catch {
+        } catch (Error) {
             return response.badRequest({ message: 'Invalid email/password' });
         }
 

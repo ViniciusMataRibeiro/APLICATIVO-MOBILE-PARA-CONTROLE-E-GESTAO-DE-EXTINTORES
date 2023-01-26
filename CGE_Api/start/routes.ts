@@ -3,13 +3,13 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.post('/login', 'AuthController.login');
 Route.post('/logout', 'AuthController.logout');
 
-Route.post('/empresa/cadastro', 'EmpresasController.store');
+Route.post('/empresa', 'EmpresasController.store');
 
 Route.group(() => {
   Route.get('auth/me', 'AuthController.me');
 
   Route.get('/Tecnicos', 'TecnicosController.index');
-  Route.post('/tecnico/cadastro', 'TecnicosController.store');
+  Route.post('/tecnico', 'TecnicosController.store');
   Route.put('/tecnico', 'TecnicosController.update');
   Route.delete('/tecnico/:id', 'TecnicosController.destroy');
 
@@ -18,8 +18,14 @@ Route.group(() => {
   Route.delete('/empresa/:id', 'EmpresasController.destroy');
 
   Route.get('/setors', 'SetorsController.index');
-  Route.post('/setor/cadastro', 'SetorsController.store');
+  Route.post('/setor', 'SetorsController.store');
   Route.put('/setor', 'SetorsController.update');
   Route.delete('/setor/:id', 'SetorsController.destroy');
+
+  Route.get('/extintorsAll', 'ExtintorsController.indexAllExtintores');
+  Route.get('/extintorsSetor/:id', 'ExtintorsController.indexExtintoresSetor');
+  Route.post('/extintor', 'ExtintorsController.store');
+  Route.put('/extintor/:id', 'ExtintorsController.update');
+  Route.delete('/extintor/:id', 'ExtintorsController.destroy');
   
 }).middleware('auth');
