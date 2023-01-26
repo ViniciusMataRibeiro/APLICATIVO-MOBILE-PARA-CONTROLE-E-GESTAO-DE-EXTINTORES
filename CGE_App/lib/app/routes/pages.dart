@@ -1,3 +1,4 @@
+import 'package:cge_app/app/modules/cadastro_empresa/page.dart';
 import 'package:cge_app/app/routes/routes.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +19,7 @@ abstract class AppPages {
   static final pages = [
     GetPage(
       name: Routes.inicial,
-      page: () => SplashPage(),
+      page: () => CadastroEmpresaPage(),
       binding: SplashBinding(),
     ),
     GetPage(
