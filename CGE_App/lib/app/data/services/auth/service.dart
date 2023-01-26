@@ -25,8 +25,12 @@ class AuthService extends GetxService {
   Future<void> login(UserLoginRequestModel userLoginRequest) async {
     var userLoginResponse = await _repository.login(userLoginRequest);
     await _configService.saveToken(userLoginResponse.token);
-    await _getUser();
-    await logout();
+    var user = await _getUser();
+    if (user != null) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+    }
   }
 
   Future<void> logout() async {
@@ -35,10 +39,7 @@ class AuthService extends GetxService {
     user.value = null;
   }
 
-  Future _getUser() {
-    return _repository.getUser()
-      .then((value) {
-        user.value = value;
-      });
+  Future<UserModel> _getUser() {
+    return _repository.getUser().then((value) => user.value = value);
   }
 }

@@ -5,4 +5,5 @@ abstract class Routes {
   static const perfil = '/perfil';
   static const cadExtintor = '/cadExtintor';
   static const cadSetor = '/cadSetor';
+  static const cadEmpresa = '/cadEmpresa';
 }

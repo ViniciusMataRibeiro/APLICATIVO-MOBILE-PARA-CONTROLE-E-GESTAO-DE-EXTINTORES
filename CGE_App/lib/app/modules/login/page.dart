@@ -8,6 +8,11 @@ class LoginPage extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    if (controller.isLogged) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+    }
     return Scaffold(
       body: Center(
         child: Container(
