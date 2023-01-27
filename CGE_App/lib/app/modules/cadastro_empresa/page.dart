@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,7 +47,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                     child: Container(
                   height: 140,
                   width: 140,
-                  margin: const EdgeInsets.only(top: 60),
+                  margin: const EdgeInsets.only(top: 50),
                   decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/image/cge.jpeg'),
@@ -61,7 +63,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                 Container(
                   padding: const EdgeInsets.all(15.0),
                   margin:
-                      const EdgeInsets.only(bottom: 100, left: 40, right: 40),
+                      const EdgeInsets.only(bottom: 50, left: 40, right: 40),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                     color: Color.fromARGB(80, 0, 0, 0),
@@ -139,15 +141,24 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                     const SizedBox(
                       height: 30,
                     ),
-                    // ignore: prefer_const_constructors
-                    Center(
-                      child: const Text('Endereço',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                      ),
-                    ),
+                  ],
+                ),
+              ),
+              Container(
+                  padding: const EdgeInsets.all(15.0),
+                  margin:
+                    const EdgeInsets.only(bottom: 30, left: 40, right: 40,),
+                    decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    color: Color.fromARGB(80, 0, 0, 0),
+                  ),
+                child: Center(
+                child: Column(children: [
+                    const Text('Endereço',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),),
                     Form(
                     child: TextFormField(
                       style: const TextStyle(
@@ -174,7 +185,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                         color: Colors.white,
                         fontSize: 15
                         ),
-                        labelText: 'Cep',
+                        labelText: 'CEP',
                       ),
                     )
                     ),
@@ -223,9 +234,32 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                       ),
                     )
                     ),
-                  ],
+                ],
                 ),
               ),
+            ),
+            Expanded(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 50),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(100),
+                        ),
+                      ),
+                    ),
+                    child: const Text('Registrar',
+                        style: TextStyle(fontSize: 20, color: Colors.black)),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              )
             ])
         )));
   }
