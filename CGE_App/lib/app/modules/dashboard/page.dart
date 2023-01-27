@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,32 +9,22 @@ import 'controller.dart';
 class DashboardPage extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
+    final Items = <Widget>[
+      const Icon(Icons.view_stream_rounded, size: 30),
+      const Icon(Icons.person, size: 30),
+    ];
+
     return Scaffold(
+        extendBody: true,
         bottomNavigationBar: Obx(
-          () => NavigationBar(
-            onDestinationSelected: controller.changePage,
+          () => CurvedNavigationBar(
+            onTap: controller.changePage,
             height: 60,
-            selectedIndex: controller.currentPage.value,
-            backgroundColor: const Color.fromARGB(255, 247, 20, 3),
-            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            destinations: const [
-              NavigationDestination(
-                icon: Icon(
-                  Icons.view_stream,
-                  color: Colors.white,
-                ),
-                label: 'Setores',
-                selectedIcon: Icon(Icons.view_stream_rounded),
-              ),
-              NavigationDestination(
-                icon: Icon(
-                  Icons.person_rounded,
-                  color: Colors.white,
-                ),
-                label: 'Perfil',
-                selectedIcon: Icon(Icons.person),
-              ),
-            ],
+            index: controller.currentPage.value,
+            color: Colors.red,
+            animationDuration: const Duration(milliseconds: 300),
+            backgroundColor: Colors.transparent,
+            items: Items,
           ),
         ),
         body: Obx(() => IndexedStack(

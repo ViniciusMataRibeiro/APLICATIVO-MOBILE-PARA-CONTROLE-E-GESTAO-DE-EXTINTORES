@@ -6,6 +6,13 @@ import 'controller.dart';
 class PerfilPage extends GetView<PerfilController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SafeArea(child: Text('PerfilController')));
+    return Scaffold(
+        body: Center(
+            child: Container(
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/image/registro.jpeg'),
+              fit: BoxFit.cover)),
+    )));
   }
 }
