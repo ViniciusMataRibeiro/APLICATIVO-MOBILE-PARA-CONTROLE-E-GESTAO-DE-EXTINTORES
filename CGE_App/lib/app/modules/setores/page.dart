@@ -32,7 +32,7 @@ class SetorPage extends GetView<SetorController> {
                   padding: const EdgeInsets.all(3.0),
                   child: Card(
                     shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
                     surfaceTintColor: const Color.fromARGB(255, 201, 201, 201),
                     child: Column(
                       children: [
@@ -48,12 +48,15 @@ class SetorPage extends GetView<SetorController> {
                           children: [
                             Expanded(
                               child: SizedBox(
-                                child: Column(                                 
+                                child: Column(
                                   children: [
                                     Row(
                                       children: const [
-                                        Icon(Icons.circle,
-                                            size: 20, color: Colors.green,),
+                                        Icon(
+                                          Icons.circle,
+                                          size: 20,
+                                          color: Colors.green,
+                                        ),
                                         SizedBox(
                                           width: 3,
                                         ),
@@ -62,7 +65,8 @@ class SetorPage extends GetView<SetorController> {
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontSize: 16,
-                                                color: Color.fromARGB(255, 78, 78, 78),
+                                                color: Color.fromARGB(
+                                                    255, 78, 78, 78),
                                               )),
                                         ),
                                       ],
@@ -70,8 +74,7 @@ class SetorPage extends GetView<SetorController> {
                                     Row(
                                       children: const [
                                         Icon(Icons.circle,
-                                            size: 20,
-                                            color: Colors.yellow),
+                                            size: 20, color: Colors.yellow),
                                         SizedBox(
                                           width: 3,
                                         ),
@@ -80,7 +83,8 @@ class SetorPage extends GetView<SetorController> {
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontSize: 16,
-                                                color: Color.fromARGB(255, 78, 78, 78),
+                                                color: Color.fromARGB(
+                                                    255, 78, 78, 78),
                                               )),
                                         ),
                                       ],
@@ -88,8 +92,7 @@ class SetorPage extends GetView<SetorController> {
                                     Row(
                                       children: const [
                                         Icon(Icons.circle,
-                                            size: 20,
-                                            color: Colors.red),
+                                            size: 20, color: Colors.red),
                                         SizedBox(
                                           width: 3,
                                         ),
@@ -98,7 +101,8 @@ class SetorPage extends GetView<SetorController> {
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontSize: 16,
-                                                color: Color.fromARGB(255, 78, 78, 78),                                               
+                                                color: Color.fromARGB(
+                                                    255, 78, 78, 78),
                                               )),
                                         ),
                                       ],
