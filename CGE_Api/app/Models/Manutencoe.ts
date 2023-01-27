@@ -36,7 +36,7 @@ export default class Manutencoe extends BaseModel {
   public aprovado: boolean
 
   @column()
-  public observacao: string
+  public observacao: string | null
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

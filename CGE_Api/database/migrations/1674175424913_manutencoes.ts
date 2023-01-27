@@ -16,7 +16,7 @@ export default class extends BaseSchema {
       table.boolean('mangueira').notNullable().defaultTo(false)
       table.boolean('lacre').notNullable().defaultTo(false)
       table.boolean('aprovado').notNullable().defaultTo(false)
-      table.string('observacao', 255).notNullable()
+      table.string('observacao', 255).nullable()
       table.timestamp('created_at').notNullable()
     })
   }

@@ -14,8 +14,9 @@ export default class ExtintorsController {
             const tecnico = await Tecnico.findByOrFail("user_id", userAuth.id);
 
             const setores = await Database.query().select('id').from('setors').where('empresa_id', tecnico.empresa_id).where('ativo', true);
+            const setoresId = setores.map((setor) => setor.id);
 
-            const extintores = await Database.query().select('*').from('extintors').whereIn('setor_id', setores).where('ativo', true);
+            const extintores = await Database.query().select('*').from('extintors').whereIn('setor_id', setoresId).where('ativo', true);
 
             return response.status(200).json(extintores);
 
@@ -28,9 +29,7 @@ export default class ExtintorsController {
 
     public async indexExtintoresSetor({ response, params }: HttpContextContract) {
         try {
-            const setor_id = await Database.query().select('id').from('setors').where('id', params.id);
-
-            const extintores = await Database.query().select('*').from('extintors').where('setor_id', setor_id).where('ativo', true);
+            const extintores = await Database.query().select('*').from('extintors').where('setor_id', params.id).where('ativo', true);
 
             if (extintores.length > 0) {
                 return response.status(200).json(extintores);
@@ -52,7 +51,7 @@ export default class ExtintorsController {
         try {
             const setor = await Setor.findByOrFail("id", payload.setor_id);
 
-            if(setor.ativo == false){
+            if (setor.ativo == false) {
                 return response.badRequest({
                     message: 'Setor Inativo',
                 });
@@ -83,19 +82,8 @@ export default class ExtintorsController {
     public async update({ request, response, params }: HttpContextContract) {
         const payload = await request.validate(EditExtintorValidator);
         try {
-            const extintor = await Extintor.findByOrFail("id", params.id);
-
-            extintor.merge({
-                nome: payload.nome,
-                tipoExtintor: payload.tipoExtintor,
-                tamanho: payload.tamanho,
-                validadeCasco: new Date(payload.validadeCasco.toISODate()),
-                proximaManutencao: new Date(payload.proximaManutencao.toISODate()),
-                ativo: payload.ativo,
-                descricao: payload.descricao,
-            });
-
-            await extintor.save();
+            const sql = 'UPDATE extintors SET nome = ?, tipoExtintor = ?, tamanho = ?, validadeCasco = ?, proximaManutencao = ?, ativo = ?, descricao = ? WHERE id = ?';
+            await Database.rawQuery(sql, [payload.nome, payload.tipoExtintor, payload.tamanho, new Date(payload.validadeCasco.toISODate()), new Date(payload.proximaManutencao.toISODate()), payload.ativo, payload.descricao, params.id]);
 
             return response.status(200).json({
                 message: 'Extintor Editado com sucesso',
