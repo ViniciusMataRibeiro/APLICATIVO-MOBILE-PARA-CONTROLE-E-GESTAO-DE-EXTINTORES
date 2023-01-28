@@ -22,7 +22,7 @@ main() async {
 
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: Routes.cadEmpresa,
+    initialRoute: Routes.perfilEmpresa,
     theme: themeData,
     defaultTransition: Transition.fade,
     getPages: AppPages.pages,
