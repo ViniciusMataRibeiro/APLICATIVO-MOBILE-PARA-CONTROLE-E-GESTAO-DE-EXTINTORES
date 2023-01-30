@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../login/controller.dart';
@@ -8,5 +9,6 @@ class SplashBinding implements Bindings {
   void dependencies() {
     Get.lazyPut<SplashController>(() => SplashController());
     Get.lazyPut<LoginController>(() => LoginController());
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 }
