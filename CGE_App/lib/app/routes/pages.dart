@@ -15,8 +15,6 @@ import '../modules/perfil/binding.dart';
 import '../modules/perfil/page.dart';
 import '../modules/splash/binding.dart';
 import '../modules/splash/page.dart';
-import '../modules/perfil_empresa/binding.dart';
-import '../modules/perfil_empresa/page.dart';
 
 abstract class AppPages {
   static final pages = [
@@ -55,10 +53,5 @@ abstract class AppPages {
       page: () => CadastroEmpresaPage(),
       binding: CadastroEmpresaBinding(),
     ),
-    GetPage(
-      name: Routes.perfilEmpresa, 
-      page: () => PerfilEmpresaPage(),
-      binding: PerfilEmpresaBinding()
-      ),
   ];
 }
