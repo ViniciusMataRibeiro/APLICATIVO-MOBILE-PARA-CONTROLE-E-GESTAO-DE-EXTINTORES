@@ -15,7 +15,6 @@ class DashboardPage extends GetView<DashboardController> {
     ];
 
     return Scaffold(
-        extendBody: true,
         bottomNavigationBar: Obx(
           () => CurvedNavigationBar(
             onTap: controller.changePage,

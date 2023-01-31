@@ -1,3 +1,4 @@
+import 'package:cge_app/app/modules/dashboard/page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -91,7 +92,7 @@ class AbaPage extends GetView<AbaController> {
             ),
             body: TabBarView(
               children: [
-                SetorPage(),
+                Setor(),
                 ExtintorPage(),
               ],
             ),
