@@ -1,12 +1,15 @@
+import 'package:cge_app/app/data/services/auth/service.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../abas/page.dart';
 import '../perfil/page.dart';
+import '../perfil_tecnico/page.dart';
 import 'controller.dart';
 
 class DashboardPage extends GetView<DashboardController> {
+  AuthService aux = Get.find<AuthService>();
   @override
   Widget build(BuildContext context) {
     final Items = <Widget>[
@@ -21,7 +24,7 @@ class DashboardPage extends GetView<DashboardController> {
         color: Colors.white,
       ),
     ];
-
+    var obj = aux.user.value;
     return Scaffold(
         bottomNavigationBar: Obx(
           () => CurvedNavigationBar(
@@ -39,7 +42,11 @@ class DashboardPage extends GetView<DashboardController> {
               index: controller.currentPage.value,
               children: [
                 AbaPage(),
-                PerfilPage(),
+                if (obj!.email == 'ad1min@email.com') ...[
+                  PerfilPage(),
+                ] else ...[
+                  PerfilTecnicoPage(),
+                ]
               ],
             )));
   }
