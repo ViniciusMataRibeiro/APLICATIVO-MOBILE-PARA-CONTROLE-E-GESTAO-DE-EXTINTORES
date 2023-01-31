@@ -13,6 +13,8 @@ import '../modules/login/binding.dart';
 import '../modules/login/page.dart';
 import '../modules/perfil/binding.dart';
 import '../modules/perfil/page.dart';
+import '../modules/perfil_tecnico/binding.dart';
+import '../modules/perfil_tecnico/page.dart';
 import '../modules/splash/binding.dart';
 import '../modules/splash/page.dart';
 
@@ -37,6 +39,11 @@ abstract class AppPages {
       name: Routes.perfil,
       page: () => PerfilPage(),
       binding: PerfilBinding(),
+    ),
+    GetPage(
+      name: Routes.perfiltecnico,
+      page: () => PerfilTecnicoPage(),
+      binding: PerfilTecnicoBinding(),
     ),
     GetPage(
       name: Routes.cadExtintor,

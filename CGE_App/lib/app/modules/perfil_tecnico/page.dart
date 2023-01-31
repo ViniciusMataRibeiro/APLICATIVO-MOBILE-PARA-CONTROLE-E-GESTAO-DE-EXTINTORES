@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'controller.dart';
+import '../perfil/controller.dart';
 
-class PerfilPage extends GetView<PerfilController> {
+class PerfilTecnicoPage extends GetView<PerfilController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +57,7 @@ class PerfilPage extends GetView<PerfilController> {
                       Container(
                         margin: const EdgeInsets.only(top: 20),
                         child: const Text(
-                          'Empresa',
+                          'Tecnico',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 30,
@@ -82,36 +82,12 @@ class PerfilPage extends GetView<PerfilController> {
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                 ),
                 icon: const Icon(
-                  Icons.person_add_alt_1_rounded,
-                  color: Colors.black,
-                  size: 30,
-                ),
-                label: const Text(
-                  'Cadastrar Técnico',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                  ),
-                ),
-              )),
-          Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16),
-              child: ElevatedButton.icon(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey,
-                  fixedSize: const Size(300, 80),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                ),
-                icon: const Icon(
                   Icons.list_alt_rounded,
                   color: Colors.black,
                   size: 30,
                 ),
                 label: const Text(
-                  'Lista de Técnicos',
+                  'Consultar Vistorias',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 25,
