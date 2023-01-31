@@ -1,6 +1,8 @@
+import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:faker/faker.dart';
+
 
 import 'controller.dart';
 
@@ -9,14 +11,17 @@ class SetorPage extends GetView<SetorController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.toNamed('/cadSetor');
-          },
-          backgroundColor: const Color.fromARGB(255, 175, 31, 21),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(100.0))),
-          child: const Icon(Icons.add_rounded, size: 40, color: Colors.white),
+        floatingActionButton: Container(
+          margin: const EdgeInsets.only(bottom: 60),
+          child: FloatingActionButton(
+            onPressed: () {
+              Get.toNamed('/cadExtintor');
+            },
+            backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(100.0))),
+            child: const Icon(Icons.add_rounded, size: 40, color: Colors.white),
+          ),
         ),
         body: Center(
             child: Container(

@@ -13,14 +13,17 @@ class ExtintorPage extends GetView<ExtintorController> {
       letra.add(char);
     }
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.toNamed('/cadExtintor');
-          },
-          backgroundColor: const Color.fromARGB(255, 175, 31, 21),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(100.0))),
-          child: const Icon(Icons.add_rounded, size: 40, color: Colors.white),
+        floatingActionButton: Container(
+          margin: const EdgeInsets.only(bottom: 60),
+          child: FloatingActionButton(
+            onPressed: () {
+              Get.toNamed('/cadExtintor');
+            },
+            backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(100.0))),
+            child: const Icon(Icons.add_rounded, size: 40, color: Colors.white),
+          ),
         ),
         body: Center(
             child: Container(
