@@ -1,22 +1,109 @@
+import 'package:cge_app/app/core/app_theme.dart';
+import 'package:cge_app/app/modules/cadastro_setor/page.dart';
+import 'package:cge_app/app/modules/dashboard/page.dart';
+import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:faker/faker.dart';
 
 import 'controller.dart';
 
-class SetorPage extends GetView<SetorController> {
+class Setor extends GetView<SetorController> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: themeData,
+      debugShowCheckedModeBanner: false,
+      home: const Directionality(
+          textDirection: TextDirection.ltr,
+          child: SetorState(
+            title: '',
+          )),
+    );
+  }
+}
+
+class SetorState extends StatefulWidget {
+  const SetorState({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  SetorPage createState() => SetorPage();
+}
+
+class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
   var number = faker.randomGenerator.integer(50);
+  late Animation<double> _animation;
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 260),
+    );
+
+    final curvedAnimation =
+        CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
+    _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.toNamed('/cadSetor');
-          },
-          backgroundColor: const Color.fromARGB(255, 175, 31, 21),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(100.0))),
-          child: const Icon(Icons.add_rounded, size: 40, color: Colors.white),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+        floatingActionButton: Container(
+          margin: const EdgeInsets.only(bottom: 20),
+          child: FloatingActionBubble(
+            items: <Bubble>[
+              Bubble(
+                title: "Settings",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.settings,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  _animationController.reverse();
+                },
+              ),
+              Bubble(
+                title: "Editar Setor",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.edit_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Get.toNamed('/cadSetor');
+                  _animationController.reverse();
+                },
+              ),
+              Bubble(
+                title: "Cadastrar Setor",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.add_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Get.toNamed('/cadSetor');
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (BuildContext context) =>
+                  //             CadastroSetorPage()));
+                  _animationController.reverse();
+                },
+              ),
+            ],
+            animation: _animation,
+            onPress: () => _animationController.isCompleted
+                ? _animationController.reverse()
+                : _animationController.forward(),
+            iconColor: Colors.white,
+            iconData: Icons.home_rounded,
+            backGroundColor: const Color.fromARGB(255, 190, 0, 0),
+          ),
         ),
         body: Center(
             child: Container(
