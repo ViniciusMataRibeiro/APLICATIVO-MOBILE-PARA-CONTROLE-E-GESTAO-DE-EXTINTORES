@@ -42,7 +42,7 @@ class DashboardPage extends GetView<DashboardController> {
               index: controller.currentPage.value,
               children: [
                 AbaPage(),
-                if (obj!.email == 'ad1min@email.com') ...[
+                if (obj!.tipo == 'empresas') ...[
                   PerfilPage(),
                 ] else ...[
                   PerfilTecnicoPage(),

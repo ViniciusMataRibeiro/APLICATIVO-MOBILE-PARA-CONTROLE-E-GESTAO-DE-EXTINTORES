@@ -9,7 +9,7 @@ class AuthService extends GetxService {
   final _configService = Get.find<ConfigService>();
   final AuthRepository _repository;
   final user = Rxn<UserModel>();
-  bool get isLogged => user.value != null;
+  bool get isLogged => user.value != null && user.value!.email != '';
 
   AuthService(this._repository);
 

@@ -7,10 +7,9 @@ import '../Models/user_login_request.dart';
 import '../Models/user_login_response.dart';
 import '../services/config/service.dart';
 
-
 class Api {
   final _configService = Get.find<ConfigService>();
-  final baseUrl = "http://192.168.0.104:3333";
+  final baseUrl = "http://192.168.0.110:3333";
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     var url = Uri.parse("$baseUrl/login");
@@ -29,11 +28,12 @@ class Api {
 
   Future<UserModel> getUser() async {
     var url = Uri.parse("$baseUrl/auth/me");
-    var response = await http.get(url, headers: {
-      'authorization': 'Bearer ${_configService.token}'
-    });
+    var response = await http
+        .get(url, headers: {'authorization': 'Bearer ${_configService.token}'});
     if (response.statusCode == 200) {
       return UserModel.fromJson(jsonDecode(response.body));
+    } else if (response.statusCode == 401 || response.statusCode == 403) {
+      return UserModel(email: '', nome: '', tipo: '');
     } else {
       throw Exception('Failed');
     }
