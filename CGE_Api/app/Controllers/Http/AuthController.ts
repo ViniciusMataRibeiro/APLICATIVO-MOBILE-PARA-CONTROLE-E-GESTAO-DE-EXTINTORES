@@ -69,6 +69,7 @@ export default class AuthController {
                     nome: empresas.nome,
                     telefone: empresas.telefone,
                     email: userAuth.email,
+                    tipo: userAuth.tipo,
                 };
                 break;
             case 'tecnicos':
@@ -79,6 +80,7 @@ export default class AuthController {
                     bloqueado: tecnicos.bloqueado,
                     online: tecnicos.online,
                     email: userAuth.email,
+                    tipo: userAuth.tipo,
                 };
                 break;
             case 'admins':
@@ -87,6 +89,7 @@ export default class AuthController {
                     id_admin: admins.id,
                     nome: admins.nome,
                     email: userAuth.email,
+                    tipo: userAuth.tipo,
                 };
                 break;
             default:
