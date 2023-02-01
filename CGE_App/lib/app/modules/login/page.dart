@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_const
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,18 +43,29 @@ class LoginPage extends GetView<LoginController> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 65, left: 25, right: 25),
+                margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
                 padding: const EdgeInsets.all(8),
                 child: Form(
                   child: TextFormField(
                     controller: controller.emailController,
-                    style: const TextStyle(fontSize: 18, color: Colors.white),
+                    style: const TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                     keyboardType: TextInputType.emailAddress,
                     cursorColor: Colors.white,
                     decoration: const InputDecoration(
                       labelStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 23,
+                        fontStyle: FontStyle.italic,
+                      ),
+                      enabledBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(100),
+                        ),
+                        borderSide:
+                            const BorderSide(color: Colors.white, width: 0.9),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
@@ -67,17 +80,25 @@ class LoginPage extends GetView<LoginController> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 5, left: 25, right: 25),
+                margin: const EdgeInsets.only(top: 5, left: 20, right: 20),
                 padding: const EdgeInsets.all(8),
                 child: Obx(() => TextFormField(
                       controller: controller.passwordController,
-                      style: const TextStyle(fontSize: 18, color: Colors.white),
+                      style: const TextStyle(fontSize: 15, color: Colors.white),
                       obscureText: controller.showPassword.value,
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
                         labelStyle: const TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 23,
+                          fontStyle: FontStyle.italic,
+                        ),
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(100),
+                          ),
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 0.9),
                         ),
                         border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(
@@ -99,18 +120,9 @@ class LoginPage extends GetView<LoginController> {
                       ),
                     )),
               ),
-              Center(
-                child: Container(
-                  alignment: const Alignment(0.6, 1.0),
-                  child: const Text(
-                      style: TextStyle(fontSize: 15, color: Colors.white),
-                      'Esqueceu sua senha?'),
-                ),
-              ),
               Expanded(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 50),
+                  padding: const EdgeInsets.only(top: 15, left: 30, right: 30),
                   child: ElevatedButton(
                     onPressed: () {
                       controller.goTologin();
@@ -118,10 +130,10 @@ class LoginPage extends GetView<LoginController> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 175, 31, 21),
                       shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(100),
-                        ),
-                      ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(100),
+                          ),
+                          side: BorderSide(width: 1, color: Colors.white)),
                     ),
                     child: const Text('Entrar',
                         style: TextStyle(fontSize: 20, color: Colors.white)),
