@@ -1,5 +1,7 @@
 import 'package:cge_app/app/modules/cadastro_empresa/binding.dart';
 import 'package:cge_app/app/modules/cadastro_empresa/page.dart';
+import 'package:cge_app/app/modules/vistoria/binding.dart';
+import 'package:cge_app/app/modules/vistoria/page.dart';
 import 'package:cge_app/app/routes/routes.dart';
 import 'package:get/get.dart';
 
@@ -60,5 +62,10 @@ abstract class AppPages {
       page: () => CadastroEmpresaPage(),
       binding: CadastroEmpresaBinding(),
     ),
+    GetPage(
+      name: Routes.vistoria,
+      page: () => VistoriaPage(),
+      binding: VistoriaBinding()
+      ),
   ];
 }

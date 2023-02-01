@@ -94,6 +94,9 @@ class PerfilTecnicoPage extends GetView<PerfilController> {
                   ),
                 ),
               )),
+          ElevatedButton(
+            onPressed: () => Get.offAllNamed('/vistoria'),
+            child: const Text('Vistoria')),
           Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 
 class VistoriaPage extends GetView<VistoriaController> {
   const VistoriaPage({super.key});
@@ -51,86 +52,148 @@ class VistoriaPage extends GetView<VistoriaController> {
                         ),
                         Row(
                           children: const [
-                            Text('Pressão',
+                            Text('Data da Manutenção',
                             style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 17,
+                            fontFamily: 'Prompt-ExtraBoldItalic',
                             color: Colors.white,
                             )),
-                            SizedBox(width: 130),
-                            Checkbox(value: true, onChanged: null)
+                             SizedBox(width: 20),
+                            Icon(Icons.date_range_outlined,
+                            size: 28,
+                            color: Colors.white,
+                            )
                           ],
                         ),
                         const SizedBox(height: 10),
                         Row(
                           children: const [
-                            Text('Mangueira',
+                            Icon(Icons.speed_outlined,
+                            color: Colors.white),
+                            SizedBox(width: 10.0,),
+                            Text('Manometro',
                             style: TextStyle(
-                            fontSize: 16,
+                            fontFamily: 'Prompt-ExtraBoldItalic',
+                            fontSize: 17,
                             color: Colors.white,
                             )),
-                            SizedBox(width: 113),
+                            SizedBox(width: 60),
                             Checkbox(value: true, onChanged: null)
                           ],
                           ),
                           const SizedBox(height: 10),
                           Row(
                             children: const [
-                            Text('Lacre',
+                            Icon(Icons.fire_extinguisher_outlined,
+                            color: Colors.white),
+                            SizedBox(width: 10.0,),
+                            Text('Sinalização Parede',
                             style: TextStyle(
+                            fontFamily: 'Prompt-ExtraBoldItalic',
                             fontSize: 16,
                             color: Colors.white,
                             )),
-                            SizedBox(width: 150),
+                            SizedBox(width: 2),
                             Checkbox(value: true, onChanged: null)
                           ],
                           ),
                           const SizedBox(height: 10),
                           Row(
                             children: const [
-                            Text('Piso',
+                            Icon(Ionicons.footsteps_outline,
+                            color: Colors.white,),
+                            SizedBox(width:  10.0,),
+                            Text('Sinalização Piso',
                             style: TextStyle(
+                            fontFamily: 'Prompt-ExtraBoldItalic',
                             fontSize: 16,
                             color: Colors.white,
                             )),
-                            SizedBox(width: 158),
+                            SizedBox(width: 27),
                             Checkbox(value: true, onChanged: null)
                           ],
                           ),
                           const SizedBox(height: 10),
                           Row(
                             children: const [
-                            Text('Parede',
-                            style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            )),
-                            SizedBox(width: 141),
-                            Checkbox(value: true, onChanged: null)
-                          ],
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            children: const [
+                            Icon(Ionicons.enter_outline,
+                            color: Colors.white),
+                            SizedBox(width: 10.0,),
                             Text('Acesso',
                             style: TextStyle(
+                            fontFamily: 'Prompt-ExtraBoldItalic',
                             fontSize: 16,
                             color: Colors.white,
                             )),
-                            SizedBox(width: 138),
+                            SizedBox(width: 102),
+                            Checkbox(value: true, onChanged: null)
+                          ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: const [
+                            Icon(Ionicons.headset_outline,
+                            color: Colors.white),
+                            SizedBox(width: 10.0,),
+                            Text('Mangueira',
+                            style: TextStyle(
+                            fontFamily: 'Prompt-ExtraBoldItalic',
+                            fontSize: 16,
+                            color: Colors.white,
+                            )),
+                            SizedBox(width: 72),
                             Checkbox(value: true, onChanged: null)
                           ],
                           ),
                         const SizedBox(height: 10),
                         Row(
                           children: const [
-                            Text('Validade da Recarga',
+                            Icon(Ionicons.headset_outline,
+                            color: Colors.white),
+                            SizedBox(width: 10.0,),
+                            Text('Lacre',
                             style: TextStyle(
+                            fontFamily: 'Prompt-ExtraBoldItalic',
                             fontSize: 16,
                             color: Colors.white,
                             )),
-                            SizedBox(width: 46),
+                            SizedBox(width: 115),
                             Checkbox(value: true, onChanged: null)
                           ],
+                        ),
+                        Row(
+                          children: const [
+                            Icon(Ionicons.thumbs_up_outline,
+                            color: Colors.white),
+                            SizedBox(width: 10.0,),
+                            Text('Aprovado',
+                            style: TextStyle(
+                            fontFamily: 'Prompt-ExtraBoldItalic',
+                            fontSize: 16,
+                            color: Colors.white,
+                            )),
+                            SizedBox(width: 77),
+                            Checkbox(value: true, onChanged: null)
+                          ],
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Center(
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                fixedSize: const Size(200, 50)
+                              ),
+                              child:  const Text('Registrar',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Roboto-BoldItalic',
+                                fontSize: 18,                             
+                              ),),
+                              ),
+                          )
+                            
                         )
                       ]
                   ),
