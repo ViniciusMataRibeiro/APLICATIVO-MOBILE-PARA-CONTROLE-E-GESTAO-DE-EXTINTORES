@@ -1,6 +1,4 @@
 import 'package:cge_app/app/core/app_theme.dart';
-import 'package:cge_app/app/modules/cadastro_setor/page.dart';
-import 'package:cge_app/app/modules/dashboard/page.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

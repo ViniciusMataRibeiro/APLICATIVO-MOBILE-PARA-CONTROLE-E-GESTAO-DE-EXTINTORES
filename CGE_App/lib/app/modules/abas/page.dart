@@ -93,7 +93,7 @@ class AbaPage extends GetView<AbaController> {
             body: TabBarView(
               children: [
                 Setor(),
-                ExtintorPage(),
+                Extintor(),
               ],
             ),
           ),
