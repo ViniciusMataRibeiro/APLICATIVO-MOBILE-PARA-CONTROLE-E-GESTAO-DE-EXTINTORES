@@ -1,4 +1,5 @@
 import 'package:cge_app/app/core/app_theme.dart';
+import 'package:cge_app/app/modules/cadastro_setor/page.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,7 +56,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
         floatingActionButton: Container(
           margin: const EdgeInsets.only(bottom: 70),
           child: FloatingActionBubble(
-            herotag: 'setor',
+            herotag: UniqueKey(),
             items: <Bubble>[
               Bubble(
                 title: "Settings",
@@ -74,7 +75,11 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 icon: Icons.edit_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  Get.toNamed('/cadSetor');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              CadastroSetorPage()));
                   _animationController.reverse();
                 },
               ),
@@ -85,12 +90,11 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  Get.toNamed('/cadSetor');
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (BuildContext context) =>
-                  //             CadastroSetorPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              CadastroSetorPage()));
                   _animationController.reverse();
                 },
               ),
