@@ -59,9 +59,9 @@ class ExtintorPage extends State<ExtintorState>
     return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         floatingActionButton: Container(
-          margin: const EdgeInsets.only(bottom: 20),
+          margin: const EdgeInsets.only(bottom: 70),
           child: FloatingActionBubble(
-            herotag: 'extintor',
+            herotag: UniqueKey(),
             items: <Bubble>[
               Bubble(
                 title: "Settings",

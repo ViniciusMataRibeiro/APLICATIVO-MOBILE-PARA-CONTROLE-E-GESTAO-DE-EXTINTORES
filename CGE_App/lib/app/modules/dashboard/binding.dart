@@ -7,5 +7,6 @@ class DashboardBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<DashboardController>(() => DashboardController());
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 }
