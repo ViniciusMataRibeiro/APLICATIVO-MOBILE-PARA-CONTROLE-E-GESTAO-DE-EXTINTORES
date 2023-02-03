@@ -53,8 +53,9 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
     return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         floatingActionButton: Container(
-          margin: const EdgeInsets.only(bottom: 20),
+          margin: const EdgeInsets.only(bottom: 70),
           child: FloatingActionBubble(
+            herotag: 'setor',
             items: <Bubble>[
               Bubble(
                 title: "Settings",
@@ -131,82 +132,72 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                         ),
                         Row(
                           children: [
-                            Expanded(
-                              child: SizedBox(
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: const [
-                                        Icon(
-                                          Icons.circle,
-                                          size: 20,
-                                          color: Colors.green,
-                                        ),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Expanded(
-                                          child: Text('Extintores Funcional',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                color: Color.fromARGB(
-                                                    255, 78, 78, 78),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: const [
-                                        Icon(Icons.circle,
-                                            size: 20, color: Colors.yellow),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Expanded(
-                                          child: Text('Extintores a Vencer',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                color: Color.fromARGB(
-                                                    255, 78, 78, 78),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: const [
-                                        Icon(Icons.circle,
-                                            size: 20, color: Colors.red),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Expanded(
-                                          child: Text('Extintores Vencidos',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                color: Color.fromARGB(
-                                                    255, 78, 78, 78),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                            SizedBox(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: const [
+                                      Icon(
+                                        Icons.circle,
+                                        size: 20,
+                                        color: Colors.green,
+                                      ),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text('Extintores Funcional',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color:
+                                                Color.fromARGB(255, 78, 78, 78),
+                                          )),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: const [
+                                      Icon(Icons.circle,
+                                          size: 20, color: Colors.yellow),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text('Extintores a Vencer',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color:
+                                                Color.fromARGB(255, 78, 78, 78),
+                                          )),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: const [
+                                      Icon(Icons.circle,
+                                          size: 20, color: Colors.red),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text('Extintores Vencidos',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color:
+                                                Color.fromARGB(255, 78, 78, 78),
+                                          )),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
-                            Expanded(
-                              child: SizedBox(
-                                height: 150,
-                                child: Container(
-                                  padding: const EdgeInsets.all(7.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    child: Image.network(
-                                      'https://picsum.photos/250?image=${i + number}',
-                                      fit: BoxFit.cover,
-                                    ),
+                            SizedBox(
+                              height: 150,
+                              child: Container(
+                                padding: const EdgeInsets.all(7.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: Image.network(
+                                    'https://picsum.photos/250?image=${i + number}',
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ),

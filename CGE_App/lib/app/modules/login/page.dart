@@ -120,24 +120,22 @@ class LoginPage extends GetView<LoginController> {
                       ),
                     )),
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 15, left: 30, right: 30),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      controller.goTologin();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 175, 31, 21),
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          side: BorderSide(width: 1, color: Colors.white)),
-                    ),
-                    child: const Text('Entrar',
-                        style: TextStyle(fontSize: 20, color: Colors.white)),
+              Padding(
+                padding: const EdgeInsets.only(top: 15, left: 30, right: 30),
+                child: ElevatedButton(
+                  onPressed: () {
+                    controller.goTologin();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(100),
+                        ),
+                        side: BorderSide(width: 1, color: Colors.white)),
                   ),
+                  child: const Text('Entrar',
+                      style: TextStyle(fontSize: 20, color: Colors.white)),
                 ),
               ),
             ],

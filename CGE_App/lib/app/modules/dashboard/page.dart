@@ -44,7 +44,8 @@ class DashboardPage extends GetView<DashboardController> {
                 PerfilPage(),
               ] else ...[
                 PerfilTecnicoPage(),
-              ]
+              ],
+              Extintor(),
             ],
           ),
         ),

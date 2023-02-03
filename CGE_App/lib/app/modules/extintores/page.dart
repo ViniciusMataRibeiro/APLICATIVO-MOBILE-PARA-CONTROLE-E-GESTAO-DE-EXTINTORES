@@ -61,6 +61,7 @@ class ExtintorPage extends State<ExtintorState>
         floatingActionButton: Container(
           margin: const EdgeInsets.only(bottom: 20),
           child: FloatingActionBubble(
+            herotag: 'extintor',
             items: <Bubble>[
               Bubble(
                 title: "Settings",
@@ -138,85 +139,75 @@ class ExtintorPage extends State<ExtintorState>
                         ),
                         Row(
                           children: [
-                            Expanded(
-                              child: SizedBox(
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: const [
-                                        Icon(Icons.circle,
-                                            size: 20, color: Colors.green),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Expanded(
-                                          child: Text('Data de Vencimento',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontSize: 17,
-                                                color: Color.fromARGB(
-                                                    255, 78, 78, 78),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: const [
-                                        Icon(Icons.circle,
-                                            size: 20, color: Colors.green),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Expanded(
-                                          child: Text('Última Inspeção',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontSize: 17,
-                                                color: Color.fromARGB(
-                                                    255, 78, 78, 78),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: const [
-                                        Icon(Icons.circle,
-                                            size: 20, color: Colors.green),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Expanded(
-                                          child: Text('Informações do Extintor',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontSize: 17,
-                                                color: Color.fromARGB(
-                                                    255, 78, 78, 78),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                            SizedBox(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: const [
+                                      Icon(Icons.circle,
+                                          size: 20, color: Colors.green),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text('Data de Vencimento',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            color:
+                                                Color.fromARGB(255, 78, 78, 78),
+                                          )),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: const [
+                                      Icon(Icons.circle,
+                                          size: 20, color: Colors.green),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text('Última Inspeção',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            color:
+                                                Color.fromARGB(255, 78, 78, 78),
+                                          )),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: const [
+                                      Icon(Icons.circle,
+                                          size: 20, color: Colors.green),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text('Informações do Extintor',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            color:
+                                                Color.fromARGB(255, 78, 78, 78),
+                                          )),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                             SizedBox(
-                              child: Expanded(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(8.0),
-                                      margin: const EdgeInsets.all(8.0),
-                                      child: ClipRRect(
-                                        child: Image.asset(
-                                          'assets/image/Classe-${letra[i]}.jpg',
-                                          fit: BoxFit.cover,
-                                          height: 80,
-                                        ),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    margin: const EdgeInsets.all(8.0),
+                                    child: ClipRRect(
+                                      child: Image.asset(
+                                        'assets/image/Classe-${letra[i]}.jpg',
+                                        fit: BoxFit.cover,
+                                        height: 80,
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
