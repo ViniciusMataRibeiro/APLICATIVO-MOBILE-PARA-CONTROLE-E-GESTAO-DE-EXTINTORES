@@ -45,10 +45,8 @@ class AbaPage extends GetView<AbaController> {
                       fontSize: 25,
                     ),
                   ),
-                  const Expanded(
-                    child: SizedBox(
-                      width: 40,
-                    ),
+                  const SizedBox(
+                    width: 40,
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: 10),
