@@ -19,9 +19,10 @@ class LoginPage extends GetView<LoginController> {
       body: Center(
         child: Container(
           decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/image/login.jpeg'),
-                  fit: BoxFit.cover)),
+            image: DecorationImage(
+                image: AssetImage('assets/image/login.jpeg'),
+                fit: BoxFit.cover),
+          ),
           child: ListView(
             children: [
               Center(

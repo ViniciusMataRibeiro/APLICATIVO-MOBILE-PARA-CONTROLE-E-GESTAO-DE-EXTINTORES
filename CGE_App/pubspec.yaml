@@ -97,6 +97,9 @@ flutter:
      - family: 'Roboto-BoldItalic'
        fonts:
          - asset: 'assets/fonts/Roboto-BoldItalic.ttf'
+     - family: 'Icones_Personalizado'
+       fonts:
+         - asset: 'assets/fonts/Icones_Personalizado.ttf'
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
