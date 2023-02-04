@@ -57,7 +57,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/image/cge.jpeg',
+                'assets/image/cge.png',
                 fit: BoxFit.contain,
                 height: 50,
               ),
@@ -102,16 +102,6 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
             herotag: UniqueKey(),
             items: <Bubble>[
               Bubble(
-                title: "Settings",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.settings,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  _animationController.reverse();
-                },
-              ),
-              Bubble(
                 title: "Editar Setor",
                 iconColor: Colors.white,
                 bubbleColor: const Color.fromARGB(255, 190, 0, 0),
@@ -141,13 +131,23 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                   _animationController.reverse();
                 },
               ),
+              Bubble(
+                title: "Realizar Vistoria",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.check_circle_outline,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  _animationController.reverse();
+                },
+              ),
             ],
             animation: _animation,
             onPress: () => _animationController.isCompleted
                 ? _animationController.reverse()
                 : _animationController.forward(),
             iconColor: Colors.white,
-            iconData: Icons.home_rounded,
+            iconData: Icons.handyman_outlined,
             backGroundColor: const Color.fromARGB(255, 190, 0, 0),
           ),
         ),

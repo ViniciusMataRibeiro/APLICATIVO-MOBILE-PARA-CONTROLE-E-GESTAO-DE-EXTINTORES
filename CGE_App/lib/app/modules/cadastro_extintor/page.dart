@@ -18,7 +18,7 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100.0),
                   child: Image.asset(
-                    'assets/image/cge.jpeg',
+                    'assets/image/cge.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -46,7 +46,7 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                   margin: const EdgeInsets.only(top: 80),
                   decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/image/cge.jpeg'),
+                        image: AssetImage('assets/image/cge.png'),
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(100)),
                       boxShadow: [

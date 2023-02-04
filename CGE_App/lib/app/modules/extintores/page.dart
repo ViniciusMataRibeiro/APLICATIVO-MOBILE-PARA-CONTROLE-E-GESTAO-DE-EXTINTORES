@@ -55,24 +55,56 @@ class ExtintorPage extends State<ExtintorState>
       var char = faker.randomGenerator.fromCharSet('ABCK', 1);
       letra.add(char);
     }
-
     return Scaffold(
+        appBar: AppBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/image/cge.png',
+                fit: BoxFit.contain,
+                height: 50,
+              ),
+              Container(
+                padding: const EdgeInsets.all(20.0),
+                child: const Text(
+                  '03/02/2023',
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon:
+                  const Icon(Icons.notification_important, color: Colors.white),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon:
+                  const Icon(Icons.find_replace_outlined, color: Colors.white),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon:
+                  const Icon(Icons.calendar_month_rounded, color: Colors.white),
+              onPressed: () {},
+            ),
+          ],
+          backgroundColor: const Color.fromARGB(255, 190, 0, 0),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(25),
+              bottomRight: Radius.circular(25),
+            ),
+          ),
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         floatingActionButton: Container(
           margin: const EdgeInsets.only(bottom: 70),
           child: FloatingActionBubble(
             herotag: UniqueKey(),
             items: <Bubble>[
-              Bubble(
-                title: "Settings",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.settings,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  _animationController.reverse();
-                },
-              ),
               Bubble(
                 title: "Editar Extintor",
                 iconColor: Colors.white,
@@ -100,13 +132,23 @@ class ExtintorPage extends State<ExtintorState>
                   _animationController.reverse();
                 },
               ),
+              Bubble(
+                title: "Realizar Vistoria",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.check_circle_outline,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  _animationController.reverse();
+                },
+              ),
             ],
             animation: _animation,
             onPress: () => _animationController.isCompleted
                 ? _animationController.reverse()
                 : _animationController.forward(),
             iconColor: Colors.white,
-            iconData: Icons.home_rounded,
+            iconData: Icons.handyman_outlined,
             backGroundColor: const Color.fromARGB(255, 190, 0, 0),
           ),
         ),

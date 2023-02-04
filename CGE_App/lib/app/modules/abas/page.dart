@@ -33,7 +33,7 @@ class AbaPage extends GetView<AbaController> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100.0),
                       child: Image.asset(
-                        'assets/image/cge.jpeg',
+                        'assets/image/cge.png',
                         fit: BoxFit.cover,
                       ),
                     ),

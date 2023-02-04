@@ -32,7 +32,7 @@ class LoginPage extends GetView<LoginController> {
                   margin: const EdgeInsets.only(top: 50),
                   decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/image/cge.jpeg'),
+                        image: AssetImage('assets/image/cge.png'),
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(100)),
                       boxShadow: [

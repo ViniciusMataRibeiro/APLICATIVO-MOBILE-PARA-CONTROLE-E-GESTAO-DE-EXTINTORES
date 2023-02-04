@@ -18,7 +18,7 @@ class DashboardPage extends GetView<DashboardController> {
     final Items = <Widget>[
       const Icon(Icones_Personalizado.place, size: 30, color: Colors.white),
       const Icon(Icones_Personalizado.fire_extinguisher, size: 30, color: Colors.white),
-      const Icon(Icons.messenger_sharp, size: 30, color: Colors.white),
+      const Icon(Icons.account_circle_rounded, size: 30, color: Colors.white),
     ];
     var obj = aux.user.value;
     return MaterialApp(
@@ -45,7 +45,6 @@ class DashboardPage extends GetView<DashboardController> {
               ] else ...[
                 PerfilTecnicoPage(),
               ],
-              Extintor(),
             ],
           ),
         ),

@@ -43,7 +43,7 @@ class PerfilTecnicoPage extends GetView<PerfilController> {
                         margin: const EdgeInsets.all(50),
                         decoration: const BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage('assets/image/cge.jpeg'),
+                                image: AssetImage('assets/image/cge.png'),
                                 fit: BoxFit.fill),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(100)),
