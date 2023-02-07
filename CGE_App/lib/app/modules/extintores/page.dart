@@ -56,108 +56,107 @@ class ExtintorPage extends State<ExtintorState>
       letra.add(char);
     }
     return Scaffold(
-        appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/image/cge.png',
-                fit: BoxFit.contain,
-                height: 50,
-              ),
-              Container(
-                padding: const EdgeInsets.all(20.0),
-                child: const Text(
-                  '03/02/2023',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon:
-                  const Icon(Icons.notification_important, color: Colors.white),
-              onPressed: () {},
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/image/cge.png',
+              fit: BoxFit.contain,
+              height: 50,
             ),
-            IconButton(
-              icon:
-                  const Icon(Icons.find_replace_outlined, color: Colors.white),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon:
-                  const Icon(Icons.calendar_month_rounded, color: Colors.white),
-              onPressed: () {},
+            Container(
+              padding: const EdgeInsets.all(20.0),
+              child: const Text(
+                '03/02/2023',
+                style: TextStyle(fontSize: 16, color: Colors.white),
+              ),
             ),
           ],
-          backgroundColor: const Color.fromARGB(255, 190, 0, 0),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(25),
-              bottomRight: Radius.circular(25),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.notification_important, color: Colors.white),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.find_replace_outlined, color: Colors.white),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.calendar_month_rounded, color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
+        backgroundColor: const Color.fromARGB(255, 190, 0, 0),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(bottom: 70),
+        child: FloatingActionBubble(
+          herotag: UniqueKey(),
+          items: <Bubble>[
+            Bubble(
+              title: "Editar Extintor",
+              iconColor: Colors.white,
+              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+              icon: Icons.edit_rounded,
+              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              onPress: () {
+                Get.toNamed('/cadSetor');
+                _animationController.reverse();
+              },
             ),
-          ),
+            Bubble(
+              title: "Cadastrar Extintor",
+              iconColor: Colors.white,
+              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+              icon: Icons.add_rounded,
+              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              onPress: () {
+                Get.toNamed('/cadExtintor');
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (BuildContext context) =>
+                //             CadastroSetorPage()));
+                _animationController.reverse();
+              },
+            ),
+            Bubble(
+              title: "Realizar Vistoria",
+              iconColor: Colors.white,
+              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+              icon: Icons.check_circle_outline,
+              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              onPress: () {
+                _animationController.reverse();
+              },
+            ),
+          ],
+          animation: _animation,
+          onPress: () => _animationController.isCompleted
+              ? _animationController.reverse()
+              : _animationController.forward(),
+          iconColor: Colors.white,
+          iconData: Icons.handyman_outlined,
+          backGroundColor: const Color.fromARGB(255, 190, 0, 0),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-        floatingActionButton: Container(
-          margin: const EdgeInsets.only(bottom: 70),
-          child: FloatingActionBubble(
-            herotag: UniqueKey(),
-            items: <Bubble>[
-              Bubble(
-                title: "Editar Extintor",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.edit_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadSetor');
-                  _animationController.reverse();
-                },
-              ),
-              Bubble(
-                title: "Cadastrar Extintor",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.add_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadExtintor');
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (BuildContext context) =>
-                  //             CadastroSetorPage()));
-                  _animationController.reverse();
-                },
-              ),
-              Bubble(
-                title: "Realizar Vistoria",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_circle_outline,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  _animationController.reverse();
-                },
-              ),
-            ],
-            animation: _animation,
-            onPress: () => _animationController.isCompleted
-                ? _animationController.reverse()
-                : _animationController.forward(),
-            iconColor: Colors.white,
-            iconData: Icons.handyman_outlined,
-            backGroundColor: const Color.fromARGB(255, 190, 0, 0),
-          ),
-        ),
-        body: Center(
-            child: Container(
+      ),
+      body: Center(
+        child: Container(
           decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/image/registro.jpeg'),
-                  fit: BoxFit.cover)),
+            image: DecorationImage(
+                image: AssetImage('assets/image/registro.jpeg'),
+                fit: BoxFit.cover),
+          ),
           child: ListView(
             children: [
               for (var i = 0; i < 10; i++) ...[
@@ -166,70 +165,80 @@ class ExtintorPage extends State<ExtintorState>
                   padding: const EdgeInsets.all(5.0),
                   child: Card(
                     shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
                     surfaceTintColor: const Color.fromARGB(255, 201, 201, 201),
                     child: Column(
                       children: [
                         ListTile(
                           title: Text(
-                              'Extintor Nº ${faker.randomGenerator.integer(99)}',
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontSize: 35,
-                                  color: Color.fromARGB(255, 131, 30, 23),
-                                  fontStyle: FontStyle.italic)),
+                            'Extintor Nº ${faker.randomGenerator.integer(99)}',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 35,
+                                color: Color.fromARGB(255, 131, 30, 23),
+                                fontStyle: FontStyle.italic),
+                          ),
                         ),
                         Row(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               child: Column(
                                 children: [
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.green),
                                       SizedBox(
                                         width: 3,
                                       ),
-                                      Text('Data de Vencimento',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                            color:
-                                                Color.fromARGB(255, 78, 78, 78),
-                                          )),
+                                      Text(
+                                        'Data de Vencimento',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          color:
+                                              Color.fromARGB(255, 78, 78, 78),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.green),
                                       SizedBox(
                                         width: 3,
                                       ),
-                                      Text('Última Inspeção',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                            color:
-                                                Color.fromARGB(255, 78, 78, 78),
-                                          )),
+                                      Text(
+                                        'Última Inspeção',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          color:
+                                              Color.fromARGB(255, 78, 78, 78),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.green),
                                       SizedBox(
                                         width: 3,
                                       ),
-                                      Text('Informações do Extintor',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                            color:
-                                                Color.fromARGB(255, 78, 78, 78),
-                                          )),
+                                      Text(
+                                        'Informações do Extintor',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          color:
+                                              Color.fromARGB(255, 78, 78, 78),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -261,6 +270,8 @@ class ExtintorPage extends State<ExtintorState>
               ],
             ],
           ),
-        )));
+        ),
+      ),
+    );
   }
 }

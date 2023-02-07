@@ -52,111 +52,112 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/image/cge.png',
-                fit: BoxFit.contain,
-                height: 50,
-              ),
-              Container(
-                padding: const EdgeInsets.all(20.0),
-                child: const Text(
-                  '03/02/2023',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon:
-                  const Icon(Icons.notification_important, color: Colors.white),
-              onPressed: () {},
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/image/cge.png',
+              fit: BoxFit.contain,
+              height: 50,
             ),
-            IconButton(
-              icon:
-                  const Icon(Icons.find_replace_outlined, color: Colors.white),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon:
-                  const Icon(Icons.calendar_month_rounded, color: Colors.white),
-              onPressed: () {},
+            Container(
+              padding: const EdgeInsets.all(20.0),
+              child: const Text(
+                '03/02/2023',
+                style: TextStyle(fontSize: 16, color: Colors.white),
+              ),
             ),
           ],
-          backgroundColor: const Color.fromARGB(255, 190, 0, 0),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(25),
-              bottomRight: Radius.circular(25),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.notification_important, color: Colors.white),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.find_replace_outlined, color: Colors.white),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.calendar_month_rounded, color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
+        backgroundColor: const Color.fromARGB(255, 190, 0, 0),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(bottom: 70),
+        child: FloatingActionBubble(
+          herotag: UniqueKey(),
+          items: <Bubble>[
+            Bubble(
+              title: "Editar Setor",
+              iconColor: Colors.white,
+              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+              icon: Icons.edit_rounded,
+              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              onPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => CadastroSetorPage(),
+                  ),
+                );
+                _animationController.reverse();
+              },
             ),
-          ),
+            Bubble(
+              title: "Cadastrar Setor",
+              iconColor: Colors.white,
+              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+              icon: Icons.add_rounded,
+              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              onPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => CadastroSetorPage(),
+                  ),
+                );
+                _animationController.reverse();
+              },
+            ),
+            Bubble(
+              title: "Realizar Vistoria",
+              iconColor: Colors.white,
+              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+              icon: Icons.check_circle_outline,
+              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              onPress: () {
+                _animationController.reverse();
+              },
+            ),
+          ],
+          animation: _animation,
+          onPress: () => _animationController.isCompleted
+              ? _animationController.reverse()
+              : _animationController.forward(),
+          iconColor: Colors.white,
+          iconData: Icons.handyman_outlined,
+          backGroundColor: const Color.fromARGB(255, 190, 0, 0),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-        floatingActionButton: Container(
-          margin: const EdgeInsets.only(bottom: 70),
-          child: FloatingActionBubble(
-            herotag: UniqueKey(),
-            items: <Bubble>[
-              Bubble(
-                title: "Editar Setor",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.edit_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              CadastroSetorPage()));
-                  _animationController.reverse();
-                },
-              ),
-              Bubble(
-                title: "Cadastrar Setor",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.add_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              CadastroSetorPage()));
-                  _animationController.reverse();
-                },
-              ),
-              Bubble(
-                title: "Realizar Vistoria",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_circle_outline,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  _animationController.reverse();
-                },
-              ),
-            ],
-            animation: _animation,
-            onPress: () => _animationController.isCompleted
-                ? _animationController.reverse()
-                : _animationController.forward(),
-            iconColor: Colors.white,
-            iconData: Icons.handyman_outlined,
-            backGroundColor: const Color.fromARGB(255, 190, 0, 0),
-          ),
-        ),
-        body: Center(
-            child: Container(
+      ),
+      body: Center(
+        child: Container(
           decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/image/registro.jpeg'),
-                  fit: BoxFit.cover)),
+            image: DecorationImage(
+                image: AssetImage('assets/image/registro.jpeg'),
+                fit: BoxFit.cover),
+          ),
           child: ListView(
             children: [
               for (var i = 1; i <= 10; i++) ...[
@@ -165,7 +166,10 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                   padding: const EdgeInsets.all(3.0),
                   child: Card(
                     shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
                     surfaceTintColor: const Color.fromARGB(255, 201, 201, 201),
                     child: Column(
                       children: [
@@ -179,11 +183,11 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                         ),
                         Row(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               child: Column(
                                 children: [
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(
                                         Icons.circle,
                                         size: 20,
@@ -192,45 +196,51 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                                       SizedBox(
                                         width: 3,
                                       ),
-                                      Text('Extintores Funcional',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color:
-                                                Color.fromARGB(255, 78, 78, 78),
-                                          )),
+                                      Text(
+                                        'Extintores Funcional',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color:
+                                              Color.fromARGB(255, 78, 78, 78),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.yellow),
                                       SizedBox(
                                         width: 3,
                                       ),
-                                      Text('Extintores a Vencer',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color:
-                                                Color.fromARGB(255, 78, 78, 78),
-                                          )),
+                                      Text(
+                                        'Extintores a Vencer',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color:
+                                              Color.fromARGB(255, 78, 78, 78),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.red),
                                       SizedBox(
                                         width: 3,
                                       ),
-                                      Text('Extintores Vencidos',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color:
-                                                Color.fromARGB(255, 78, 78, 78),
-                                          )),
+                                      Text(
+                                        'Extintores Vencidos',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color:
+                                              Color.fromARGB(255, 78, 78, 78),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -258,6 +268,8 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               ],
             ],
           ),
-        )));
+        ),
+      ),
+    );
   }
 }

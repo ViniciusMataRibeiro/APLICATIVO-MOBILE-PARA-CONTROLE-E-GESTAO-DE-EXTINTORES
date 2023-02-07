@@ -1,3 +1,8 @@
 import 'package:get/get.dart';
 
-class SetorController extends GetxController {}
+import '../../data/services/auth/service.dart';
+
+class SetorController extends GetxController {
+  AuthService aux = Get.find<AuthService>();
+
+}
