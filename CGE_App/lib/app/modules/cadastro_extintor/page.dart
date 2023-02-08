@@ -1,5 +1,7 @@
+import 'package:cge_app/app/data/Models/subject_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import 'controller.dart';
 
@@ -68,80 +70,126 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          margin: const EdgeInsets.only(bottom: 0, top: 8),
-                          padding: const EdgeInsets.only(bottom: 0),
-                          child: Form(
-                            child: Obx(() => DropdownButton(
-                                  icon: const Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Colors.white,
-                                  ),
-                                  value: controller.extintor,
-                                  isExpanded: true,
-                                  onChanged: (value) {
-                                    value = controller.extintor;
-                                  },
-                                  style: const TextStyle(
-                                      fontSize: 18, color: Colors.white),
-                                  items: [
-                                            const DropdownMenuItem(
-                                              child: Text('teste1'),
-                                              value: 1,
-                                            ),
-                                          ].isEmpty ||
-                                          controller.extintor == 0
-                                      ? [
-                                          const DropdownMenuItem(
-                                            child: Text('Selecione'),
-                                            value: 0,
-                                          ),
-                                        ]
-                                      : [
-                                          const DropdownMenuItem(
-                                            child: Text('Selecione'),
-                                            value: 0,
-                                          ),
-                                        ],
-                                )),
-                          )),
-                      Container(
-                        margin: const EdgeInsets.all(0),
+                        margin: const EdgeInsets.only(left: 0),
                         child: Form(
                             child: TextFormField(
-                          style: const TextStyle(
+                            style: const TextStyle(
+                              wordSpacing: 1,
                               fontSize: 18, color: Colors.white),
                           decoration: const InputDecoration(
-                            labelStyle: TextStyle(
+                              icon: Icon(Icons.fire_extinguisher_outlined,
+                              color: Colors.white,
+                              size: 27,),
+                              labelStyle: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                             ),
-                            labelText: 'Tamanho',
+                            labelText: 'Nº do Extintor',
                           ),
-                        )),
+                        ),),
                       ),
                       Container(
-                        margin: const EdgeInsets.all(0),
+                        margin: const EdgeInsets.only(left: 0),
                         child: Form(
                             child: TextFormField(
-                          style: const TextStyle(
+                            style: const TextStyle(
+                              wordSpacing: 1,
                               fontSize: 18, color: Colors.white),
                           decoration: const InputDecoration(
-                            labelStyle: TextStyle(
+                              icon: Icon(Icons.fire_extinguisher_outlined,
+                              color: Colors.white,
+                              size: 27,),
+                              labelStyle: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                             ),
-                            labelText: 'Validade do Casco',
-                            suffixIcon: Icon(
-                              Icons.calendar_today,
-                              color: Colors.white,
-                            ),
+                            labelText: 'Nº do Extintor',
                           ),
-                        )),
+                        ),),
                       ),
+                      Container(
+                        margin: const EdgeInsets.only(left: 0),
+                        child: Form(
+                            child: TextFormField(
+                            style: const TextStyle(
+                              wordSpacing: 1,
+                              fontSize: 18, color: Colors.white),
+                          decoration: const InputDecoration(
+                              icon: Icon(Icons.fire_extinguisher_outlined,
+                              color: Colors.white,
+                              size: 27,),
+                              labelStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                            labelText: 'Nº do Extintor',
+                          ),
+                        ),),
+                      ),
+                      GetBuilder<CadastroExtintorController>(builder: (controller) {
+                        return Container(
+                         padding: const EdgeInsets.all(10.0),
+                          child: MultiSelectDialogField(
+                           dialogHeight: 200,
+                            items: controller.dropDownData,
+                            title: const Text("Tipo do Extintor",
+                            style: TextStyle(color: Colors.black)),
+                           selectedColor: Colors.black,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.all(Radius.circular(30)),
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 2
+                              ),
+                            ),
+                            buttonIcon: const Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black,
+                            ),
+                            buttonText: const Text(
+                              "Tipo do Extintor",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
+                            ),
+                            onConfirm: (results) {
+                              var subjectData = [];
+                              for(var i = 0; i < results.length; i++) {
+                                SubjectModel data = results[i] as SubjectModel;
+                                print(data.subjectId);
+                                print(data.subjectName);
+                                subjectData.add(data.subjectId);
+                              }
+                              print("data $subjectData");
+                            },
+                          ));
+                      }),
+                      Container(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Center(
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  fixedSize: const Size(200, 50)),
+                              child: const Text(
+                                'Registrar',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Roboto-BoldItalic',
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                      ))
                     ],
                   ),
                 ),
-              ])),
+              ]
+              )
+              ),              
         ));
   }
 }

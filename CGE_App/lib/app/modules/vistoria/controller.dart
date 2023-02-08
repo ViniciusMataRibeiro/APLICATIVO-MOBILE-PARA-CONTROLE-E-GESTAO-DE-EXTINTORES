@@ -1,3 +1,6 @@
+
 import 'package:get/get.dart';
 
-class VistoriaController extends GetxController {}
+
+class VistoriaController extends GetxController {
+}

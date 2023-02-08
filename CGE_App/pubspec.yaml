@@ -51,6 +51,7 @@ dependencies:
   faker: ^2.1.0
   floating_action_bubble: ^1.1.4
   ionicons: ^0.2.2
+  multi_select_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:

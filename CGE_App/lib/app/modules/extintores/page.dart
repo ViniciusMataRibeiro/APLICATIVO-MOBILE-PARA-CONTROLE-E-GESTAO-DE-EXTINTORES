@@ -184,20 +184,20 @@ class ExtintorPage extends State<ExtintorState>
                         ),
                         Row(
                           children: [
-                            const SizedBox(
+                             SizedBox(
                               child: Column(
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(Icons.circle,
+                                      const Icon(Icons.circle,
                                           size: 20, color: Colors.green),
-                                      SizedBox(
+                                     const SizedBox(
                                         width: 3,
                                       ),
-                                      Text(
+                                      const Text(
                                         'Data de Vencimento',
                                         textAlign: TextAlign.left,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 17,
                                           color:
                                               Color.fromARGB(255, 78, 78, 78),

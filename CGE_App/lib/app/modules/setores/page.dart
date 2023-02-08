@@ -183,7 +183,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                         ),
                         Row(
                           children: [
-                            const SizedBox(
+                            SizedBox(
                               child: Column(
                                 children: [
                                   Row(
