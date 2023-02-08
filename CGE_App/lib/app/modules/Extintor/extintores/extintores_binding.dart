@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'controller.dart';
+import 'extintores_controller.dart';
 
 class ExtintorBinding implements Bindings {
   @override

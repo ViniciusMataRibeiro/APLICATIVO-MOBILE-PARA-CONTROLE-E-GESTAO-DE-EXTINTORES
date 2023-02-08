@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'controller.dart';
+import 'cadastroSetor_controller.dart';
 
 class CadastroSetorBinding implements Bindings {
   @override
