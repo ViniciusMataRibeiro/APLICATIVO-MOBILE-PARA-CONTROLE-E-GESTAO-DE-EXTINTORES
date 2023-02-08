@@ -1,24 +1,24 @@
-import 'package:cge_app/app/modules/cadastro_empresa/binding.dart';
-import 'package:cge_app/app/modules/cadastro_empresa/page.dart';
-import 'package:cge_app/app/modules/vistoria/binding.dart';
-import 'package:cge_app/app/modules/vistoria/page.dart';
+import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_binding.dart';
+import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_page.dart';
+import 'package:cge_app/app/modules/Tecnico/vistoria/vistoria_binding.dart';
+import 'package:cge_app/app/modules/Tecnico/vistoria/vistoria_page.dart';
 import 'package:cge_app/app/routes/routes.dart';
 import 'package:get/get.dart';
 
-import '../modules/cadastro_extintor/binding.dart';
-import '../modules/cadastro_extintor/page.dart';
-import '../modules/cadastro_setor/binding.dart';
-import '../modules/cadastro_setor/page.dart';
-import '../modules/dashboard/binding.dart';
-import '../modules/dashboard/page.dart';
-import '../modules/login/binding.dart';
-import '../modules/login/page.dart';
-import '../modules/perfil/binding.dart';
-import '../modules/perfil/page.dart';
-import '../modules/perfil_tecnico/binding.dart';
-import '../modules/perfil_tecnico/page.dart';
-import '../modules/splash/binding.dart';
-import '../modules/splash/page.dart';
+import '../modules/Extintor/cadastro_extintor/cadastroExtintor_binding.dart';
+import '../modules/Extintor/cadastro_extintor/cadastroExtintor_page.dart';
+import '../modules/Setor/cadastro_setor/cadastroSetor_binding.dart';
+import '../modules/Setor/cadastro_setor/cadastroSetor_page.dart';
+import '../modules/dashboard/dashboard_binding.dart';
+import '../modules/dashboard/dashboard_page.dart';
+import '../modules/login/login_binding.dart';
+import '../modules/login/login_page.dart';
+import '../modules/Empresa/perfil_empresa/perfilEmpresa_binding.dart';
+import '../modules/Empresa/perfil_empresa/perfilEmpresa_page.dart';
+import '../modules/Tecnico/perfil_tecnico/perfilTecnico_binding.dart';
+import '../modules/Tecnico/perfil_tecnico/perfilTecnico_page.dart';
+import '../modules/splash/splash_binding.dart';
+import '../modules/splash/splash_page.dart';
 
 abstract class AppPages {
   static final pages = [
@@ -34,7 +34,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.login,
-      page: () => LoginPage(),
+      page: () => const LoginPage(),
       binding: LoginBinding(),
     ),
     GetPage(
@@ -64,7 +64,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.vistoria,
-      page: () => VistoriaPage(),
+      page: () => const VistoriaPage(),
       binding: VistoriaBinding()
       ),
   ];

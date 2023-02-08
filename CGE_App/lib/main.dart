@@ -21,7 +21,7 @@ main() async {
   Intl.defaultLocale = 'pt_BR';
 
   runApp(GetMaterialApp(
-    debugShowCheckedModeBanner: false,
+    debugShowCheckedModeBanner: true,
     initialRoute: Routes.inicial,
     theme: themeData,
     defaultTransition: Transition.fade,
