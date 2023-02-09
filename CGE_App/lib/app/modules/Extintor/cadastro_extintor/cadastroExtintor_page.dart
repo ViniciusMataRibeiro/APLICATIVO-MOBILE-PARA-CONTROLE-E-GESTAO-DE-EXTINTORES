@@ -1,3 +1,4 @@
+import 'package:cge_app/app/Icones/icones_personalizado.dart';
 import 'package:cge_app/app/data/Models/subject_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -77,12 +78,12 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                               wordSpacing: 1,
                               fontSize: 18, color: Colors.white),
                           decoration: const InputDecoration(
-                              icon: Icon(Icons.fire_extinguisher_outlined,
+                              icon: Icon(Icones_Personalizado.fire_extinguisher,
                               color: Colors.white,
                               size: 27,),
                               labelStyle: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: 15,
                             ),
                             labelText: 'Nº do Extintor',
                           ),
@@ -96,14 +97,16 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                               wordSpacing: 1,
                               fontSize: 18, color: Colors.white),
                           decoration: const InputDecoration(
-                              icon: Icon(Icons.fire_extinguisher_outlined,
+                              icon: Icon(Icones_Personalizado.fire_extinguisher,
                               color: Colors.white,
                               size: 27,),
                               labelStyle: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: 15,
                             ),
-                            labelText: 'Nº do Extintor',
+                            suffixIcon: Icon(Icons.date_range_outlined,
+                            color: Colors.white,),
+                            labelText: 'Validade Extintor',
                           ),
                         ),),
                       ),
@@ -115,14 +118,16 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                               wordSpacing: 1,
                               fontSize: 18, color: Colors.white),
                           decoration: const InputDecoration(
-                              icon: Icon(Icons.fire_extinguisher_outlined,
+                              icon: Icon(Icones_Personalizado.fire_extinguisher,
                               color: Colors.white,
                               size: 27,),
                               labelStyle: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: 15,
                             ),
-                            labelText: 'Nº do Extintor',
+                            suffixIcon: Icon(Icons.date_range_outlined,
+                            color: Colors.white,),
+                            labelText: 'Validade do Casco',
                           ),
                         ),),
                       ),
