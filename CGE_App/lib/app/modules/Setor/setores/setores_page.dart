@@ -122,12 +122,13 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               icon: Icons.add_rounded,
               titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
               onPress: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => CadastroSetorPage(),
-                  ),
-                );
+                Get.offNamed('/cadSetor');
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (BuildContext context) => CadastroSetorPage(),
+                //   ),
+                // );
                 _animationController.reverse();
               },
             ),
