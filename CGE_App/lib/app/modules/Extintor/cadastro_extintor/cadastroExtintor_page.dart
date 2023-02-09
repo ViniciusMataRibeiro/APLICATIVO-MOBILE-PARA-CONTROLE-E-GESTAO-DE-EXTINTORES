@@ -2,11 +2,15 @@ import 'package:cge_app/app/Icones/icones_personalizado.dart';
 import 'package:cge_app/app/data/Models/subject_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import 'cadastroExtintor_controller.dart';
 
 class CadastroExtintorPage extends GetView<CadastroExtintorController> {
+
+  var mask = MaskTextInputFormatter(mask: "##/##/####");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +78,7 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                         margin: const EdgeInsets.only(left: 0),
                         child: Form(
                             child: TextFormField(
+                            keyboardType: TextInputType.number,
                             style: const TextStyle(
                               wordSpacing: 1,
                               fontSize: 18, color: Colors.white),
@@ -90,13 +95,20 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                         ),),
                       ),
                       Container(
+                        
                         margin: const EdgeInsets.only(left: 0),
                         child: Form(
                             child: TextFormField(
+                            inputFormatters: [mask],
+                            keyboardType: TextInputType.number,
                             style: const TextStyle(
                               wordSpacing: 1,
                               fontSize: 18, color: Colors.white),
                           decoration: const InputDecoration(
+                              hintText: '31/12/2022',
+                              hintStyle: TextStyle(
+                                color: Colors.white
+                              ),
                               icon: Icon(Icones_Personalizado.fire_extinguisher,
                               color: Colors.white,
                               size: 27,),
@@ -114,10 +126,16 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                         margin: const EdgeInsets.only(left: 0),
                         child: Form(
                             child: TextFormField(
+                              inputFormatters: [mask],
+                              keyboardType: TextInputType.number,
                             style: const TextStyle(
                               wordSpacing: 1,
                               fontSize: 18, color: Colors.white),
                           decoration: const InputDecoration(
+                              hintText: '31/12/2022',
+                              hintStyle: TextStyle(
+                                color: Colors.white,
+                              ),
                               icon: Icon(Icones_Personalizado.fire_extinguisher,
                               color: Colors.white,
                               size: 27,),
@@ -133,6 +151,8 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                       ),
                       GetBuilder<CadastroExtintorController>(builder: (controller) {
                         return Container(
+                         width: 350,
+                         margin: const EdgeInsets.only(top: 10),
                          padding: const EdgeInsets.all(10.0),
                           child: MultiSelectDialogField(
                            dialogHeight: 200,
@@ -141,21 +161,21 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                             style: TextStyle(color: Colors.black)),
                            selectedColor: Colors.black,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: const Color.fromARGB(80, 0, 0, 0),
                               borderRadius: const BorderRadius.all(Radius.circular(30)),
                               border: Border.all(
-                                color: Colors.black,
+                                color: const Color.fromARGB(80, 0, 0, 0),
                                 width: 2
                               ),
                             ),
                             buttonIcon: const Icon(
                               Icons.arrow_drop_down,
-                              color: Colors.black,
+                              color: Colors.white,
                             ),
                             buttonText: const Text(
                               "Tipo do Extintor",
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontSize: 16,
                               ),
                             ),
@@ -163,11 +183,8 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                               var subjectData = [];
                               for(var i = 0; i < results.length; i++) {
                                 SubjectModel data = results[i] as SubjectModel;
-                                print(data.subjectId);
-                                print(data.subjectName);
-                                subjectData.add(data.subjectId);
+                                subjectData.add(data.subjectName);
                               }
-                              print("data $subjectData");
                             },
                           ));
                       }),
