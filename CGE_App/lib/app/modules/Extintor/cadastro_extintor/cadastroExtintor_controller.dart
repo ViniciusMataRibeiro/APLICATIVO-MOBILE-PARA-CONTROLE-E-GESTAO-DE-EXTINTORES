@@ -1,6 +1,7 @@
-import 'package:cge_app/app/data/Models/subject_data_model.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
+
+import '../../../data/Models/subject_data_model.dart';
 
 class CadastroExtintorController extends GetxController {
   var _extintor = 0.obs;
@@ -45,7 +46,6 @@ class CadastroExtintorController extends GetxController {
           );
         },
       );
-      print(tempSubjectData);
       subjectData.addAll(tempSubjectData);
 
       dropDownData = subjectData.map((subjectdata) {
