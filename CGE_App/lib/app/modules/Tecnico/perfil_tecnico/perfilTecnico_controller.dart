@@ -1,3 +1,11 @@
 import 'package:get/get.dart';
 
-class PerfilTecnicoController extends GetxController {}
+import '../../../data/services/auth/service.dart';
+
+class PerfilTecnicoController extends GetxController {
+  final _authService = Get.find<AuthService>();
+
+  void goTologout() {
+    _authService.logout().then((value) => null);
+  }
+}

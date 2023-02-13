@@ -1,12 +1,12 @@
+import 'package:cge_app/app/modules/Tecnico/perfil_tecnico/perfilTecnico_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/services/auth/service.dart';
-import '../../Empresa/perfil_empresa/PerfilEmpresa_controller.dart';
 
 String nome = "";
 
-class PerfilTecnicoPage extends GetView<PerfilController> {
+class PerfilTecnicoPage extends GetView<PerfilTecnicoController> {
   AuthService aux = Get.find<AuthService>();
 
   @override
@@ -71,7 +71,7 @@ class PerfilTecnicoPage extends GetView<PerfilController> {
                       leading: const Icon(Icons.person_pin, size: 40),
                       trailing: const Icon(Icons.logout, color: Colors.black),
                       onTap: () {
-                        //controller.goTologin();
+                        controller.goTologout();
                       },
                     ),
                   ),

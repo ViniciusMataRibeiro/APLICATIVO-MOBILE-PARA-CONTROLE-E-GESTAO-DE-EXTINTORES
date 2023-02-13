@@ -1,10 +1,10 @@
+import 'package:cge_app/app/modules/Empresa/perfil_empresa/perfilEmpresa_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/services/auth/service.dart';
-import 'PerfilEmpresa_controller.dart';
 
-class PerfilPage extends GetView<PerfilController> {
+class PerfilPage extends GetView<PerfilEmpresaController> {
 AuthService aux = Get.find<AuthService>();
 
   @override
@@ -70,7 +70,9 @@ AuthService aux = Get.find<AuthService>();
                           const Icon(Icons.person_pin, size: 40),
                       trailing:
                           const Icon(Icons.logout, color: Colors.black),
-                      onTap: () {},
+                      onTap: () {
+                        controller.goTologout();
+                      },
                     ),
                   ),
                   Card(
