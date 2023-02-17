@@ -1,6 +1,7 @@
 import 'package:cge_app/app/modules/Tecnico/perfil_tecnico/perfilTecnico_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 
 import '../../../data/services/auth/service.dart';
 
@@ -81,70 +82,18 @@ class PerfilTecnicoPage extends GetView<PerfilTecnicoController> {
                     elevation: 5,
                     child: ListTile(
                       title: const Text(
-                        "Opção 1",
+                        "Consultar Vistoria",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                       leading:
-                          const Icon(Icons.accessibility_new_rounded, size: 40),
+                          const Icon(Ionicons.document_text_outline, size: 40),
                       trailing:
                           const Icon(Icons.arrow_forward, color: Colors.black),
                       onTap: () {},
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Card(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
-                    color: const Color(0xFFD7CCC8),
-                    elevation: 5,
-                    child: ListTile(
-                      title: const Text(
-                        "Opção 2",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                      leading:
-                          const Icon(Icons.accessible_forward_sharp, size: 40),
-                      trailing:
-                          const Icon(Icons.arrow_forward, color: Colors.black),
-                      onTap: () {},
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Card(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
-                    color: const Color(0xFFD7CCC8),
-                    elevation: 5,
-                    child: ListTile(
-                      title: const Text(
-                        "Opção 3",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                      leading: const Icon(Icons.add_reaction, size: 40),
-                      trailing:
-                          const Icon(Icons.arrow_forward, color: Colors.black),
-                      onTap: () {},
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Card(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
-                    color: const Color(0xFFD7CCC8),
-                    elevation: 5,
-                    child: ListTile(
-                      title: const Text(
-                        "Opção 4",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                      leading:
-                          const Icon(Icons.add_shopping_cart_rounded, size: 40),
-                      trailing:
-                          const Icon(Icons.arrow_forward, color: Colors.black),
-                      onTap: () {},
-                    ),
-                  ),
                 ],
               ),
             ],

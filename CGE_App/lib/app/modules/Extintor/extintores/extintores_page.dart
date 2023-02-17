@@ -2,9 +2,15 @@ import 'package:faker/faker.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/app_theme.dart';
 import 'extintores_controller.dart';
+import 'dart:ui' as ui;
+
+DateTime selectedDate = DateTime.now();
+String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
+String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
 
 class Extintor extends GetView<ExtintorController> {
   @override
@@ -13,7 +19,7 @@ class Extintor extends GetView<ExtintorController> {
       theme: themeData,
       debugShowCheckedModeBanner: false,
       home: const Directionality(
-          textDirection: TextDirection.ltr,
+          textDirection: ui.TextDirection.ltr,
           child: ExtintorState(
             title: '',
           )),
@@ -34,6 +40,46 @@ class ExtintorPage extends State<ExtintorState>
   var letra = <String>[];
   late Animation<double> _animation;
   late AnimationController _animationController;
+
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime.now(),
+      cancelText: "CANCELAR",
+      builder: (context, child) => 
+      Theme(
+        data: ThemeData.light().copyWith(
+              primaryColor: const Color(0xFF4C131A),
+              buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+              colorScheme: const ColorScheme.light(primary: Color.fromARGB(255, 190, 0, 0)).copyWith(secondary: const Color(0xFF4C131A))),
+          child: child!,
+      )
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(
+        () {
+          _refresh(data: picked);
+        },
+      );
+    }
+  }
+
+  _refresh({DateTime? data}) async {
+    try {
+      data ??= DateTime.parse(updatedDt2);
+
+      setState(() {
+        selectedDate = data!;
+        updatedDt = DateFormat("dd/MM/y").format(data);
+        updatedDt2 = DateFormat("y-MM-dd").format(data);
+      });
+      // ignore: empty_catches
+    } catch (e) {}
+  }
 
   @override
   void initState() {
@@ -68,9 +114,9 @@ class ExtintorPage extends State<ExtintorState>
             ),
             Container(
               padding: const EdgeInsets.all(20.0),
-              child: const Text(
-                '03/02/2023',
-                style: TextStyle(fontSize: 16, color: Colors.white),
+              child: Text(
+                updatedDt,
+                style: const TextStyle(fontSize: 16, color: Colors.white),
               ),
             ),
           ],
@@ -82,11 +128,11 @@ class ExtintorPage extends State<ExtintorState>
           ),
           IconButton(
             icon: const Icon(Icons.find_replace_outlined, color: Colors.white),
-            onPressed: () {},
+            onPressed: () => _refresh(),
           ),
           IconButton(
             icon: const Icon(Icons.calendar_month_rounded, color: Colors.white),
-            onPressed: () {},
+            onPressed: () => _selectDate(context),
           ),
         ],
         backgroundColor: const Color.fromARGB(255, 190, 0, 0),
@@ -184,20 +230,20 @@ class ExtintorPage extends State<ExtintorState>
                         ),
                         Row(
                           children: [
-                             SizedBox(
+                             const SizedBox(
                               child: Column(
                                 children: [
                                   Row(
                                     children: [
-                                      const Icon(Icons.circle,
+                                      Icon(Icons.circle,
                                           size: 20, color: Colors.green),
-                                     const SizedBox(
+                                     SizedBox(
                                         width: 3,
                                       ),
-                                      const Text(
+                                      Text(
                                         'Data de Vencimento',
                                         textAlign: TextAlign.left,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 17,
                                           color:
                                               Color.fromARGB(255, 78, 78, 78),

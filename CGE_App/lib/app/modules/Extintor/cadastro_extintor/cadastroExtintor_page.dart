@@ -94,8 +94,7 @@ class CadastroExtintorPage extends GetView<CadastroExtintorController> {
                           ),
                         ),),
                       ),
-                      Container(
-                        
+                      Container(                      
                         margin: const EdgeInsets.only(left: 0),
                         child: Form(
                             child: TextFormField(
