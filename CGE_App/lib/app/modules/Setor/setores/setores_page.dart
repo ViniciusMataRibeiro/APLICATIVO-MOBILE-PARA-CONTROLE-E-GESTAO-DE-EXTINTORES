@@ -184,6 +184,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
               onPress: () {
                 _animationController.reverse();
+                Get.toNamed('vistoria');
               },
             ),
           ],

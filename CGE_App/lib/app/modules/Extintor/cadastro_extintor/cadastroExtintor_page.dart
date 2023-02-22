@@ -1,18 +1,110 @@
 import 'package:cge_app/app/Icones/icones_personalizado.dart';
+import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/data/Models/subject_data_model.dart';
 import 'package:cge_app/app/modules/Extintor/cadastro_extintor/cadastroExtintor_controller.dart';
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'dart:ui' as ui;
 
+
+DateTime selectedDate = DateTime.now();
+String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
+String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
 
 
 class CadastroExtintorPage extends GetView<CadastroExtintorController> {
 
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: themeData,
+      debugShowCheckedModeBanner: false,
+      home: const Directionality(
+          textDirection: ui.TextDirection.ltr,
+          child: CadastroExtintorState(
+            title: '',
+          )),
+    );
+  }
+}
+
+
+
+class CadastroExtintorState extends StatefulWidget {
+  const CadastroExtintorState({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  CadastroExtintor createState() => CadastroExtintor();
+}
+
+
+class CadastroExtintor extends State<CadastroExtintorState> with SingleTickerProviderStateMixin {
+  var number = faker.randomGenerator.integer(50);
+  late Animation<double> _animation;
+  late AnimationController _animationController;
+
   var mask = MaskTextInputFormatter(mask: "##/##/####");
 
-  
+    Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime.now(),
+      cancelText: "CANCELAR",
+      builder: (context, child) => 
+      Theme(
+        data: ThemeData.light().copyWith(
+              primaryColor: const Color(0xFF4C131A),
+              buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+              colorScheme: const ColorScheme.light(primary: Color.fromARGB(255, 190, 0, 0)).copyWith(secondary: const Color(0xFF4C131A))),
+          child: child!,
+      )
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(
+        () {
+          _refresh(data: picked);
+        },
+      );
+    }
+  }
+
+
+    _refresh({DateTime? data}) async {
+    try {
+      data ??= DateTime.parse(updatedDt2);
+
+      setState(() {
+        selectedDate = data!;
+        updatedDt = DateFormat("dd/MM/y").format(data);
+        updatedDt2 = DateFormat("y-MM-dd").format(data);
+      });
+      // ignore: empty_catches
+    } catch (e) {}
+  }
+
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 260),
+    );
+
+    final curvedAnimation =
+        CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
+    _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
+
+    super.initState();
+  }  
+
 
   @override
   Widget build(BuildContext context) {
