@@ -228,11 +228,11 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                         ),
                         Row(
                           children: [
-                            const SizedBox(
+                             SizedBox(
                               child: Column(
                                 children: [
                                   Row(
-                                    children: [
+                                    children: const [
                                       Icon(
                                         Icons.circle,
                                         size: 20,
@@ -253,7 +253,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                                     ],
                                   ),
                                   Row(
-                                    children: [
+                                    children: const [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.yellow),
                                       SizedBox(
@@ -271,7 +271,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                                     ],
                                   ),
                                   Row(
-                                    children: [
+                                    children: const [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.red),
                                       SizedBox(

@@ -183,6 +183,7 @@ class ExtintorPage extends State<ExtintorState>
               icon: Icons.check_circle_outline,
               titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
               onPress: () {
+                Get.toNamed('/vistoria');
                 _animationController.reverse();
               },
             ),
@@ -230,29 +231,29 @@ class ExtintorPage extends State<ExtintorState>
                         ),
                         Row(
                           children: [
-                             const SizedBox(
+                            SizedBox(
                               child: Column(
                                 children: [
                                   Row(
-                                    children: [
-                                      Icon(Icons.circle,
+                                    children: const [
+                                       Icon(Icons.circle,
                                           size: 20, color: Colors.green),
-                                     SizedBox(
+                                      SizedBox(
                                         width: 3,
                                       ),
-                                      Text(
+                                       Text(
                                         'Data de Vencimento',
                                         textAlign: TextAlign.left,
-                                        style: TextStyle(
+                                        style:  TextStyle(
                                           fontSize: 17,
                                           color:
-                                              Color.fromARGB(255, 78, 78, 78),
+                                               Color.fromARGB(255, 78, 78, 78),
                                         ),
                                       ),
                                     ],
                                   ),
                                   Row(
-                                    children: [
+                                    children: const [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.green),
                                       SizedBox(
@@ -270,7 +271,7 @@ class ExtintorPage extends State<ExtintorState>
                                     ],
                                   ),
                                   Row(
-                                    children: [
+                                    children: const [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.green),
                                       SizedBox(

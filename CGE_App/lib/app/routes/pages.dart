@@ -64,7 +64,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.vistoria,
-      page: () => const VistoriaPage(),
+      page: () => VistoriaPage(),
       binding: VistoriaBinding()
       ),
   ];
