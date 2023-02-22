@@ -3,11 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
-class VistoriaPage extends GetView<VistoriaController> {
+class VistoriaPage extends StatefulWidget {
   const VistoriaPage({super.key});
 
   @override
+  State<VistoriaPage> createState() => _VistoriaPage();
+}
+
+
+class _VistoriaPage extends State<VistoriaPage> {
+
+  bool isSelectmanometro = false;
+  bool isSelectparede = false;
+  bool isSelectpiso = false;
+  bool isSelectacesso = false;
+  bool isSelectmangueira = false;
+  bool isSelectlacre = false;
+  bool isSelectaprovado = false;
+
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Center(
         child: Container(
@@ -64,128 +80,298 @@ class VistoriaPage extends GetView<VistoriaController> {
                           )
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 30),
                       Row(
-                        children: const [
-                          Icon(Icons.speed_outlined, color: Colors.white),
-                          SizedBox(
+                        children: [
+                          const Icon(Icons.speed_outlined, color: Colors.white),
+                          const SizedBox(
                             width: 10.0,
                           ),
-                          Text('Manometro',
-                              style: TextStyle(
-                                fontFamily: 'Prompt-ExtraBoldItalic',
-                                fontSize: 17,
-                                color: Colors.white,
-                              )),
-                          SizedBox(width: 60),
-                          Checkbox(value: true, onChanged: null)
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: const [
-                          Icon(Icons.fire_extinguisher_outlined,
-                              color: Colors.white),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Text('Sinalização Parede',
+                          const Text('Manômetro',
                               style: TextStyle(
                                 fontFamily: 'Prompt-ExtraBoldItalic',
                                 fontSize: 16,
                                 color: Colors.white,
                               )),
-                          SizedBox(width: 2),
-                          Checkbox(value: true, onChanged: null)
+                          const SizedBox(width: 77),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isSelectmanometro = !isSelectmanometro;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectmanometro ? Colors.red : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectmanometro ? null : Border.all(
+                                  color: Colors.black54,
+                                  width: 2
+                                )
+                              ),
+                              width: 25,
+                              height: 25,
+                              child: isSelectmanometro ? const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                              ) : null,
+                            ),
+                          ),
+                        ]
+                      ),
+                      const SizedBox(height: 30),
+                      Row(
+                        children: [
+                          const Icon(Icons.fire_extinguisher_outlined,
+                              color: Colors.white),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          const Text('Sinalização Parede',
+                              style: TextStyle(
+                                fontFamily: 'Prompt-ExtraBoldItalic',
+                                fontSize: 16,
+                                color: Colors.white,
+                              )),
+                          const SizedBox(width: 13),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isSelectparede = !isSelectparede;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectparede ? Colors.red : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectparede ? null : Border.all(
+                                  color: Colors.black54,
+                                  width: 2
+                                )
+                              ),
+                              width: 25,
+                              height: 25,
+                              child: isSelectparede ? const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                              ) : null,
+                            ),
+                          ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 30),
                       Row(
-                        children: const [
-                          Icon(
+                        children: [
+                          const Icon(
                             Ionicons.footsteps_outline,
                             color: Colors.white,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10.0,
                           ),
-                          Text('Sinalização Piso',
+                          const Text('Sinalização Piso',
                               style: TextStyle(
                                 fontFamily: 'Prompt-ExtraBoldItalic',
                                 fontSize: 16,
                                 color: Colors.white,
                               )),
-                          SizedBox(width: 27),
-                          Checkbox(value: true, onChanged: null)
+                          const SizedBox(width: 37),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isSelectpiso = !isSelectpiso;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectpiso ? Colors.red : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectpiso ? null : Border.all(
+                                  color: Colors.black54,
+                                  width: 2
+                                )
+                              ),
+                              width: 25,
+                              height: 25,
+                              child: isSelectpiso ? const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                              ) : null,
+                            ),
+                          ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 30),
                       Row(
-                        children: const [
-                          Icon(Ionicons.enter_outline, color: Colors.white),
-                          SizedBox(
+                        children: [
+                          const Icon(Ionicons.enter_outline, color: Colors.white),
+                          const SizedBox(
                             width: 10.0,
                           ),
-                          Text('Acesso',
+                          const Text('Acesso',
                               style: TextStyle(
                                 fontFamily: 'Prompt-ExtraBoldItalic',
                                 fontSize: 16,
                                 color: Colors.white,
                               )),
-                          SizedBox(width: 102),
-                          Checkbox(value: true, onChanged: null)
+                          const SizedBox(width: 112),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isSelectacesso = !isSelectacesso;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectacesso ? Colors.red : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectacesso ? null : Border.all(
+                                  color: Colors.black54,
+                                  width: 2
+                                )
+                              ),
+                              width: 25,
+                              height: 25,
+                              child: isSelectacesso ? const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                              ) : null,
+                            ),
+                          ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 30),
                       Row(
-                        children: const [
-                          Icon(Ionicons.headset_outline, color: Colors.white),
-                          SizedBox(
+                        children: [
+                          const Icon(Ionicons.headset_outline, color: Colors.white),
+                          const SizedBox(
                             width: 10.0,
                           ),
-                          Text('Mangueira',
+                          const Text('Mangueira',
                               style: TextStyle(
                                 fontFamily: 'Prompt-ExtraBoldItalic',
                                 fontSize: 16,
                                 color: Colors.white,
                               )),
-                          SizedBox(width: 72),
-                          Checkbox(value: true, onChanged: null)
+                          const SizedBox(width: 82),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isSelectmangueira = !isSelectmangueira;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectmangueira ? Colors.red : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectmangueira ? null : Border.all(
+                                  color: Colors.black54,
+                                  width: 2
+                                )
+                              ),
+                              width: 25,
+                              height: 25,
+                              child: isSelectmangueira ? const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                              ) : null,
+                            ),
+                          ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 30),
                       Row(
-                        children: const [
-                          Icon(Ionicons.headset_outline, color: Colors.white),
-                          SizedBox(
+                        children: [
+                          const Icon(Ionicons.headset_outline, color: Colors.white),
+                          const SizedBox(
                             width: 10.0,
                           ),
-                          Text('Lacre',
+                          const Text('Lacre',
                               style: TextStyle(
                                 fontFamily: 'Prompt-ExtraBoldItalic',
                                 fontSize: 16,
                                 color: Colors.white,
                               )),
-                          SizedBox(width: 115),
-                          Checkbox(value: true, onChanged: null)
+                          const SizedBox(width: 126),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isSelectlacre = !isSelectlacre;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectlacre ? Colors.red : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectlacre ? null : Border.all(
+                                  color: Colors.black54,
+                                  width: 2
+                                )
+                              ),
+                              width: 25,
+                              height: 25,
+                              child: isSelectlacre ? const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                              ) : null,
+                            ),
+                          ),
                         ],
                       ),
+                      const SizedBox(height: 30),
                       Row(
-                        children: const [
-                          Icon(Ionicons.thumbs_up_outline, color: Colors.white),
-                          SizedBox(
+                        children: [
+                          const Icon(Ionicons.thumbs_up_outline, color: Colors.white),
+                          const SizedBox(
                             width: 10.0,
                           ),
-                          Text('Aprovado',
+                          const Text('Aprovado',
                               style: TextStyle(
                                 fontFamily: 'Prompt-ExtraBoldItalic',
                                 fontSize: 16,
                                 color: Colors.white,
                               )),
-                          SizedBox(width: 77),
-                          Checkbox(value: true, onChanged: null)
+                          const SizedBox(width: 88),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isSelectaprovado = !isSelectaprovado;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectaprovado ? Colors.red : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectaprovado ? null : Border.all(
+                                  color: Colors.black54,
+                                  width: 2
+                                )
+                              ),
+                              width: 25,
+                              height: 25,
+                              child: isSelectaprovado ? const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                              ) : null,
+                            ),
+                          ),
                         ],
                       ),
+                      const SizedBox(height: 20),
                       Container(
                           padding: const EdgeInsets.all(20.0),
                           child: Center(

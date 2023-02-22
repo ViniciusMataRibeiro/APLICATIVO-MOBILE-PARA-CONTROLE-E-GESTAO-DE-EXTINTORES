@@ -1,15 +1,18 @@
 import 'package:cge_app/app/Icones/icones_personalizado.dart';
 import 'package:cge_app/app/data/Models/subject_data_model.dart';
+import 'package:cge_app/app/modules/Extintor/cadastro_extintor/cadastroExtintor_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-import 'cadastroExtintor_controller.dart';
+
 
 class CadastroExtintorPage extends GetView<CadastroExtintorController> {
 
   var mask = MaskTextInputFormatter(mask: "##/##/####");
+
+  
 
   @override
   Widget build(BuildContext context) {
