@@ -4,7 +4,7 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../../../data/Models/subject_data_model.dart';
 
 class CadastroExtintorController extends GetxController {
-  var _extintor = 0.obs;
+  final _extintor = 0.obs;
   get extintor => _extintor.value;
 
   void changeExtintor(int value) {

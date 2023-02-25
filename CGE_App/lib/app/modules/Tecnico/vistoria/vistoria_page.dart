@@ -1,17 +1,48 @@
+import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/modules/Tecnico/vistoria/vistoria_controller.dart';
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+import 'dart:ui' as ui;
 
-class VistoriaPage extends StatefulWidget {
-  const VistoriaPage({super.key});
+
+DateTime selectedDate = DateTime.now();
+String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
+String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
+
+
+class VistoriaPage extends GetView<VistoriaController> {
+
 
   @override
-  State<VistoriaPage> createState() => _VistoriaPage();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: themeData,
+      debugShowCheckedModeBanner: false,
+      home: const Directionality(
+          textDirection: ui.TextDirection.ltr,
+          child: VistoriaState(
+            title: '',
+          )),
+    );
+  }
+}
+
+class VistoriaState extends StatefulWidget {
+  const VistoriaState({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  Vistoria createState() => Vistoria();
 }
 
 
-class _VistoriaPage extends State<VistoriaPage> {
+class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin {
+  var number = faker.randomGenerator.integer(50);
+  late Animation<double> _animation;
+  late AnimationController _animationController;
 
   bool isSelectmanometro = false;
   bool isSelectparede = false;
@@ -21,10 +52,90 @@ class _VistoriaPage extends State<VistoriaPage> {
   bool isSelectlacre = false;
   bool isSelectaprovado = false;
 
+    Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime.now(),
+      cancelText: "CANCELAR",
+      builder: (context, child) => 
+      Theme(
+        data: ThemeData.light().copyWith(
+              primaryColor: const Color(0xFF4C131A),
+              buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+              colorScheme: const ColorScheme.light(primary: Color.fromARGB(255, 190, 0, 0)).copyWith(secondary: const Color(0xFF4C131A))),
+          child: child!,
+      )
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(
+        () {
+          _refresh(data: picked);
+        },
+      );
+    }
+  }
+
+    _refresh({DateTime? data}) async {
+    try {
+      data ??= DateTime.parse(updatedDt2);
+
+      setState(() {
+        selectedDate = data!;
+        updatedDt = DateFormat("dd/MM/y").format(data);
+        updatedDt2 = DateFormat("y-MM-dd").format(data);
+      });
+      // ignore: empty_catches
+    } catch (e) {}
+  }
+
+    @override
+  void initState() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 260),
+    );
+
+    final curvedAnimation =
+        CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
+    _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+          title: Row(
+            children: [
+              const Icon(Icons.arrow_back,
+              color: Colors.white),
+              const SizedBox(width: 20),
+              Container(
+                margin: const EdgeInsets.only(right: 10),
+                width: 40,
+                height: 40,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100.0),
+                  child: Image.asset(
+                    'assets/image/cge.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const Text('Vistoria',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic)),
+            ],
+          ),
+          centerTitle: true,
+        ),
       body: Center(
         child: Container(
           decoration: const BoxDecoration(
@@ -65,22 +176,23 @@ class _VistoriaPage extends State<VistoriaPage> {
                         padding: const EdgeInsets.only(bottom: 0),
                       ),
                       Row(
-                        children: const [
-                          Text('Data da Manutenção',
+                        children: [
+                          const Text('Data da Manutenção',
                               style: TextStyle(
                                 fontSize: 17,
                                 fontFamily: 'Prompt-ExtraBoldItalic',
                                 color: Colors.white,
                               )),
-                          SizedBox(width: 20),
-                          Icon(
-                            Icons.date_range_outlined,
-                            size: 28,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 30),
+                          const SizedBox(width: 8),
+                          IconButton(
+                          icon: const Icon(Icons.calendar_month_rounded, color: Colors.white), 
+                          color: Colors.white,
+                          iconSize: 35,
+                          onPressed: () => _selectDate(context)
+                          ),
+                          ]
+                        ),
+                      const SizedBox(height: 27),
                       Row(
                         children: [
                           const Icon(Icons.speed_outlined, color: Colors.white),
