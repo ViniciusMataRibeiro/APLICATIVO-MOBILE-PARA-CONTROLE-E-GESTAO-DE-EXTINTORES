@@ -37,6 +37,11 @@ class AuthService extends GetxService {
     _repository.logout();
     await _configService.removeToken();
     user.value = null;
+    if (user != null) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/login');
+      });
+    }
   }
 
   Future<UserModel> _getUser() {
