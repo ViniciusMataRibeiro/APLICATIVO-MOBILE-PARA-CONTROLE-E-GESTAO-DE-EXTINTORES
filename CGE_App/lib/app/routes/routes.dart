@@ -8,4 +8,5 @@ abstract class Routes {
   static const cadSetor = '/cadSetor';
   static const cadEmpresa = '/cadEmpresa';
   static const vistoria = '/vistoria';
+  static const cadTecnico = '/cadTecnico';
 }

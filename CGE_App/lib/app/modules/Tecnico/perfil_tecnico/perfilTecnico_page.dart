@@ -94,6 +94,25 @@ class PerfilTecnicoPage extends GetView<PerfilTecnicoController> {
                     ),
                   ),
                   const SizedBox(height: 8),
+                  Card(
+                    margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                    color: const Color(0xFFD7CCC8),
+                    elevation: 5,
+                    child: ListTile(
+                      title: const Text(
+                        "Cadastar Tecnico",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      leading:
+                          const Icon(Ionicons.document_text_outline, size: 40),
+                      trailing:
+                          const Icon(Icons.arrow_forward, color: Colors.black),
+                      onTap: () {
+                        Get.toNamed('/cadTecnico');
+                      },
+                    ),
+                  ),
                 ],
               ),
             ],

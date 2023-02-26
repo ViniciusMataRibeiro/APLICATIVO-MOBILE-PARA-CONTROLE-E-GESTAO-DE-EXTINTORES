@@ -1,5 +1,7 @@
 import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_binding.dart';
 import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_page.dart';
+import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
+import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastrotecnico_binding.dart';
 import 'package:cge_app/app/modules/Tecnico/vistoria/vistoria_binding.dart';
 import 'package:cge_app/app/modules/Tecnico/vistoria/vistoria_page.dart';
 import 'package:cge_app/app/routes/routes.dart';
@@ -66,6 +68,11 @@ abstract class AppPages {
       name: Routes.vistoria,
       page: () => VistoriaPage(),
       binding: VistoriaBinding()
+      ),
+    GetPage(
+      name: Routes.cadTecnico,
+      page: () => CadastroTecnicoPage(),
+      binding: CadastroTecnicoBinding()
       ),
   ];
 }
