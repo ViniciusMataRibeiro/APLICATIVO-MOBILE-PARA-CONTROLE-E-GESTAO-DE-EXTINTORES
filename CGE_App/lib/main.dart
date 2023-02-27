@@ -19,7 +19,6 @@ main() async {
   Get.put<AuthService>(AuthService(AuthRepository(Get.find<Api>())));
 
   Intl.defaultLocale = 'pt_BR';
-
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: true,
     initialRoute: Routes.inicial,

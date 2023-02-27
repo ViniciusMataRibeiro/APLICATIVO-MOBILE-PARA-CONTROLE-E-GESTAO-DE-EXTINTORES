@@ -1,3 +1,4 @@
+import 'package:cge_app/app/modules/Extintor/cadastro_extintor/cadastroExtintor_page.dart';
 import 'package:faker/faker.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/app_theme.dart';
+import '../../../data/services/auth/service.dart';
+import '../../Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
+import '../../Tecnico/vistoria/vistoria_page.dart';
 import 'extintores_controller.dart';
 import 'dart:ui' as ui;
 
@@ -37,7 +41,8 @@ class ExtintorState extends StatefulWidget {
 
 class ExtintorPage extends State<ExtintorState>
     with SingleTickerProviderStateMixin {
-  var letra = <String>[];
+  AuthService aux = Get.find<AuthService>();
+  var number = faker.randomGenerator.integer(50);
   late Animation<double> _animation;
   late AnimationController _animationController;
 
@@ -45,20 +50,21 @@ class ExtintorPage extends State<ExtintorState>
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime.now(),
-      cancelText: "CANCELAR",
-      builder: (context, child) => 
-      Theme(
-        data: ThemeData.light().copyWith(
-              primaryColor: const Color(0xFF4C131A),
-              buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
-              colorScheme: const ColorScheme.light(primary: Color.fromARGB(255, 190, 0, 0)).copyWith(secondary: const Color(0xFF4C131A))),
-          child: child!,
-      )
-    );
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2000),
+        lastDate: DateTime.now(),
+        cancelText: "CANCELAR",
+        builder: (context, child) => Theme(
+              data: ThemeData.light().copyWith(
+                  primaryColor: const Color(0xFF4C131A),
+                  buttonTheme:
+                      const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+                  colorScheme: const ColorScheme.light(
+                          primary: Color.fromARGB(255, 190, 0, 0))
+                      .copyWith(secondary: const Color(0xFF4C131A))),
+              child: child!,
+            ));
     if (picked != null && picked != selectedDate) {
       setState(
         () {
@@ -97,10 +103,7 @@ class ExtintorPage extends State<ExtintorState>
 
   @override
   Widget build(BuildContext context) {
-    for (var i = 0; i < 10; i++) {
-      var char = faker.randomGenerator.fromCharSet('ABCK', 1);
-      letra.add(char);
-    }
+    var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -149,44 +152,73 @@ class ExtintorPage extends State<ExtintorState>
         child: FloatingActionBubble(
           herotag: UniqueKey(),
           items: <Bubble>[
-            Bubble(
-              title: "Editar Extintor",
-              iconColor: Colors.white,
-              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-              icon: Icons.edit_rounded,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              onPress: () {
-                Get.toNamed('/cadSetor');
-                _animationController.reverse();
-              },
-            ),
-            Bubble(
-              title: "Cadastrar Extintor",
-              iconColor: Colors.white,
-              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-              icon: Icons.add_rounded,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              onPress: () {
-                Get.toNamed('/cadExtintor');
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (BuildContext context) =>
-                //             CadastroSetorPage()));
-                _animationController.reverse();
-              },
-            ),
-            Bubble(
-              title: "Realizar Vistoria",
-              iconColor: Colors.white,
-              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-              icon: Icons.check_circle_outline,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              onPress: () {
-                Get.toNamed('/vistoria');
-                _animationController.reverse();
-              },
-            ),
+            if (obj!.tipo == 'empresas') ...[
+              Bubble(
+                title: "Cadastrar Tecnico",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.check_circle_outline,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => CadastroTecnicoPage(),
+                    ),
+                  );
+                  _animationController.reverse();
+                },
+              ),
+            ] else ...[
+              Bubble(
+                title: "Editar Extintor",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.edit_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => CadastroExtintorPage(),
+                    ),
+                  );
+                  _animationController.reverse();
+                },
+              ),
+              Bubble(
+                title: "Cadastrar Extintor",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.add_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => CadastroExtintorPage(),
+                    ),
+                  );
+                  _animationController.reverse();
+                },
+              ),
+              Bubble(
+                title: "Realizar Vistoria",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.check_circle_outline,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => VistoriaPage(),
+                    ),
+                  );
+                  _animationController.reverse();
+                },
+              ),
+            ],
           ],
           animation: _animation,
           onPress: () => _animationController.isCompleted
@@ -221,7 +253,7 @@ class ExtintorPage extends State<ExtintorState>
                       children: [
                         ListTile(
                           title: Text(
-                            'Extintor Nº ${faker.randomGenerator.integer(99)}',
+                            faker.lorem.words(2).join(' '),
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                                 fontSize: 35,
@@ -231,29 +263,29 @@ class ExtintorPage extends State<ExtintorState>
                         ),
                         Row(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               child: Column(
                                 children: [
                                   Row(
-                                    children: const [
-                                       Icon(Icons.circle,
+                                    children: [
+                                      Icon(Icons.circle,
                                           size: 20, color: Colors.green),
                                       SizedBox(
                                         width: 3,
                                       ),
-                                       Text(
+                                      Text(
                                         'Data de Vencimento',
                                         textAlign: TextAlign.left,
-                                        style:  TextStyle(
+                                        style: TextStyle(
                                           fontSize: 17,
                                           color:
-                                               Color.fromARGB(255, 78, 78, 78),
+                                              Color.fromARGB(255, 78, 78, 78),
                                         ),
                                       ),
                                     ],
                                   ),
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.green),
                                       SizedBox(
@@ -271,7 +303,7 @@ class ExtintorPage extends State<ExtintorState>
                                     ],
                                   ),
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.green),
                                       SizedBox(
@@ -292,20 +324,16 @@ class ExtintorPage extends State<ExtintorState>
                               ),
                             ),
                             SizedBox(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.all(8.0),
-                                    margin: const EdgeInsets.all(8.0),
-                                    child: ClipRRect(
-                                      child: Image.asset(
-                                        'assets/image/Classe-${letra[i]}.jpg',
-                                        fit: BoxFit.cover,
-                                        height: 80,
-                                      ),
-                                    ),
+                              height: 150,
+                              child: Container(
+                                padding: const EdgeInsets.all(7.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: Image.network(
+                                    'https://picsum.photos/250?image=${i + number}',
+                                    fit: BoxFit.cover,
                                   ),
-                                ],
+                                ),
                               ),
                             ),
                           ],

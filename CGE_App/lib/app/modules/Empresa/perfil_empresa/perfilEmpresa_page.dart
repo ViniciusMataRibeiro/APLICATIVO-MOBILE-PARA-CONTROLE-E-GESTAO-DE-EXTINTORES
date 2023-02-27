@@ -80,7 +80,7 @@ AuthService aux = Get.find<AuthService>();
                     elevation: 5,
                     child: ListTile(
                       title: const Text(
-                        "Consultar Tecnico",
+                        "Consultar Técnicos",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),

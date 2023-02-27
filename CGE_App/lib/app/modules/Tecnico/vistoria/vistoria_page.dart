@@ -7,15 +7,11 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'dart:ui' as ui;
 
-
 DateTime selectedDate = DateTime.now();
 String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
 String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
 
-
 class VistoriaPage extends GetView<VistoriaController> {
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,8 +34,8 @@ class VistoriaState extends StatefulWidget {
   Vistoria createState() => Vistoria();
 }
 
-
-class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin {
+class Vistoria extends State<VistoriaState>
+    with SingleTickerProviderStateMixin {
   var number = faker.randomGenerator.integer(50);
   late Animation<double> _animation;
   late AnimationController _animationController;
@@ -52,22 +48,23 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
   bool isSelectlacre = false;
   bool isSelectaprovado = false;
 
-    Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime.now(),
-      cancelText: "CANCELAR",
-      builder: (context, child) => 
-      Theme(
-        data: ThemeData.light().copyWith(
-              primaryColor: const Color(0xFF4C131A),
-              buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
-              colorScheme: const ColorScheme.light(primary: Color.fromARGB(255, 190, 0, 0)).copyWith(secondary: const Color(0xFF4C131A))),
-          child: child!,
-      )
-    );
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2000),
+        lastDate: DateTime.now(),
+        cancelText: "CANCELAR",
+        builder: (context, child) => Theme(
+              data: ThemeData.light().copyWith(
+                  primaryColor: const Color(0xFF4C131A),
+                  buttonTheme:
+                      const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+                  colorScheme: const ColorScheme.light(
+                          primary: Color.fromARGB(255, 190, 0, 0))
+                      .copyWith(secondary: const Color(0xFF4C131A))),
+              child: child!,
+            ));
     if (picked != null && picked != selectedDate) {
       setState(
         () {
@@ -77,7 +74,7 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
     }
   }
 
-    _refresh({DateTime? data}) async {
+  _refresh({DateTime? data}) async {
     try {
       data ??= DateTime.parse(updatedDt2);
 
@@ -90,7 +87,7 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
     } catch (e) {}
   }
 
-    @override
+  @override
   void initState() {
     _animationController = AnimationController(
       vsync: this,
@@ -106,36 +103,34 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 175, 31, 21),
-          title: Row(
-            children: [
-              const Icon(Icons.arrow_back,
-              color: Colors.white),
-              const SizedBox(width: 20),
-              Container(
-                margin: const EdgeInsets.only(right: 10),
-                width: 40,
-                height: 40,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100.0),
-                  child: Image.asset(
-                    'assets/image/cge.png',
-                    fit: BoxFit.cover,
-                  ),
+        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+        title: Row(
+          children: [
+            const Icon(Icons.arrow_back, color: Colors.white),
+            const SizedBox(width: 20),
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              width: 40,
+              height: 40,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100.0),
+                child: Image.asset(
+                  'assets/image/cge.png',
+                  fit: BoxFit.cover,
                 ),
               ),
-              const Text('Vistoria',
-                  style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.white,
-                      fontStyle: FontStyle.italic)),
-            ],
-          ),
-          centerTitle: true,
+            ),
+            const Text('Vistoria',
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic)),
+          ],
         ),
+        centerTitle: true,
+      ),
       body: Center(
         child: Container(
           decoration: const BoxDecoration(
@@ -175,64 +170,63 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
                         margin: const EdgeInsets.only(bottom: 0, top: 8),
                         padding: const EdgeInsets.only(bottom: 0),
                       ),
-                      Row(
-                        children: [
-                          const Text('Data da Manutenção',
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontFamily: 'Prompt-ExtraBoldItalic',
-                                color: Colors.white,
-                              )),
-                          const SizedBox(width: 8),
-                          IconButton(
-                          icon: const Icon(Icons.calendar_month_rounded, color: Colors.white), 
-                          color: Colors.white,
-                          iconSize: 35,
-                          onPressed: () => _selectDate(context)
-                          ),
-                          ]
-                        ),
+                      Row(children: [
+                        const Text('Data da Manutenção',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontFamily: 'Prompt-ExtraBoldItalic',
+                              color: Colors.white,
+                            )),
+                        const SizedBox(width: 8),
+                        IconButton(
+                            icon: const Icon(Icons.calendar_month_rounded,
+                                color: Colors.white),
+                            color: Colors.white,
+                            iconSize: 35,
+                            onPressed: () => _selectDate(context)),
+                      ]),
                       const SizedBox(height: 27),
-                      Row(
-                        children: [
-                          const Icon(Icons.speed_outlined, color: Colors.white),
-                          const SizedBox(
-                            width: 10.0,
-                          ),
-                          const Text('Manômetro',
-                              style: TextStyle(
-                                fontFamily: 'Prompt-ExtraBoldItalic',
-                                fontSize: 16,
-                                color: Colors.white,
-                              )),
-                          const SizedBox(width: 77),
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                isSelectmanometro = !isSelectmanometro;
-                              });
-                            },
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 400),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              decoration: BoxDecoration(
-                                color: isSelectmanometro ? Colors.red : Colors.transparent,
+                      Row(children: [
+                        const Icon(Icons.speed_outlined, color: Colors.white),
+                        const SizedBox(
+                          width: 10.0,
+                        ),
+                        const Text('Manômetro',
+                            style: TextStyle(
+                              fontFamily: 'Prompt-ExtraBoldItalic',
+                              fontSize: 16,
+                              color: Colors.white,
+                            )),
+                        const SizedBox(width: 77),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isSelectmanometro = !isSelectmanometro;
+                            });
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.fastLinearToSlowEaseIn,
+                            decoration: BoxDecoration(
+                                color: isSelectmanometro
+                                    ? Colors.red
+                                    : Colors.transparent,
                                 borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectmanometro ? null : Border.all(
-                                  color: Colors.black54,
-                                  width: 2
-                                )
-                              ),
-                              width: 25,
-                              height: 25,
-                              child: isSelectmanometro ? const Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              ) : null,
-                            ),
+                                border: isSelectmanometro
+                                    ? null
+                                    : Border.all(
+                                        color: Colors.black54, width: 2)),
+                            width: 25,
+                            height: 25,
+                            child: isSelectmanometro
+                                ? const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                  )
+                                : null,
                           ),
-                        ]
-                      ),
+                        ),
+                      ]),
                       const SizedBox(height: 30),
                       Row(
                         children: [
@@ -258,19 +252,22 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.fastLinearToSlowEaseIn,
                               decoration: BoxDecoration(
-                                color: isSelectparede ? Colors.red : Colors.transparent,
-                                borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectparede ? null : Border.all(
-                                  color: Colors.black54,
-                                  width: 2
-                                )
-                              ),
+                                  color: isSelectparede
+                                      ? Colors.red
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  border: isSelectparede
+                                      ? null
+                                      : Border.all(
+                                          color: Colors.black54, width: 2)),
                               width: 25,
                               height: 25,
-                              child: isSelectparede ? const Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              ) : null,
+                              child: isSelectparede
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    )
+                                  : null,
                             ),
                           ),
                         ],
@@ -302,19 +299,22 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.fastLinearToSlowEaseIn,
                               decoration: BoxDecoration(
-                                color: isSelectpiso ? Colors.red : Colors.transparent,
-                                borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectpiso ? null : Border.all(
-                                  color: Colors.black54,
-                                  width: 2
-                                )
-                              ),
+                                  color: isSelectpiso
+                                      ? Colors.red
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  border: isSelectpiso
+                                      ? null
+                                      : Border.all(
+                                          color: Colors.black54, width: 2)),
                               width: 25,
                               height: 25,
-                              child: isSelectpiso ? const Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              ) : null,
+                              child: isSelectpiso
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    )
+                                  : null,
                             ),
                           ),
                         ],
@@ -322,7 +322,8 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
                       const SizedBox(height: 30),
                       Row(
                         children: [
-                          const Icon(Ionicons.enter_outline, color: Colors.white),
+                          const Icon(Ionicons.enter_outline,
+                              color: Colors.white),
                           const SizedBox(
                             width: 10.0,
                           ),
@@ -343,19 +344,22 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.fastLinearToSlowEaseIn,
                               decoration: BoxDecoration(
-                                color: isSelectacesso ? Colors.red : Colors.transparent,
-                                borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectacesso ? null : Border.all(
-                                  color: Colors.black54,
-                                  width: 2
-                                )
-                              ),
+                                  color: isSelectacesso
+                                      ? Colors.red
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  border: isSelectacesso
+                                      ? null
+                                      : Border.all(
+                                          color: Colors.black54, width: 2)),
                               width: 25,
                               height: 25,
-                              child: isSelectacesso ? const Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              ) : null,
+                              child: isSelectacesso
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    )
+                                  : null,
                             ),
                           ),
                         ],
@@ -363,7 +367,8 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
                       const SizedBox(height: 30),
                       Row(
                         children: [
-                          const Icon(Ionicons.headset_outline, color: Colors.white),
+                          const Icon(Ionicons.headset_outline,
+                              color: Colors.white),
                           const SizedBox(
                             width: 10.0,
                           ),
@@ -384,19 +389,22 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.fastLinearToSlowEaseIn,
                               decoration: BoxDecoration(
-                                color: isSelectmangueira ? Colors.red : Colors.transparent,
-                                borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectmangueira ? null : Border.all(
-                                  color: Colors.black54,
-                                  width: 2
-                                )
-                              ),
+                                  color: isSelectmangueira
+                                      ? Colors.red
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  border: isSelectmangueira
+                                      ? null
+                                      : Border.all(
+                                          color: Colors.black54, width: 2)),
                               width: 25,
                               height: 25,
-                              child: isSelectmangueira ? const Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              ) : null,
+                              child: isSelectmangueira
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    )
+                                  : null,
                             ),
                           ),
                         ],
@@ -404,7 +412,8 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
                       const SizedBox(height: 30),
                       Row(
                         children: [
-                          const Icon(Ionicons.headset_outline, color: Colors.white),
+                          const Icon(Ionicons.headset_outline,
+                              color: Colors.white),
                           const SizedBox(
                             width: 10.0,
                           ),
@@ -425,19 +434,22 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.fastLinearToSlowEaseIn,
                               decoration: BoxDecoration(
-                                color: isSelectlacre ? Colors.red : Colors.transparent,
-                                borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectlacre ? null : Border.all(
-                                  color: Colors.black54,
-                                  width: 2
-                                )
-                              ),
+                                  color: isSelectlacre
+                                      ? Colors.red
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  border: isSelectlacre
+                                      ? null
+                                      : Border.all(
+                                          color: Colors.black54, width: 2)),
                               width: 25,
                               height: 25,
-                              child: isSelectlacre ? const Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              ) : null,
+                              child: isSelectlacre
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    )
+                                  : null,
                             ),
                           ),
                         ],
@@ -445,7 +457,8 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
                       const SizedBox(height: 30),
                       Row(
                         children: [
-                          const Icon(Ionicons.thumbs_up_outline, color: Colors.white),
+                          const Icon(Ionicons.thumbs_up_outline,
+                              color: Colors.white),
                           const SizedBox(
                             width: 10.0,
                           ),
@@ -466,19 +479,22 @@ class Vistoria extends State<VistoriaState> with SingleTickerProviderStateMixin 
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.fastLinearToSlowEaseIn,
                               decoration: BoxDecoration(
-                                color: isSelectaprovado ? Colors.red : Colors.transparent,
-                                borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectaprovado ? null : Border.all(
-                                  color: Colors.black54,
-                                  width: 2
-                                )
-                              ),
+                                  color: isSelectaprovado
+                                      ? Colors.red
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  border: isSelectaprovado
+                                      ? null
+                                      : Border.all(
+                                          color: Colors.black54, width: 2)),
                               width: 25,
                               height: 25,
-                              child: isSelectaprovado ? const Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              ) : null,
+                              child: isSelectaprovado
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    )
+                                  : null,
                             ),
                           ),
                         ],

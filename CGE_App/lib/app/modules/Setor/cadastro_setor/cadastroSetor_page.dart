@@ -7,27 +7,32 @@ class CadastroSetorPage extends GetView<CadastroSetorController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(20.0),
-              child: const Text(
-                'Cadastro de Setor',
-                style: TextStyle(fontSize: 20, color: Colors.white),
+              margin: const EdgeInsets.only(right: 10),
+              width: 40,
+              height: 40,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100.0),
+                child: Image.asset(
+                  'assets/image/cge.png',
+                  fit: BoxFit.cover,
+                ),
               ),
+            ),
+            const Text(
+              'Cadastro Setoyr',
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic),
             ),
           ],
         ),
-        backgroundColor: const Color.fromARGB(255, 190, 0, 0),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(25),
-            bottomRight: Radius.circular(25),
-          ),
-        ),
+        centerTitle: true,
       ),
       body: Center(
         child: Container(

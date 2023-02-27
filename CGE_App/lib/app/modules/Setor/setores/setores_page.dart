@@ -1,5 +1,7 @@
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/modules/Setor/cadastro_setor/cadastroSetor_page.dart';
+import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
+import 'package:cge_app/app/modules/Tecnico/vistoria/vistoria_page.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +9,7 @@ import 'package:faker/faker.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
+import '../../../data/services/auth/service.dart';
 import 'setores_controller.dart';
 
 DateTime selectedDate = DateTime.now();
@@ -37,26 +40,30 @@ class SetorState extends StatefulWidget {
 }
 
 class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
+  AuthService aux = Get.find<AuthService>();
   var number = faker.randomGenerator.integer(50);
   late Animation<double> _animation;
   late AnimationController _animationController;
 
+  DateTime selectedDate = DateTime.now();
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime.now(),
-      cancelText: "CANCELAR",
-      builder: (context, child) => 
-      Theme(
-        data: ThemeData.light().copyWith(
-              primaryColor: const Color(0xFF4C131A),
-              buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
-              colorScheme: const ColorScheme.light(primary: Color.fromARGB(255, 190, 0, 0)).copyWith(secondary: const Color(0xFF4C131A))),
-          child: child!,
-      )
-    );
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2000),
+        lastDate: DateTime.now(),
+        cancelText: "CANCELAR",
+        builder: (context, child) => Theme(
+              data: ThemeData.light().copyWith(
+                  primaryColor: const Color(0xFF4C131A),
+                  buttonTheme:
+                      const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+                  colorScheme: const ColorScheme.light(
+                          primary: Color.fromARGB(255, 190, 0, 0))
+                      .copyWith(secondary: const Color(0xFF4C131A))),
+              child: child!,
+            ));
     if (picked != null && picked != selectedDate) {
       setState(
         () {
@@ -95,6 +102,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -143,50 +151,73 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
         child: FloatingActionBubble(
           herotag: UniqueKey(),
           items: <Bubble>[
-            Bubble(
-              title: "Editar Setor",
-              iconColor: Colors.white,
-              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-              icon: Icons.edit_rounded,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              onPress: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => CadastroSetorPage(),
-                  ),
-                );
-                _animationController.reverse();
-              },
-            ),
-            Bubble(
-              title: "Cadastrar Setor",
-              iconColor: Colors.white,
-              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-              icon: Icons.add_rounded,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              onPress: () {
-                Get.offNamed('/cadSetor');
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (BuildContext context) => CadastroSetorPage(),
-                //   ),
-                // );
-                _animationController.reverse();
-              },
-            ),
-            Bubble(
-              title: "Realizar Vistoria",
-              iconColor: Colors.white,
-              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-              icon: Icons.check_circle_outline,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              onPress: () {
-                _animationController.reverse();
-                Get.toNamed('vistoria');
-              },
-            ),
+            if (obj!.tipo == 'empresas') ...[
+              Bubble(
+                title: "Cadastrar Tecnico",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.check_circle_outline,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => CadastroTecnicoPage(),
+                    ),
+                  );
+                  _animationController.reverse();
+                },
+              ),
+            ] else ...[
+              Bubble(
+                title: "Editar Setor",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.edit_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => CadastroSetorPage(),
+                    ),
+                  );
+                  _animationController.reverse();
+                },
+              ),
+              Bubble(
+                title: "Cadastrar Setor",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.add_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => CadastroSetorPage(),
+                    ),
+                  );
+                  _animationController.reverse();
+                },
+              ),
+              Bubble(
+                title: "Realizar Vistoria",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.check_circle_outline,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => VistoriaPage(),
+                    ),
+                  );
+                  _animationController.reverse();
+                },
+              ),
+            ],
           ],
           animation: _animation,
           onPress: () => _animationController.isCompleted
@@ -220,20 +251,22 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                     child: Column(
                       children: [
                         ListTile(
-                          title: Text(faker.lorem.words(2).join(' '),
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontSize: 35,
-                                  color: Color.fromARGB(255, 131, 30, 23),
-                                  fontStyle: FontStyle.italic)),
+                          title: Text(
+                            faker.lorem.words(2).join(' '),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 35,
+                                color: Color.fromARGB(255, 131, 30, 23),
+                                fontStyle: FontStyle.italic),
+                          ),
                         ),
                         Row(
                           children: [
-                             SizedBox(
+                            const SizedBox(
                               child: Column(
                                 children: [
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(
                                         Icons.circle,
                                         size: 20,
@@ -254,7 +287,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                                     ],
                                   ),
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.yellow),
                                       SizedBox(
@@ -272,7 +305,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                                     ],
                                   ),
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.red),
                                       SizedBox(
