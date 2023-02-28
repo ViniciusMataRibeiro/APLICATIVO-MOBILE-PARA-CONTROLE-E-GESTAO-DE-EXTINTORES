@@ -263,11 +263,11 @@ class ExtintorPage extends State<ExtintorState>
                         ),
                         Row(
                           children: [
-                            const SizedBox(
+                            SizedBox(
                               child: Column(
                                 children: [
                                   Row(
-                                    children: [
+                                    children: const [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.green),
                                       SizedBox(
@@ -285,7 +285,7 @@ class ExtintorPage extends State<ExtintorState>
                                     ],
                                   ),
                                   Row(
-                                    children: [
+                                    children: const [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.green),
                                       SizedBox(
@@ -303,7 +303,7 @@ class ExtintorPage extends State<ExtintorState>
                                     ],
                                   ),
                                   Row(
-                                    children: [
+                                    children: const [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.green),
                                       SizedBox(
