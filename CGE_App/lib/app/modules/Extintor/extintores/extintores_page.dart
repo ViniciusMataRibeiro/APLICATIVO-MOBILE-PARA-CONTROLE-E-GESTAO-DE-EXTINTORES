@@ -177,13 +177,13 @@ class ExtintorPage extends State<ExtintorState>
                 icon: Icons.edit_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => CadastroExtintorPage(),
-                    ),
-                  );
-                  _animationController.reverse();
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (BuildContext context) => CadastroExtintorPage(),
+                  //   ),
+                  // );
+                  // _animationController.reverse();
                 },
               ),
               Bubble(

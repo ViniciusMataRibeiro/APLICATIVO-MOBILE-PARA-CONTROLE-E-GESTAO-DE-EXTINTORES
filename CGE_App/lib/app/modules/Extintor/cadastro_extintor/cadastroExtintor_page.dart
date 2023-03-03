@@ -134,6 +134,18 @@ class CadastroExtintor extends State<CadastroExtintorState>
         backgroundColor: const Color.fromARGB(255, 175, 31, 21),
         title: Row(
           children: [
+            IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Get.offAllNamed('/dashboard');
+              },
+            ),
+            const SizedBox(
+              width: 5,
+            ),
             Container(
               margin: const EdgeInsets.only(right: 10),
               width: 40,
@@ -147,7 +159,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
               ),
             ),
             const Text(
-              'Cadastro de Extintor',
+              'Cadastro Extintor',
               style: TextStyle(
                   fontSize: 25,
                   color: Colors.white,
@@ -170,7 +182,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                 child: Container(
                   height: 140,
                   width: 140,
-                  margin: const EdgeInsets.only(top: 40, bottom: 40),
+                  margin: const EdgeInsets.only(top: 30, bottom: 30),
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/image/cge.png'),
@@ -287,29 +299,38 @@ class CadastroExtintor extends State<CadastroExtintorState>
                         mode: Mode.BOTTOM_SHEET,
                         items: const ["Tipo AB", "Tipo A", "Tipo B"],
                         dropdownSearchDecoration: const InputDecoration(
-                            labelText: "Tipo do Extintor"),
-                        onChanged: (escolha) => cadastroExtintorController.teste = escolha.toString(),
+                          labelText: "Tipo do Extintor",
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                        onChanged: (escolha) => cadastroExtintorController
+                            .teste = escolha.toString(),
                       ),
                     ),
+                    const SizedBox(height: 15),
                     Container(
                       padding: const EdgeInsets.all(20.0),
                       child: Center(
                         child: ElevatedButton(
-                          onPressed: () => cadastroExtintorController.goToRegisterExtintor(),
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              fixedSize: const Size(200, 50)),
+                            backgroundColor:
+                                const Color.fromARGB(255, 175, 31, 21),
+                            fixedSize: const Size(250, 50),
+                          ),
                           child: const Text(
                             'Registrar',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontFamily: 'Roboto-BoldItalic',
                               fontSize: 18,
                             ),
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

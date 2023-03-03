@@ -62,7 +62,7 @@ export default class AuthController {
         let data;
 
         switch (userAuth.tipo) {
-            case 'empresa':
+            case 'empresas':
                 const empresas = await Empresa.findByOrFail('userId', userAuth.id);
                 data = {
                     id_empresa: empresas.id,

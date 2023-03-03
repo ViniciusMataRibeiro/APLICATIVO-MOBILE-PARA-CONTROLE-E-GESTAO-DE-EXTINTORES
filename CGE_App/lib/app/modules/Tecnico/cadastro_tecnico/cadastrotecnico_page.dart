@@ -60,13 +60,17 @@ class CadastroExtintor extends State<CadastroExtintorState>
         backgroundColor: const Color.fromARGB(255, 175, 31, 21),
         title: Row(
           children: [
-            const Icon(
-              Icons.arrow_back,
-              size: 25,
-              color: Colors.white,
+            IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Get.offAllNamed('/dashboard');
+              },
             ),
             const SizedBox(
-              width: 15,
+              width: 5,
             ),
             Container(
               margin: const EdgeInsets.only(right: 10),
@@ -104,7 +108,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                 child: Container(
                   height: 140,
                   width: 140,
-                  margin: const EdgeInsets.only(top: 80),
+                  margin: const EdgeInsets.only(top: 40, bottom: 40),
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/image/cge.png'),
@@ -123,7 +127,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
               ),
               Container(
                 padding: const EdgeInsets.all(15.0),
-                margin: const EdgeInsets.only(bottom: 100, left: 50, right: 50),
+                margin: const EdgeInsets.only(bottom: 100, left: 20, right: 20),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),
@@ -238,27 +242,28 @@ class CadastroExtintor extends State<CadastroExtintorState>
                         ),
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 15),
                     Container(
                       padding: const EdgeInsets.all(20.0),
                       child: Center(
                         child: ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            fixedSize: const Size(200, 50),
+                            backgroundColor:
+                                const Color.fromARGB(255, 175, 31, 21),
+                            fixedSize: const Size(300, 50),
                           ),
                           child: const Text(
                             'Registrar',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontFamily: 'Roboto-BoldItalic',
                               fontSize: 18,
                             ),
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

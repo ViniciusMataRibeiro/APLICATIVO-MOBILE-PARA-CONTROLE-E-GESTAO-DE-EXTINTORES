@@ -176,13 +176,13 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 icon: Icons.edit_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => CadastroSetorPage(),
-                    ),
-                  );
-                  _animationController.reverse();
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (BuildContext context) => CadastroSetorPage(),
+                  //   ),
+                  // );
+                  // _animationController.reverse();
                 },
               ),
               Bubble(

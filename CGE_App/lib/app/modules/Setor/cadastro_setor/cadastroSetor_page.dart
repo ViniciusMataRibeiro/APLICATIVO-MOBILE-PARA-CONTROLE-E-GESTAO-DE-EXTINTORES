@@ -1,9 +1,37 @@
+import 'package:cge_app/app/core/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
 import 'cadastroSetor_controller.dart';
 
 class CadastroSetorPage extends GetView<CadastroSetorController> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: themeData,
+      debugShowCheckedModeBanner: false,
+      home: const Directionality(
+        textDirection: ui.TextDirection.ltr,
+        child: CadastroSetorState(
+          title: '',
+        ),
+      ),
+    );
+  }
+}
+
+class CadastroSetorState extends StatefulWidget {
+  const CadastroSetorState({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  CadastroSetor createState() => CadastroSetor();
+}
+
+class CadastroSetor extends State<CadastroSetorState> {
+  final CadastroSetorController controller = Get.put(CadastroSetorController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,6 +39,18 @@ class CadastroSetorPage extends GetView<CadastroSetorController> {
         backgroundColor: const Color.fromARGB(255, 175, 31, 21),
         title: Row(
           children: [
+            IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Get.offAllNamed('/dashboard');
+              },
+            ),
+            const SizedBox(
+              width: 5,
+            ),
             Container(
               margin: const EdgeInsets.only(right: 10),
               width: 40,
@@ -24,7 +64,7 @@ class CadastroSetorPage extends GetView<CadastroSetorController> {
               ),
             ),
             const Text(
-              'Cadastro Setoyr',
+              'Cadastro Setor',
               style: TextStyle(
                   fontSize: 25,
                   color: Colors.white,
@@ -34,26 +74,49 @@ class CadastroSetorPage extends GetView<CadastroSetorController> {
         ),
         centerTitle: true,
       ),
-      body: Center(
+      body: Form(
         child: Container(
           decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/image/registro.jpeg'),
-                  fit: BoxFit.cover)),
+            image: DecorationImage(
+                image: AssetImage('assets/image/registro.jpeg'),
+                fit: BoxFit.cover),
+          ),
           child: ListView(
             children: [
+              Center(
+                child: Container(
+                  height: 140,
+                  width: 140,
+                  margin: const EdgeInsets.only(top: 40, bottom: 40),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/image/cge.png'),
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 10,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               Container(
-                padding: const EdgeInsets.all(15.0),
-                margin: const EdgeInsets.only(top: 100, left: 50, right: 50),
+                padding: const EdgeInsets.all(0),
+                margin: const EdgeInsets.only(bottom: 100, left: 20, right: 20),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   color: Color.fromARGB(80, 0, 0, 0),
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(left: 0),
+                      margin:
+                          const EdgeInsets.only(top: 20, left: 30, right: 30),
                       child: Form(
                         child: TextFormField(
                           style: const TextStyle(
@@ -83,9 +146,8 @@ class CadastroSetorPage extends GetView<CadastroSetorController> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(
-                        top: 20,
-                      ),
+                      margin:
+                          const EdgeInsets.only(top: 15, left: 30, right: 30),
                       child: Form(
                         child: TextFormField(
                           style: const TextStyle(
@@ -122,25 +184,28 @@ class CadastroSetorPage extends GetView<CadastroSetorController> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 15),
                     Container(
                       padding: const EdgeInsets.all(20.0),
                       child: Center(
                         child: ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              fixedSize: const Size(200, 50)),
+                            backgroundColor:
+                                const Color.fromARGB(255, 175, 31, 21),
+                            fixedSize: const Size(250, 50),
+                          ),
                           child: const Text(
                             'Registrar',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontFamily: 'Roboto-BoldItalic',
                               fontSize: 18,
                             ),
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
