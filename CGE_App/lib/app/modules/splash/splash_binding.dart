@@ -7,6 +7,7 @@ import '../Extintor/cadastro_extintor/cadastroExtintor_controller.dart';
 import '../Extintor/extintores/extintores_controller.dart';
 import '../Setor/cadastro_setor/cadastroSetor_controller.dart';
 import '../Setor/setores/setores_controller.dart';
+import '../Tecnico/cadastro_tecnico/cadastrotecnico_controller.dart';
 import '../Tecnico/perfil_tecnico/perfilTecnico_controller.dart';
 import '../Tecnico/vistoria/vistoria_controller.dart';
 import '../dashboard/dashboard_Controller.dart';
@@ -32,6 +33,8 @@ class SplashBinding implements Bindings {
     Get.lazyPut<SplashController>(() => SplashController());
 
     Get.lazyPut<PerfilTecnicoController>(() => PerfilTecnicoController());
+    Get.lazyPut<CadastroTecnicoController>(() => CadastroTecnicoController());
+
     Get.lazyPut<VistoriaController>(() => VistoriaController());
 
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
