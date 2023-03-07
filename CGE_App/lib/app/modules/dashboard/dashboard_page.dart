@@ -17,12 +17,14 @@ class DashboardPage extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     final Items = <Widget>[
       const Icon(Icones_Personalizado.place, size: 30, color: Colors.white),
-      const Icon(Icones_Personalizado.fire_extinguisher, size: 30, color: Colors.white),
+      const Icon(Icones_Personalizado.fire_extinguisher,
+          size: 30, color: Colors.white),
       const Icon(Icons.account_circle_rounded, size: 30, color: Colors.white),
     ];
     var obj = aux.user.value;
     return MaterialApp(
       home: Scaffold(
+        extendBody: true,
         bottomNavigationBar: Obx(
           () => CurvedNavigationBar(
             onTap: controller.changePage,
@@ -33,7 +35,7 @@ class DashboardPage extends GetView<DashboardController> {
             items: Items,
           ),
         ),
-        extendBody: true,
+        //extendBody: true,
         body: Obx(
           () => IndexedStack(
             index: controller.currentPage.value,

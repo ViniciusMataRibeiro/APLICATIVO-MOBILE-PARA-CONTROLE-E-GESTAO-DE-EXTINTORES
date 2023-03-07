@@ -9,7 +9,7 @@ class LoginController extends GetxController {
   final _login = Get.find<AuthService>();
 
   var showPassword = true.obs;
-  var emailController = TextEditingController(text: 'empresa@email.com');
+  var emailController = TextEditingController(text: 'tecnico@email.com');
   var passwordController = TextEditingController(text: '123456');
   bool get isLogged => _login.isLogged;
 
