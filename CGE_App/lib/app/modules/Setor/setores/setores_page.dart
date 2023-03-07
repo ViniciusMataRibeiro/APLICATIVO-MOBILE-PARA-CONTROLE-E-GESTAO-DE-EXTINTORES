@@ -159,13 +159,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 icon: Icons.check_circle_outline,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => CadastroTecnicoPage(),
-                    ),
-                  );
-                  _animationController.reverse();
+                  Get.toNamed('/cadTecnico');
                 },
               ),
             ] else ...[
@@ -176,13 +170,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 icon: Icons.edit_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (BuildContext context) => CadastroSetorPage(),
-                  //   ),
-                  // );
-                  // _animationController.reverse();
+                  Get.toNamed('/cadSetor');
                 },
               ),
               Bubble(
@@ -192,13 +180,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => CadastroSetorPage(),
-                    ),
-                  );
-                  _animationController.reverse();
+                  Get.toNamed('/cadSetor');
                 },
               ),
               Bubble(
@@ -208,13 +190,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 icon: Icons.check_circle_outline,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => VistoriaPage(),
-                    ),
-                  );
-                  _animationController.reverse();
+                  Get.toNamed('/vistoria');
                 },
               ),
             ],
@@ -262,7 +238,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                         ),
                         Row(
                           children: [
-                             SizedBox(
+                            SizedBox(
                               child: Column(
                                 children: [
                                   Row(

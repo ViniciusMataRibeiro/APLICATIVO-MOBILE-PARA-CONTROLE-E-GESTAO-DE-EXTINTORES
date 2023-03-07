@@ -160,13 +160,7 @@ class ExtintorPage extends State<ExtintorState>
                 icon: Icons.check_circle_outline,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => CadastroTecnicoPage(),
-                    ),
-                  );
-                  _animationController.reverse();
+                  Get.toNamed('/cadTecnico');
                 },
               ),
             ] else ...[
@@ -177,13 +171,7 @@ class ExtintorPage extends State<ExtintorState>
                 icon: Icons.edit_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (BuildContext context) => CadastroExtintorPage(),
-                  //   ),
-                  // );
-                  // _animationController.reverse();
+                  Get.toNamed('/cadExtintor');
                 },
               ),
               Bubble(
@@ -193,13 +181,7 @@ class ExtintorPage extends State<ExtintorState>
                 icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => CadastroExtintorPage(),
-                    ),
-                  );
-                  _animationController.reverse();
+                  Get.toNamed('/cadExtintor');
                 },
               ),
               Bubble(
@@ -209,13 +191,7 @@ class ExtintorPage extends State<ExtintorState>
                 icon: Icons.check_circle_outline,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => VistoriaPage(),
-                    ),
-                  );
-                  _animationController.reverse();
+                  Get.toNamed('/vistoria');
                 },
               ),
             ],
