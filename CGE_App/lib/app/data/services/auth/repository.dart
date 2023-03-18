@@ -1,4 +1,5 @@
 
+import '../../Models/tecnico_request.dart';
 import '../../Models/user.dart';
 import '../../Models/user_login_request.dart';
 import '../../Models/user_login_response.dart';
@@ -16,4 +17,6 @@ class AuthRepository {
   Future<UserModel> getUser() => _api.getUser();
 
   Future<void> logout() => _api.logout();
+
+  Future<void> InsertTecnico(TecnicoRequestModel tecnico) => _api.InsertTecnico(tecnico);
 }

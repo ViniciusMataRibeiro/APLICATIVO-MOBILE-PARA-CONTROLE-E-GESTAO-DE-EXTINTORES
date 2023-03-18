@@ -1,3 +1,4 @@
+import 'package:cge_app/app/data/Models/tecnico_request.dart';
 import 'package:cge_app/app/data/services/auth/repository.dart';
 import 'package:get/get.dart';
 
@@ -37,14 +38,19 @@ class AuthService extends GetxService {
     _repository.logout();
     await _configService.removeToken();
     user.value = null;
-    if (user != null) {
-      Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/login');
-      });
-    }
+    Future.delayed(const Duration(milliseconds: 1), () {
+      Get.offAllNamed('/login');
+    });
   }
 
   Future<UserModel> _getUser() {
     return _repository.getUser().then((value) => user.value = value);
+  }
+
+  Future<void> InsertTecnico(TecnicoRequestModel tecnico) async {
+    await _repository.InsertTecnico(tecnico);
+    Future.delayed(const Duration(milliseconds: 1), () {
+      Get.offAllNamed('/dashboard');
+    });
   }
 }

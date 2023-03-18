@@ -19,10 +19,11 @@ class VistoriaPage extends GetView<VistoriaController> {
       theme: themeData,
       debugShowCheckedModeBanner: false,
       home: const Directionality(
-          textDirection: ui.TextDirection.ltr,
-          child: VistoriaState(
-            title: '',
-          )),
+        textDirection: ui.TextDirection.ltr,
+        child: VistoriaState(
+          title: '',
+        ),
+      ),
     );
   }
 }
@@ -71,11 +72,13 @@ class Vistoria extends State<VistoriaState>
       ),
     );
     if (picked != null) {
-      setState(() {
-        dt = picked;
-        data = dt.toIso8601String();
-        updatedDt = newFormat.format(picked);
-      });
+      setState(
+        () {
+          dt = picked;
+          data = dt.toIso8601String();
+          updatedDt = newFormat.format(picked);
+        },
+      );
     }
   }
 
@@ -138,9 +141,10 @@ class Vistoria extends State<VistoriaState>
       body: Center(
         child: Container(
           decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/image/registro.jpeg'),
-                  fit: BoxFit.cover)),
+            image: DecorationImage(
+                image: AssetImage('assets/image/registro.jpeg'),
+                fit: BoxFit.cover),
+          ),
           child: ListView(
             children: [
               Center(
@@ -260,11 +264,13 @@ class Vistoria extends State<VistoriaState>
                         const SizedBox(
                           width: 20,
                         ),
-                        const Text('Sinalização Parede',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                            )),
+                        const Text(
+                          'Sinalização Parede',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
                         const SizedBox(width: 23),
                         GestureDetector(
                           onTap: () {

@@ -1,12 +1,13 @@
 import 'package:cge_app/app/core/app_theme.dart';
-import 'package:cge_app/app/modules/Extintor/cadastro_extintor/cadastroExtintor_controller.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'dart:ui' as ui;
 
-class CadastroTecnicoPage extends GetView<CadastroExtintorController> {
+import 'cadastrotecnico_controller.dart';
+
+class CadastroTecnicoPage extends GetView<CadastroTecnicoController> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,6 +37,8 @@ class CadastroExtintor extends State<CadastroExtintorState>
   var number = faker.randomGenerator.integer(50);
   late Animation<double> _animation;
   late AnimationController _animationController;
+  CadastroTecnicoController cadastroTecnicoController =
+      Get.put(CadastroTecnicoController());
 
   var mask = MaskTextInputFormatter(mask: "(##) #####-####");
 
@@ -141,6 +144,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       margin: const EdgeInsets.only(left: 0),
                       child: Form(
                         child: TextFormField(
+                          controller: cadastroTecnicoController.name,
                           style: const TextStyle(
                               wordSpacing: 1,
                               fontSize: 18,
@@ -164,6 +168,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       margin: const EdgeInsets.only(left: 0),
                       child: Form(
                         child: TextFormField(
+                          controller: cadastroTecnicoController.email,
                           style: const TextStyle(
                               wordSpacing: 1,
                               fontSize: 18,
@@ -186,58 +191,38 @@ class CadastroExtintor extends State<CadastroExtintorState>
                     ),
                     Container(
                       margin: const EdgeInsets.only(left: 0),
-                      child: Form(
-                        child: TextFormField(
+                      child: Obx(
+                        () => TextFormField(
+                          controller: cadastroTecnicoController.password,
                           style: const TextStyle(
                               wordSpacing: 1,
                               fontSize: 18,
                               color: Colors.white),
-                          decoration: const InputDecoration(
-                            hintStyle: TextStyle(
+                          obscureText: cadastroTecnicoController.showPassword.value,
+                          decoration:  InputDecoration(
+                            hintStyle: const TextStyle(
                               color: Colors.white,
                             ),
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.lock_rounded,
                               color: Colors.white,
                               size: 27,
                             ),
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
-                            ),
-                            suffixIcon: Icon(
-                              Icons.remove_red_eye_outlined,
-                              color: Colors.white,
                             ),
                             labelText: 'Senha',
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 0),
-                      child: Form(
-                        child: TextFormField(
-                          inputFormatters: [mask],
-                          keyboardType: TextInputType.number,
-                          style: const TextStyle(
-                              wordSpacing: 1,
-                              fontSize: 18,
+                            suffixIcon: GestureDetector(
+                          child: Icon(
+                              cadastroTecnicoController.showPassword.value == false
+                                  ? Icons.visibility_off_rounded
+                                  : Icons.visibility_rounded,
                               color: Colors.white),
-                          decoration: const InputDecoration(
-                            hintStyle: TextStyle(
-                              color: Colors.white,
-                            ),
-                            icon: Icon(
-                              Icons.phone_android_outlined,
-                              color: Colors.white,
-                              size: 27,
-                            ),
-                            labelStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                            labelText: 'Telefeone',
+                          onTap: () {
+                            cadastroTecnicoController.toggleShowPassword();
+                          },
+                        ),
                           ),
                         ),
                       ),
@@ -247,7 +232,9 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       padding: const EdgeInsets.all(20.0),
                       child: Center(
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            cadastroTecnicoController.goToInsert();
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromARGB(255, 175, 31, 21),
