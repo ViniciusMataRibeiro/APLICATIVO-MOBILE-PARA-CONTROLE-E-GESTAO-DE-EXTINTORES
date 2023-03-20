@@ -1,7 +1,7 @@
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/modules/Setor/cadastro_setor/cadastroSetor_page.dart';
 import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
-import 'package:cge_app/app/modules/Tecnico/vistoria/vistoria_page.dart';
+import 'package:cge_app/app/modules/vistoria/vistoria_page.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -238,11 +238,11 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                         ),
                         Row(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               child: Column(
                                 children: [
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(
                                         Icons.circle,
                                         size: 20,
@@ -263,7 +263,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                                     ],
                                   ),
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.yellow),
                                       SizedBox(
@@ -281,7 +281,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                                     ],
                                   ),
                                   Row(
-                                    children: const [
+                                    children: [
                                       Icon(Icons.circle,
                                           size: 20, color: Colors.red),
                                       SizedBox(

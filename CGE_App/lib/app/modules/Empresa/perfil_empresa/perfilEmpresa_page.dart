@@ -88,7 +88,9 @@ AuthService aux = Get.find<AuthService>();
                           const Icon(Ionicons.document_text_outline, size: 40),
                       trailing:
                           const Icon(Icons.arrow_forward, color: Colors.black),
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed('/listTecnico');
+                      },
                     ),
                   ),
                   const SizedBox(height: 8),

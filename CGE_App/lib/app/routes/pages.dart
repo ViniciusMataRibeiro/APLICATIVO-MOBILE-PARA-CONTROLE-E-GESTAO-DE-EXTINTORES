@@ -2,8 +2,8 @@ import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_bin
 import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_page.dart';
 import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
 import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastrotecnico_binding.dart';
-import 'package:cge_app/app/modules/Tecnico/vistoria/vistoria_binding.dart';
-import 'package:cge_app/app/modules/Tecnico/vistoria/vistoria_page.dart';
+import 'package:cge_app/app/modules/vistoria/vistoria_binding.dart';
+import 'package:cge_app/app/modules/vistoria/vistoria_page.dart';
 import 'package:cge_app/app/routes/routes.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +11,8 @@ import '../modules/Extintor/cadastro_extintor/cadastroExtintor_binding.dart';
 import '../modules/Extintor/cadastro_extintor/cadastroExtintor_page.dart';
 import '../modules/Setor/cadastro_setor/cadastroSetor_binding.dart';
 import '../modules/Setor/cadastro_setor/cadastroSetor_page.dart';
+import '../modules/Tecnico/ListTecnico/ListTecnico_binding.dart';
+import '../modules/Tecnico/ListTecnico/ListTecnico_page.dart';
 import '../modules/dashboard/dashboard_binding.dart';
 import '../modules/dashboard/dashboard_page.dart';
 import '../modules/login/login_binding.dart';
@@ -73,6 +75,11 @@ abstract class AppPages {
       name: Routes.cadTecnico,
       page: () => CadastroTecnicoPage(),
       binding: CadastroTecnicoBinding()
+      ),
+    GetPage(
+      name: Routes.listTecnico,
+      page: () => ListTecnico(),
+      binding: ListTecnicoBinding()
       ),
   ];
 }

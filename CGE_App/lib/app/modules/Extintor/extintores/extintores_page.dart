@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
 import '../../Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
-import '../../Tecnico/vistoria/vistoria_page.dart';
+import '../../vistoria/vistoria_page.dart';
 import 'extintores_controller.dart';
 import 'dart:ui' as ui;
 

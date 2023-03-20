@@ -1,4 +1,4 @@
-import 'package:cge_app/app/modules/Tecnico/vistoria/vistoria_controller.dart';
+import 'package:cge_app/app/modules/vistoria/vistoria_controller.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
