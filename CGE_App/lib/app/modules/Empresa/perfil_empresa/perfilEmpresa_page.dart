@@ -5,8 +5,11 @@ import 'package:ionicons/ionicons.dart';
 
 import '../../../data/services/auth/service.dart';
 
+//ignore: must_be_immutable
 class PerfilPage extends GetView<PerfilEmpresaController> {
 AuthService aux = Get.find<AuthService>();
+
+  PerfilPage({super.key});
 
   @override
   Widget build(BuildContext context) {

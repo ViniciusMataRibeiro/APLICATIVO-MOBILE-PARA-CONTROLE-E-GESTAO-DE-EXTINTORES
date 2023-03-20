@@ -37,7 +37,7 @@ dependencies:
   http: ^0.13.5
   get: ^4.6.3
   get_storage: ^2.0.3
-  intl: ^0.17.0
+  intl: ^0.18.0
   transparent_image: ^2.0.0
   curved_navigation_bar: ^1.0.3
   datetime_picker_formfield: ^2.0.0

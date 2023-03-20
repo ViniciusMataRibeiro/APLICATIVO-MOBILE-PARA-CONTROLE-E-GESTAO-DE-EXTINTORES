@@ -10,8 +10,11 @@ import '../Empresa/perfil_empresa/perfilEmpresa_page.dart';
 import '../Tecnico/perfil_tecnico/perfilTecnico_page.dart';
 import 'dashboard_Controller.dart';
 
+//ignore: must_be_immutable
 class DashboardPage extends GetView<DashboardController> {
   AuthService aux = Get.find<AuthService>();
+
+  DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {

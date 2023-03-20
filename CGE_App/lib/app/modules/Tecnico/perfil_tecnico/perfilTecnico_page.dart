@@ -7,8 +7,11 @@ import '../../../data/services/auth/service.dart';
 
 String nome = "";
 
+//ignore: must_be_immutable
 class PerfilTecnicoPage extends GetView<PerfilTecnicoController> {
   AuthService aux = Get.find<AuthService>();
+
+  PerfilTecnicoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
