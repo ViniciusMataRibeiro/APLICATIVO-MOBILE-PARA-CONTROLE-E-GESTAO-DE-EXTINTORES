@@ -1,3 +1,4 @@
+import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:ui' as ui;
@@ -105,7 +106,7 @@ class ListTecnicoPage extends State<ListTecnicoState>
               ),
               centerTitle: true,
             ),
-            body: _mostraDados(dados: snapshot.data),
+            body: _mostraDados(dados: snapshot.data, controllerTecnico: controller),
           );
         } else {
           return const Scaffold(
@@ -113,69 +114,51 @@ class ListTecnicoPage extends State<ListTecnicoState>
               child: CircularProgressIndicator(),
             ),
           );
-        } 
+        }
       },
     );
   }
 
-  _mostraDados({required List dados}) {
+  _mostraDados({required List dados, required ListTecnicoController controllerTecnico}) {
     return ListView.builder(
-        itemCount: dados.length,
-        itemBuilder: (context, index) {
-          Map item = dados[index];
-          
-          return GestureDetector(
-            onTap: () {},
-            child: Container(
-              margin: const EdgeInsets.all(10),
-              child: Card(
-                elevation: 5,
-                color: Colors.grey,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 15),
-                    _icone(item),
-                    _detalhes(item),
-                  ],
-                ),
+      itemCount: dados.length,
+      itemBuilder: (context, index) {
+        Map item = dados[index];
+
+        return GestureDetector(
+          onTap: () {},
+          child: Container(
+            margin: const EdgeInsets.all(10),
+            child: Card(
+              elevation: 5,
+              color: Colors.grey,
+              child: Column(
+                children: [
+                  const SizedBox(height: 15),
+                  _icone(item),
+                  _detalhes(item, controllerTecnico),
+                ],
               ),
             ),
-          );
-        },
+          ),
+        );
+      },
     );
   }
 }
 
 Widget _icone(Map item) {
-  return Column(
+  return const Column(
     children: [
       Padding(
-        padding: const EdgeInsets.only(left: 68, right: 15),
+        padding: EdgeInsets.only(left: 0, right: 0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Visibility(
-              visible: false,
-              child: IconButton(
-                icon: Icon(Icons.edit, size: 25, color: Colors.white),
-                onPressed: null,
-              ),
-            ),
-            const Flexible(
-              flex: 5,
-              child: Icon(
-                Icons.person,
-                size: 40,
-                color: Color.fromARGB(255, 255, 255, 255),
-              ),
-            ),
-            Flexible(
-              flex: 5,
-              child: IconButton(
-                icon: const Icon(Icons.edit, size: 25, color: Colors.white),
-                onPressed: () {},
-              ),
+            Icon(
+              Icons.person,
+              size: 40,
+              color: Color.fromARGB(255, 255, 255, 255),
             ),
           ],
         ),
@@ -184,7 +167,7 @@ Widget _icone(Map item) {
   );
 }
 
-Widget _detalhes(Map item) {
+Widget _detalhes(Map item, ListTecnicoController controllerTecnico) {
   return Card(
     color: const Color(0xFFE8E8E8),
     margin: const EdgeInsets.all(10),
@@ -203,7 +186,7 @@ Widget _detalhes(Map item) {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     const Text(
+                      const Text(
                         "Nome",
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -221,6 +204,12 @@ Widget _detalhes(Map item) {
                   ),
                 ),
               ),
+              Flexible(
+                flex: 5,
+                child: IconButton(
+                  icon: const Icon(Icons.edit, size: 25, color: Colors.black),
+                  onPressed: () => controllerTecnico.gotoEditTecnico(item)),
+                ),
             ],
           ),
           const SizedBox(height: 10),
@@ -235,7 +224,7 @@ Widget _detalhes(Map item) {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     const Text(
+                      const Text(
                         "Email",
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -256,7 +245,7 @@ Widget _detalhes(Map item) {
             ],
           ),
           const SizedBox(height: 10),
-           Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
