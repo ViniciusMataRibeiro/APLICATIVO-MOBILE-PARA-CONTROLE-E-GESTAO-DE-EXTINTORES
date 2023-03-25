@@ -7,7 +7,10 @@ import '../../../data/services/auth/service.dart';
 class ListTecnicoController extends GetxController {
   final _authService = Get.find<AuthService>();
   
-  Future<List<TecnicoModel>> getTecnico(){
-    return _authService.getTecnico();
+  Future<List> getTecnico() async {
+
+    List t = await _authService.getTecnico();
+
+    return t;
   }
 }

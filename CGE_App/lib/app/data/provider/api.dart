@@ -67,22 +67,22 @@ class Api {
     }
   }
 
-  Future<List<TecnicoModel>> getTecnico() async {
+  Future<List> getTecnico() async {
     var url = Uri.parse("$baseUrl/Tecnicos");
-    var response = await http.get(url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'authorization': 'Bearer ${_configService.token}',
-        });
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization': 'Bearer ${_configService.token}',
+    });
     if (response.statusCode == 200) {
+      List d = [];
+      List dados = await jsonDecode(response.body);
+        await Future.forEach(dados, (element) {
+        Map<String, dynamic> t = Map.from(element);
+        d.add(t);
+      });
 
-      List<TecnicoModel> data = [];
-      for (var item in jsonDecode(response.body)) {
-        data.add(TecnicoModel.fromJson(item));
-      }
-
-      return data;
+      return d;
     } else {
       throw Exception('Failed');
     }

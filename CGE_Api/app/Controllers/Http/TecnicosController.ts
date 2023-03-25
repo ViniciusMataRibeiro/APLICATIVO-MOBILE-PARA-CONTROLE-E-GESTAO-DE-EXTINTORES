@@ -25,7 +25,7 @@ export default class TecnicosController {
                     nome: element.nome,
                     email: usertecnico.email,
                     status: element.bloqueado,
-                    QtdVistorias: Math.random() * 2,
+                    QtdVistorias: 2,
                 }
 
                 listTecnico.push(obj);

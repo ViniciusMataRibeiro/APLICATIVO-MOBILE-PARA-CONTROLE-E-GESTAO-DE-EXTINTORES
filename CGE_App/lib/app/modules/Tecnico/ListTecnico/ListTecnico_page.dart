@@ -51,7 +51,6 @@ class ListTecnicoPage extends State<ListTecnicoState>
     super.initState();
 
     dadosTecnico = controller.getTecnico();
-
   }
 
   @override
@@ -119,16 +118,12 @@ class ListTecnicoPage extends State<ListTecnicoState>
     );
   }
 
-  _mostraDados({required dados}) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/image/registro.jpeg'), fit: BoxFit.cover),
-      ),
-      child: ListView.builder(
-        itemCount: 10,
+  _mostraDados({required List dados}) {
+    return ListView.builder(
+        itemCount: dados.length,
         itemBuilder: (context, index) {
-          //Map item = dados[index];
+          Map item = dados[index];
+          
           return GestureDetector(
             onTap: () {},
             child: Container(
@@ -139,20 +134,19 @@ class ListTecnicoPage extends State<ListTecnicoState>
                 child: Column(
                   children: [
                     const SizedBox(height: 15),
-                    _icone(),
-                    _detalhes(),
+                    _icone(item),
+                    _detalhes(item),
                   ],
                 ),
               ),
             ),
           );
         },
-      ),
     );
   }
 }
 
-Widget _icone() {
+Widget _icone(Map item) {
   return Column(
     children: [
       Padding(
@@ -186,28 +180,16 @@ Widget _icone() {
           ],
         ),
       ),
-      const Padding(
-        padding: EdgeInsets.only(left: 10, right: 10, top: 0),
-        child: Text(
-          'Nome',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 255, 255, 255),
-          ),
-        ),
-      ),
     ],
   );
 }
 
-Widget _detalhes() {
-  return const Card(
-    color: Color(0xFFE8E8E8),
-    margin: EdgeInsets.all(10),
+Widget _detalhes(Map item) {
+  return Card(
+    color: const Color(0xFFE8E8E8),
+    margin: const EdgeInsets.all(10),
     child: Padding(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           Row(
@@ -216,12 +198,44 @@ Widget _detalhes() {
               Flexible(
                 flex: 5,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                     const Text(
+                        "Nome",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ),
                       Text(
+                        item['nome'] ?? 'Sem informação',
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 122, 0, 14),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                flex: 5,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                     const Text(
                         "Email",
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -230,8 +244,8 @@ Widget _detalhes() {
                         ),
                       ),
                       Text(
-                        'Sem informação',
-                        style: TextStyle(
+                        item['email'] ?? 'Sem informação',
+                        style: const TextStyle(
                           color: Color.fromARGB(255, 122, 0, 14),
                         ),
                       ),
@@ -241,19 +255,19 @@ Widget _detalhes() {
               ),
             ],
           ),
-          SizedBox(height: 10),
-          Row(
+          const SizedBox(height: 10),
+           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
                 flex: 5,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Quantidade de Vistorias",
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -262,8 +276,8 @@ Widget _detalhes() {
                         ),
                       ),
                       Text(
-                        'Sem informação',
-                        style: TextStyle(
+                        item['qtdVistorias'] ?? 'Sem informação',
+                        style: const TextStyle(
                           color: Color.fromARGB(255, 122, 0, 14),
                         ),
                       ),
@@ -273,19 +287,19 @@ Widget _detalhes() {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
                 flex: 5,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Status",
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -294,8 +308,8 @@ Widget _detalhes() {
                         ),
                       ),
                       Text(
-                        'Sem informação',
-                        style: TextStyle(
+                        item['Status'] == 0 ? 'Ativo' : 'Inativo',
+                        style: const TextStyle(
                           color: Color.fromARGB(255, 122, 0, 14),
                         ),
                       ),

@@ -1,19 +1,16 @@
-import 'dart:convert';
-import 'dart:ffi';
-
 class TecnicoModel {
   int id;
   String email;
   String name;
   int status;
-  String QtdVistorias;
+  String qtdVistorias;
   
   TecnicoModel({
     required this.id,
     required this.email,
     required this.name,
     required this.status,
-    required this.QtdVistorias,
+    required this.qtdVistorias,
   });
 
   factory TecnicoModel.fromJson(Map<String, dynamic> json) => TecnicoModel(
@@ -21,6 +18,6 @@ class TecnicoModel {
         email: json['email'],
         name: json['nome'].toString(),
         status: json['status'],
-        QtdVistorias: json['QtdVistorias'].toString(),
+        qtdVistorias: json['QtdVistorias'].toString(),
       );
 }

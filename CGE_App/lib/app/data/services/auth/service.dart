@@ -55,7 +55,7 @@ class AuthService extends GetxService {
     });
   }
 
-  Future<List<TecnicoModel>> getTecnico() async {
+  Future<List> getTecnico() async {
     return await _repository.getTecnico();
   }
 }
