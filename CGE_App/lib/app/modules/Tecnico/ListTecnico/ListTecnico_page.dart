@@ -308,7 +308,7 @@ Widget _detalhes(Map item) {
                         ),
                       ),
                       Text(
-                        item['Status'] == 0 ? 'Ativo' : 'Inativo',
+                        item['status'],
                         style: const TextStyle(
                           color: Color.fromARGB(255, 122, 0, 14),
                         ),

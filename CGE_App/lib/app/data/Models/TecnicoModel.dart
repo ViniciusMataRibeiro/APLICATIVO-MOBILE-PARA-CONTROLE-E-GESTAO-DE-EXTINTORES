@@ -2,8 +2,8 @@ class TecnicoModel {
   int id;
   String email;
   String name;
-  int status;
-  String qtdVistorias;
+  String status;
+  int qtdVistorias;
   
   TecnicoModel({
     required this.id,
@@ -15,9 +15,9 @@ class TecnicoModel {
 
   factory TecnicoModel.fromJson(Map<String, dynamic> json) => TecnicoModel(
         id: json['id'],
-        email: json['email'],
+        email: json['email'].toString(),
         name: json['nome'].toString(),
-        status: json['status'],
-        qtdVistorias: json['QtdVistorias'].toString(),
+        status: json['status'].toString(),
+        qtdVistorias: json['qtdVistorias'],
       );
 }

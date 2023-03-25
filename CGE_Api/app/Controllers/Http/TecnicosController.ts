@@ -24,8 +24,8 @@ export default class TecnicosController {
                     id: element.id,
                     nome: element.nome,
                     email: usertecnico.email,
-                    status: element.bloqueado,
-                    QtdVistorias: 2,
+                    status: element.bloqueado == false ? 'Ativo' : 'Bloqueado',
+                    qtdVistorias: '2',
                 }
 
                 listTecnico.push(obj);
