@@ -2,6 +2,7 @@ import 'package:cge_app/app/data/Models/tecnico_request.dart';
 import 'package:cge_app/app/data/services/auth/repository.dart';
 import 'package:get/get.dart';
 
+import '../../Models/TecnicoModel.dart';
 import '../../Models/user.dart';
 import '../../Models/user_login_request.dart';
 import '../config/service.dart';
@@ -52,5 +53,9 @@ class AuthService extends GetxService {
     Future.delayed(const Duration(milliseconds: 1), () {
       Get.offAllNamed('/dashboard');
     });
+  }
+
+  Future<List<TecnicoModel>> getTecnico() async {
+    return await _repository.getTecnico();
   }
 }

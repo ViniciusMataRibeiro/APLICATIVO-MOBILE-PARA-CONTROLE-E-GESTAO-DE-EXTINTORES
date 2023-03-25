@@ -15,7 +15,24 @@ export default class TecnicosController {
             const empresa = await Empresa.findByOrFail("user_id", userAuth.id);
             const tecnicos = await Tecnico.query().where('empresa_id', empresa.id).where('bloqueado', false);
 
-            return response.ok(tecnicos);
+            const listTecnico = new Array();
+
+            for (const element of tecnicos) {
+                const usertecnico = await User.findByOrFail("id", element.userId);
+                
+                let obj = {
+                    id: element.id,
+                    nome: element.nome,
+                    email: usertecnico.email,
+                    status: element.bloqueado,
+                    QtdVistorias: Math.random() * 2,
+                }
+
+                listTecnico.push(obj);
+            }
+
+            return response.ok(listTecnico);
+            
         } catch (error) {
             return response.badRequest({
                 message: 'Erro ao listar Técnicos',

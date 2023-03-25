@@ -1,10 +1,8 @@
-import 'package:cge_app/app/core/app_theme.dart';
-import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:faker/faker.dart';
 import 'dart:ui' as ui;
 
+import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
 import 'ListTecnico_controller.dart';
 
@@ -37,6 +35,7 @@ class ListTecnicoPage extends State<ListTecnicoState>
   final ListTecnicoController controller = Get.put(ListTecnicoController());
   late Animation<double> _animation;
   late AnimationController _animationController;
+  late Future dadosTecnico;
 
   @override
   void initState() {
@@ -50,57 +49,77 @@ class ListTecnicoPage extends State<ListTecnicoState>
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
     super.initState();
+
+    dadosTecnico = controller.getTecnico();
+
   }
 
   @override
   Widget build(BuildContext context) {
+    return buildContainer();
+  }
+
+  buildContainer() {
     var obj = aux.user.value;
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
-        title: Row(
-          children: [
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+    return FutureBuilder(
+      future: dadosTecnico,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Scaffold(
+            extendBodyBehindAppBar: true,
+            appBar: AppBar(
+              backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+              title: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Get.offAllNamed('/dashboard');
+                    },
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    width: 40,
+                    height: 40,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100.0),
+                      child: Image.asset(
+                        'assets/image/cge.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  const Text(
+                    'Tecnicos',
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic),
+                  ),
+                ],
               ),
-              onPressed: () {
-                Get.offAllNamed('/dashboard');
-              },
+              centerTitle: true,
             ),
-            const SizedBox(
-              width: 5,
+            body: _mostraDados(dados: snapshot.data),
+          );
+        } else {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
             ),
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              width: 40,
-              height: 40,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100.0),
-                child: Image.asset(
-                  'assets/image/cge.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            const Text(
-              'Tecnicos',
-              style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic),
-            ),
-          ],
-        ),
-        centerTitle: true,
-      ),
-      body: _mostraDados(),
+          );
+        } 
+      },
     );
   }
 
-  _mostraDados() {
+  _mostraDados({required dados}) {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(

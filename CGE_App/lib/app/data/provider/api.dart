@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../Models/TecnicoModel.dart';
 import '../Models/tecnico_request.dart';
 import '../Models/user.dart';
 import '../Models/user_login_request.dart';
@@ -61,6 +62,27 @@ class Api {
         body: jsonEncode(data.toJson()));
     if (response.statusCode == 200) {
       return;
+    } else {
+      throw Exception('Failed');
+    }
+  }
+
+  Future<List<TecnicoModel>> getTecnico() async {
+    var url = Uri.parse("$baseUrl/Tecnicos");
+    var response = await http.get(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        });
+    if (response.statusCode == 200) {
+
+      List<TecnicoModel> data = [];
+      for (var item in jsonDecode(response.body)) {
+        data.add(TecnicoModel.fromJson(item));
+      }
+
+      return data;
     } else {
       throw Exception('Failed');
     }

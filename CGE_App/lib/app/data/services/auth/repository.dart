@@ -1,4 +1,5 @@
 
+import '../../Models/TecnicoModel.dart';
 import '../../Models/tecnico_request.dart';
 import '../../Models/user.dart';
 import '../../Models/user_login_request.dart';
@@ -18,5 +19,8 @@ class AuthRepository {
 
   Future<void> logout() => _api.logout();
 
+  // ignore: non_constant_identifier_names
   Future<void> InsertTecnico(TecnicoRequestModel tecnico) => _api.InsertTecnico(tecnico);
+
+  Future<List<TecnicoModel>> getTecnico() => _api.getTecnico();
 }
