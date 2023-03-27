@@ -20,6 +20,8 @@ export default class CreateTecnicoValidator {
       rules.minLength(6),
       rules.maxLength(20),
     ]),
+    
+    bloqueado: schema.boolean(),
   })
 
   

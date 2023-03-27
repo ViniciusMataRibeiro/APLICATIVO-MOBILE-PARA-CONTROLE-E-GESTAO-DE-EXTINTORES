@@ -20,7 +20,9 @@ class AuthRepository {
   Future<void> logout() => _api.logout();
 
   // ignore: non_constant_identifier_names
-  Future<void> InsertTecnico(TecnicoRequestModel tecnico) => _api.InsertTecnico(tecnico);
+  Future<void> InsertTecnico(TecnicoRequestModel tecnico) => _api.insertTecnico(tecnico);
+
+  Future<void> updateTecnico(TecnicoRequestModel tecnico) => _api.updateTecnico(tecnico);
 
   Future<List> getTecnico() => _api.getTecnico();
 }

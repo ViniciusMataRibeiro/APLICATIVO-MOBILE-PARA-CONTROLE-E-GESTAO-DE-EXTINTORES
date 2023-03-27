@@ -13,26 +13,30 @@ export default class TecnicosController {
             const userAuth = await auth.use('api').authenticate();
 
             const empresa = await Empresa.findByOrFail("user_id", userAuth.id);
-            const tecnicos = await Tecnico.query().where('empresa_id', empresa.id).where('bloqueado', false);
+            const tecnicos = await Tecnico.query().where('empresa_id', empresa.id);
 
             const listTecnico = new Array();
 
             for (const element of tecnicos) {
                 const usertecnico = await User.findByOrFail("id", element.userId);
-                
+
                 let obj = {
                     id: element.id,
                     nome: element.nome,
                     email: usertecnico.email,
-                    status: element.bloqueado == false ? 'Ativo' : 'Bloqueado',
+                    status: element.bloqueado == false ? 'Ativo' : 'Inativo',
                     qtdVistorias: '2',
                 }
 
                 listTecnico.push(obj);
             }
 
+            listTecnico.sort(function(a,b) {
+                return a.status < b.status ? -1 : a.status > b.status ? 1 : 0;
+            });
+
             return response.ok(listTecnico);
-            
+
         } catch (error) {
             return response.badRequest({
                 message: 'Erro ao listar Técnicos',
@@ -73,15 +77,15 @@ export default class TecnicosController {
         }
     }
 
-    public async update({ request, response, auth }: HttpContextContract) {
+    public async update({ request, response, params }: HttpContextContract) {
         const payload = await request.validate(EditTecnicoValidator);
-        const userAuth = await auth.use('api').authenticate();
 
         const trx = await Database.transaction();
 
         try {
-            const user = await User.findByOrFail("id", userAuth.id);
-            const tecnico = await Tecnico.findByOrFail("user_id", userAuth.id);
+            const tecnico = await Tecnico.findByOrFail("id", parseInt(params.id));
+            const user = await User.findByOrFail("id", tecnico.userId);
+
 
             if (payload.password) {
                 user.merge({
@@ -110,7 +114,7 @@ export default class TecnicosController {
                 email: user.email,
             });
 
-        } catch {
+        } catch (error) {
             await trx.rollback();
             return response.badRequest({
                 message: 'Erro ao Editar Técnico',

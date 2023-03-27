@@ -58,6 +58,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
 
   @override
   Widget build(BuildContext context) {
+    bool isSelectbloqueado = cadastroTecnicoController.bloqueado.value;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 175, 31, 21),
@@ -140,6 +141,52 @@ class CadastroExtintor extends State<CadastroExtintorState>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(
+                              () {
+                                isSelectbloqueado = !isSelectbloqueado;
+                                cadastroTecnicoController.bloqueado.value =
+                                    isSelectbloqueado;
+                              },
+                            );
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.fastLinearToSlowEaseIn,
+                            decoration: BoxDecoration(
+                              color: isSelectbloqueado
+                                  ? Colors.red
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(5.0),
+                              border: isSelectbloqueado
+                                  ? null
+                                  : Border.all(color: Colors.white, width: 2),
+                            ),
+                            width: 25,
+                            height: 25,
+                            child: isSelectbloqueado
+                                ? const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                  )
+                                : null,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Text(
+                          'Inativo',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                     Container(
                       margin: const EdgeInsets.only(left: 0),
                       child: Form(
@@ -198,8 +245,9 @@ class CadastroExtintor extends State<CadastroExtintorState>
                               wordSpacing: 1,
                               fontSize: 18,
                               color: Colors.white),
-                          obscureText: cadastroTecnicoController.showPassword.value,
-                          decoration:  InputDecoration(
+                          obscureText:
+                              cadastroTecnicoController.showPassword.value,
+                          decoration: InputDecoration(
                             hintStyle: const TextStyle(
                               color: Colors.white,
                             ),
@@ -214,15 +262,17 @@ class CadastroExtintor extends State<CadastroExtintorState>
                             ),
                             labelText: 'Senha',
                             suffixIcon: GestureDetector(
-                          child: Icon(
-                              cadastroTecnicoController.showPassword.value == false
-                                  ? Icons.visibility_off_rounded
-                                  : Icons.visibility_rounded,
-                              color: Colors.white),
-                          onTap: () {
-                            cadastroTecnicoController.toggleShowPassword();
-                          },
-                        ),
+                              child: Icon(
+                                  cadastroTecnicoController
+                                              .showPassword.value ==
+                                          false
+                                      ? Icons.visibility_off_rounded
+                                      : Icons.visibility_rounded,
+                                  color: Colors.white),
+                              onTap: () {
+                                cadastroTecnicoController.toggleShowPassword();
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -241,7 +291,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                             fixedSize: const Size(300, 50),
                           ),
                           child: const Text(
-                            'Registrar',
+                            'Gravar',
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Roboto-BoldItalic',

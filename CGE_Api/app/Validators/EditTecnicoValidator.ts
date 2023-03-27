@@ -4,10 +4,6 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 export default class EditTecnicoValidator {
   constructor(protected ctx: HttpContextContract) {}
 
-  public refs = schema.refs({
-    user_id: this.ctx.auth.user!.id,
-  })
-
   public schema = schema.create({
     nome: schema.string({ trim: true }, [
       rules.minLength(3),
@@ -17,13 +13,14 @@ export default class EditTecnicoValidator {
     email: schema.string({ trim: true }, [
       rules.email(),
       rules.maxLength(100),
-      rules.unique({ table: 'users', column: 'email', whereNot: { id: this.refs.user_id } }),
     ]),
 
     password: schema.string.nullableAndOptional({}, [
       rules.minLength(6),
       rules.maxLength(20),
-    ])
+    ]),
+    
+    bloqueado: schema.boolean(),
   })
 
   public messages: CustomMessages = {

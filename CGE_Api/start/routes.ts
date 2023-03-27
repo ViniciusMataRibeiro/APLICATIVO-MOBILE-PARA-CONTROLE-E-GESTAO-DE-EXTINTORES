@@ -10,7 +10,7 @@ Route.group(() => {
 
   Route.get('/Tecnicos', 'TecnicosController.index');
   Route.post('/tecnico', 'TecnicosController.store');
-  Route.put('/tecnico', 'TecnicosController.update');
+  Route.put('/tecnico/:id', 'TecnicosController.update');
   Route.delete('/tecnico/:id', 'TecnicosController.destroy');
 
   Route.get('/Empresas', 'EmpresasController.index');

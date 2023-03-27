@@ -18,6 +18,6 @@ class TecnicoModel {
         email: json['email'].toString(),
         name: json['nome'].toString(),
         status: json['status'].toString(),
-        qtdVistorias: json['qtdVistorias'],
+        qtdVistorias: json['qtdVistorias'], 
       );
 }

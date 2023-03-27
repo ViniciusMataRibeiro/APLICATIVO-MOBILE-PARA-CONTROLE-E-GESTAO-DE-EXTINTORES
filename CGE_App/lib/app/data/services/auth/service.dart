@@ -48,10 +48,17 @@ class AuthService extends GetxService {
     return _repository.getUser().then((value) => user.value = value);
   }
 
-  Future<void> InsertTecnico(TecnicoRequestModel tecnico) async {
+  Future<void> insertTecnico(TecnicoRequestModel tecnico) async {
     await _repository.InsertTecnico(tecnico);
     Future.delayed(const Duration(milliseconds: 1), () {
       Get.offAllNamed('/dashboard');
+    });
+  }
+
+  Future<void> updateTecnico(TecnicoRequestModel tecnico) async {
+    await _repository.updateTecnico(tecnico);
+    Future.delayed(const Duration(milliseconds: 1), () {
+      Get.offAllNamed('/listTecnico');
     });
   }
 
