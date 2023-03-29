@@ -22,9 +22,8 @@ class Api {
         body: jsonEncode(data.toJson()));
     if (response.statusCode == 200) {
       return UserLoginResponseModel.fromJson(jsonDecode(response.body));
-    }else{
-      Map<String, dynamic> data = jsonDecode(response.body);
-      return UserLoginResponseModel(token: '', expiresAt: data['message']);
+    } else {
+      throw Exception('Failed');
     }
   }
 
@@ -37,7 +36,7 @@ class Api {
     } else if (response.statusCode == 401 || response.statusCode == 403) {
       return UserModel(email: '', nome: '', tipo: '');
     } else {
-      return UserModel(email: '', nome: '', tipo: '');
+      throw Exception('Failed');
     }
   }
 
@@ -67,7 +66,7 @@ class Api {
     }
   }
 
-  Future<bool> updateTecnico(TecnicoRequestModel data) async {
+  Future<void> updateTecnico(TecnicoRequestModel data) async {
     var url = Uri.parse("$baseUrl/tecnico/${data.id}");
     var response = await http.put(url,
         headers: {
@@ -77,9 +76,8 @@ class Api {
         },
         body: jsonEncode(data.toJson()));
     if (response.statusCode == 200) {
-      return true;
+      return;
     } else {
-      return false;
     }
   }
 

@@ -7,7 +7,7 @@ export default class extends BaseSeeder {
     const user = await User.create({
       email: 'empresa@email.com',
       password: '123456',
-      tipo: 'empresa',
+      tipo: 'empresas',
     })
     await Empresa.create({
       nome: 'Empresa',

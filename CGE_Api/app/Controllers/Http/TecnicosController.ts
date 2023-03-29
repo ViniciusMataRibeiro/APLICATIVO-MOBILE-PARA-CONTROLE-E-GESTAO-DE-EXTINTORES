@@ -61,7 +61,6 @@ export default class TecnicosController {
                 nome: payload.nome,
                 userId: user.id,
                 empresa_id: empresa.id,
-                bloqueado: false,
             });
 
             return response.ok({
@@ -103,7 +102,6 @@ export default class TecnicosController {
 
             tecnico.merge({
                 nome: payload.nome,
-                bloqueado: payload.bloqueado,
             });
 
             await tecnico.save();
