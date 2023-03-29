@@ -3,7 +3,6 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cge_app/app/modules/Alertas/Alertas.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import 'login_controller.dart';
@@ -128,7 +127,7 @@ class LoginPage extends GetView<LoginController> {
                 padding: const EdgeInsets.only(top: 15, left: 30, right: 30),
                 child: ElevatedButton(
                   onPressed: () async {
-                    var result = await controller.goTologin(context);
+                    var result = await controller.goTologin();
                     if (result != 'true') {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
@@ -136,8 +135,13 @@ class LoginPage extends GetView<LoginController> {
                           Alertas.alertaError(
                               'Erro ao logar!', result.toString()),
                         );
-                    }else{
-                      controller.toast('Logado com Sucesso!');
+                    }
+                    else{
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          Alertas.alertaSucess('Sucesso!', 'Logado com sucesso!'),
+                        );
                     }
                   },
                   style: ElevatedButton.styleFrom(

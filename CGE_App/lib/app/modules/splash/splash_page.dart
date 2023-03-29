@@ -13,7 +13,7 @@ class SplashPage extends GetView<SplashController> {
     return AnimatedSplashScreen(
       splash: Lottie.asset('assets/image/loading.json'),
       backgroundColor: Colors.white,
-      nextScreen: LoginPage(),
+      nextScreen: const LoginPage(),
       splashTransition: SplashTransition.fadeTransition,
       pageTransitionType: PageTransitionType.rightToLeftWithFade,
       splashIconSize: 250,

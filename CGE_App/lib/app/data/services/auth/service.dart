@@ -1,6 +1,5 @@
 import 'package:cge_app/app/data/Models/tecnico_request.dart';
 import 'package:cge_app/app/data/services/auth/repository.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 import '../../Models/TecnicoModel.dart';
@@ -25,7 +24,7 @@ class AuthService extends GetxService {
     super.onInit();
   }
 
-  Future<String> login(UserLoginRequestModel userLoginRequest, BuildContext context) async {
+  Future<String> login(UserLoginRequestModel userLoginRequest) async {
     var userLoginResponse = await _repository.login(userLoginRequest);
     if (userLoginResponse.expiresAt == 'Invalid email/password') {
       return 'Usuário ou senha inválidos';

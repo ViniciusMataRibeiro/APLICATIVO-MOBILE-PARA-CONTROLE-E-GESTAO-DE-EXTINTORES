@@ -1,4 +1,7 @@
 import 'package:cge_app/app/core/app_theme.dart';
+import 'package:cge_app/app/modules/Setor/cadastro_setor/cadastroSetor_page.dart';
+import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
+import 'package:cge_app/app/modules/vistoria/vistoria_page.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,8 +15,6 @@ import 'setores_controller.dart';
 DateTime selectedDate = DateTime.now();
 String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
 String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
-List dados = [];
-List<Tab> myTabs = [];
 
 class Setor extends GetView<SetorController> {
   @override
@@ -43,7 +44,6 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
   var number = faker.randomGenerator.integer(50);
   late Animation<double> _animation;
   late AnimationController _animationController;
-  late Future mapa;
 
   DateTime selectedDate = DateTime.now();
 
@@ -204,83 +204,127 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
           backGroundColor: const Color.fromARGB(255, 190, 0, 0),
         ),
       ),
-      body: buildContainer(),
-    );
-  }
-
-  buildContainer() {
-    return FutureBuilder(
-      future: mapa,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          if (dados.isNotEmpty) {
-            return DefaultTabController(
-              length: myTabs.length,
-              child: Scaffold(
-                body: TabBarView(
-                  children: myTabs.map<Widget>(
-                    (Tab tab) {
-                      return _mostradados(tipo: 'Setor', dados: dados);
-                    },
-                  ).toList(),
-                ),
-              ),
-            );
-          } else {
-            return const Scaffold(
-              body: Center(
-                child: Text('Nenhum dado encontrado'),
-              ),
-            );
-          }
-        } else {
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-      },
-    );
-  }
-
-  _mostradados({String? tipo, required List dados}) {
-    return ListView.builder(
-      itemCount: dados.length,
-      itemBuilder: (BuildContext context, index) {
-        Map item = dados[index];
-        if (true) {
-          return GestureDetector(
-            onTap: () {},
-            child: Container(
-              margin: const EdgeInsets.all(10),
-              child: const Card(
-                elevation: 5,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 15),
-                    Text(
-                      'Setor',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFFB2505C),
+      body: Center(
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/image/registro.jpeg'),
+                fit: BoxFit.cover),
+          ),
+          child: ListView(
+            children: [
+              for (var i = 1; i <= 10; i++) ...[
+                Container(
+                  margin: const EdgeInsets.all(3.0),
+                  padding: const EdgeInsets.all(3.0),
+                  child: Card(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
                       ),
                     ),
-                    // Container(
-                    //     padding: EdgeInsets.only(top: 50, bottom: 20),
-                    //     child: DonutChart(item),
-                    //   ),
-                  ],
+                    surfaceTintColor: const Color.fromARGB(255, 201, 201, 201),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text(
+                            faker.lorem.words(2).join(' '),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 35,
+                                color: Color.fromARGB(255, 131, 30, 23),
+                                fontStyle: FontStyle.italic),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            const SizedBox(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.circle,
+                                        size: 20,
+                                        color: Colors.green,
+                                      ),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text(
+                                        'Extintores Funcional',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color:
+                                              Color.fromARGB(255, 78, 78, 78),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.circle,
+                                          size: 20, color: Colors.yellow),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text(
+                                        'Extintores a Vencer',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color:
+                                              Color.fromARGB(255, 78, 78, 78),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.circle,
+                                          size: 20, color: Colors.red),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text(
+                                        'Extintores Vencidos',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color:
+                                              Color.fromARGB(255, 78, 78, 78),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 150,
+                              child: Container(
+                                padding: const EdgeInsets.all(7.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: Image.network(
+                                    'https://picsum.photos/250?image=${i + number}',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          );
-        } else {
-          return Container();
-        }
-      },
+              ],
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
