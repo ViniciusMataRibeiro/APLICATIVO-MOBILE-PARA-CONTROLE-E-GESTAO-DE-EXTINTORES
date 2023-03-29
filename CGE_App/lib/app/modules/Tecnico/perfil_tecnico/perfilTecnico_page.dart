@@ -11,7 +11,7 @@ String nome = "";
 class PerfilTecnicoPage extends GetView<PerfilTecnicoController> {
   AuthService aux = Get.find<AuthService>();
 
-  PerfilTecnicoPage({super.key});
+  PerfilTecnicoPage({key});
 
   @override
   Widget build(BuildContext context) {
