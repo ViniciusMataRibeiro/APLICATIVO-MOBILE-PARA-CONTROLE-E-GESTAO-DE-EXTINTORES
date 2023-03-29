@@ -45,7 +45,7 @@ class DashboardPage extends GetView<DashboardController> {
             children: [
               Setor(),
               Extintor(),
-              if (obj!.tipo == 'empresas') ...[
+              if (obj!.tipo == 'empresa') ...[
                 PerfilPage(),
               ] else ...[
                 PerfilTecnicoPage(),

@@ -9,7 +9,7 @@ class LoginController extends GetxController {
   final _login = Get.find<AuthService>();
 
   var showPassword = true.obs;
-  var emailController = TextEditingController(text: 'empresa@email.com');
+  var emailController = TextEditingController(text: 'tecnico@email.com');
   var passwordController = TextEditingController(text: '123456');
   bool get isLogged => _login.isLogged;
 
@@ -17,14 +17,18 @@ class LoginController extends GetxController {
     showPassword.value = !showPassword.value;
   }
 
-  void goTologin() {
+  Future<String> goTologin() async {
     var userLoginRequestModel = UserLoginRequestModel(
         email: emailController.text, password: passwordController.text);
 
-    _authService.login(userLoginRequestModel).then((value) => null);
+    var result =  await _authService.login(userLoginRequestModel);
+
+    return result;
   }
 
-  void goTologout() {
-    _authService.logout().then((value) => null);
+  bool goTologout() {
+    var result = _authService.logout().then((value) => null) as bool;
+
+    return result;
   }
 }

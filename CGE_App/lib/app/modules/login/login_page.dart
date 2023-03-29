@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_const
 
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:cge_app/app/modules/Alertas/Alertas.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -124,8 +126,23 @@ class LoginPage extends GetView<LoginController> {
               Padding(
                 padding: const EdgeInsets.only(top: 15, left: 30, right: 30),
                 child: ElevatedButton(
-                  onPressed: () {
-                    controller.goTologin();
+                  onPressed: () async {
+                    var result = await controller.goTologin();
+                    if (result != 'true') {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          Alertas.alertaError(
+                              'Erro ao logar!', result.toString()),
+                        );
+                    }
+                    else{
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          Alertas.alertaSucess('Sucesso!', 'Logado com sucesso!'),
+                        );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 175, 31, 21),

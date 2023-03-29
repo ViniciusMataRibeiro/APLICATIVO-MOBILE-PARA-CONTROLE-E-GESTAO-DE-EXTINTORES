@@ -11,16 +11,25 @@ export default class AuthController {
 
         try {
             const user = await User.findByOrFail('email', email);
-
             let expira;
             switch (user.tipo) {
-                case 'tecnicos':
-                    expira = '30days';
+                case 'tecnico':
+                    const tecnico = await Tecnico.findByOrFail('userId', user.id);
+                    if (!tecnico.bloqueado) {
+                        expira = '30days';
+                    }else{
+                        return response.badRequest({ message: 'Técnico bloqueado' });
+                    }
                     break;
-                case 'empresas':
-                    expira = '7days';
+                case 'empresa':
+                    const empresa = await Empresa.findByOrFail('userId', user.id);
+                    if (!empresa.bloqueado) {
+                        expira = '30days';
+                    }else{
+                        return response.badRequest({ message: 'Empresa bloqueada' });
+                    }
                     break;
-                case 'admins':
+                case 'admin':
                     expira = '1day';
                     break;
                 default:
@@ -62,7 +71,7 @@ export default class AuthController {
         let data;
 
         switch (userAuth.tipo) {
-            case 'empresas':
+            case 'empresa':
                 const empresas = await Empresa.findByOrFail('userId', userAuth.id);
                 data = {
                     id_empresa: empresas.id,
@@ -72,7 +81,7 @@ export default class AuthController {
                     tipo: userAuth.tipo,
                 };
                 break;
-            case 'tecnicos':
+            case 'tecnico':
                 const tecnicos = await Tecnico.findByOrFail('userId', userAuth.id);
                 data = {
                     id_tecnico: tecnicos.id,
@@ -83,7 +92,7 @@ export default class AuthController {
                     tipo: userAuth.tipo,
                 };
                 break;
-            case 'admins':
+            case 'admin':
                 const admins = await Admin.findByOrFail('userId', userAuth.id);
                 data = {
                     id_admin: admins.id,

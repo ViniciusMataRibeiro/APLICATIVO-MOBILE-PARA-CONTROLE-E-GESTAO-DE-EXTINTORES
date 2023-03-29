@@ -24,24 +24,37 @@ class AuthService extends GetxService {
     super.onInit();
   }
 
-  Future<void> login(UserLoginRequestModel userLoginRequest) async {
+  Future<String> login(UserLoginRequestModel userLoginRequest) async {
     var userLoginResponse = await _repository.login(userLoginRequest);
-    await _configService.saveToken(userLoginResponse.token);
-    var user = await _getUser();
-    if (user != null) {
-      Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
-      });
+    if (userLoginResponse.expiresAt == 'Invalid email/password') {
+      return 'Usuário ou senha inválidos';
+    } else if (userLoginResponse.expiresAt == 'Técnico bloqueado') {
+      return 'Técnico bloqueado';
     }
+    else {
+      await _configService.saveToken(userLoginResponse.token);
+      var user = await _getUser();
+      if (user.email != '') {
+        Future.delayed(const Duration(milliseconds: 1), () {
+          Get.offAllNamed('/dashboard');
+        });
+        return 'true';
+      }
+    }
+
+    return '';
   }
 
-  Future<void> logout() async {
+  Future<bool> logout() async {
     _repository.logout();
     await _configService.removeToken();
     user.value = null;
     Future.delayed(const Duration(milliseconds: 1), () {
       Get.offAllNamed('/login');
+      return true;
     });
+
+    return false;
   }
 
   Future<UserModel> _getUser() {
@@ -56,10 +69,12 @@ class AuthService extends GetxService {
   }
 
   Future<void> updateTecnico(TecnicoRequestModel tecnico) async {
-    await _repository.updateTecnico(tecnico);
-    Future.delayed(const Duration(milliseconds: 1), () {
-      Get.offAllNamed('/listTecnico');
-    });
+    var result = await _repository.updateTecnico(tecnico);
+    if (result) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/listTecnico');
+      });
+    }
   }
 
   Future<List> getTecnico() async {
