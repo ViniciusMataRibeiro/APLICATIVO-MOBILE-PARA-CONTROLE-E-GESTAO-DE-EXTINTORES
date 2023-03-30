@@ -102,6 +102,7 @@ export default class TecnicosController {
 
             tecnico.merge({
                 nome: payload.nome,
+                bloqueado: payload.bloqueado,
             });
 
             await tecnico.save();

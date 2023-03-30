@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import '../../data/Models/user_login_request.dart';
@@ -17,14 +18,28 @@ class LoginController extends GetxController {
     showPassword.value = !showPassword.value;
   }
 
-  void goTologin() {
+  Future<String> goTologin() async {
     var userLoginRequestModel = UserLoginRequestModel(
         email: emailController.text, password: passwordController.text);
 
-    _authService.login(userLoginRequestModel).then((value) => null);
+    var result =_authService.login(userLoginRequestModel);
+
+    return result;
   }
 
   void goTologout() {
     _authService.logout().then((value) => null);
+  }
+
+   Future<bool?> toast(String message) {
+    Fluttertoast.cancel();
+    return Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 4,
+        backgroundColor: Colors.redAccent,
+        textColor: Colors.white,
+        fontSize: 15.0);
   }
 }

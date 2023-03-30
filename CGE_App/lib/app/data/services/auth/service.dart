@@ -24,15 +24,24 @@ class AuthService extends GetxService {
     super.onInit();
   }
 
-  Future<void> login(UserLoginRequestModel userLoginRequest) async {
+  Future<String> login(UserLoginRequestModel userLoginRequest) async {
     var userLoginResponse = await _repository.login(userLoginRequest);
-    await _configService.saveToken(userLoginResponse.token);
-    var user = await _getUser();
-    if (user != null) {
-      Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
-      });
+    if (userLoginResponse.expiresAt == 'Invalid email/password') {
+      return 'Usuário ou senha inválidos';
+    } else if (userLoginResponse.expiresAt == 'Técnico bloqueado') {
+      return 'Técnico bloqueado';
+    } else {
+      await _configService.saveToken(userLoginResponse.token);
+      var user = await _getUser();
+      if (user.email != '') {
+        Future.delayed(const Duration(milliseconds: 1), () {
+          Get.offAllNamed('/dashboard');
+        });
+        return 'true';
+      }
     }
+
+    return '';
   }
 
   Future<void> logout() async {
@@ -48,18 +57,28 @@ class AuthService extends GetxService {
     return _repository.getUser().then((value) => user.value = value);
   }
 
-  Future<void> insertTecnico(TecnicoRequestModel tecnico) async {
-    await _repository.InsertTecnico(tecnico);
-    Future.delayed(const Duration(milliseconds: 1), () {
-      Get.offAllNamed('/dashboard');
-    });
+  Future<bool> insertTecnico(TecnicoRequestModel tecnico) async {
+    var result = await _repository.InsertTecnico(tecnico);
+    if (result) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  Future<void> updateTecnico(TecnicoRequestModel tecnico) async {
-    await _repository.updateTecnico(tecnico);
-    Future.delayed(const Duration(milliseconds: 1), () {
-      Get.offAllNamed('/listTecnico');
-    });
+  Future<bool> updateTecnico(TecnicoRequestModel tecnico) async {
+    var result = await _repository.updateTecnico(tecnico);
+    if (result) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/listTecnico');
+      });
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future<List> getTecnico() async {

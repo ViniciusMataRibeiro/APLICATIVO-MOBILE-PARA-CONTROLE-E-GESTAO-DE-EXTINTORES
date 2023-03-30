@@ -148,7 +148,7 @@ class ListTecnicoPage extends State<ListTecnicoState>
 }
 
 Widget _icone(Map item) {
-  return const Column(
+  return Column(
     children: [
       Padding(
         padding: EdgeInsets.only(left: 0, right: 0),

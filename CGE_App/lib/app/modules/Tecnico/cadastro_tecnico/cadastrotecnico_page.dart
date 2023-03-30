@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
@@ -88,13 +89,22 @@ class CadastroExtintor extends State<CadastroExtintorState>
                 ),
               ),
             ),
-            const Text(
-              'Cadastro Tecnico',
-              style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic),
-            ),
+            if (cadastroTecnicoController.alterando)
+              const Text(
+                'Alterando Tecnico',
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic),
+              ),
+            if (!cadastroTecnicoController.alterando)
+              const Text(
+                'Cadastro Tecnico',
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic),
+              ),
           ],
         ),
         centerTitle: true,
@@ -282,8 +292,29 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       padding: const EdgeInsets.all(20.0),
                       child: Center(
                         child: ElevatedButton(
-                          onPressed: () {
-                            cadastroTecnicoController.goToInsert();
+                          onPressed: () async {
+                            var result =
+                                await cadastroTecnicoController.goToInsert();
+                            if (result == 'true') {
+                              cadastroTecnicoController
+                                  .toast('Gravado com sucesso!');
+                            } else {
+                              final snackBar = SnackBar(
+                                elevation: 0,
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: Colors.transparent,
+                                content: AwesomeSnackbarContent(
+                                  title: 'Alerta',
+                                  message: result.toString(),
+                                  contentType: ContentType.failure,
+                                ),
+                              );
+
+                              // ignore: use_build_context_synchronously
+                              ScaffoldMessenger.of(context)
+                                ..hideCurrentSnackBar()
+                                ..showSnackBar(snackBar);
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:

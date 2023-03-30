@@ -151,7 +151,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
         child: FloatingActionBubble(
           herotag: UniqueKey(),
           items: <Bubble>[
-            if (obj!.tipo == 'empresas') ...[
+            if (obj!.tipo == 'empresa') ...[
               Bubble(
                 title: "Cadastrar Tecnico",
                 iconColor: Colors.white,
@@ -238,7 +238,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                         ),
                         Row(
                           children: [
-                            const SizedBox(
+                             SizedBox(
                               child: Column(
                                 children: [
                                   Row(

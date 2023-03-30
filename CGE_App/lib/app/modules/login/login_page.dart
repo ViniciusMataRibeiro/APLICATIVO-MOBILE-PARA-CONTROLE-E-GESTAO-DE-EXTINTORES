@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_const
 
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -124,8 +125,27 @@ class LoginPage extends GetView<LoginController> {
               Padding(
                 padding: const EdgeInsets.only(top: 15, left: 30, right: 30),
                 child: ElevatedButton(
-                  onPressed: () {
-                    controller.goTologin();
+                  onPressed: () async {
+                    var result = await controller.goTologin();
+                    if (result != 'true') {
+                      final snackBar = SnackBar(
+                        elevation: 0,
+                        behavior: SnackBarBehavior.floating,
+                        backgroundColor: Colors.transparent,
+                        content: AwesomeSnackbarContent(
+                          title: 'Erro ao Logar!',
+                          message:
+                              result.toString(),
+                          contentType: ContentType.failure,
+                        ),
+                      );
+
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(snackBar);
+                    } else {
+                      controller.toast('Logado com Sucesso!');
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 175, 31, 21),
