@@ -5,6 +5,8 @@ Route.post('/logout', 'AuthController.logout');
 
 Route.post('/empresa', 'EmpresasController.store');
 
+Route.get('/resumoSetor', 'SetorsController.ResumoSetor');
+
 Route.group(() => {
   Route.get('auth/me', 'AuthController.me');
 

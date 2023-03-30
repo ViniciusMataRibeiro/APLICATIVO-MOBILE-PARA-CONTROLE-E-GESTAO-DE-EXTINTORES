@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Database from '@ioc:Adonis/Lucid/Database';
+import Extintor from 'App/Models/Extintor';
 import Setor from 'App/Models/Setor';
 import Tecnico from 'App/Models/Tecnico';
 import CreateSetorValidator from 'App/Validators/CreateSetorValidator';
@@ -7,6 +8,79 @@ import EditSetorValidator from 'App/Validators/EditSetorValidator';
 import { DateTime } from 'luxon';
 
 export default class SetorsController {
+
+    public async ResumoSetor({ response, auth }: HttpContextContract) {
+        try {
+            // const userAuth = await auth.use('api').authenticate();
+            let TipoUsuario;
+            let Setores;
+
+            //if (userAuth.tipo == 'tecnico') {
+            TipoUsuario = await Tecnico.findByOrFail("user_id", 4); //userAuth.id);
+            Setores = await Database.query().select('*').from('setors').where('empresa_id', TipoUsuario.empresa_id).where('ativo', true);
+            // }
+            // else {
+            //     TipoUsuario = await Empresa.findByOrFail("user_id", userAuth.id);
+            //     Setores = await Database.query().select('*').from('setors').where('empresa_id', TipoUsuario.id).where('ativo', true);
+            // }
+
+            let ResumoSetor = new Array();
+
+            for (const element of Setores) {
+                let obj;
+
+                const result = await Database.rawQuery('SELECT * FROM extintors WHERE setor_id = ? AND ativo = ?', [element.id, true]);
+
+                obj = {
+                    setor: element.nome,
+                    extintores: result[0],
+                    totalVencidos: 0,
+                    totalVencer: 0,
+                    totalFuncional: 0,
+                }
+
+                let cont = 0;
+
+                for (const element of obj.extintores) {
+                    cont++;
+                    var dateAtual = new Date();
+                    var dataLimite = new Date(dateAtual.getFullYear(), dateAtual.getMonth(), dateAtual.getDate() + 15);
+
+                    if (dateAtual > element.proximaManutencao) {
+                        obj.totalVencidos++;
+                    }
+                    else if (dateAtual < element.proximaManutencao && dataLimite > element.proximaManutencao) {
+                        obj.totalVencer++;
+                    }
+                    else {
+                        obj.totalFuncional++;
+                    }
+                }
+
+                //porcentagem
+                obj.totalVencidos = Number(
+                    ((obj.totalVencidos / cont) * 100).toFixed(2)
+                );
+                obj.totalVencer = Number(
+                    ((obj.totalVencer / cont) * 100).toFixed(2)
+                );
+                obj.totalFuncional = Number(
+                    ((obj.totalFuncional / cont) * 100).toFixed(2)
+                );
+
+                ResumoSetor.push(obj);
+            }
+
+            return response.ok(ResumoSetor);
+
+        } catch (error) {
+            return response.badRequest({
+                message: error.message,
+            });
+        }
+
+    }
+
     public async index({ response, auth }: HttpContextContract) {
         try {
             const userAuth = await auth.use('api').authenticate();

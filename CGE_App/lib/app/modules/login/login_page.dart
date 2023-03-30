@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_const
-
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -62,12 +60,11 @@ class LoginPage extends GetView<LoginController> {
                         fontSize: 23,
                         fontStyle: FontStyle.italic,
                       ),
-                      enabledBorder: const OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(100),
                         ),
-                        borderSide:
-                            const BorderSide(color: Colors.white, width: 0.9),
+                        borderSide: BorderSide(color: Colors.white, width: 0.9),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
@@ -100,7 +97,7 @@ class LoginPage extends GetView<LoginController> {
                             Radius.circular(100),
                           ),
                           borderSide:
-                              const BorderSide(color: Colors.white, width: 0.9),
+                              BorderSide(color: Colors.white, width: 0.9),
                         ),
                         border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(
@@ -134,8 +131,7 @@ class LoginPage extends GetView<LoginController> {
                         backgroundColor: Colors.transparent,
                         content: AwesomeSnackbarContent(
                           title: 'Erro ao Logar!',
-                          message:
-                              result.toString(),
+                          message: result.toString(),
                           contentType: ContentType.failure,
                         ),
                       );

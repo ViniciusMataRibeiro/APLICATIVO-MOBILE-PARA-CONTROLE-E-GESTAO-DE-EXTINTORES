@@ -1,7 +1,4 @@
 import 'package:cge_app/app/core/app_theme.dart';
-import 'package:cge_app/app/modules/Setor/cadastro_setor/cadastroSetor_page.dart';
-import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
-import 'package:cge_app/app/modules/vistoria/vistoria_page.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,11 +7,13 @@ import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
 import '../../../data/services/auth/service.dart';
+import '../../widget/gaficoSetor.dart';
 import 'setores_controller.dart';
 
 DateTime selectedDate = DateTime.now();
 String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
 String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
+List dados = [];
 
 class Setor extends GetView<SetorController> {
   @override
@@ -23,10 +22,11 @@ class Setor extends GetView<SetorController> {
       theme: themeData,
       debugShowCheckedModeBanner: false,
       home: const Directionality(
-          textDirection: ui.TextDirection.ltr,
-          child: SetorState(
-            title: '',
-          )),
+        textDirection: ui.TextDirection.ltr,
+        child: SetorState(
+          title: '',
+        ),
+      ),
     );
   }
 }
@@ -41,29 +41,37 @@ class SetorState extends StatefulWidget {
 
 class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
   AuthService aux = Get.find<AuthService>();
+  SetorController controller = Get.put(
+    SetorController(),
+  );
   var number = faker.randomGenerator.integer(50);
   late Animation<double> _animation;
   late AnimationController _animationController;
+  late Future mapa;
 
   DateTime selectedDate = DateTime.now();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2000),
-        lastDate: DateTime.now(),
-        cancelText: "CANCELAR",
-        builder: (context, child) => Theme(
-              data: ThemeData.light().copyWith(
-                  primaryColor: const Color(0xFF4C131A),
-                  buttonTheme:
-                      const ButtonThemeData(textTheme: ButtonTextTheme.primary),
-                  colorScheme: const ColorScheme.light(
-                          primary: Color.fromARGB(255, 190, 0, 0))
-                      .copyWith(secondary: const Color(0xFF4C131A))),
-              child: child!,
-            ));
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime.now(),
+      cancelText: "CANCELAR",
+      builder: (context, child) => Theme(
+        data: ThemeData.light().copyWith(
+          primaryColor: const Color(0xFF4C131A),
+          buttonTheme:
+              const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          colorScheme: const ColorScheme.light(
+            primary: Color.fromARGB(255, 190, 0, 0),
+          ).copyWith(
+            secondary: const Color(0xFF4C131A),
+          ),
+        ),
+        child: child!,
+      ),
+    );
     if (picked != null && picked != selectedDate) {
       setState(
         () {
@@ -96,6 +104,8 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
     final curvedAnimation =
         CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
+
+    //mapa = controller.getResumoSetor();
 
     super.initState();
   }
@@ -204,127 +214,106 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
           backGroundColor: const Color.fromARGB(255, 190, 0, 0),
         ),
       ),
-      body: Center(
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/image/registro.jpeg'),
-                fit: BoxFit.cover),
-          ),
-          child: ListView(
-            children: [
-              for (var i = 1; i <= 10; i++) ...[
-                Container(
-                  margin: const EdgeInsets.all(3.0),
-                  padding: const EdgeInsets.all(3.0),
-                  child: Card(
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    surfaceTintColor: const Color.fromARGB(255, 201, 201, 201),
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text(
-                            faker.lorem.words(2).join(' '),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                fontSize: 35,
-                                color: Color.fromARGB(255, 131, 30, 23),
-                                fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                             SizedBox(
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.circle,
-                                        size: 20,
-                                        color: Colors.green,
-                                      ),
-                                      SizedBox(
-                                        width: 3,
-                                      ),
-                                      Text(
-                                        'Extintores Funcional',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color:
-                                              Color.fromARGB(255, 78, 78, 78),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Icon(Icons.circle,
-                                          size: 20, color: Colors.yellow),
-                                      SizedBox(
-                                        width: 3,
-                                      ),
-                                      Text(
-                                        'Extintores a Vencer',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color:
-                                              Color.fromARGB(255, 78, 78, 78),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Icon(Icons.circle,
-                                          size: 20, color: Colors.red),
-                                      SizedBox(
-                                        width: 3,
-                                      ),
-                                      Text(
-                                        'Extintores Vencidos',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color:
-                                              Color.fromARGB(255, 78, 78, 78),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 150,
-                              child: Container(
-                                padding: const EdgeInsets.all(7.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  child: Image.network(
-                                    'https://picsum.photos/250?image=${i + number}',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+      body: buildContainer(),
+    );
+  }
+
+  buildContainer() {
+    return FutureBuilder(
+      future: mapa,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          if (dados.isNotEmpty) {
+            return DefaultTabController(
+              length: 1,
+              child: _mostradados(tipo: 'Setor', dados: dados),
+            );
+          } else {
+            return const Scaffold(
+              body: Center(
+                child: Text('Nenhum dado encontrado'),
+              ),
+            );
+          }
+        } else if (snapshot.hasData) {
+          Map temp = snapshot.data;
+          dados = temp['dados'];
+
+          if (dados.isNotEmpty) {
+            Future.delayed(
+              const Duration(minutes: 1),
+              () {
+                if (mounted) {
+                  _refresh();
+                }
+              },
+            );
+
+            return DefaultTabController(
+              length: 1,
+              child: Scaffold(
+                appBar: AppBar(
+                  leading: Container(
+                    padding: const EdgeInsets.all(5),
+                    child: Image.asset("assets/img/frota_logo.png"),
+                  ),
+                  title: Text(updatedDt),
+                  backgroundColor: const Color(0xFF4C131A),
+                ),
+                body: _mostradados(tipo: 'Setor', dados: dados),
+              ),
+            );
+          } else {
+            return const Scaffold(
+              body: Center(
+                child: Text('Nenhum dado encontrado'),
+              ),
+            );
+          }
+        } else {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  _mostradados({String? tipo, required List dados}) {
+    return ListView.builder(
+      itemCount: dados.length,
+      itemBuilder: (BuildContext context, index) {
+        Map item = dados[index];
+        return GestureDetector(
+          onTap: () {},
+          child: Container(
+            margin: const EdgeInsets.all(10),
+            child: Card(
+              elevation: 5,
+              child: Column(
+                children: [
+                  const SizedBox(height: 15),
+                  const Text(
+                    'Setor',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFB2505C),
                     ),
                   ),
-                ),
-              ],
-            ],
+                  Container(
+                    padding: const EdgeInsets.only(top: 50, bottom: 20),
+                    child: Grafico(item),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

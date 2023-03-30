@@ -5,4 +5,9 @@ import '../../../data/services/auth/service.dart';
 class SetorController extends GetxController {
   AuthService aux = Get.find<AuthService>();
 
+  // Future<Map> getResumoSetor() {
+
+    
+  // }
+
 }
