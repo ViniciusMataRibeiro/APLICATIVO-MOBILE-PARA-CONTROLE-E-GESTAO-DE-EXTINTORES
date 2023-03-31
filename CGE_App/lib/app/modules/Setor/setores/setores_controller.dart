@@ -3,11 +3,15 @@ import 'package:get/get.dart';
 import '../../../data/services/auth/service.dart';
 
 class SetorController extends GetxController {
-  AuthService aux = Get.find<AuthService>();
+  final _authService = Get.find<AuthService>();
 
-  // Future<Map> getResumoSetor() {
+  Future<Map> getResumoSetor() async {
+
+    Map t = await _authService.getResumoSetor();
+
+    return t;
 
     
-  // }
+  }
 
 }

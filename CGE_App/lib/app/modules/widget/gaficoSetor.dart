@@ -4,17 +4,14 @@ import 'package:flutter/material.dart';
 class Grafico extends StatelessWidget {
   final Map<dynamic, dynamic> dataMap;
 
-  Grafico(this.dataMap);
+  const Grafico(this.dataMap, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.center,
       children: [
-        const Text(
-          "Total",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        Text("Total ${dataMap["totalExtintor"]}", style: const TextStyle(fontWeight: FontWeight.bold)),
         Container(
           height: 350,
           alignment: Alignment.center,
@@ -83,15 +80,15 @@ class Grafico extends StatelessWidget {
         ];
       } else {
         data = [
-          SituacaoLista("Vencido", totalVencido, Colors.red),
-          SituacaoLista("Vencer", totalVencer, Colors.orange),
-          SituacaoLista("Funcional", totalFuncional, Colors.green),
+          SituacaoLista("Vencido", 0, Colors.red),
+          SituacaoLista("Vencer", 0, Colors.orange),
+          SituacaoLista("Funcional", 0, Colors.green),
         ];
       }
 
     return [
       charts.Series<SituacaoLista, dynamic>(
-          id: dados["grupo"],
+          id: 'Setor',
           domainFn: (SituacaoLista sit, _) => sit.label,
           measureFn: (SituacaoLista sit, _) => sit.valor,
           data: data,

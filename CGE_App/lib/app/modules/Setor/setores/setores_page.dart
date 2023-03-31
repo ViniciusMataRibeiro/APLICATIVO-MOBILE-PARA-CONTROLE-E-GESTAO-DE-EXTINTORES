@@ -105,7 +105,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
         CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
-    //mapa = controller.getResumoSetor();
+    mapa = controller.getResumoSetor();
 
     super.initState();
   }

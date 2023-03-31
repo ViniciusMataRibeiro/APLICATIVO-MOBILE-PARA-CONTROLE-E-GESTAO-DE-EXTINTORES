@@ -5,7 +5,6 @@ Route.post('/logout', 'AuthController.logout');
 
 Route.post('/empresa', 'EmpresasController.store');
 
-Route.get('/resumoSetor', 'SetorsController.ResumoSetor');
 
 Route.group(() => {
   Route.get('auth/me', 'AuthController.me');
@@ -19,6 +18,7 @@ Route.group(() => {
   Route.put('/empresa', 'EmpresasController.update');
   Route.delete('/empresa/:id', 'EmpresasController.destroy');
 
+  Route.get('/resumoSetor', 'SetorsController.ResumoSetor');
   Route.get('/setors', 'SetorsController.index');
   Route.post('/setor', 'SetorsController.store');
   Route.put('/setor', 'SetorsController.update');
@@ -29,5 +29,5 @@ Route.group(() => {
   Route.post('/extintor', 'ExtintorsController.store');
   Route.put('/extintor/:id', 'ExtintorsController.update');
   Route.delete('/extintor/:id', 'ExtintorsController.destroy');
-  
+
 }).middleware('auth');

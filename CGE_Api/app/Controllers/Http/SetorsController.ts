@@ -1,6 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Database from '@ioc:Adonis/Lucid/Database';
-import Extintor from 'App/Models/Extintor';
+import Empresa from 'App/Models/Empresa';
 import Setor from 'App/Models/Setor';
 import Tecnico from 'App/Models/Tecnico';
 import CreateSetorValidator from 'App/Validators/CreateSetorValidator';
@@ -11,18 +11,18 @@ export default class SetorsController {
 
     public async ResumoSetor({ response, auth }: HttpContextContract) {
         try {
-            // const userAuth = await auth.use('api').authenticate();
+            const userAuth = await auth.use('api').authenticate();
             let TipoUsuario;
             let Setores;
 
-            //if (userAuth.tipo == 'tecnico') {
+            if (userAuth.tipo == 'tecnico') {
             TipoUsuario = await Tecnico.findByOrFail("user_id", 4); //userAuth.id);
             Setores = await Database.query().select('*').from('setors').where('empresa_id', TipoUsuario.empresa_id).where('ativo', true);
-            // }
-            // else {
-            //     TipoUsuario = await Empresa.findByOrFail("user_id", userAuth.id);
-            //     Setores = await Database.query().select('*').from('setors').where('empresa_id', TipoUsuario.id).where('ativo', true);
-            // }
+            }
+            else {
+                TipoUsuario = await Empresa.findByOrFail("user_id", userAuth.id);
+                Setores = await Database.query().select('*').from('setors').where('empresa_id', TipoUsuario.id).where('ativo', true);
+            }
 
             let ResumoSetor = new Array();
 
@@ -37,6 +37,7 @@ export default class SetorsController {
                     totalVencidos: 0,
                     totalVencer: 0,
                     totalFuncional: 0,
+                    totalExtintores: result[0].length,
                 }
 
                 let cont = 0;

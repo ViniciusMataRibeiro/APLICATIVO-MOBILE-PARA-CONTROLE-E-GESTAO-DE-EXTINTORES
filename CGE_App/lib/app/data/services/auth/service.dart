@@ -84,4 +84,8 @@ class AuthService extends GetxService {
   Future<List> getTecnico() async {
     return await _repository.getTecnico();
   }
+
+  Future<Map> getResumoSetor() async {
+    return await _repository.getResumoSetor();
+  }
 }
