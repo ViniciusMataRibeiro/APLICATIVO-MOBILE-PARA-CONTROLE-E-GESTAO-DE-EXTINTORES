@@ -30,6 +30,9 @@ export default class SetorsController {
                 let obj;
 
                 const result = await Database.rawQuery('SELECT * FROM extintors WHERE setor_id = ? AND ativo = ?', [element.id, true]);
+                if (result[0].length == 0) {
+                    continue;
+                }
 
                 obj = {
                     setor: element.nome,
@@ -59,16 +62,21 @@ export default class SetorsController {
                 }
 
                 //porcentagem
-                obj.totalVencidos = Number(
-                    ((obj.totalVencidos / cont) * 100).toFixed(2)
-                );
-                obj.totalVencer = Number(
-                    ((obj.totalVencer / cont) * 100).toFixed(2)
-                );
-                obj.totalFuncional = Number(
-                    ((obj.totalFuncional / cont) * 100).toFixed(2)
-                );
-
+                if (obj.totalVencidos > 0) {
+                    obj.totalVencidos = Number(
+                        ((obj.totalVencidos / cont) * 100).toFixed(2)
+                    );
+                }
+                if (obj.totalVencer > 0) {
+                    obj.totalVencer = Number(
+                        ((obj.totalVencer / cont) * 100).toFixed(2)
+                    ); 
+                }
+                if(obj.totalFuncional > 0){
+                    obj.totalFuncional = Number(
+                        ((obj.totalFuncional / cont) * 100).toFixed(2)
+                    );
+                }
                 ResumoSetor.push(obj);
             }
 

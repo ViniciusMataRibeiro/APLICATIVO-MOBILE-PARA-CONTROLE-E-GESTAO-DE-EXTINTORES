@@ -222,23 +222,9 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
     return FutureBuilder(
       future: mapa,
       builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          if (dados.isNotEmpty) {
-            return DefaultTabController(
-              length: 1,
-              child: _mostradados(tipo: 'Setor', dados: dados),
-            );
-          } else {
-            return const Scaffold(
-              body: Center(
-                child: Text('Nenhum dado encontrado'),
-              ),
-            );
-          }
-        } else if (snapshot.hasData) {
+        if (snapshot.hasData) {
           Map temp = snapshot.data;
-          dados = temp['dados'];
-
+          dados = temp['dadosGraficos'];
           if (dados.isNotEmpty) {
             Future.delayed(
               const Duration(minutes: 1),
@@ -248,19 +234,9 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 }
               },
             );
-
-            return DefaultTabController(
-              length: 1,
-              child: Scaffold(
-                appBar: AppBar(
-                  leading: Container(
-                    padding: const EdgeInsets.all(5),
-                    child: Image.asset("assets/img/frota_logo.png"),
-                  ),
-                  title: Text(updatedDt),
-                  backgroundColor: const Color(0xFF4C131A),
-                ),
-                body: _mostradados(tipo: 'Setor', dados: dados),
+            return Scaffold(
+              body: Center(
+                child: _mostradados(dados: dados),
               ),
             );
           } else {
@@ -281,7 +257,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
     );
   }
 
-  _mostradados({String? tipo, required List dados}) {
+  _mostradados({required List dados}) {
     return ListView.builder(
       itemCount: dados.length,
       itemBuilder: (BuildContext context, index) {
@@ -296,7 +272,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 children: [
                   const SizedBox(height: 15),
                   const Text(
-                    'Setor',
+                    'Setor A',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,

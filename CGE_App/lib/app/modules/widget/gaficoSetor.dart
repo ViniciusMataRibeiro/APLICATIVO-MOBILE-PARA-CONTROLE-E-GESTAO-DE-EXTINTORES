@@ -11,11 +11,11 @@ class Grafico extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Text("Total ${dataMap["totalExtintor"]}", style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text("Total ${dataMap["totalExtintores"]}", style: const TextStyle(fontWeight: FontWeight.bold)),
         Container(
           height: 350,
           alignment: Alignment.center,
-          child: charts.PieChart(
+          child: charts.PieChart<Object>(
             _createData(dataMap),
             animate: true,
             animationDuration: const Duration(seconds: 2),
@@ -47,17 +47,17 @@ class Grafico extends StatelessWidget {
     );
   }
 
-  static List<charts.Series<SituacaoLista, dynamic>> _createData(
+  static List<charts.Series<SituacaoLista, Object>> _createData(
       Map<dynamic, dynamic> dados) {
     List<SituacaoLista> data = [];
 
     double totalExtintor =
-          (dados["totalVencido"] == 0 ? 0.0 : dados["totalVencido"]) +
+          (dados["totalVencidos"] == 0 ? 0.0 : dados["totalVencidos"]) +
               (dados["totalVencer"] == 0 ? 0.0 : dados["totalVencer"]) +
-              (dados["totalNoPrazo"] == 0 ? 0.0 : dados["totalNoPrazo"]);
+              (dados["totalFuncional"] == 0 ? 0.0 : dados["totalFuncional"]);
 
       double totalVencido =
-          (dados["totalVencido"] == 0 ? 0.0 : dados["totalVencido"]) *
+          (dados["totalVencidos"] == 0 ? 0.0 : dados["totalVencidos"]) *
               100 /
               totalExtintor;
       double totalVencer =
@@ -74,20 +74,20 @@ class Grafico extends StatelessWidget {
 
       if (tGeral > 0) {
         data = [
-          SituacaoLista("Vencido", totalVencido, Colors.red),
+          SituacaoLista("Vencidos", totalVencido, Colors.red),
           SituacaoLista("Vencer", totalVencer, Colors.orange),
           SituacaoLista("Funcional", totalFuncional, Colors.green),
         ];
       } else {
         data = [
-          SituacaoLista("Vencido", 0, Colors.red),
+          SituacaoLista("Vencidos", 0, Colors.red),
           SituacaoLista("Vencer", 0, Colors.orange),
           SituacaoLista("Funcional", 0, Colors.green),
         ];
       }
 
     return [
-      charts.Series<SituacaoLista, dynamic>(
+      charts.Series<SituacaoLista, Object>(
           id: 'Setor',
           domainFn: (SituacaoLista sit, _) => sit.label,
           measureFn: (SituacaoLista sit, _) => sit.valor,
