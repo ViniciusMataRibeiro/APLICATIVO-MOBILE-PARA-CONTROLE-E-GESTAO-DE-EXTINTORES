@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -119,6 +120,7 @@ class CadastroSetor extends State<CadastroSetorState> {
                           const EdgeInsets.only(top: 20, left: 30, right: 30),
                       child: Form(
                         child: TextFormField(
+                          controller: controller.name,
                           style: const TextStyle(
                               wordSpacing: 1,
                               fontSize: 18,
@@ -150,6 +152,7 @@ class CadastroSetor extends State<CadastroSetorState> {
                           const EdgeInsets.only(top: 15, left: 30, right: 30),
                       child: Form(
                         child: TextFormField(
+                          controller: controller.descricao,
                           style: const TextStyle(
                               wordSpacing: 1,
                               fontSize: 18,
@@ -189,7 +192,27 @@ class CadastroSetor extends State<CadastroSetorState> {
                       padding: const EdgeInsets.all(20.0),
                       child: Center(
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            var result = await controller.goToInsert();
+                            if (result == 'true') {
+                              controller.toast('Gravado com sucesso!');
+                            } else {
+                              final snackBar = SnackBar(
+                                elevation: 0,
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: Colors.transparent,
+                                content: AwesomeSnackbarContent(
+                                  title: 'Alerta',
+                                  message: result.toString(),
+                                  contentType: ContentType.failure,
+                                ),
+                              );
+                              // ignore: use_build_context_synchronously
+                              ScaffoldMessenger.of(context)
+                                ..hideCurrentSnackBar()
+                                ..showSnackBar(snackBar);
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromARGB(255, 175, 31, 21),
