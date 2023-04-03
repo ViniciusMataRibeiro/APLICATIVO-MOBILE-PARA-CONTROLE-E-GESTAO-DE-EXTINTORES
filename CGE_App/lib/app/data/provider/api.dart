@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cge_app/app/data/Models/setor_request.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,7 +11,7 @@ import '../services/config/service.dart';
 
 class Api {
   final _configService = Get.find<ConfigService>();
-  final baseUrl = "http://192.168.10.44:8000";
+  final baseUrl = "http://192.168.0.116:3333";
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     var url = Uri.parse("$baseUrl/login");
@@ -119,9 +120,24 @@ class Api {
       });
 
       return {"dadosGraficos": d};
-
     } else {
       throw Exception('Failed');
+    }
+  }
+
+  Future<bool> insertSetor(SetorRequestModel data) async {
+    var url = Uri.parse("$baseUrl/setor");
+    var response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(data.toJson()));
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

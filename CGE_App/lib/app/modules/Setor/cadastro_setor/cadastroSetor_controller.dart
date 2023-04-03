@@ -1,3 +1,50 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-class CadastroSetorController extends GetxController {}
+import '../../../data/Models/setor_request.dart';
+import '../../../data/services/auth/service.dart';
+
+class CadastroSetorController extends GetxController {
+  final _authService = Get.find<AuthService>();
+  var idSetor = 0;
+
+  var name = TextEditingController(text: '');
+  var descricao = TextEditingController(text: '');
+  var ativo = false.obs;
+
+  Future<String> goToInsert() async {
+    if (name.text == '') {
+      return 'Informe o nome';
+    }
+
+    var setorRequestModel = SetorRequestModel(
+        id: idSetor,
+        name: name.text,
+        descricao: descricao.text,
+        ativo: ativo.value);
+
+    bool res = false;
+
+    if (idSetor > 0) {
+      // res = await _authService.updateTecnico(setorRequestModel);
+    } else {
+      res = await _authService.insertSetor(setorRequestModel);
+    }
+
+    return res == true ? 'true' : 'Algo deu Errado';
+  }
+
+  Future<bool?> toast(String message) {
+    Fluttertoast.cancel();
+    return Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 4,
+        backgroundColor: Colors.redAccent,
+        textColor: Colors.white,
+        fontSize: 15.0);
+  }
+}

@@ -3,6 +3,7 @@ import 'package:cge_app/app/data/services/auth/repository.dart';
 import 'package:get/get.dart';
 
 import '../../Models/TecnicoModel.dart';
+import '../../Models/setor_request.dart';
 import '../../Models/user.dart';
 import '../../Models/user_login_request.dart';
 import '../config/service.dart';
@@ -87,5 +88,17 @@ class AuthService extends GetxService {
 
   Future<Map> getResumoSetor() async {
     return await _repository.getResumoSetor();
+  }
+
+  Future<bool> insertSetor(SetorRequestModel setor) async {
+    var result = await _repository.insertSetor(setor);
+    if (result) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return true;
+    } else {
+      return false;
+    }
   }
 }

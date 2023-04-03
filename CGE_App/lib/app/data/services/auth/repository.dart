@@ -1,5 +1,5 @@
-
 import '../../Models/TecnicoModel.dart';
+import '../../Models/setor_request.dart';
 import '../../Models/tecnico_request.dart';
 import '../../Models/user.dart';
 import '../../Models/user_login_request.dart';
@@ -20,11 +20,15 @@ class AuthRepository {
   Future<void> logout() => _api.logout();
 
   // ignore: non_constant_identifier_names
-  Future<bool> InsertTecnico(TecnicoRequestModel tecnico) => _api.insertTecnico(tecnico);
+  Future<bool> InsertTecnico(TecnicoRequestModel tecnico) =>
+      _api.insertTecnico(tecnico);
 
-  Future<bool> updateTecnico(TecnicoRequestModel tecnico) => _api.updateTecnico(tecnico);
+  Future<bool> updateTecnico(TecnicoRequestModel tecnico) =>
+      _api.updateTecnico(tecnico);
 
   Future<List> getTecnico() => _api.getTecnico();
 
   Future<Map> getResumoSetor() => _api.getResumoSetor();
+
+  Future<bool> insertSetor(SetorRequestModel setor) => _api.insertSetor(setor);
 }
