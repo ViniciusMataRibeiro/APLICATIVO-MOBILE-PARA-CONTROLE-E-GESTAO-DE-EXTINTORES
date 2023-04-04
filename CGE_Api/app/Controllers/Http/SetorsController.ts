@@ -37,16 +37,16 @@ export default class SetorsController {
                 obj = {
                     setor: element.nome,
                     extintores: result[0],
-                    totalVencidos: 0,
-                    totalVencer: 0,
-                    totalFuncional: 0,
+                    totalVencidos: 0.0,
+                    totalVencer: 0.0,
+                    totalFuncional: 0.0,
                     totalExtintores: result[0].length,
                 }
 
-                let cont = 0;
+                //let cont = 0;
 
                 for (const element of obj.extintores) {
-                    cont++;
+                    //cont++;
                     var dateAtual = new Date();
                     var dataLimite = new Date(dateAtual.getFullYear(), dateAtual.getMonth(), dateAtual.getDate() + 15);
 
@@ -61,22 +61,22 @@ export default class SetorsController {
                     }
                 }
 
-                //porcentagem
-                if (obj.totalVencidos > 0) {
-                    obj.totalVencidos = Number(
-                        ((obj.totalVencidos / cont) * 100).toFixed(2)
-                    );
-                }
-                if (obj.totalVencer > 0) {
-                    obj.totalVencer = Number(
-                        ((obj.totalVencer / cont) * 100).toFixed(2)
-                    ); 
-                }
-                if(obj.totalFuncional > 0){
-                    obj.totalFuncional = Number(
-                        ((obj.totalFuncional / cont) * 100).toFixed(2)
-                    );
-                }
+                // //porcentagem
+                // if (obj.totalVencidos > 0) {
+                //     obj.totalVencidos = Number(
+                //         ((obj.totalVencidos / cont) * 100).toFixed(2)
+                //     );
+                // }
+                // if (obj.totalVencer > 0) {
+                //     obj.totalVencer = Number(
+                //         ((obj.totalVencer / cont) * 100).toFixed(2)
+                //     ); 
+                // }
+                // if(obj.totalFuncional > 0){
+                //     obj.totalFuncional = Number(
+                //         ((obj.totalFuncional / cont) * 100).toFixed(2)
+                //     );
+                // }
                 ResumoSetor.push(obj);
             }
 

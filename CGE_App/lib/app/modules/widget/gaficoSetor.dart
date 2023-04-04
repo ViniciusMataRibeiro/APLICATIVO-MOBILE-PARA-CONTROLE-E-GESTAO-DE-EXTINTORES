@@ -51,10 +51,7 @@ class Grafico extends StatelessWidget {
       Map<dynamic, dynamic> dados) {
     List<SituacaoLista> data = [];
 
-    double totalExtintor =
-          (dados["totalVencidos"] == 0 ? 0.0 : dados["totalVencidos"]) +
-              (dados["totalVencer"] == 0 ? 0.0 : dados["totalVencer"]) +
-              (dados["totalFuncional"] == 0 ? 0.0 : dados["totalFuncional"]);
+    int totalExtintor = dados["totalExtintores"];
 
       double totalVencido =
           (dados["totalVencidos"] == 0 ? 0.0 : dados["totalVencidos"]) *
