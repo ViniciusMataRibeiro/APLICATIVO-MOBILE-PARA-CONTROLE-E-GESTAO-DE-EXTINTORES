@@ -101,4 +101,16 @@ class AuthService extends GetxService {
       return false;
     }
   }
+
+  Future<bool> updateSetor(SetorRequestModel setor) async {
+    var result = await _repository.updateSetor(setor);
+    if (result) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

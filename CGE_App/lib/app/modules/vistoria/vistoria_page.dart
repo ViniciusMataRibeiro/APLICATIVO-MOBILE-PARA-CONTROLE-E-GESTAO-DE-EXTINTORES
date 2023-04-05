@@ -556,13 +556,14 @@ class Vistoria extends State<VistoriaState>
                         child: ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
+                            backgroundColor:
+                                const Color.fromARGB(255, 175, 31, 21),
                             fixedSize: const Size(200, 50),
                           ),
                           child: const Text(
                             'Registrar',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontFamily: 'Roboto-BoldItalic',
                               fontSize: 18,
                             ),

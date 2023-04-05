@@ -173,16 +173,16 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 },
               ),
             ] else ...[
-              Bubble(
-                title: "Editar Setor",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.edit_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadSetor');
-                },
-              ),
+              // Bubble(
+              //   title: "Editar Setor",
+              //   iconColor: Colors.white,
+              //   bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+              //   icon: Icons.edit_rounded,
+              //   titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              //   onPress: () {
+              //     Get.toNamed('/cadSetor');
+              //   },
+              // ),
               Bubble(
                 title: "Cadastrar Setor",
                 iconColor: Colors.white,
@@ -260,6 +260,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
   _mostradados({required List dados}) {
     return ListView.builder(
       itemCount: dados.length,
+      padding: const EdgeInsets.only(bottom: 52, top: 50),
       itemBuilder: (BuildContext context, index) {
         Map item = dados[index];
         return GestureDetector(
@@ -270,15 +271,27 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               elevation: 5,
               child: Column(
                 children: [
-                  const SizedBox(height: 15),
-                  const Text(
-                    'Setor A',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFB2505C),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(height: 15),
+                      Text(
+                        dados[index]['setor'],
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFB2505C),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 5,
+                        child: IconButton(
+                            icon: const Icon(Icons.edit,
+                                size: 25, color: Colors.black),
+                            onPressed: () => controller.gotoEditSetor(item)),
+                      ),
+                    ],
                   ),
                   Container(
                     padding: const EdgeInsets.only(top: 50, bottom: 20),

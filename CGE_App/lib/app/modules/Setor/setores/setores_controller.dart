@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../../data/services/auth/service.dart';
+import '../../../routes/routes.dart';
 
 class SetorController extends GetxController {
   final _authService = Get.find<AuthService>();
@@ -9,5 +10,9 @@ class SetorController extends GetxController {
     Map t = await _authService.getResumoSetor();
 
     return t;
+  }
+
+  Future<void> gotoEditSetor(Map item) async {
+    var result = await Get.toNamed(Routes.cadSetor, arguments: item);
   }
 }
