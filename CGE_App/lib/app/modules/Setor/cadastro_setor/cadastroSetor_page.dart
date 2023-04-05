@@ -32,7 +32,7 @@ class CadastroSetorState extends StatefulWidget {
 
 class CadastroSetor extends State<CadastroSetorState> {
   final CadastroSetorController controller = Get.put(CadastroSetorController());
-
+  bool isInativo = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,8 +113,57 @@ class CadastroSetor extends State<CadastroSetorState> {
                   color: Color.fromARGB(80, 0, 0, 0),
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 8.0,
+                        right: 15.0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Text(
+                            'Ativo  ',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(
+                                () {
+                                  controller.ativo.value =
+                                      !controller.ativo.value;
+                                },
+                              );
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: controller.ativo.value
+                                    ? Colors.red
+                                    : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: controller.ativo.value
+                                    ? null
+                                    : Border.all(color: Colors.white, width: 2),
+                              ),
+                              width: 25,
+                              height: 25,
+                              child: controller.ativo.value
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    )
+                                  : null,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     Container(
                       margin:
                           const EdgeInsets.only(top: 20, left: 30, right: 30),

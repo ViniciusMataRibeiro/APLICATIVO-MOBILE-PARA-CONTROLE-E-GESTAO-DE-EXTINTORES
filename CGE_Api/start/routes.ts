@@ -21,7 +21,7 @@ Route.group(() => {
   Route.get('/resumoSetor', 'SetorsController.ResumoSetor');
   Route.get('/setors', 'SetorsController.index');
   Route.post('/setor', 'SetorsController.store');
-  Route.put('/setor', 'SetorsController.update');
+  Route.put('/setor/:id', 'SetorsController.update');
   Route.delete('/setor/:id', 'SetorsController.destroy');
 
   Route.get('/extintorsAll', 'ExtintorsController.indexAllExtintores');

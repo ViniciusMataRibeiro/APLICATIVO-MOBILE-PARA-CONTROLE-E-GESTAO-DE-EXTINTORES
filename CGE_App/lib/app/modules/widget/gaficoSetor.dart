@@ -11,7 +11,8 @@ class Grafico extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Text("Total ${dataMap["totalExtintores"]}", style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text("Total ${dataMap["totalExtintores"]}",
+            style: const TextStyle(fontWeight: FontWeight.bold)),
         Container(
           height: 350,
           alignment: Alignment.center,
@@ -53,35 +54,34 @@ class Grafico extends StatelessWidget {
 
     int totalExtintor = dados["totalExtintores"];
 
-      double totalVencido =
-          (dados["totalVencidos"] == 0 ? 0.0 : dados["totalVencidos"]) *
-              100 /
-              totalExtintor;
-      double totalVencer =
-          (dados["totalVencer"] == 0 ? 0.0 : dados["totalVencer"]) *
-              100 /
-              totalExtintor;
-      double totalFuncional =
-          (dados["totalFuncional"] == 0 ? 0.0 : dados["totalFuncional"]) *
-              100 /
-              totalExtintor;
+    double totalVencido =
+        (dados["totalVencidos"] == 0 ? 0.0 : dados["totalVencidos"]) *
+            100 /
+            totalExtintor;
+    double totalVencer =
+        (dados["totalVencer"] == 0 ? 0.0 : dados["totalVencer"]) *
+            100 /
+            totalExtintor;
+    double totalFuncional =
+        (dados["totalFuncional"] == 0 ? 0.0 : dados["totalFuncional"]) *
+            100 /
+            totalExtintor;
 
-      double tGeral =
-          totalVencido + totalVencer + totalFuncional;
+    double tGeral = totalVencido + totalVencer + totalFuncional;
 
-      if (tGeral > 0) {
-        data = [
-          SituacaoLista("Vencidos", totalVencido, Colors.red),
-          SituacaoLista("Vencer", totalVencer, Colors.orange),
-          SituacaoLista("Funcional", totalFuncional, Colors.green),
-        ];
-      } else {
-        data = [
-          SituacaoLista("Vencidos", 0, Colors.red),
-          SituacaoLista("Vencer", 0, Colors.orange),
-          SituacaoLista("Funcional", 0, Colors.green),
-        ];
-      }
+    if (tGeral > 0) {
+      data = [
+        SituacaoLista("Vencidos", totalVencido, Colors.red),
+        SituacaoLista("Vencer", totalVencer, Colors.orange),
+        SituacaoLista("Funcional", totalFuncional, Colors.green),
+      ];
+    } else {
+      data = [
+        SituacaoLista("Vencidos", 0, Colors.red),
+        SituacaoLista("Vencer", 0, Colors.orange),
+        SituacaoLista("Funcional", 0, Colors.green),
+      ];
+    }
 
     return [
       charts.Series<SituacaoLista, Object>(

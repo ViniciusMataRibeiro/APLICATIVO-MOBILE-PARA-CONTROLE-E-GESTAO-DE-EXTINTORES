@@ -106,7 +106,8 @@ class ListTecnicoPage extends State<ListTecnicoState>
               ),
               centerTitle: true,
             ),
-            body: _mostraDados(dados: snapshot.data, controllerTecnico: controller),
+            body: _mostraDados(
+                dados: snapshot.data, controllerTecnico: controller),
           );
         } else {
           return const Scaffold(
@@ -119,7 +120,8 @@ class ListTecnicoPage extends State<ListTecnicoState>
     );
   }
 
-  _mostraDados({required List dados, required ListTecnicoController controllerTecnico}) {
+  _mostraDados(
+      {required List dados, required ListTecnicoController controllerTecnico}) {
     return ListView.builder(
       itemCount: dados.length,
       itemBuilder: (context, index) {
@@ -151,10 +153,10 @@ Widget _icone(Map item) {
   return Column(
     children: [
       Padding(
-        padding: EdgeInsets.only(left: 0, right: 0),
+        padding: const EdgeInsets.only(left: 0, right: 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Icon(
               Icons.person,
               size: 40,
@@ -207,9 +209,9 @@ Widget _detalhes(Map item, ListTecnicoController controllerTecnico) {
               Flexible(
                 flex: 5,
                 child: IconButton(
-                  icon: const Icon(Icons.edit, size: 25, color: Colors.black),
-                  onPressed: () => controllerTecnico.gotoEditTecnico(item)),
-                ),
+                    icon: const Icon(Icons.edit, size: 25, color: Colors.black),
+                    onPressed: () => controllerTecnico.gotoEditTecnico(item)),
+              ),
             ],
           ),
           const SizedBox(height: 10),

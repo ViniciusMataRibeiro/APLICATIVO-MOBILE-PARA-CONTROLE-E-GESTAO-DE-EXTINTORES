@@ -16,7 +16,7 @@ export default class SetorsController {
             let Setores;
 
             if (userAuth.tipo == 'tecnico') {
-            TipoUsuario = await Tecnico.findByOrFail("user_id", 4); //userAuth.id);
+            TipoUsuario = await Tecnico.findByOrFail("user_id", userAuth.id); //userAuth.id);
             Setores = await Database.query().select('*').from('setors').where('empresa_id', TipoUsuario.empresa_id).where('ativo', true);
             }
             else {
@@ -35,7 +35,10 @@ export default class SetorsController {
                 }
 
                 obj = {
+                    idsetor: element.id,
                     setor: element.nome,
+                    descricao: element.descricao,
+                    ativo: element.ativo,
                     extintores: result[0],
                     totalVencidos: 0.0,
                     totalVencer: 0.0,

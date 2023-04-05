@@ -12,7 +12,27 @@ class CadastroSetorController extends GetxController {
 
   var name = TextEditingController(text: '');
   var descricao = TextEditingController(text: '');
-  var ativo = false.obs;
+  var ativo = true.obs;
+
+  var alterando = false;
+  late Map _setor;
+
+  @override
+  void onInit() {
+    if (Get.arguments != null) {
+      _setor = Get.arguments;
+      idSetor = _setor['idsetor'];
+      name.text = _setor['setor'];
+      descricao.text = _setor['descricao'] ?? '';
+      ativo = _setor['ativo'] == 1 ? true.obs : false.obs;
+
+      alterando = true;
+    } else {
+      alterando = false;
+    }
+
+    super.onInit();
+  }
 
   Future<String> goToInsert() async {
     if (name.text == '') {
@@ -28,7 +48,7 @@ class CadastroSetorController extends GetxController {
     bool res = false;
 
     if (idSetor > 0) {
-      // res = await _authService.updateTecnico(setorRequestModel);
+      res = await _authService.updateSetor(setorRequestModel);
     } else {
       res = await _authService.insertSetor(setorRequestModel);
     }
