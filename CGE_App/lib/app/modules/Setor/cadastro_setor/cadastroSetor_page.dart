@@ -32,7 +32,7 @@ class CadastroSetorState extends StatefulWidget {
 
 class CadastroSetor extends State<CadastroSetorState> {
   final CadastroSetorController controller = Get.put(CadastroSetorController());
-  bool isInativo = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,9 +64,9 @@ class CadastroSetor extends State<CadastroSetorState> {
                 ),
               ),
             ),
-            const Text(
-              'Cadastro Setor',
-              style: TextStyle(
+            Text(
+              controller.alterando ? 'Editar Setor' : 'Cadastro Setor',
+              style: const TextStyle(
                   fontSize: 25,
                   color: Colors.white,
                   fontStyle: FontStyle.italic),
