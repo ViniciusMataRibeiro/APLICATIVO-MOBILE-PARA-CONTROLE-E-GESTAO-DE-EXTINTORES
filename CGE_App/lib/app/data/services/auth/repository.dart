@@ -33,4 +33,6 @@ class AuthRepository {
   Future<bool> insertSetor(SetorRequestModel setor) => _api.insertSetor(setor);
 
   Future<bool> updateSetor(SetorRequestModel setor) => _api.updateSetor(setor);
+
+  Future<Map> getAllExtintor() => _api.getAllExtintor();
 }

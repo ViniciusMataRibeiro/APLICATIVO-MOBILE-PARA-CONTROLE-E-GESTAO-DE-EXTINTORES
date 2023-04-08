@@ -1,50 +1,49 @@
-import 'package:cge_app/app/modules/Extintor/cadastro_extintor/cadastroExtintor_page.dart';
-import 'package:faker/faker.dart';
+import 'package:cge_app/app/core/app_theme.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:faker/faker.dart';
 import 'package:intl/intl.dart';
-
-import '../../../core/app_theme.dart';
-import '../../../data/services/auth/service.dart';
-import '../../Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
-import '../../vistoria/vistoria_page.dart';
-import 'extintores_controller.dart';
 import 'dart:ui' as ui;
+
+import '../../../data/services/auth/service.dart';
+import '../../widget/gaficoSetor.dart';
+import 'setores_controller.dart';
 
 DateTime selectedDate = DateTime.now();
 String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
 String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
 List dados = [];
 
-class Extintor extends GetView<ExtintorController> {
+class SetorEmpresa extends GetView<SetorController> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: themeData,
       debugShowCheckedModeBanner: false,
       home: const Directionality(
-          textDirection: ui.TextDirection.ltr,
-          child: ExtintorState(
-            title: '',
-          )),
+        textDirection: ui.TextDirection.ltr,
+        child: SetorState(
+          title: '',
+        ),
+      ),
     );
   }
 }
 
-class ExtintorState extends StatefulWidget {
-  const ExtintorState({Key? key, required this.title}) : super(key: key);
+class SetorState extends StatefulWidget {
+  const SetorState({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  ExtintorPage createState() => ExtintorPage();
+  SetorEmpresaPage createState() => SetorEmpresaPage();
 }
 
-class ExtintorPage extends State<ExtintorState>
+class SetorEmpresaPage extends State<SetorState>
     with SingleTickerProviderStateMixin {
   AuthService aux = Get.find<AuthService>();
-  ExtintorController controller = Get.put(
-    ExtintorController(),
+  SetorController controller = Get.put(
+    SetorController(),
   );
   var number = faker.randomGenerator.integer(50);
   late Animation<double> _animation;
@@ -55,21 +54,25 @@ class ExtintorPage extends State<ExtintorState>
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2000),
-        lastDate: DateTime.now(),
-        cancelText: "CANCELAR",
-        builder: (context, child) => Theme(
-              data: ThemeData.light().copyWith(
-                  primaryColor: const Color(0xFF4C131A),
-                  buttonTheme:
-                      const ButtonThemeData(textTheme: ButtonTextTheme.primary),
-                  colorScheme: const ColorScheme.light(
-                          primary: Color.fromARGB(255, 190, 0, 0))
-                      .copyWith(secondary: const Color(0xFF4C131A))),
-              child: child!,
-            ));
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime.now(),
+      cancelText: "CANCELAR",
+      builder: (context, child) => Theme(
+        data: ThemeData.light().copyWith(
+          primaryColor: const Color(0xFF4C131A),
+          buttonTheme:
+              const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          colorScheme: const ColorScheme.light(
+            primary: Color.fromARGB(255, 190, 0, 0),
+          ).copyWith(
+            secondary: const Color(0xFF4C131A),
+          ),
+        ),
+        child: child!,
+      ),
+    );
     if (picked != null && picked != selectedDate) {
       setState(
         () {
@@ -103,7 +106,7 @@ class ExtintorPage extends State<ExtintorState>
         CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
-    mapa = controller.getAllExtintor();
+    mapa = controller.getResumoSetor();
 
     super.initState();
   }
@@ -137,7 +140,7 @@ class ExtintorPage extends State<ExtintorState>
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.refresh_rounded, color: Colors.white),
+            icon: const Icon(Icons.find_replace_outlined, color: Colors.white),
             onPressed: () => _refresh(),
           ),
           IconButton(
@@ -153,55 +156,6 @@ class ExtintorPage extends State<ExtintorState>
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: Container(
-        margin: const EdgeInsets.only(bottom: 70),
-        child: FloatingActionBubble(
-          herotag: UniqueKey(),
-          items: <Bubble>[
-            if (obj!.tipo == 'empresa') ...[
-              Bubble(
-                title: "Cadastrar Tecnico",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_circle_outline,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadTecnico');
-                },
-              ),
-            ] else ...[
-              Bubble(
-                title: "Cadastrar Extintor",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.add_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadExtintor');
-                },
-              ),
-              Bubble(
-                title: "Realizar Vistoria",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_circle_outline,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/vistoria');
-                },
-              ),
-            ],
-          ],
-          animation: _animation,
-          onPress: () => _animationController.isCompleted
-              ? _animationController.reverse()
-              : _animationController.forward(),
-          iconColor: Colors.white,
-          iconData: Icons.handyman_outlined,
-          backGroundColor: const Color.fromARGB(255, 190, 0, 0),
-        ),
-      ),
       body: buildContainer(),
     );
   }
@@ -212,7 +166,7 @@ class ExtintorPage extends State<ExtintorState>
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           Map temp = snapshot.data;
-          dados = temp['dados'];
+          dados = temp['dadosGraficos'];
           if (dados.isNotEmpty) {
             Future.delayed(
               const Duration(minutes: 1),
@@ -262,9 +216,9 @@ class ExtintorPage extends State<ExtintorState>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const SizedBox(height: 0),
+                      const SizedBox(height: 15),
                       Text(
-                        dados[index]['nome'],
+                        dados[index]['setor'],
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 20,
@@ -277,29 +231,13 @@ class ExtintorPage extends State<ExtintorState>
                         child: IconButton(
                             icon: const Icon(Icons.edit,
                                 size: 25, color: Colors.black),
-                            onPressed: () {}),
+                            onPressed: () => controller.gotoEditSetor(item)),
                       ),
                     ],
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Tipo de Extintor: ${dados[index]['tipoExtintor']}',
-                        ),
-                        Text(
-                          'Validade do Casco: ${dados[index]['validadeCasco']}',
-                        ),
-                        Text(
-                          'Próxima Manutenção: ${dados[index]['proximaManutencao']}',
-                        ),
-                        Text(
-                          'Descrição: ${dados[index]['descricao']}',
-                        ),
-                      ],
-                    ),
+                    padding: const EdgeInsets.only(top: 50, bottom: 20),
+                    child: Grafico(item),
                   ),
                 ],
               ),
