@@ -1,5 +1,6 @@
 import 'package:cge_app/app/data/services/auth/service.dart';
 import 'package:cge_app/app/modules/Extintor/extintores/extintores_page.dart';
+import 'package:cge_app/app/modules/Setor/setores/setores_empresa_page.dart';
 import 'package:cge_app/app/modules/Setor/setores/setores_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class DashboardPage extends GetView<DashboardController> {
     ];
     var obj = aux.user.value;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         extendBody: true,
         bottomNavigationBar: Obx(
@@ -43,11 +45,15 @@ class DashboardPage extends GetView<DashboardController> {
           () => IndexedStack(
             index: controller.currentPage.value,
             children: [
-              Setor(),
-              Extintor(),
+              //Setor(),
+              //Extintor(),
               if (obj!.tipo == 'empresa') ...[
+                SetorEmpresa(),
+                Extintor(),
                 PerfilPage(),
               ] else ...[
+                Setor(),
+                Extintor(),
                 PerfilTecnicoPage(),
               ],
             ],

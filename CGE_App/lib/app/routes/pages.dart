@@ -69,17 +69,17 @@ abstract class AppPages {
     GetPage(
       name: Routes.vistoria,
       page: () => VistoriaPage(),
-      binding: VistoriaBinding()
-      ),
+      binding: VistoriaBinding(),
+    ),
     GetPage(
       name: Routes.cadTecnico,
       page: () => CadastroTecnicoPage(),
-      binding: CadastroTecnicoBinding()
-      ),
+      binding: CadastroTecnicoBinding(),
+    ),
     GetPage(
       name: Routes.listTecnico,
       page: () => ListTecnico(),
-      binding: ListTecnicoBinding()
-      ),
+      binding: ListTecnicoBinding(),
+    ),
   ];
 }

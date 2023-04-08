@@ -7,7 +7,7 @@ import '../../../data/services/auth/service.dart';
 
 //ignore: must_be_immutable
 class PerfilPage extends GetView<PerfilEmpresaController> {
-AuthService aux = Get.find<AuthService>();
+  AuthService aux = Get.find<AuthService>();
 
   PerfilPage({super.key});
 
@@ -74,6 +74,29 @@ AuthService aux = Get.find<AuthService>();
                       trailing: const Icon(Icons.logout, color: Colors.black),
                       onTap: () {
                         controller.goTologout();
+                      },
+                    ),
+                  ),
+                  Card(
+                    margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                    color: const Color(0xFFD7CCC8),
+                    elevation: 5,
+                    child: ListTile(
+                      title: const Text(
+                        "Cadastrar Técnico",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      leading: const Icon(
+                        Icons.person_add_alt_1_rounded,
+                        size: 40,
+                      ),
+                      trailing: const Icon(
+                        Icons.arrow_forward,
+                        color: Colors.black,
+                      ),
+                      onTap: () {
+                        Get.toNamed('/cadTecnico');
                       },
                     ),
                   ),

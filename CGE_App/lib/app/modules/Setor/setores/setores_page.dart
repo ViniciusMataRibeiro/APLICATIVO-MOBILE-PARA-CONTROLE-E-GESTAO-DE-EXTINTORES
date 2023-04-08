@@ -139,7 +139,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.find_replace_outlined, color: Colors.white),
+            icon: const Icon(Icons.refresh_rounded, color: Colors.white),
             onPressed: () => _refresh(),
           ),
           IconButton(
@@ -161,49 +161,26 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
         child: FloatingActionBubble(
           herotag: UniqueKey(),
           items: <Bubble>[
-            if (obj!.tipo == 'empresa') ...[
-              Bubble(
-                title: "Cadastrar Tecnico",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_circle_outline,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadTecnico');
-                },
-              ),
-            ] else ...[
-              // Bubble(
-              //   title: "Editar Setor",
-              //   iconColor: Colors.white,
-              //   bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-              //   icon: Icons.edit_rounded,
-              //   titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              //   onPress: () {
-              //     Get.toNamed('/cadSetor');
-              //   },
-              // ),
-              Bubble(
-                title: "Cadastrar Setor",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.add_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadSetor');
-                },
-              ),
-              Bubble(
-                title: "Realizar Vistoria",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_circle_outline,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/vistoria');
-                },
-              ),
-            ],
+            Bubble(
+              title: "Cadastrar Setor",
+              iconColor: Colors.white,
+              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+              icon: Icons.add_rounded,
+              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              onPress: () {
+                Get.toNamed('/cadSetor');
+              },
+            ),
+            Bubble(
+              title: "Realizar Vistoria",
+              iconColor: Colors.white,
+              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+              icon: Icons.check_rounded,
+              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              onPress: () {
+                Get.toNamed('/vistoria');
+              },
+            ),
           ],
           animation: _animation,
           onPress: () => _animationController.isCompleted
@@ -274,7 +251,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const SizedBox(height: 15),
+                      const SizedBox(width: 25),
                       Text(
                         dados[index]['setor'],
                         textAlign: TextAlign.center,
