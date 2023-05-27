@@ -1,4 +1,3 @@
-import '../../Models/TecnicoModel.dart';
 import '../../Models/setor_request.dart';
 import '../../Models/tecnico_request.dart';
 import '../../Models/user.dart';

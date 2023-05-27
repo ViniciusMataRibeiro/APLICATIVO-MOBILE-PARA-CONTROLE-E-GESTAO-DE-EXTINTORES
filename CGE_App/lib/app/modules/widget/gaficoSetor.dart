@@ -1,5 +1,7 @@
-import 'package:charts_flutter/flutter.dart' as charts;
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Grafico extends StatelessWidget {
   final Map<dynamic, dynamic> dataMap;
@@ -8,98 +10,47 @@ class Grafico extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Text("Total ${dataMap["totalExtintores"]}",
-            style: const TextStyle(fontWeight: FontWeight.bold)),
-        Container(
-          height: 350,
-          alignment: Alignment.center,
-          child: charts.PieChart<Object>(
-            _createData(dataMap),
-            animate: true,
-            animationDuration: const Duration(seconds: 2),
-            defaultInteractions: false,
-            behaviors: [
-              charts.DatumLegend(
-                outsideJustification:
-                    charts.OutsideJustification.middleDrawArea,
-                horizontalFirst: false,
-                desiredMaxRows: 1,
-                cellPadding: const EdgeInsets.only(right: 4, bottom: 4),
-                entryTextStyle: const charts.TextStyleSpec(
-                  fontSize: 11,
-                ),
-              )
-            ],
-            defaultRenderer: charts.ArcRendererConfig(
-              arcWidth: 50,
-              arcRendererDecorators: [
-                charts.ArcLabelDecorator(
-                    labelPosition: charts.ArcLabelPosition.inside,
-                    labelPadding: 5,
-                    showLeaderLines: true)
-              ],
-            ),
-          ),
-        )
-      ],
+    return _buildDefaultPieChart();
+  }
+
+  SfCircularChart _buildDefaultPieChart() {
+    return SfCircularChart(
+      legend: Legend(isVisible: true, position: LegendPosition.bottom),
+      series: _getDefaultPieSeries(dataMap),
     );
   }
 
-  static List<charts.Series<SituacaoLista, Object>> _createData(
-      Map<dynamic, dynamic> dados) {
-    List<SituacaoLista> data = [];
-
-    int totalExtintor = dados["totalExtintores"];
-
-    double totalVencido =
-        (dados["totalVencidos"] == 0 ? 0.0 : dados["totalVencidos"]) *
-            100 /
-            totalExtintor;
-    double totalVencer =
-        (dados["totalVencer"] == 0 ? 0.0 : dados["totalVencer"]) *
-            100 /
-            totalExtintor;
-    double totalFuncional =
-        (dados["totalFuncional"] == 0 ? 0.0 : dados["totalFuncional"]) *
-            100 /
-            totalExtintor;
-
-    double tGeral = totalVencido + totalVencer + totalFuncional;
-
-    if (tGeral > 0) {
-      data = [
-        SituacaoLista("Vencidos", totalVencido, Colors.red),
-        SituacaoLista("Vencer", totalVencer, Colors.orange),
-        SituacaoLista("Funcional", totalFuncional, Colors.green),
-      ];
-    } else {
-      data = [
-        SituacaoLista("Vencidos", 0, Colors.red),
-        SituacaoLista("Vencer", 0, Colors.orange),
-        SituacaoLista("Funcional", 0, Colors.green),
-      ];
-    }
-
-    return [
-      charts.Series<SituacaoLista, Object>(
-          id: 'Setor',
-          domainFn: (SituacaoLista sit, _) => sit.label,
-          measureFn: (SituacaoLista sit, _) => sit.valor,
-          data: data,
-          labelAccessorFn: (SituacaoLista sit, _) => '${sit.valor.round()}%',
-          colorFn: (SituacaoLista sit, _) =>
-              charts.ColorUtil.fromDartColor(sit.colorval))
+  List<PieSeries<ChartSampleData, String>> _getDefaultPieSeries(Map dataMap) {
+    return <PieSeries<ChartSampleData, String>>[
+      PieSeries<ChartSampleData, String>(
+        explode: true,
+        explodeIndex: 0,
+        explodeOffset: '5%',
+        dataSource: <ChartSampleData>[
+          if (dataMap['totalFuncional'] > 0)
+          ChartSampleData(x: 'Funcional', y: dataMap['totalFuncional'], text: '${dataMap['totalFuncional']}\nFuncional', pointColor: Colors.green),
+          if (dataMap['totalVencidos'] > 0)
+            ChartSampleData(x: 'Vencidos', y: dataMap['totalVencidos'], text: '${dataMap['totalVencidos']}\nVencido ', pointColor: Colors.red),
+          if (dataMap['totalVencer'] > 0)
+            ChartSampleData(x: 'A Vencer', y: dataMap['totalVencer'], text: '${dataMap['totalVencer']}\nA Vencer ', pointColor: Colors.deepOrange),
+        ],
+        xValueMapper: (ChartSampleData data, _) => data.x,
+        yValueMapper: (ChartSampleData data, _) => data.y,
+        dataLabelMapper: (ChartSampleData data, _) => data.text,
+        pointColorMapper: (ChartSampleData data, _) => data.pointColor,
+        startAngle: 50,
+        endAngle: 50,
+        dataLabelSettings: const DataLabelSettings(isVisible: true, labelPosition: ChartDataLabelPosition.inside), 
+      ),
     ];
   }
 }
 
-class SituacaoLista {
-  final String label;
-  final double valor;
-  final Color colorval;
+class ChartSampleData {
+  final String x;
+  final num y;
+  final String text;
+  final Color? pointColor;
 
-  SituacaoLista(this.label, this.valor, this.colorval);
+  ChartSampleData({required this.x, required this.y, required this.text, this.pointColor});
 }

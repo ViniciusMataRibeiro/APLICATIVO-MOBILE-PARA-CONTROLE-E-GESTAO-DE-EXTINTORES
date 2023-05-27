@@ -2,7 +2,6 @@ import 'package:cge_app/app/data/Models/tecnico_request.dart';
 import 'package:cge_app/app/data/services/auth/repository.dart';
 import 'package:get/get.dart';
 
-import '../../Models/TecnicoModel.dart';
 import '../../Models/setor_request.dart';
 import '../../Models/user.dart';
 import '../../Models/user_login_request.dart';

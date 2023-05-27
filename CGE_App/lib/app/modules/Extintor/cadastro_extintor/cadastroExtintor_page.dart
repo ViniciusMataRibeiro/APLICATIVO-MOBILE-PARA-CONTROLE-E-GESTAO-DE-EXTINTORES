@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:cge_app/app/Icones/icones_personalizado.dart';
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/modules/Extintor/cadastro_extintor/cadastroExtintor_controller.dart';
@@ -19,6 +21,8 @@ String updatedDt2 = newFormat.format(dt);
 String data2 = DateTime.now().toIso8601String();
 
 class CadastroExtintorPage extends GetView<CadastroExtintorController> {
+  const CadastroExtintorPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,6 +52,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
       Get.put(CadastroExtintorController());
 
   var number = faker.randomGenerator.integer(50);
+  // ignore: unused_field
   late Animation<double> _animation;
   late AnimationController _animationController;
 

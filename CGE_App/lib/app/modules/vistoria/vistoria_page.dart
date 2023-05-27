@@ -13,6 +13,8 @@ String updatedDt = newFormat.format(dt);
 String data = DateTime.now().toIso8601String();
 
 class VistoriaPage extends GetView<VistoriaController> {
+  const VistoriaPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,6 +41,7 @@ class VistoriaState extends StatefulWidget {
 class Vistoria extends State<VistoriaState>
     with SingleTickerProviderStateMixin {
   var number = faker.randomGenerator.integer(50);
+  // ignore: unused_field
   late Animation<double> _animation;
   late AnimationController _animationController;
 

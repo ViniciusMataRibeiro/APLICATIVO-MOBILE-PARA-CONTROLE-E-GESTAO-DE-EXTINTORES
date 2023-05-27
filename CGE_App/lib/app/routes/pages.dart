@@ -28,7 +28,7 @@ abstract class AppPages {
   static final pages = [
     GetPage(
       name: Routes.inicial,
-      page: () => SplashPage(),
+      page: () => const SplashPage(),
       binding: SplashBinding(),
     ),
     GetPage(
@@ -53,32 +53,32 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.cadExtintor,
-      page: () => CadastroExtintorPage(),
+      page: () => const CadastroExtintorPage(),
       binding: CadastroExtintorBinding(),
     ),
     GetPage(
       name: Routes.cadSetor,
-      page: () => CadastroSetorPage(),
+      page: () => const CadastroSetorPage(),
       binding: CadastroSetorBinding(),
     ),
     GetPage(
       name: Routes.cadEmpresa,
-      page: () => CadastroEmpresaPage(),
+      page: () => const CadastroEmpresaPage(),
       binding: CadastroEmpresaBinding(),
     ),
     GetPage(
       name: Routes.vistoria,
-      page: () => VistoriaPage(),
+      page: () => const VistoriaPage(),
       binding: VistoriaBinding(),
     ),
     GetPage(
       name: Routes.cadTecnico,
-      page: () => CadastroTecnicoPage(),
+      page: () => const CadastroTecnicoPage(),
       binding: CadastroTecnicoBinding(),
     ),
     GetPage(
       name: Routes.listTecnico,
-      page: () => ListTecnico(),
+      page: () => const ListTecnico(),
       binding: ListTecnicoBinding(),
     ),
   ];

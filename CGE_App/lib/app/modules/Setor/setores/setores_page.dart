@@ -1,5 +1,6 @@
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:faker/faker.dart';
@@ -16,6 +17,8 @@ String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
 List dados = [];
 
 class Setor extends GetView<SetorController> {
+  const Setor({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -112,6 +115,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -241,7 +245,11 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
       itemBuilder: (BuildContext context, index) {
         Map item = dados[index];
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            if (kDebugMode) {
+              print("cliquei no card");
+            }
+          },
           child: Container(
             margin: const EdgeInsets.all(10),
             child: Card(
@@ -253,7 +261,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                     children: [
                       const SizedBox(width: 25),
                       Text(
-                        dados[index]['setor'],
+                        '      ${dados[index]['setor']}',
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 20,
@@ -271,7 +279,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                     ],
                   ),
                   Container(
-                    padding: const EdgeInsets.only(top: 50, bottom: 20),
+                    padding: const EdgeInsets.only( bottom: 20),
                     child: Grafico(item),
                   ),
                 ],

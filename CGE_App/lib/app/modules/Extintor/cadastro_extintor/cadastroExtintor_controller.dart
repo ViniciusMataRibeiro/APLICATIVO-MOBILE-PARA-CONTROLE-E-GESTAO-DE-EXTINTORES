@@ -1,4 +1,7 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
@@ -59,14 +62,20 @@ class CadastroExtintorController extends GetxController {
 
       update();
     } else if (apiResponse['code'] == 400) {
-      print("Show Error model why error occurred..");
+      if (kDebugMode) {
+        print("Show Error model why error occurred..");
+      }
     } else {
-      print("show some error model like something went worng..");
+      if (kDebugMode) {
+        print("show some error model like something went worng..");
+      }
     }
   }
 
   void goToRegisterExtintor() {
-    print(teste);
+    if (kDebugMode) {
+      print(teste);
+    }
   }
 
 }

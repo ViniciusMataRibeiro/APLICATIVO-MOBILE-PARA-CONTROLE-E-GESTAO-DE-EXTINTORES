@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:cge_app/app/modules/Tecnico/perfil_tecnico/perfilTecnico_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,5 +1,6 @@
+// ignore_for_file: unused_field
+
 import 'package:cge_app/app/core/app_theme.dart';
-import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:faker/faker.dart';
@@ -7,7 +8,6 @@ import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
 import '../../../data/services/auth/service.dart';
-import '../../widget/gaficoSetor.dart';
 import 'setores_controller.dart';
 
 DateTime selectedDate = DateTime.now();
@@ -16,6 +16,8 @@ String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
 List dados = [];
 
 class SetorEmpresa extends GetView<SetorController> {
+  const SetorEmpresa({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -113,7 +115,6 @@ class SetorEmpresaPage extends State<SetorState>
 
   @override
   Widget build(BuildContext context) {
-    var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -235,10 +236,10 @@ class SetorEmpresaPage extends State<SetorState>
                       ),
                     ],
                   ),
-                  Container(
-                    padding: const EdgeInsets.only(top: 50, bottom: 20),
-                    child: Grafico(item),
-                  ),
+                  // Container(
+                  //   padding: const EdgeInsets.only(top: 50, bottom: 20),
+                  //   child: Grafico(item),
+                  // ),
                 ],
               ),
             ),

@@ -19,6 +19,7 @@ class DashboardPage extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
     final Items = <Widget>[
       const Icon(Icones_Personalizado.place, size: 30, color: Colors.white),
       const Icon(Icones_Personalizado.fire_extinguisher,
@@ -48,12 +49,12 @@ class DashboardPage extends GetView<DashboardController> {
               //Setor(),
               //Extintor(),
               if (obj!.tipo == 'empresa') ...[
-                SetorEmpresa(),
-                Extintor(),
+                const SetorEmpresa(),
+                const Extintor(),
                 PerfilPage(),
               ] else ...[
-                Setor(),
-                Extintor(),
+                const Setor(),
+                const Extintor(),
                 PerfilTecnicoPage(),
               ],
             ],

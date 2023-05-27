@@ -13,6 +13,6 @@ class SetorController extends GetxController {
   }
 
   Future<void> gotoEditSetor(Map item) async {
-    var result = await Get.toNamed(Routes.cadSetor, arguments: item);
+    await Get.toNamed(Routes.cadSetor, arguments: item);
   }
 }

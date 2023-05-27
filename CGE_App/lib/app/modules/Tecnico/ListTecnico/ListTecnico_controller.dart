@@ -1,8 +1,9 @@
-import 'package:cge_app/app/routes/routes.dart';
+// ignore_for_file: file_names
+
 import 'package:get/get.dart';
 
-import '../../../data/Models/TecnicoModel.dart';
-import '../../../data/provider/api.dart';
+import 'package:cge_app/app/routes/routes.dart';
+
 import '../../../data/services/auth/service.dart';
 
 class ListTecnicoController extends GetxController {
@@ -16,6 +17,6 @@ class ListTecnicoController extends GetxController {
   }
 
   Future<void> gotoEditTecnico(Map item) async {
-    var result = await Get.toNamed(Routes.cadTecnico, arguments: item);
+    await Get.toNamed(Routes.cadTecnico, arguments: item);
   }
 }

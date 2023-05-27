@@ -1,14 +1,10 @@
-import 'package:cge_app/app/modules/Extintor/cadastro_extintor/cadastroExtintor_page.dart';
 import 'package:faker/faker.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
-import '../../Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
-import '../../vistoria/vistoria_page.dart';
 import 'extintores_controller.dart';
 import 'dart:ui' as ui;
 
@@ -18,6 +14,8 @@ String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
 List dados = [];
 
 class Extintor extends GetView<ExtintorController> {
+  const Extintor({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -250,7 +248,7 @@ class ExtintorPage extends State<ExtintorState>
       itemCount: dados.length,
       padding: const EdgeInsets.only(bottom: 52, top: 50),
       itemBuilder: (BuildContext context, index) {
-        Map item = dados[index];
+        // Map item = dados[index];
         return GestureDetector(
           onTap: () {},
           child: Container(

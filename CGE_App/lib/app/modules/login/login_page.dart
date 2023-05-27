@@ -81,43 +81,45 @@ class LoginPage extends GetView<LoginController> {
               Container(
                 margin: const EdgeInsets.only(top: 5, left: 20, right: 20),
                 padding: const EdgeInsets.all(8),
-                child: Obx(() => TextFormField(
-                      controller: controller.passwordController,
-                      style: const TextStyle(fontSize: 15, color: Colors.white),
-                      obscureText: controller.showPassword.value,
-                      cursorColor: Colors.white,
-                      decoration: InputDecoration(
-                        labelStyle: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 23,
-                          fontStyle: FontStyle.italic,
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          borderSide:
-                              BorderSide(color: Colors.white, width: 0.9),
-                        ),
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
+                child: Obx(
+                  () => TextFormField(
+                    controller: controller.passwordController,
+                    style: const TextStyle(fontSize: 15, color: Colors.white),
+                    obscureText: controller.showPassword.value,
+                    cursorColor: Colors.white,
+                    decoration: InputDecoration(
+                      labelStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 23,
+                        fontStyle: FontStyle.italic,
+                      ),
+                      enabledBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
                           Radius.circular(100),
-                        )),
-                        labelText: 'Senha',
-                        prefixIcon:
-                            const Icon(Icons.lock_rounded, color: Colors.white),
-                        suffixIcon: GestureDetector(
-                          child: Icon(
-                              controller.showPassword.value == false
-                                  ? Icons.visibility_off_rounded
-                                  : Icons.visibility_rounded,
-                              color: Colors.white),
-                          onTap: () {
-                            controller.toggleShowPassword();
-                          },
+                        ),
+                        borderSide: BorderSide(color: Colors.white, width: 0.9),
+                      ),
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(100),
                         ),
                       ),
-                    )),
+                      labelText: 'Senha',
+                      prefixIcon:
+                          const Icon(Icons.lock_rounded, color: Colors.white),
+                      suffixIcon: GestureDetector(
+                        child: Icon(
+                            controller.showPassword.value == false
+                                ? Icons.visibility_off_rounded
+                                : Icons.visibility_rounded,
+                            color: Colors.white),
+                        onTap: () {
+                          controller.toggleShowPassword();
+                        },
+                      ),
+                    ),
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 15, left: 30, right: 30),
@@ -136,6 +138,7 @@ class LoginPage extends GetView<LoginController> {
                         ),
                       );
 
+                      // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(snackBar);
@@ -146,13 +149,16 @@ class LoginPage extends GetView<LoginController> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 175, 31, 21),
                     shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(100),
-                        ),
-                        side: BorderSide(width: 1, color: Colors.white)),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(100),
+                      ),
+                      side: BorderSide(width: 1, color: Colors.white),
+                    ),
                   ),
-                  child: const Text('Entrar',
-                      style: TextStyle(fontSize: 20, color: Colors.white)),
+                  child: const Text(
+                    'Entrar',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
                 ),
               ),
             ],

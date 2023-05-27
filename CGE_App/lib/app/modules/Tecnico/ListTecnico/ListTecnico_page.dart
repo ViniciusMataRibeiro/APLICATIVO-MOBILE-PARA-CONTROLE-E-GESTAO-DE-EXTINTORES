@@ -1,13 +1,17 @@
-import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
+// ignore_for_file: file_names
+
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:ui' as ui;
 
 import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
 import 'ListTecnico_controller.dart';
 
 class ListTecnico extends GetView<ListTecnicoController> {
+  const ListTecnico({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,6 +38,7 @@ class ListTecnicoPage extends State<ListTecnicoState>
     with SingleTickerProviderStateMixin {
   AuthService aux = Get.find<AuthService>();
   final ListTecnicoController controller = Get.put(ListTecnicoController());
+  // ignore: unused_field
   late Animation<double> _animation;
   late AnimationController _animationController;
   late Future dadosTecnico;
@@ -60,7 +65,6 @@ class ListTecnicoPage extends State<ListTecnicoState>
   }
 
   buildContainer() {
-    var obj = aux.user.value;
     return FutureBuilder(
       future: dadosTecnico,
       builder: (context, snapshot) {
@@ -150,13 +154,13 @@ class ListTecnicoPage extends State<ListTecnicoState>
 }
 
 Widget _icone(Map item) {
-  return Column(
+  return const Column(
     children: [
       Padding(
-        padding: const EdgeInsets.only(left: 0, right: 0),
+        padding: EdgeInsets.only(left: 0, right: 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Icon(
               Icons.person,
               size: 40,

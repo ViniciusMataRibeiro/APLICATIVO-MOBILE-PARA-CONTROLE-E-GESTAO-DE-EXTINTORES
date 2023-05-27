@@ -1,11 +1,12 @@
-import 'dart:ffi';
-
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'CadastroEmpresa_controller.dart';
 
 class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
+  const CadastroEmpresaPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

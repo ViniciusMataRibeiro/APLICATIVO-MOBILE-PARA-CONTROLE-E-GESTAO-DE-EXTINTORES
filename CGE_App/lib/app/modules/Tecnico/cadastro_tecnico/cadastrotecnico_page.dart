@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:faker/faker.dart';
@@ -9,6 +11,8 @@ import 'dart:ui' as ui;
 import 'cadastrotecnico_controller.dart';
 
 class CadastroTecnicoPage extends GetView<CadastroTecnicoController> {
+  const CadastroTecnicoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

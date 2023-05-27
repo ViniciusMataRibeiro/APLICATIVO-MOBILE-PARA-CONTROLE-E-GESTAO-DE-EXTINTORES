@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,8 @@ import 'dart:ui' as ui;
 import 'cadastroSetor_controller.dart';
 
 class CadastroSetorPage extends GetView<CadastroSetorController> {
+  const CadastroSetorPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

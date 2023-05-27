@@ -1,15 +1,12 @@
 import 'package:cge_app/app/data/Models/tecnico_request.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-import '../../../data/Models/TecnicoModel.dart';
 import '../../../data/services/auth/service.dart';
 
 class CadastroTecnicoController extends GetxController {
   final _authService = Get.find<AuthService>();
-  final _cadastroTecnico = Get.find<AuthService>();
 
   var idTecnico = 0;
 
