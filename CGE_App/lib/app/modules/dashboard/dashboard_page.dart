@@ -46,15 +46,11 @@ class DashboardPage extends GetView<DashboardController> {
           () => IndexedStack(
             index: controller.currentPage.value,
             children: [
-              //Setor(),
-              //Extintor(),
+              const Setor(),
+              const Extintor(),
               if (obj!.tipo == 'empresa') ...[
-                const SetorEmpresa(),
-                const Extintor(),
                 PerfilPage(),
               ] else ...[
-                const Setor(),
-                const Extintor(),
                 PerfilTecnicoPage(),
               ],
             ],

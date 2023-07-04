@@ -6,19 +6,32 @@ import CreateExtintorValidator from 'App/Validators/CreateExtintorValidator';
 import Extintor from 'App/Models/Extintor';
 import EditExtintorValidator from 'App/Validators/EditExtintorValidator';
 import { DateTime } from 'luxon';
+import Empresa from 'App/Models/Empresa';
 
 export default class ExtintorsController {
     public async indexAllExtintores({ response, auth }: HttpContextContract) {
         try {
             const userAuth = await auth.use('api').authenticate();
-            const tecnico = await Tecnico.findByOrFail("user_id", userAuth.id);
+            let setores;
 
-            const setores = await Database.query().select('id').from('setors').where('empresa_id', tecnico.empresa_id).where('ativo', true);
+            switch (userAuth.tipo) {
+                case 'empresa':
+                    const empresa = await Empresa.findByOrFail("user_id", userAuth.id);
+
+                    setores = await Database.query().select('id').from('setors').where('empresa_id', empresa.id).where('ativo', true);
+                    break;
+                case 'tecnico':
+                    const tecnico = await Tecnico.findByOrFail("user_id", userAuth.id);
+
+                    setores = await Database.query().select('id').from('setors').where('empresa_id', tecnico.empresa_id).where('ativo', true);
+                    break;
+            }
+
             const setoresId = setores.map((setor) => setor.id);
-
             const extintores = await Database.query().select('*').from('extintors').whereIn('setor_id', setoresId).where('ativo', true);
 
             return response.status(200).json(extintores);
+
 
         } catch (error) {
             return response.badRequest({
