@@ -63,23 +63,7 @@ export default class SetorsController {
                         obj.totalFuncional++;
                     }
                 }
-
-                // //porcentagem
-                // if (obj.totalVencidos > 0) {
-                //     obj.totalVencidos = Number(
-                //         ((obj.totalVencidos / cont) * 100).toFixed(2)
-                //     );
-                // }
-                // if (obj.totalVencer > 0) {
-                //     obj.totalVencer = Number(
-                //         ((obj.totalVencer / cont) * 100).toFixed(2)
-                //     ); 
-                // }
-                // if(obj.totalFuncional > 0){
-                //     obj.totalFuncional = Number(
-                //         ((obj.totalFuncional / cont) * 100).toFixed(2)
-                //     );
-                // }
+                
                 ResumoSetor.push(obj);
             }
 

@@ -261,7 +261,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                     children: [
                       const SizedBox(width: 25),
                       Text(
-                        '      ${dados[index]['setor']}',
+                        '${item['setor']}',
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 20,

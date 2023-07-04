@@ -248,7 +248,7 @@ class ExtintorPage extends State<ExtintorState>
       itemCount: dados.length,
       padding: const EdgeInsets.only(bottom: 52, top: 50),
       itemBuilder: (BuildContext context, index) {
-        // Map item = dados[index];
+        Map item = dados[index];
         return GestureDetector(
           onTap: () {},
           child: Container(
@@ -285,16 +285,16 @@ class ExtintorPage extends State<ExtintorState>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Tipo de Extintor: ${dados[index]['tipoExtintor']}',
+                          'Tipo de Extintor: ${item['tipoExtintor']}',
                         ),
                         Text(
-                          'Validade do Casco: ${dados[index]['validadeCasco']}',
+                          'Validade do Casco: ${item['validadeCasco']}',
                         ),
                         Text(
-                          'Próxima Manutenção: ${dados[index]['proximaManutencao']}',
+                          'Próxima Manutenção: ${item['proximaManutencao']}',
                         ),
                         Text(
-                          'Descrição: ${dados[index]['descricao']}',
+                          'Descrição: ${item['descricao']}',
                         ),
                       ],
                     ),
