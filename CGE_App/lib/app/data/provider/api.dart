@@ -11,7 +11,7 @@ import '../services/config/service.dart';
 
 class Api {
   final _configService = Get.find<ConfigService>();
-  final baseUrl = "http://192.168.0.116:3333";
+  final baseUrl = "http://192.168.0.134:3333";
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     var url = Uri.parse("$baseUrl/login");
@@ -36,7 +36,6 @@ class Api {
     if (response.statusCode == 200) {
       return UserModel.fromJson(jsonDecode(response.body));
     } else {
-      Map<String, dynamic> data = jsonDecode(response.body);
       return UserModel(nome: '', email: '', tipo: '');
     }
   }
@@ -100,7 +99,7 @@ class Api {
 
       return d;
     } else {
-      throw Exception('Failed');
+      return [];
     }
   }
 
@@ -121,7 +120,7 @@ class Api {
 
       return {"dadosGraficos": d};
     } else {
-      throw Exception('Failed');
+      return {"dadosGraficos": []};
     }
   }
 
@@ -174,7 +173,7 @@ class Api {
 
       return {"dados": d};
     } else {
-      throw Exception('Failed');
+      return {"dados": []};
     }
   }
 }
