@@ -123,17 +123,24 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/image/cge.png',
-              fit: BoxFit.contain,
-              height: 50,
-            ),
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                updatedDt,
-                style: const TextStyle(fontSize: 16, color: Colors.white),
-              ),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    Image.asset(
+                      'assets/image/cge.png',
+                      fit: BoxFit.contain,
+                      height: 45,
+                    ),
+                    const SizedBox(width: 60),
+                    Text(
+                      textAlign: TextAlign.center,
+                      updatedDt,
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ],
+                )
+              ],
             ),
           ],
         ),
@@ -145,10 +152,6 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
           IconButton(
             icon: const Icon(Icons.refresh_rounded, color: Colors.white),
             onPressed: () => _refresh(),
-          ),
-          IconButton(
-            icon: const Icon(Icons.calendar_month_rounded, color: Colors.white),
-            onPressed: () => _selectDate(context),
           ),
         ],
         backgroundColor: const Color.fromARGB(255, 190, 0, 0),
@@ -279,7 +282,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                     ],
                   ),
                   Container(
-                    padding: const EdgeInsets.only( bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 20),
                     child: Grafico(item),
                   ),
                 ],
