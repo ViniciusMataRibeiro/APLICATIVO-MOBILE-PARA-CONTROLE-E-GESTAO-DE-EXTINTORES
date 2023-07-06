@@ -1,3 +1,4 @@
+import '../../Models/extintor_request_model.dart';
 import '../../Models/setor_request.dart';
 import '../../Models/tecnico_request.dart';
 import '../../Models/user.dart';
@@ -32,6 +33,8 @@ class AuthRepository {
   Future<bool> insertSetor(SetorRequestModel setor) => _api.insertSetor(setor);
 
   Future<bool> updateSetor(SetorRequestModel setor) => _api.updateSetor(setor);
+
+  Future<bool> insertExtintor (ExtintorRequestModel extintor) => _api.insertExtintor(extintor);
 
   Future<Map> getAllExtintor() => _api.getAllExtintor();
 }

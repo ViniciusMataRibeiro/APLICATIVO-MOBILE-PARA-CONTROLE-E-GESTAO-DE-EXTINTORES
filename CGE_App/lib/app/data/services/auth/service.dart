@@ -2,6 +2,7 @@ import 'package:cge_app/app/data/Models/tecnico_request.dart';
 import 'package:cge_app/app/data/services/auth/repository.dart';
 import 'package:get/get.dart';
 
+import '../../Models/extintor_request_model.dart';
 import '../../Models/setor_request.dart';
 import '../../Models/user.dart';
 import '../../Models/user_login_request.dart';
@@ -116,4 +117,17 @@ class AuthService extends GetxService {
   Future<Map> getAllExtintor() async {
     return await _repository.getAllExtintor();
   }
+
+   Future<bool> insertExtintor(ExtintorRequestModel extintor) async {
+      var result = await _repository.insertExtintor(extintor);
+      if(result){
+        Future.delayed(const Duration(milliseconds: 1), () {
+          Get.offAllNamed('/dashboard');
+        });
+        return true;
+      }
+      else {
+        return false;
+      }
+   }
 }

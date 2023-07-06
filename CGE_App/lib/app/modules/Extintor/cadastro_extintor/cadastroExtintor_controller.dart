@@ -8,8 +8,11 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../../../data/Models/subject_data_model.dart';
 
 class CadastroExtintorController extends GetxController {
-  var validadeCasco = TextEditingController(text: '01/01/0001');
+  var validadeCasco = TextEditingController(text: '02/01/0001');
   var validadeExtintor = TextEditingController(text: '02/01/0001');
+  var nextintor = TextEditingController(text: '1995');
+  var tamanho = TextEditingController(text: '4');
+  var tipo = TextEditingController(text: 'AB');
   var teste = "";
 
   final _extintor = 0.obs;

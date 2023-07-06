@@ -3,6 +3,7 @@ import 'package:cge_app/app/data/Models/setor_request.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../Models/extintor_request_model.dart';
 import '../Models/tecnico_request.dart';
 import '../Models/user.dart';
 import '../Models/user_login_request.dart';
@@ -11,7 +12,7 @@ import '../services/config/service.dart';
 
 class Api {
   final _configService = Get.find<ConfigService>();
-  final baseUrl = "http://192.168.0.134:3333";
+  final baseUrl = "http://192.168.1.100:3333";
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     var url = Uri.parse("$baseUrl/login");
@@ -174,6 +175,22 @@ class Api {
       return {"dados": d};
     } else {
       return {"dados": []};
+    }
+  }
+
+  Future<bool> insertExtintor(ExtintorRequestModel extintor) async {
+    var url = Uri.parse("$baseUrl/extintor");
+    var response = await http.post(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization': 'Bearer ${_configService.token}',
+    },
+    body: jsonEncode(extintor.toJson()));
+    if(response.statusCode == 200){
+      return true;
+    }
+    else {
+      return false;
     }
   }
 }

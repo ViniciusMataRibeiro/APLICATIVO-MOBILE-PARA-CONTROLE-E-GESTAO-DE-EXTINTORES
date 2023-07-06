@@ -67,7 +67,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
       context: context,
       initialDate: dt,
       firstDate: DateTime(2000),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(2500),
       cancelText: "CANCELAR",
       builder: (context, child) => Theme(
         data: ThemeData.light().copyWith(
@@ -97,7 +97,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
       context: context,
       initialDate: dt2,
       firstDate: DateTime(2000),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(2500),
       cancelText: "CANCELAR",
       builder: (context, child) => Theme(
         data: ThemeData.light().copyWith(
@@ -280,6 +280,8 @@ class CadastroExtintor extends State<CadastroExtintorState>
                     Container(
                       margin: const EdgeInsets.only(left: 20, right: 20),
                       child: TextFormField(
+                        style: const TextStyle(
+                            color: Colors.white, fontStyle: FontStyle.italic),
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           labelText: 'N° do Extintor',
@@ -299,6 +301,11 @@ class CadastroExtintor extends State<CadastroExtintorState>
                     Container(
                       margin: const EdgeInsets.only(left: 20, right: 20),
                       child: TextFormField(
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 18,
+                        ),
                         readOnly: true,
                         decoration: InputDecoration(
                           labelText: 'Tamanho Extintor',
@@ -317,10 +324,23 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: const Text('Tamanho Extintor'),
                                     content: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
+                                        const Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: Text(
+                                            'Tamanho Extintor',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontStyle: FontStyle.italic,
+                                            ),
+                                          ),
+                                        ),
+                                        const Divider(
+                                          color: Colors.black,
+                                          thickness: 2,
+                                        ),
                                         InkWell(
                                           onTap: () {
                                             setState(() {
@@ -390,6 +410,11 @@ class CadastroExtintor extends State<CadastroExtintorState>
                     Container(
                       margin: const EdgeInsets.only(left: 20, right: 20),
                       child: TextFormField(
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 18,
+                        ),
                         readOnly: true,
                         decoration: InputDecoration(
                           labelText: 'Tipo Extintor',
@@ -408,10 +433,23 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: const Text('Tipo do Extintor'),
                                     content: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
+                                        const Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: Text(
+                                            'Tipo Extintor',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontStyle: FontStyle.italic,
+                                            ),
+                                          ),
+                                        ),
+                                        const Divider(
+                                          color: Colors.black,
+                                          thickness: 2,
+                                        ),
                                         InkWell(
                                           onTap: () {
                                             setState(() {
