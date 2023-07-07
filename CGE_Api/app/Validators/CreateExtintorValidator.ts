@@ -32,6 +32,8 @@ export default class CreateExtintorValidator {
       rules.minLength(5),
       rules.maxLength(100),
     ]),
+
+    validadeExtintor: schema.date({}),
   })
 
   public messages: CustomMessages = {
@@ -45,5 +47,6 @@ export default class CreateExtintorValidator {
     'setor_id.unsigned': 'O campo {{ field }} deve ser um número positivo',
     'descricao.minLength': 'O campo {{ field }} deve ter no mínimo 5 caracteres',
     'descricao.maxLength': 'O campo {{ field }} deve ter no máximo 100 caracteres',
+    'validadeExtintor': 'O campo {{ field }} deve ter ser uma data válida',
   }
 }

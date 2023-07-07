@@ -130,4 +130,17 @@ class AuthService extends GetxService {
         return false;
       }
    }
+
+   Future<bool> updateExtintor(ExtintorRequestModel extintor) async {
+    var result = await _repository.updateExtintor(extintor);
+    if(result){
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return true;
+    }
+    else {
+      return false;
+    }
+   }
 }

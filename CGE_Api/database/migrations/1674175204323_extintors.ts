@@ -14,6 +14,7 @@ export default class extends BaseSchema {
       table.date('proximaManutencao').notNullable()
       table.boolean('ativo').notNullable().defaultTo(true)
       table.string('descricao', 255).notNullable()
+      table.date('validadeExtintor').notNullable()
       table.timestamps(true, true)
       table.timestamp('deleted_at').nullable()
     })

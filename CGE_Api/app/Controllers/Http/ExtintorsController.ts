@@ -79,6 +79,7 @@ export default class ExtintorsController {
                 ativo: payload.ativo,
                 setor_id: setor.id,
                 descricao: payload.descricao,
+                validadeExtintor: new Date(payload.validadeExtintor.toISODate()),
             });
 
             return response.status(201).json({

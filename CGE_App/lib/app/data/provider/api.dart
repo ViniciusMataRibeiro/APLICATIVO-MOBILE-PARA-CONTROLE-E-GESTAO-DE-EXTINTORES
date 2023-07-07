@@ -193,4 +193,22 @@ class Api {
       return false;
     }
   }
+
+  Future<bool> updateExtintor(ExtintorRequestModel extintor) async {
+    var url = Uri.parse("$baseUrl/extintor/${extintor.id}");
+    var response = await http.put(url,
+     headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(extintor.toJson()));
+      if(response.statusCode == 200) {
+        return true;
+      }
+      else{
+        return false;
+      }
+        
+  }
 }
