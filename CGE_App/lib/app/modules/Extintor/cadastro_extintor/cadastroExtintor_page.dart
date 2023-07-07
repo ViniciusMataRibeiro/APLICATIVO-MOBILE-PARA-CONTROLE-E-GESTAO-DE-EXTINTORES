@@ -88,6 +88,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
         dt = picked;
         data = dt.toIso8601String();
         updatedDt = newFormat.format(picked);
+        controller.validadeCasco.text = updatedDt;
       });
     }
   }
@@ -118,6 +119,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
         dt2 = picked;
         data2 = dt.toIso8601String();
         updatedDt2 = newFormat.format(picked);
+        controller.validadeExtintor.text = updatedDt2;
       });
     }
   }
@@ -271,7 +273,6 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       onTap: () {
                         setState(() {
                           _data(context);
-                          controller.validadeCasco.text = updatedDt;
                         });
                       },
                     ),
@@ -304,7 +305,6 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       onTap: () {
                         setState(() {
                           _data2(context);
-                          controller.validadeExtintor.text = updatedDt2;
                         });
                       },
                     ),
@@ -356,7 +356,8 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                           onTap: () {
                                             setState(() {
                                               selectedTamanho = '4 Kg';
-                                              controller.tamanho.text = selectedTamanho;
+                                              controller.tamanho.text =
+                                                  4.toString();
                                             });
                                             Navigator.pop(context);
                                           },
@@ -369,7 +370,8 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                           onTap: () {
                                             setState(() {
                                               selectedTamanho = '6 Kg';
-                                              controller.tamanho.text = selectedTamanho;
+                                              controller.tamanho.text =
+                                                  6.toString();
                                             });
                                             Navigator.pop(context);
                                           },
@@ -382,7 +384,8 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                           onTap: () {
                                             setState(() {
                                               selectedTamanho = '8 Kg';
-                                              controller.tamanho.text = selectedTamanho;
+                                              controller.tamanho.text =
+                                                  8.toString();
                                             });
                                             Navigator.pop(context);
                                           },
@@ -395,7 +398,8 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                           onTap: () {
                                             setState(() {
                                               selectedTamanho = '10 Kg';
-                                              controller.tamanho.text = selectedTamanho;
+                                              controller.tamanho.text =
+                                                  10.toString();
                                             });
                                             Navigator.pop(context);
                                           },
@@ -469,7 +473,8 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                           onTap: () {
                                             setState(() {
                                               selectedTipo = 'Tipo A';
-                                              controller.tipoExtintor.text = selectedTipo;
+                                              controller.tipoExtintor.text =
+                                                  selectedTipo;
                                             });
                                             Navigator.pop(context);
                                           },
@@ -482,7 +487,8 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                           onTap: () {
                                             setState(() {
                                               selectedTipo = 'Tipo BC';
-                                              controller.tipoExtintor.text = selectedTipo;
+                                              controller.tipoExtintor.text =
+                                                  selectedTipo;
                                             });
                                             Navigator.pop(context);
                                           },
@@ -495,7 +501,8 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                           onTap: () {
                                             setState(() {
                                               selectedTipo = 'Tipo ABC';
-                                              controller.tipoExtintor.text = selectedTipo;
+                                              controller.tipoExtintor.text =
+                                                  selectedTipo;
                                             });
                                             Navigator.pop(context);
                                           },
@@ -509,21 +516,22 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                           onTap: () {
                                             setState(() {
                                               selectedTipo = 'Tipo K';
-                                              controller.tipoExtintor.text = selectedTipo;
+                                              controller.tipoExtintor.text =
+                                                  selectedTipo;
                                             });
                                             Navigator.pop(context);
                                           },
                                           child: ListTile(
                                             title: const Text('Tipo K'),
                                             selected: selectedTipo == 'Tipo K',
-                                            
                                           ),
                                         ),
                                         InkWell(
                                           onTap: () {
                                             setState(() {
                                               selectedTipo = 'Tipo CO²';
-                                              controller.tipoExtintor.text = selectedTipo;
+                                              controller.tipoExtintor.text =
+                                                  selectedTipo;
                                             });
                                             Navigator.pop(context);
                                           },

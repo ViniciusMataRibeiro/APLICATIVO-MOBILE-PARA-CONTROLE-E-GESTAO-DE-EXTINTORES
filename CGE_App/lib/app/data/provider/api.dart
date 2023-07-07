@@ -12,7 +12,7 @@ import '../services/config/service.dart';
 
 class Api {
   final _configService = Get.find<ConfigService>();
-  final baseUrl = "http://192.168.1.100:3333";
+  final baseUrl = "http://192.168.0.134:3333";
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     var url = Uri.parse("$baseUrl/login");
@@ -186,7 +186,7 @@ class Api {
       'authorization': 'Bearer ${_configService.token}',
     },
     body: jsonEncode(extintor.toJson()));
-    if(response.statusCode == 200){
+    if(response.statusCode == 201){
       return true;
     }
     else {

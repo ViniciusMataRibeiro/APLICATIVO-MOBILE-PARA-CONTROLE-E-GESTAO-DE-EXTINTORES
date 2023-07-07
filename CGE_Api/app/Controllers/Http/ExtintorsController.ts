@@ -60,8 +60,9 @@ export default class ExtintorsController {
     }
 
     public async store({ request, response }: HttpContextContract) {
-        const payload = await request.validate(CreateExtintorValidator);
         try {
+            const payload = await request.validate(CreateExtintorValidator);
+
             const setor = await Setor.findByOrFail("id", payload.setor_id);
 
             if (setor.ativo == false) {
@@ -75,11 +76,12 @@ export default class ExtintorsController {
                 tipoExtintor: payload.tipoExtintor,
                 tamanho: payload.tamanho,
                 validadeCasco: new Date(payload.validadeCasco.toISODate()),
-                proximaManutencao: new Date(payload.proximaManutencao.toISODate()),
+                validadeExtintor: new Date(payload.validadeExtintor.toISODate()),
+                proximaManutencao: payload.proximaManutencao ?? null,
                 ativo: payload.ativo,
                 setor_id: setor.id,
                 descricao: payload.descricao,
-                validadeExtintor: new Date(payload.validadeExtintor.toISODate()),
+                
             });
 
             return response.status(201).json({
@@ -87,6 +89,11 @@ export default class ExtintorsController {
             });
         }
         catch (error) {
+            if(error.sqlMessage.includes('Duplicate entry')){
+                return response.status(401).json({
+                    message: 'Extintor já cadastrado com este indentificador',
+                });
+            }
             return response.badRequest({
                 message: 'Erro ao cadastrar Extintor',
             });
@@ -97,7 +104,7 @@ export default class ExtintorsController {
         const payload = await request.validate(EditExtintorValidator);
         try {
             const sql = 'UPDATE extintors SET nome = ?, tipoExtintor = ?, tamanho = ?, validadeCasco = ?, proximaManutencao = ?, ativo = ?, descricao = ? WHERE id = ?';
-            await Database.rawQuery(sql, [payload.nome, payload.tipoExtintor, payload.tamanho, new Date(payload.validadeCasco.toISODate()), new Date(payload.proximaManutencao.toISODate()), payload.ativo, payload.descricao, params.id]);
+            await Database.rawQuery(sql, [payload.nome, payload.tipoExtintor, payload.tamanho, new Date(payload.validadeCasco.toISODate()), new Date(payload.proximaManutencao!.toISODate()), payload.ativo, payload.descricao, params.id]);
 
             return response.status(200).json({
                 message: 'Extintor Editado com sucesso',
