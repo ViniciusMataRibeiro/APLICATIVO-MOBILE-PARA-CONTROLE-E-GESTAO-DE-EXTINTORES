@@ -1,10 +1,15 @@
 class ExtintorRequestModel {
   int id;
   String nome;
-  String validadeCasco;
-  String validadeExtintor;
-  String tamanho;
+  DateTime validadeCasco;
+  DateTime validadeExtintor;
+  DateTime? proximaManutencao;
+  int tamanho;
   String tipo;
+  bool ativo;
+  // ignore: non_constant_identifier_names
+  int setor_id;
+  String? descricao;
 
   ExtintorRequestModel({
     required this.id,
@@ -13,14 +18,21 @@ class ExtintorRequestModel {
     required this.validadeExtintor,
     required this.tamanho,
     required this.tipo,
+    required this.ativo,
+    // ignore: non_constant_identifier_names
+    required this.setor_id,
+    this.descricao
   });
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'nome': nome.toString(),
-        'validadeCasco': validadeCasco.toString(),
-        'validadeExtintor': validadeExtintor.toString(),       
-        'tamanho': tamanho.toString(),
-        'tipo': tipo.toString(),
+        'validadeCasco': validadeCasco.toIso8601String(),
+        'validadeExtintor': validadeExtintor.toIso8601String(),       
+        'tamanho': tamanho,
+        'tipoExtintor': tipo.toString(),
+        'ativo': ativo,
+        'setor_id': setor_id,
+        'descricao': descricao.toString(),
       };
 }

@@ -2,19 +2,15 @@
 
 import 'package:cge_app/app/data/Models/extintor_request_model.dart';
 import 'package:cge_app/app/data/services/auth/service.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
-
-import '../../../data/Models/subject_data_model.dart';
+import 'package:intl/intl.dart';
 
 class CadastroExtintorController extends GetxController {
   final _authService = Get.find<AuthService>();
   var id = 0;
-  var setor_id = 0;
+  var setor_id =0;
 
   var nome = TextEditingController(text: '');
   var validadeCasco = TextEditingController(text: '');
@@ -54,13 +50,13 @@ class CadastroExtintorController extends GetxController {
 
   Future<String> goToInsert() async{
     if(nome.text == ''){
-      return 'informe a data';
+      return 'informe o numero do extintor';
     }
     if(validadeCasco.text == ''){
-      return 'informe a data';
+      return 'informe a validade do casco';
     }
     if(validadeExtintor.text == ''){
-      return 'informe a data';
+      return 'informe a validade do extintor';
     }
     if(tamanho.text == ''){
       return 'informe o tamanho do extintor';
@@ -73,10 +69,13 @@ class CadastroExtintorController extends GetxController {
     var extintorResquestModel = ExtintorRequestModel(
       id: id, 
       nome: nome.text, 
-      validadeCasco: validadeCasco.text, 
-      validadeExtintor: validadeExtintor.text, 
-      tamanho: tamanho.text, 
+      validadeCasco: DateFormat('dd/MM/yyyy').parse(validadeCasco.text) , 
+      validadeExtintor: DateFormat('dd/MM/yyyy').parse(validadeExtintor.text), 
+      tamanho: int.parse(tamanho.text), 
       tipo: tipoExtintor.text,
+      ativo: true,
+      setor_id: 1,
+      descricao: "teste",
       );
 
       bool res = false;
