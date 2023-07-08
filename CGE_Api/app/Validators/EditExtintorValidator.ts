@@ -10,15 +10,15 @@ export default class EditExtintorValidator {
       rules.maxLength(100),
     ]),
 
-    tipoExtintor: schema.string({ trim: true }, [
-      rules.unsigned(),
-    ]),
+    tipoExtintor: schema.string({ trim: true }, []),
 
     tamanho: schema.number([
       rules.unsigned(),
     ]),
 
     validadeCasco: schema.date({}),
+
+    validadeExtintor: schema.date({}),
 
     proximaManutencao: schema.date.nullableAndOptional({}),
 

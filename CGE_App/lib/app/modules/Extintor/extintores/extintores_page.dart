@@ -276,9 +276,10 @@ class ExtintorPage extends State<ExtintorState>
                       Flexible(
                         flex: 5,
                         child: IconButton(
-                            icon: const Icon(Icons.edit,
-                                size: 25, color: Colors.black),
-                            onPressed: () {}),
+                          icon: const Icon(Icons.edit,
+                              size: 25, color: Colors.black),
+                          onPressed: () => controller.gotoEditExtintor(item),
+                        ),
                       ),
                     ],
                   ),
