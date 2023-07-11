@@ -1,12 +1,12 @@
+import CreateExtintorValidator from 'App/Validators/CreateExtintorValidator';
+import EditExtintorValidator from 'App/Validators/EditExtintorValidator';
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database';
-import Tecnico from 'App/Models/Tecnico';
-import Setor from 'App/Models/Setor';
-import CreateExtintorValidator from 'App/Validators/CreateExtintorValidator';
 import Extintor from 'App/Models/Extintor';
-import EditExtintorValidator from 'App/Validators/EditExtintorValidator';
-import { DateTime } from 'luxon';
+import Tecnico from 'App/Models/Tecnico';
 import Empresa from 'App/Models/Empresa';
+import Setor from 'App/Models/Setor';
+import { DateTime } from 'luxon';
 
 export default class ExtintorsController {
     public async indexAllExtintores({ response, auth }: HttpContextContract) {
@@ -103,8 +103,23 @@ export default class ExtintorsController {
     public async update({ request, response, params }: HttpContextContract) {
         const payload = await request.validate(EditExtintorValidator);
         try {
-            const sql = 'UPDATE extintors SET nome = ?, tipoExtintor = ?, tamanho = ?, validadeCasco = ?, proximaManutencao = ?, ativo = ?, descricao = ? WHERE id = ?';
-            await Database.rawQuery(sql, [payload.nome, payload.tipoExtintor, payload.tamanho, new Date(payload.validadeCasco.toISODate()), new Date(payload.proximaManutencao!.toISODate()), payload.ativo, payload.descricao, params.id]);
+            const extintores = await Extintor.findByOrFail("id", params.id);
+            if(extintores == null){
+                return response.badRequest({
+                    message: 'Setor não encontrado',
+                });
+            }  
+
+            let proximaManutencao;
+
+            if (payload.proximaManutencao != null) {
+                proximaManutencao = new Date(payload.proximaManutencao.toISODate());
+            }else{
+                proximaManutencao = null;
+            }
+
+            const sql = 'UPDATE extintors SET nome = ?, tipoExtintor = ?, tamanho = ?, validadeCasco = ?, validadeExtintor = ?, proximaManutencao = ? , ativo = ?, descricao = ? WHERE id = ?';
+            await Database.rawQuery(sql, [payload.nome, payload.tipoExtintor, payload.tamanho, new Date(payload.validadeCasco.toISO()), (new Date(payload.validadeExtintor.toISO())) ?? null , proximaManutencao , payload.ativo, payload.descricao, params.id]);
 
             return response.status(200).json({
                 message: 'Extintor Editado com sucesso',

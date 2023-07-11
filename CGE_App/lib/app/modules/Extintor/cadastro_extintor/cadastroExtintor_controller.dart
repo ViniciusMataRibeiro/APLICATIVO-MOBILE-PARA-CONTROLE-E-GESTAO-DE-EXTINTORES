@@ -9,14 +9,17 @@ import 'package:intl/intl.dart';
 
 class CadastroExtintorController extends GetxController {
   final _authService = Get.find<AuthService>();
+  DateTime dt = DateTime.now();
+  DateTime dt2 = DateTime.now();
+  String selectedTamanho = '';
+  String selectedTipo = '';
+
   var id = 0;
-  var setor_id =0;
+  var setor_id = 0;
 
   var nome = TextEditingController(text: '');
   var validadeCasco = TextEditingController(text: '');
   var validadeExtintor = TextEditingController(text: '');
-  var tamanho = TextEditingController(text: '');
-  var tipoExtintor = TextEditingController(text: '');
   var proximaManutencao = TextEditingController(text: '');
   var descricao = TextEditingController(text: '');
   var ativo = true.obs;
@@ -25,73 +28,76 @@ class CadastroExtintorController extends GetxController {
 
   late Map _extintor;
 
-
   @override
   void onInit() {
-    if(Get.arguments != null){
+    if (Get.arguments != null) {
       _extintor = Get.arguments;
       id = _extintor['id'];
-      nome = _extintor['nome'];
-      validadeCasco.text = _extintor['validadeCasco'];
-      validadeExtintor.text = _extintor['validadeExtintor'];
-      tamanho.text = _extintor['tamanho'];
-      tipoExtintor.text = _extintor['tipoExtintor'];
+      nome.text = _extintor['nome'];
+      selectedTamanho = "${_extintor['tamanho'] ?? 0} Kg";
+      selectedTipo = _extintor['tipoExtintor'];
       setor_id = _extintor['setor_id'];
       ativo = _extintor['ativo'] == 1 ? true.obs : false.obs;
 
+      dt = DateTime.parse(_extintor['validadeCasco']);
+      dt2 = DateTime.parse(_extintor['validadeExtintor']);
+
       alterando = true;
-    }
-    else {
+    } else {
+      dt = DateTime.now();
+      dt2 = DateTime.now();
+      
       alterando = false;
     }
 
     super.onInit();
   }
 
-  Future<String> goToInsert() async{
-    if(nome.text == ''){
+  Future<String> goToInsert() async {
+    if (nome.text == '') {
       return 'informe o numero do extintor';
     }
-    if(validadeCasco.text == ''){
-      return 'informe a validade do casco';
-    }
-    if(validadeExtintor.text == ''){
-      return 'informe a validade do extintor';
-    }
-    if(tamanho.text == ''){
+
+    if (selectedTamanho == '') {
       return 'informe o tamanho do extintor';
     }
-    if(tipoExtintor.text == ''){
+
+    if (selectedTipo == '') {
       return 'informe o tipo do extintor';
     }
 
+    if (validadeCasco.text == '') {
+      validadeCasco.text = DateFormat('dd/MM/yyyy').format(dt);
+    }
+
+    if (validadeExtintor.text == '') {
+      validadeExtintor.text = DateFormat('dd/MM/yyyy').format(dt2);
+    }
 
     var extintorResquestModel = ExtintorRequestModel(
-      id: id, 
-      nome: nome.text, 
-      validadeCasco: DateFormat('dd/MM/yyyy').parse(validadeCasco.text) , 
-      validadeExtintor: DateFormat('dd/MM/yyyy').parse(validadeExtintor.text), 
-      tamanho: int.parse(tamanho.text), 
-      tipo: tipoExtintor.text,
+      id: id,
+      nome: nome.text,
+      validadeCasco: DateFormat('dd/MM/yyyy').parse(validadeCasco.text),
+      validadeExtintor: DateFormat('dd/MM/yyyy').parse(validadeExtintor.text),
+      tamanho: int.parse(selectedTamanho.replaceAll(RegExp(r'[^0-9]'),'')) ,
+      tipo: selectedTipo,
       ativo: true,
       setor_id: 1,
       descricao: "teste",
-      );
+    );
 
-      bool res = false;
+    bool res = false;
 
-      if(id > 0){
-        res = await _authService.updateExtintor(extintorResquestModel);
-      }
-      else{
-        res = await _authService.insertExtintor(extintorResquestModel);
-      }
+    if (id > 0) {
+      res = await _authService.updateExtintor(extintorResquestModel);
+    } else {
+      res = await _authService.insertExtintor(extintorResquestModel);
+    }
 
-      return res == true ? 'true' : 'Algo deu Errado';
+    return res == true ? 'true' : 'Algo deu Errado';
   }
 
-
-    Future<bool?> toast(String message) {
+  Future<bool?> toast(String message) {
     Fluttertoast.cancel();
     return Fluttertoast.showToast(
         msg: message,
