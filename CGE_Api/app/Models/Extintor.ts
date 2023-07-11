@@ -10,7 +10,7 @@ export default class Extintor extends BaseModel {
   public nome: string
 
   @column()
-  public tipoExtintor: number
+  public tipoExtintor: string
 
   @column()
   public tamanho: number
@@ -19,7 +19,7 @@ export default class Extintor extends BaseModel {
   public validadeCasco: Date
 
   @column()
-  public proximaManutencao: Date
+  public proximaManutencao: Date | null
 
   @column()
   public ativo: boolean
@@ -30,6 +30,9 @@ export default class Extintor extends BaseModel {
   @column()
   public descricao: string | null
 
+  @column()
+  public validadeExtintor: Date
+  
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

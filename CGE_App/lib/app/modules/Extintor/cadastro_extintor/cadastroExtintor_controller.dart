@@ -1,81 +1,111 @@
 // ignore_for_file: file_names
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+import 'package:cge_app/app/data/Models/extintor_request_model.dart';
+import 'package:cge_app/app/data/services/auth/service.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
-
-import '../../../data/Models/subject_data_model.dart';
+import 'package:intl/intl.dart';
 
 class CadastroExtintorController extends GetxController {
-  var validadeCasco = TextEditingController(text: '01/01/0001');
-  var validadeExtintor = TextEditingController(text: '02/01/0001');
-  var teste = "";
+  final _authService = Get.find<AuthService>();
+  DateTime dt = DateTime.now();
+  DateTime dt2 = DateTime.now();
+  String selectedTamanho = '';
+  String selectedTipo = '';
 
-  final _extintor = 0.obs;
-  get extintor => _extintor.value;
+  var id = 0;
+  var setor_id = 0;
 
-  void changeExtintor(int value) {
-    _extintor.value = value;
-  }
+  var nome = TextEditingController(text: '');
+  var validadeCasco = TextEditingController(text: '');
+  var validadeExtintor = TextEditingController(text: '');
+  var proximaManutencao = TextEditingController(text: '');
+  var descricao = TextEditingController(text: '');
+  var ativo = true.obs;
 
-  List<SubjectModel> subjectData = [];
-  List<MultiSelectItem> dropDownData = [];
+  var alterando = false;
 
-  getSubjectData() {
-    subjectData.clear();
-    dropDownData.clear();
+  late Map _extintor;
 
-    Map<String, dynamic> apiResponse = {
-      "code": 200,
-      "message": "Course subject lists.",
-      "data": [
-        {"subject_id": "1", "subject_name": "AP 10L"},
-        {"subject_id": "2", "subject_name": "AP 75L"},
-        {"subject_id": "3", "subject_name": "ABC 4KG"},
-        {"subject_id": "4", "subject_name": "ABC 6KG"},
-        {"subject_id": "5", "subject_name": "BC 2KG"},
-        {"subject_id": "6", "subject_name": "BC 4KG"},
-        {"subject_id": "7", "subject_name": "BC 6KG"},
-        {"subject_id": "8", "subject_name": "BC 50KG"},
-        {"subject_id": "9", "subject_name": "CO2 6KG"}
-      ]
-    };
+  @override
+  void onInit() {
+    if (Get.arguments != null) {
+      _extintor = Get.arguments;
+      id = _extintor['id'];
+      nome.text = _extintor['nome'];
+      selectedTamanho = "${_extintor['tamanho'] ?? 0} Kg";
+      selectedTipo = _extintor['tipoExtintor'];
+      setor_id = _extintor['setor_id'];
+      ativo = _extintor['ativo'] == 1 ? true.obs : false.obs;
 
-    if (apiResponse['code'] == 200) {
-      List<SubjectModel> tempSubjectData = [];
-      apiResponse['data'].forEach(
-        (data) {
-          tempSubjectData.add(
-            SubjectModel(
-              subjectId: data['subject_id'],
-              subjectName: data['subject_name'],
-            ),
-          );
-        },
-      );
-      subjectData.addAll(tempSubjectData);
+      dt = DateTime.parse(_extintor['validadeCasco']);
+      dt2 = DateTime.parse(_extintor['validadeExtintor']);
 
-      dropDownData = subjectData.map((subjectdata) {
-        return MultiSelectItem(subjectdata, subjectdata.subjectName);
-      }).toList();
-
-      update();
-    } else if (apiResponse['code'] == 400) {
-      if (kDebugMode) {
-        print("Show Error model why error occurred..");
-      }
+      alterando = true;
     } else {
-      if (kDebugMode) {
-        print("show some error model like something went worng..");
-      }
+      dt = DateTime.now();
+      dt2 = DateTime.now();
+      
+      alterando = false;
     }
+
+    super.onInit();
   }
 
-  void goToRegisterExtintor() {
-    if (kDebugMode) {
-      print(teste);
+  Future<String> goToInsert() async {
+    if (nome.text == '') {
+      return 'informe o numero do extintor';
     }
+
+    if (selectedTamanho == '') {
+      return 'informe o tamanho do extintor';
+    }
+
+    if (selectedTipo == '') {
+      return 'informe o tipo do extintor';
+    }
+
+    if (validadeCasco.text == '') {
+      validadeCasco.text = DateFormat('dd/MM/yyyy').format(dt);
+    }
+
+    if (validadeExtintor.text == '') {
+      validadeExtintor.text = DateFormat('dd/MM/yyyy').format(dt2);
+    }
+
+    var extintorResquestModel = ExtintorRequestModel(
+      id: id,
+      nome: nome.text,
+      validadeCasco: DateFormat('dd/MM/yyyy').parse(validadeCasco.text),
+      validadeExtintor: DateFormat('dd/MM/yyyy').parse(validadeExtintor.text),
+      tamanho: int.parse(selectedTamanho.replaceAll(RegExp(r'[^0-9]'),'')) ,
+      tipo: selectedTipo,
+      ativo: true,
+      setor_id: 1,
+      descricao: "teste",
+    );
+
+    bool res = false;
+
+    if (id > 0) {
+      res = await _authService.updateExtintor(extintorResquestModel);
+    } else {
+      res = await _authService.insertExtintor(extintorResquestModel);
+    }
+
+    return res == true ? 'true' : 'Algo deu Errado';
   }
 
+  Future<bool?> toast(String message) {
+    Fluttertoast.cancel();
+    return Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 4,
+        backgroundColor: Colors.redAccent,
+        textColor: Colors.white,
+        fontSize: 15.0);
+  }
 }

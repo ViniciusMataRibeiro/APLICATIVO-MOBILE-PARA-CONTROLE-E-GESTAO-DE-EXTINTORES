@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id').primary()
       table.integer('empresa_id').unsigned().references('id').inTable('empresas').onDelete('CASCADE')
       table.string('nome', 255).notNullable()
-      table.string('descricao', 255).notNullable()
+      table.string('descricao', 255).nullable()
       table.boolean('ativo').notNullable()
       table.timestamps(true, true)
       table.timestamp('deleted_at').nullable()
