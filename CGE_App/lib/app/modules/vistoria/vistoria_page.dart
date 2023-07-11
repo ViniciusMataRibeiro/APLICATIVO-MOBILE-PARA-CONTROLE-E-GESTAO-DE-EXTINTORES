@@ -101,6 +101,8 @@ class Vistoria extends State<VistoriaState>
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 175, 31, 21),
@@ -120,15 +122,8 @@ class Vistoria extends State<VistoriaState>
             ),
             Container(
               margin: const EdgeInsets.only(right: 10),
-              width: 40,
+              width: size.width * 0.15,
               height: 40,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100.0),
-                child: Image.asset(
-                  'assets/image/cge.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
             ),
             const Text(
               'Vistoria',
@@ -145,7 +140,7 @@ class Vistoria extends State<VistoriaState>
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/image/registro.jpeg'),
+                image: AssetImage('assets/image/LogOut.png'),
                 fit: BoxFit.cover),
           ),
           child: ListView(
@@ -177,7 +172,6 @@ class Vistoria extends State<VistoriaState>
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),
                   ),
-                  color: Color.fromARGB(80, 0, 0, 0),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,12 +180,12 @@ class Vistoria extends State<VistoriaState>
                       leading: const Icon(
                         Icons.date_range_outlined,
                         size: 40,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       title: const Text(
                         "Data da Manutenção",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -200,21 +194,22 @@ class Vistoria extends State<VistoriaState>
                         updatedDt,
                         style: const TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontStyle: FontStyle.italic),
                       ),
                       trailing: const Icon(
                         Icons.arrow_drop_down,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       onTap: () => _data(context),
                     ),
-                    const SizedBox(height: 20),
+                    const Divider(color: Colors.black, thickness: 1),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         const SizedBox(width: 20),
                         const Icon(Icons.speed_outlined,
-                            color: Colors.white, size: 35),
+                            color: Colors.black, size: 35),
                         const SizedBox(
                           width: 20,
                         ),
@@ -222,7 +217,7 @@ class Vistoria extends State<VistoriaState>
                           'Manômetro',
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(width: 90),
@@ -258,12 +253,13 @@ class Vistoria extends State<VistoriaState>
                         ),
                       ],
                     ),
-                    const SizedBox(height: 30),
+                    const Divider(color: Colors.black, thickness: 1),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         const SizedBox(width: 20),
                         const Icon(Icons.fire_extinguisher_outlined,
-                            color: Colors.white, size: 35),
+                            color: Colors.black, size: 35),
                         const SizedBox(
                           width: 20,
                         ),
@@ -271,7 +267,7 @@ class Vistoria extends State<VistoriaState>
                           'Sinalização Parede',
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(width: 23),
@@ -307,12 +303,13 @@ class Vistoria extends State<VistoriaState>
                         ),
                       ],
                     ),
-                    const SizedBox(height: 30),
+                    const Divider(color: Colors.black, thickness: 1),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         const SizedBox(width: 20),
                         const Icon(Ionicons.footsteps_outline,
-                            color: Colors.white, size: 35),
+                            color: Colors.black, size: 35),
                         const SizedBox(
                           width: 20,
                         ),
@@ -320,7 +317,7 @@ class Vistoria extends State<VistoriaState>
                           'Sinalização Piso',
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(width: 37),
@@ -356,12 +353,13 @@ class Vistoria extends State<VistoriaState>
                         ),
                       ],
                     ),
-                    const SizedBox(height: 30),
+                    const Divider(color: Colors.black, thickness: 1),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         const SizedBox(width: 20),
                         const Icon(Ionicons.enter_outline,
-                            color: Colors.white, size: 35),
+                            color: Colors.black, size: 35),
                         const SizedBox(
                           width: 20,
                         ),
@@ -369,7 +367,7 @@ class Vistoria extends State<VistoriaState>
                           'Acesso',
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(width: 112),
@@ -405,12 +403,13 @@ class Vistoria extends State<VistoriaState>
                         ),
                       ],
                     ),
-                    const SizedBox(height: 30),
+                    const Divider(color: Colors.black, thickness: 1),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         const SizedBox(width: 20),
                         const Icon(Ionicons.headset_outline,
-                            color: Colors.white, size: 35),
+                            color: Colors.black, size: 35),
                         const SizedBox(
                           width: 20,
                         ),
@@ -418,7 +417,7 @@ class Vistoria extends State<VistoriaState>
                           'Mangueira',
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(width: 82),
@@ -447,19 +446,20 @@ class Vistoria extends State<VistoriaState>
                             child: isSelectmangueira
                                 ? const Icon(
                                     Icons.check,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   )
                                 : null,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 30),
+                    const Divider(color: Colors.black, thickness: 1),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         const SizedBox(width: 20),
                         const Icon(Ionicons.headset_outline,
-                            color: Colors.white, size: 35),
+                            color: Colors.black, size: 35),
                         const SizedBox(
                           width: 20,
                         ),
@@ -467,7 +467,7 @@ class Vistoria extends State<VistoriaState>
                           'Lacre',
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(width: 126),
@@ -496,19 +496,20 @@ class Vistoria extends State<VistoriaState>
                             child: isSelectlacre
                                 ? const Icon(
                                     Icons.check,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   )
                                 : null,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 30),
+                    const Divider(color: Colors.black, thickness: 1),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         const SizedBox(width: 20),
                         const Icon(Ionicons.thumbs_up_outline,
-                            color: Colors.white),
+                            color: Colors.black),
                         const SizedBox(
                           width: 20,
                         ),
@@ -516,7 +517,7 @@ class Vistoria extends State<VistoriaState>
                           'Aprovado',
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(width: 88),
@@ -552,7 +553,7 @@ class Vistoria extends State<VistoriaState>
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 30),
                     Container(
                       padding: const EdgeInsets.all(20.0),
                       child: Center(
