@@ -1,6 +1,8 @@
 // ignore_for_file: unused_field
 
 import 'package:cge_app/app/core/app_theme.dart';
+import 'package:floating_action_bubble/floating_action_bubble.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:faker/faker.dart';
@@ -8,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
 import '../../../data/services/auth/service.dart';
+import '../../widget/graficoSetorModelo2.dart';
 import 'setores_controller.dart';
 
 DateTime selectedDate = DateTime.now();
@@ -18,7 +21,7 @@ List dados = [];
 class SetorEmpresa extends GetView<SetorController> {
   const SetorEmpresa({super.key});
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: themeData,
@@ -38,11 +41,10 @@ class SetorState extends StatefulWidget {
   final String title;
 
   @override
-  SetorEmpresaPage createState() => SetorEmpresaPage();
+  SetorPage createState() => SetorPage();
 }
 
-class SetorEmpresaPage extends State<SetorState>
-    with SingleTickerProviderStateMixin {
+class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
   AuthService aux = Get.find<AuthService>();
   SetorController controller = Get.put(
     SetorController(),
@@ -115,23 +117,32 @@ class SetorEmpresaPage extends State<SetorState>
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/image/cge.png',
-              fit: BoxFit.contain,
-              height: 50,
-            ),
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                updatedDt,
-                style: const TextStyle(fontSize: 16, color: Colors.white),
-              ),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    Image.asset(
+                      'assets/image/cge.png',
+                      fit: BoxFit.contain,
+                      height: 45,
+                    ),
+                    const SizedBox(width: 60),
+                    Text(
+                      textAlign: TextAlign.center,
+                      updatedDt,
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ],
+                )
+              ],
             ),
           ],
         ),
@@ -141,12 +152,8 @@ class SetorEmpresaPage extends State<SetorState>
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.find_replace_outlined, color: Colors.white),
+            icon: const Icon(Icons.refresh_rounded, color: Colors.white),
             onPressed: () => _refresh(),
-          ),
-          IconButton(
-            icon: const Icon(Icons.calendar_month_rounded, color: Colors.white),
-            onPressed: () => _selectDate(context),
           ),
         ],
         backgroundColor: const Color.fromARGB(255, 190, 0, 0),
@@ -155,6 +162,42 @@ class SetorEmpresaPage extends State<SetorState>
             bottomLeft: Radius.circular(25),
             bottomRight: Radius.circular(25),
           ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(bottom: 70),
+        child: FloatingActionBubble(
+          herotag: UniqueKey(),
+          items: <Bubble>[
+            Bubble(
+              title: "Cadastrar Setor",
+              iconColor: Colors.white,
+              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+              icon: Icons.add_rounded,
+              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              onPress: () {
+                Get.toNamed('/cadSetor');
+              },
+            ),
+            Bubble(
+              title: "Realizar Vistoria",
+              iconColor: Colors.white,
+              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+              icon: Icons.check_rounded,
+              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+              onPress: () {
+                Get.toNamed('/vistoria');
+              },
+            ),
+          ],
+          animation: _animation,
+          onPress: () => _animationController.isCompleted
+              ? _animationController.reverse()
+              : _animationController.forward(),
+          iconColor: Colors.white,
+          iconData: Icons.handyman_outlined,
+          backGroundColor: const Color.fromARGB(255, 190, 0, 0),
         ),
       ),
       body: buildContainer(),
@@ -207,45 +250,88 @@ class SetorEmpresaPage extends State<SetorState>
       itemBuilder: (BuildContext context, index) {
         Map item = dados[index];
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            if (kDebugMode) {
+              print("cliquei no card");
+            }
+          },
           child: Container(
             margin: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.pink[100],
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 5,
+                  offset: Offset(0, 5),
+                ),
+              ],
+              image: const DecorationImage(
+                image: AssetImage('assets/image/LogoCardSetor.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
             child: Card(
+              color: Colors.transparent,
               elevation: 5,
               child: Column(
                 children: [
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     const SizedBox(width: 25),
+                  //     Flexible(
+                  //       flex: 5,
+                  //       child: IconButton(
+                  //           icon: const Icon(Icons.edit,
+                  //               size: 25, color: Colors.black),
+                  //           onPressed: () => controller.gotoEditSetor(item)),
+                  //     ),
+                  //   ],
+                  // ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const SizedBox(height: 15),
-                      Text(
-                        dados[index]['setor'],
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFB2505C),
-                        ),
-                      ),
-                      Flexible(
-                        flex: 5,
-                        child: IconButton(
-                            icon: const Icon(Icons.edit,
-                                size: 25, color: Colors.black),
-                            onPressed: () => controller.gotoEditSetor(item)),
-                      ),
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      _buildCardGrafico(item),
+                      _buildCardGrafico(item),
+                      _buildCardGrafico(item),
                     ],
                   ),
-                  // Container(
-                  //   padding: const EdgeInsets.only(top: 50, bottom: 20),
-                  //   child: Grafico(item),
-                  // ),
+                  
                 ],
               ),
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget _buildCardGrafico(Map item) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          verticalDirection: VerticalDirection.down,
+          children: <Widget>[
+            SizedBox(
+              height: 150,
+              child: DoughnutElevation(item),
+            ),
+            const Text(
+              "title",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
