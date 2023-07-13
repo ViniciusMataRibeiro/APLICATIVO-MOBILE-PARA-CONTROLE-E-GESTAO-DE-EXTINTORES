@@ -1,5 +1,6 @@
 import 'package:cge_app/app/data/services/auth/service.dart';
 import 'package:cge_app/app/modules/Extintor/extintores/extintores_page.dart';
+import 'package:cge_app/app/modules/Setor/setores/setores_empresa_page.dart';
 import 'package:cge_app/app/modules/Setor/setores/setores_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,7 @@ class DashboardPage extends GetView<DashboardController> {
             children: [
               const Setor(),
               const Extintor(),
+              const SetorEmpresa(),
               if (obj!.tipo == 'empresa') ...[
                 PerfilPage(),
               ] else ...[
