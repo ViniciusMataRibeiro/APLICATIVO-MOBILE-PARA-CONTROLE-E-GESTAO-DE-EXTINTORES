@@ -141,15 +141,17 @@ class CadastroExtintor extends State<CadastroExtintorState>
     super.dispose();
   }
 
-  String dateInput(){
+  String dateInput() {
     return "";
-  } 
+  }
 
   GlobalKey<DropdownSearchState<String>> dropdownKey =
       GlobalKey<DropdownSearchState<String>>();
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 175, 31, 21),
@@ -169,15 +171,8 @@ class CadastroExtintor extends State<CadastroExtintorState>
             ),
             Container(
               margin: const EdgeInsets.only(right: 10),
-              width: 40,
+              width: size.width * 0.05,
               height: 40,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100.0),
-                child: Image.asset(
-                  'assets/image/cge.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
             ),
             Text(
               controller.alterando ? 'Alterar Extintor' : 'Cadastrar Extintor',
@@ -194,7 +189,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/image/registro.jpeg'),
+                image: AssetImage('assets/image/LogOut.png'),
                 fit: BoxFit.cover),
           ),
           child: ListView(
@@ -222,46 +217,48 @@ class CadastroExtintor extends State<CadastroExtintorState>
               ),
               Container(
                 padding: const EdgeInsets.all(0),
-                margin: const EdgeInsets.only(bottom: 100, left: 20, right: 20),
+                margin: const EdgeInsets.only(bottom: 50),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: Color.fromARGB(80, 0, 0, 0),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(left: 20, right: 20),
-                      child: TextFormField(
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(
+                        Icones_Personalizado.fire_extinguisher,
+                        color: Colors.black,
+                        size: 40,
+                      ),
+                      title: TextFormField(
                         controller: controller.nome,
                         style: const TextStyle(
-                            color: Colors.white, fontStyle: FontStyle.italic),
+                          color: Colors.white,
+                          fontStyle: FontStyle.italic,
+                        ),
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           labelText: 'N° do Extintor',
                           labelStyle: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20,
-                          ),
-                          prefixIcon: Icon(
-                            Icones_Personalizado.fire_extinguisher,
-                            color: Colors.white,
-                            size: 40,
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 20),
                     ListTile(
+                      contentPadding: EdgeInsets.zero,
                       leading: const Icon(
                         Icons.date_range_outlined,
                         size: 40,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       title: const Text(
                         "Validade do Casco",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -272,12 +269,12 @@ class CadastroExtintor extends State<CadastroExtintorState>
                             : updatedDt,
                         style: const TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontStyle: FontStyle.italic),
                       ),
                       trailing: const Icon(
                         Icons.arrow_drop_down,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       onTap: () {
                         setState(() {
@@ -287,15 +284,16 @@ class CadastroExtintor extends State<CadastroExtintorState>
                     ),
                     const SizedBox(height: 20),
                     ListTile(
+                      contentPadding: EdgeInsets.zero,
                       leading: const Icon(
                         Icons.date_range_outlined,
                         size: 40,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       title: const Text(
-                        "Validade Extintor",
+                        "Validade do Casco",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -306,12 +304,12 @@ class CadastroExtintor extends State<CadastroExtintorState>
                             : updatedDt2,
                         style: const TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontStyle: FontStyle.italic),
                       ),
                       trailing: const Icon(
                         Icons.arrow_drop_down,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       onTap: () {
                         setState(() {
@@ -320,239 +318,243 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       },
                     ),
                     const SizedBox(height: 20),
-                    Container(
-                      margin: const EdgeInsets.only(left: 20, right: 20),
-                      child: TextFormField(
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 18,
-                        ),
-                        readOnly: true,
-                        decoration: InputDecoration(
-                          labelText: 'Tamanho Extintor',
-                          hintText: controller.selectedTamanho,
-                          labelStyle: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                          prefixIcon: const Icon(
-                            Ionicons.resize_outline,
-                            color: Colors.white,
-                            size: 40,
-                          ),
-                          suffixIcon: InkWell(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: Text(
-                                            'Tamanho Extintor',
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontStyle: FontStyle.italic,
-                                            ),
-                                          ),
-                                        ),
-                                        const Divider(
-                                          color: Colors.black,
-                                          thickness: 2,
-                                        ),
-                                        InkWell(
-                                          child: ListTile(
-                                            title: const Text('4 Kg'),
-                                            selected: controller.selectedTamanho == '4 Kg',
-                                          ),
-                                          onTap: () {
-                                            setState(() {
-                                              controller.selectedTamanho = '4 Kg';
-                                                  4.toString();
-                                            });
-                                            Navigator.pop(context);
-                                          },
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              controller.selectedTamanho = '6 Kg';
-                                                  6.toString();
-                                            });
-                                            Navigator.pop(context);
-                                          },
-                                          child: ListTile(
-                                            title: const Text('6 Kg'),
-                                            selected: controller.selectedTamanho == '6 Kg',
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              controller.selectedTamanho = '8 Kg';
-                                                  8.toString();
-                                            });
-                                            Navigator.pop(context);
-                                          },
-                                          child: ListTile(
-                                            title: const Text('8 Kg'),
-                                            selected: controller.selectedTamanho == '8 Kg',
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              controller.selectedTamanho = '10 Kg';
-                                            });
-                                            Navigator.pop(context);
-                                          },
-                                          child: ListTile(
-                                            title: const Text('10 Kg'),
-                                            selected:
-                                                controller.selectedTamanho == '10 Kg',
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                            child: const Icon(
-                              Icons.arrow_drop_down,
-                              color: Colors.white,
-                            ),
-                            
-                          ),
-                        ),
-                        controller:
-                            TextEditingController(text: controller.selectedTamanho),
+                    TextFormField(
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 18,
                       ),
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        labelText: 'Tamanho Extintor',
+                        hintText: controller.selectedTamanho,
+                        labelStyle: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                        prefixIcon: const Icon(
+                          Ionicons.resize_outline,
+                          color: Colors.black,
+                          size: 40,
+                        ),
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Text(
+                                          'Tamanho Extintor',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontStyle: FontStyle.italic,
+                                          ),
+                                        ),
+                                      ),
+                                      const Divider(
+                                        color: Colors.black,
+                                        thickness: 2,
+                                      ),
+                                      InkWell(
+                                        child: ListTile(
+                                          title: const Text('4 Kg'),
+                                          selected:
+                                              controller.selectedTamanho ==
+                                                  '4 Kg',
+                                        ),
+                                        onTap: () {
+                                          setState(() {
+                                            controller.selectedTamanho = '4 Kg';
+                                          });
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            controller.selectedTamanho = '6 Kg';
+                                          });
+                                          Navigator.pop(context);
+                                        },
+                                        child: ListTile(
+                                          title: const Text('6 Kg'),
+                                          selected:
+                                              controller.selectedTamanho ==
+                                                  '6 Kg',
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            controller.selectedTamanho = '8 Kg';
+                                          });
+                                          Navigator.pop(context);
+                                        },
+                                        child: ListTile(
+                                          title: const Text('8 Kg'),
+                                          selected:
+                                              controller.selectedTamanho ==
+                                                  '8 Kg',
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            controller.selectedTamanho =
+                                                '10 Kg';
+                                          });
+                                          Navigator.pop(context);
+                                        },
+                                        child: ListTile(
+                                          title: const Text('10 Kg'),
+                                          selected:
+                                              controller.selectedTamanho ==
+                                                  '10 Kg',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: const Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      controller: TextEditingController(
+                          text: controller.selectedTamanho),
                     ),
                     const SizedBox(height: 20),
-                    Container(
-                      margin: const EdgeInsets.only(left: 20, right: 20),
-                      child: TextFormField(
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 18,
-                        ),
-                        readOnly: true,
-                        decoration: InputDecoration(
-                          labelText: 'Tipo Extintor',
-                          labelStyle: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                          prefixIcon: const Icon(
-                            Ionicons.flame_outline,
-                            color: Colors.white,
-                            size: 40,
-                          ),
-                          suffixIcon: InkWell(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: Text(
-                                            'Tipo Extintor',
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontStyle: FontStyle.italic,
-                                            ),
-                                          ),
-                                        ),
-                                        const Divider(
-                                          color: Colors.black,
-                                          thickness: 2,
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              controller.selectedTipo = 'Tipo A';
-                                            });
-                                            Navigator.pop(context);
-                                          },
-                                          child: ListTile(
-                                            title: const Text('Tipo A'),
-                                            selected: controller.selectedTipo == 'Tipo A',
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              controller.selectedTipo = 'Tipo BC';
-                                            });
-                                            Navigator.pop(context);
-                                          },
-                                          child: ListTile(
-                                            title: const Text('Tipo BC'),
-                                            selected: controller.selectedTipo == 'Tipo BC',
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              controller.selectedTipo = 'Tipo ABC';
-                                            });
-                                            Navigator.pop(context);
-                                          },
-                                          child: ListTile(
-                                            title: const Text('Tipo ABC'),
-                                            selected:
-                                                controller.selectedTipo == 'Tipo ABC',
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              controller.selectedTipo = 'Tipo K';
-                                            });
-                                            Navigator.pop(context);
-                                          },
-                                          child: ListTile(
-                                            title: const Text('Tipo K'),
-                                            selected: controller.selectedTipo == 'Tipo K',
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              controller.selectedTipo = 'Tipo CO²';
-                                            });
-                                            Navigator.pop(context);
-                                          },
-                                          child: ListTile(
-                                            title: const Text('Tipo CO²'),
-                                            selected:
-                                                controller.selectedTipo == 'Tipo CO²',
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                            child: const Icon(
-                              Icons.arrow_drop_down,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        controller: TextEditingController(text: controller.selectedTipo),
+                    TextFormField(
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 18,
                       ),
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        labelText: 'Tipo Extintor',
+                        labelStyle: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                        prefixIcon: const Icon(
+                          Ionicons.flame_outline,
+                          color: Colors.black,
+                          size: 40,
+                        ),
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Text(
+                                          'Tipo Extintor',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontStyle: FontStyle.italic,
+                                          ),
+                                        ),
+                                      ),
+                                      const Divider(
+                                        color: Colors.black,
+                                        thickness: 2,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            controller.selectedTipo = 'Tipo A';
+                                          });
+                                          Navigator.pop(context);
+                                        },
+                                        child: ListTile(
+                                          title: const Text('Tipo A'),
+                                          selected: controller.selectedTipo ==
+                                              'Tipo A',
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            controller.selectedTipo = 'Tipo BC';
+                                          });
+                                          Navigator.pop(context);
+                                        },
+                                        child: ListTile(
+                                          title: const Text('Tipo BC'),
+                                          selected: controller.selectedTipo ==
+                                              'Tipo BC',
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            controller.selectedTipo =
+                                                'Tipo ABC';
+                                          });
+                                          Navigator.pop(context);
+                                        },
+                                        child: ListTile(
+                                          title: const Text('Tipo ABC'),
+                                          selected: controller.selectedTipo ==
+                                              'Tipo ABC',
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            controller.selectedTipo = 'Tipo K';
+                                          });
+                                          Navigator.pop(context);
+                                        },
+                                        child: ListTile(
+                                          title: const Text('Tipo K'),
+                                          selected: controller.selectedTipo ==
+                                              'Tipo K',
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            controller.selectedTipo =
+                                                'Tipo CO²';
+                                          });
+                                          Navigator.pop(context);
+                                        },
+                                        child: ListTile(
+                                          title: const Text('Tipo CO²'),
+                                          selected: controller.selectedTipo ==
+                                              'Tipo CO²',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: const Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      controller:
+                          TextEditingController(text: controller.selectedTipo),
                     ),
                     const SizedBox(height: 15),
                     Container(

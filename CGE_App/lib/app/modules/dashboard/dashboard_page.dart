@@ -47,6 +47,7 @@ class DashboardPage extends GetView<DashboardController> {
             index: controller.currentPage.value,
             children: [
               const Setor(),
+              const Extintor(),
               const SetorEmpresa(),
               if (obj!.tipo == 'empresa') ...[
                 PerfilPage(),
