@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
 import '../../../data/services/auth/service.dart';
-import '../../widget/graficoSetorModelo2.dart';
+import '../../widget/gaficoSetor.dart';
 import 'setores_controller.dart';
 
 DateTime selectedDate = DateTime.now();
@@ -319,7 +319,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
           children: <Widget>[
             SizedBox(
               height: 150,
-              child: DoughnutElevation(item),
+              child: ExportCircular(item),
             ),
             const Text(
               "title",
