@@ -167,7 +167,7 @@ class Vistoria extends State<VistoriaState>
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(bottom: 50, left: 20, right: 20),
+                margin: const EdgeInsets.only(bottom: 50, left: 30, right: 30),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),
@@ -177,6 +177,7 @@ class Vistoria extends State<VistoriaState>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListTile(
+                      contentPadding: EdgeInsets.zero,
                       leading: const Icon(
                         Icons.date_range_outlined,
                         size: 40,
@@ -197,361 +198,304 @@ class Vistoria extends State<VistoriaState>
                             color: Colors.black,
                             fontStyle: FontStyle.italic),
                       ),
-                      trailing: const Icon(
-                        Icons.arrow_drop_down,
-                        color: Colors.black,
+                    ),
+                    const Divider(color: Colors.black, thickness: 1),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.speed_outlined,
+                          color: Colors.black, size: 35),
+                      title: const Text(
+                        'Manômetro',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
                       ),
-                      onTap: () => _data(context),
+                      trailing: GestureDetector(
+                        onTap: () {
+                          setState(
+                            () {
+                              isSelectmanometro = !isSelectmanometro;
+                            },
+                          );
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          decoration: BoxDecoration(
+                            color: isSelectmanometro
+                                ? Colors.red
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(5.0),
+                            border: isSelectmanometro
+                                ? null
+                                : Border.all(color: Colors.black54, width: 2),
+                          ),
+                          width: 25,
+                          height: 25,
+                          child: isSelectmanometro
+                              ? const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                )
+                              : null,
+                        ),
+                      ),
                     ),
                     const Divider(color: Colors.black, thickness: 1),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const SizedBox(width: 20),
-                        const Icon(Icons.speed_outlined,
-                            color: Colors.black, size: 35),
-                        const SizedBox(
-                          width: 20,
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.fire_extinguisher_outlined,
+                          color: Colors.black, size: 35),
+                      title: const Text(
+                        'Sinalização Parede',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
                         ),
-                        const Text(
-                          'Manômetro',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
+                      ),
+                      trailing: GestureDetector(
+                        onTap: () {
+                          setState(
+                            () {
+                              isSelectparede = !isSelectparede;
+                            },
+                          );
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          decoration: BoxDecoration(
+                            color: isSelectparede
+                                ? Colors.red
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(5.0),
+                            border: isSelectparede
+                                ? null
+                                : Border.all(color: Colors.black54, width: 2),
                           ),
+                          width: 25,
+                          height: 25,
+                          child: isSelectparede
+                              ? const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                )
+                              : null,
                         ),
-                        const SizedBox(width: 90),
-                        GestureDetector(
-                          onTap: () {
-                            setState(
-                              () {
-                                isSelectmanometro = !isSelectmanometro;
-                              },
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            decoration: BoxDecoration(
-                              color: isSelectmanometro
-                                  ? Colors.red
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(5.0),
-                              border: isSelectmanometro
-                                  ? null
-                                  : Border.all(color: Colors.black54, width: 2),
-                            ),
-                            width: 25,
-                            height: 25,
-                            child: isSelectmanometro
-                                ? const Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                  )
-                                : null,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     const Divider(color: Colors.black, thickness: 1),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const SizedBox(width: 20),
-                        const Icon(Icons.fire_extinguisher_outlined,
-                            color: Colors.black, size: 35),
-                        const SizedBox(
-                          width: 20,
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Ionicons.footsteps_outline,
+                          color: Colors.black, size: 35),
+                      title: const Text(
+                        'Sinalização Piso',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
                         ),
-                        const Text(
-                          'Sinalização Parede',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
+                      ),
+                      trailing: GestureDetector(
+                        onTap: () {
+                          setState(
+                            () {
+                              isSelectpiso = !isSelectpiso;
+                            },
+                          );
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          decoration: BoxDecoration(
+                            color:
+                                isSelectpiso ? Colors.red : Colors.transparent,
+                            borderRadius: BorderRadius.circular(5.0),
+                            border: isSelectpiso
+                                ? null
+                                : Border.all(color: Colors.black54, width: 2),
                           ),
+                          width: 25,
+                          height: 25,
+                          child: isSelectpiso
+                              ? const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                )
+                              : null,
                         ),
-                        const SizedBox(width: 23),
-                        GestureDetector(
-                          onTap: () {
-                            setState(
-                              () {
-                                isSelectparede = !isSelectparede;
-                              },
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            decoration: BoxDecoration(
-                              color: isSelectparede
-                                  ? Colors.red
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(5.0),
-                              border: isSelectparede
-                                  ? null
-                                  : Border.all(color: Colors.black54, width: 2),
-                            ),
-                            width: 25,
-                            height: 25,
-                            child: isSelectparede
-                                ? const Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                  )
-                                : null,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     const Divider(color: Colors.black, thickness: 1),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const SizedBox(width: 20),
-                        const Icon(Ionicons.footsteps_outline,
-                            color: Colors.black, size: 35),
-                        const SizedBox(
-                          width: 20,
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Ionicons.enter_outline,
+                          color: Colors.black, size: 35),
+                      title: const Text(
+                        'Acesso',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
                         ),
-                        const Text(
-                          'Sinalização Piso',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
+                      ),
+                      trailing: GestureDetector(
+                        onTap: () {
+                          setState(
+                            () {
+                              isSelectacesso = !isSelectacesso;
+                            },
+                          );
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          decoration: BoxDecoration(
+                            color: isSelectacesso
+                                ? Colors.red
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(5.0),
+                            border: isSelectacesso
+                                ? null
+                                : Border.all(color: Colors.black54, width: 2),
                           ),
+                          width: 25,
+                          height: 25,
+                          child: isSelectacesso
+                              ? const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                )
+                              : null,
                         ),
-                        const SizedBox(width: 37),
-                        GestureDetector(
-                          onTap: () {
-                            setState(
-                              () {
-                                isSelectpiso = !isSelectpiso;
-                              },
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            decoration: BoxDecoration(
-                              color: isSelectpiso
-                                  ? Colors.red
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(5.0),
-                              border: isSelectpiso
-                                  ? null
-                                  : Border.all(color: Colors.black54, width: 2),
-                            ),
-                            width: 25,
-                            height: 25,
-                            child: isSelectpiso
-                                ? const Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                  )
-                                : null,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     const Divider(color: Colors.black, thickness: 1),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const SizedBox(width: 20),
-                        const Icon(Ionicons.enter_outline,
-                            color: Colors.black, size: 35),
-                        const SizedBox(
-                          width: 20,
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Ionicons.headset_outline,
+                          color: Colors.black, size: 35),
+                      title: const Text(
+                        'Mangueira',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
                         ),
-                        const Text(
-                          'Acesso',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
+                      ),
+                      trailing: GestureDetector(
+                        onTap: () {
+                          setState(
+                            () {
+                              isSelectmangueira = !isSelectmangueira;
+                            },
+                          );
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          decoration: BoxDecoration(
+                            color: isSelectmangueira
+                                ? Colors.red
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(5.0),
+                            border: isSelectmangueira
+                                ? null
+                                : Border.all(color: Colors.black54, width: 2),
                           ),
+                          width: 25,
+                          height: 25,
+                          child: isSelectmangueira
+                              ? const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                )
+                              : null,
                         ),
-                        const SizedBox(width: 112),
-                        GestureDetector(
-                          onTap: () {
-                            setState(
-                              () {
-                                isSelectacesso = !isSelectacesso;
-                              },
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            decoration: BoxDecoration(
-                              color: isSelectacesso
-                                  ? Colors.red
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(5.0),
-                              border: isSelectacesso
-                                  ? null
-                                  : Border.all(color: Colors.black54, width: 2),
-                            ),
-                            width: 25,
-                            height: 25,
-                            child: isSelectacesso
-                                ? const Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                  )
-                                : null,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     const Divider(color: Colors.black, thickness: 1),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const SizedBox(width: 20),
-                        const Icon(Ionicons.headset_outline,
-                            color: Colors.black, size: 35),
-                        const SizedBox(
-                          width: 20,
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Ionicons.headset_outline,
+                          color: Colors.black, size: 35),
+                      title: const Text(
+                        'Lacre',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
                         ),
-                        const Text(
-                          'Mangueira',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
+                      ),
+                      trailing: GestureDetector(
+                        onTap: () {
+                          setState(
+                            () {
+                              isSelectlacre = !isSelectlacre;
+                            },
+                          );
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          decoration: BoxDecoration(
+                            color:
+                                isSelectlacre ? Colors.red : Colors.transparent,
+                            borderRadius: BorderRadius.circular(5.0),
+                            border: isSelectlacre
+                                ? null
+                                : Border.all(color: Colors.black54, width: 2),
                           ),
+                          width: 25,
+                          height: 25,
+                          child: isSelectlacre
+                              ? const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                )
+                              : null,
                         ),
-                        const SizedBox(width: 82),
-                        GestureDetector(
-                          onTap: () {
-                            setState(
-                              () {
-                                isSelectmangueira = !isSelectmangueira;
-                              },
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            decoration: BoxDecoration(
-                              color: isSelectmangueira
-                                  ? Colors.red
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(5.0),
-                              border: isSelectmangueira
-                                  ? null
-                                  : Border.all(color: Colors.black54, width: 2),
-                            ),
-                            width: 25,
-                            height: 25,
-                            child: isSelectmangueira
-                                ? const Icon(
-                                    Icons.check,
-                                    color: Colors.black,
-                                  )
-                                : null,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     const Divider(color: Colors.black, thickness: 1),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const SizedBox(width: 20),
-                        const Icon(Ionicons.headset_outline,
-                            color: Colors.black, size: 35),
-                        const SizedBox(
-                          width: 20,
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Ionicons.thumbs_up_outline,
+                          color: Colors.black, size: 35),
+                      title: const Text(
+                        'Lacre',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
                         ),
-                        const Text(
-                          'Lacre',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
+                      ),
+                      trailing: GestureDetector(
+                        onTap: () {
+                          setState(
+                            () {
+                              isSelectaprovado = !isSelectaprovado;
+                            },
+                          );
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          decoration: BoxDecoration(
+                            color:
+                                isSelectaprovado ? Colors.red : Colors.transparent,
+                            borderRadius: BorderRadius.circular(5.0),
+                            border: isSelectaprovado
+                                ? null
+                                : Border.all(color: Colors.black54, width: 2),
                           ),
+                          width: 25,
+                          height: 25,
+                          child: isSelectaprovado
+                              ? const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                )
+                              : null,
                         ),
-                        const SizedBox(width: 126),
-                        GestureDetector(
-                          onTap: () {
-                            setState(
-                              () {
-                                isSelectlacre = !isSelectlacre;
-                              },
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            decoration: BoxDecoration(
-                              color: isSelectlacre
-                                  ? Colors.red
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(5.0),
-                              border: isSelectlacre
-                                  ? null
-                                  : Border.all(color: Colors.black54, width: 2),
-                            ),
-                            width: 25,
-                            height: 25,
-                            child: isSelectlacre
-                                ? const Icon(
-                                    Icons.check,
-                                    color: Colors.black,
-                                  )
-                                : null,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Divider(color: Colors.black, thickness: 1),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const SizedBox(width: 20),
-                        const Icon(Ionicons.thumbs_up_outline,
-                            color: Colors.black),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        const Text(
-                          'Aprovado',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(width: 88),
-                        GestureDetector(
-                          onTap: () {
-                            setState(
-                              () {
-                                isSelectaprovado = !isSelectaprovado;
-                              },
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            decoration: BoxDecoration(
-                              color: isSelectaprovado
-                                  ? Colors.red
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(5.0),
-                              border: isSelectaprovado
-                                  ? null
-                                  : Border.all(color: Colors.black54, width: 2),
-                            ),
-                            width: 25,
-                            height: 25,
-                            child: isSelectaprovado
-                                ? const Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                  )
-                                : null,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     const SizedBox(height: 30),
                     Container(

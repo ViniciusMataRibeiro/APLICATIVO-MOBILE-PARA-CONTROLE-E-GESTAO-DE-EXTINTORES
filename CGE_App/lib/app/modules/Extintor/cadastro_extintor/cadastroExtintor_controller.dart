@@ -83,7 +83,7 @@ class CadastroExtintorController extends GetxController {
       tipo: selectedTipo,
       ativo: true,
       setor_id: 1,
-      descricao: "teste",
+      descricao: "Extintor Ativo no setor id 1",
     );
 
     bool res = false;
