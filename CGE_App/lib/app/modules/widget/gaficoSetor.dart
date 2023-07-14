@@ -19,7 +19,7 @@ class _ExportState extends State {
 
   @override
   void initState() {
-    _tooltip = TooltipBehavior(enable: true, format: 'point.x : point.y%');
+    _tooltip = TooltipBehavior(enable: true, format: 'point.x : point.y Extintor');
     super.initState();
   }
 
@@ -32,18 +32,18 @@ class _ExportState extends State {
     return SfCircularChart(
       annotations: <CircularChartAnnotation>[
         CircularChartAnnotation(
-          widget: const Row(
+          widget: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                '1',
-                style: TextStyle(
+                dataMap['totalExtintores'].toString(),
+                style: const TextStyle(
                     fontSize: 25,
                     color: Colors.black,
                     fontWeight: FontWeight.bold),
               ),
-              Icon(Icons.fire_extinguisher, size: 30, color: Colors.black)
+              const Icon(Icons.fire_extinguisher, size: 30, color: Colors.black)
             ],
           ),
         )
@@ -58,33 +58,27 @@ class _ExportState extends State {
     return <DoughnutSeries<ChartSampleData, String>>[
       DoughnutSeries<ChartSampleData, String>(
         radius: '85%',
-        explode: true,
         explodeOffset: '8%',
         dataSource: <ChartSampleData>[
           if (dataMap['totalFuncional'] > 0)
             ChartSampleData(
                 x: 'Funcional',
                 y: dataMap['totalFuncional'],
-                text: '${dataMap['totalFuncional']}',
                 pointColor: Colors.green),
           if (dataMap['totalVencidos'] > 0)
             ChartSampleData(
                 x: 'Vencidos',
                 y: dataMap['totalVencidos'],
-                text: '${dataMap['totalVencidos']} ',
                 pointColor: Colors.red),
           if (dataMap['totalVencer'] > 0)
             ChartSampleData(
                 x: 'A Vencer',
                 y: dataMap['totalVencer'],
-                text: '${dataMap['totalVencer']}',
-                pointColor: Colors.deepOrange),
+                pointColor: const Color.fromARGB(255, 255, 215, 0)),
         ],
         xValueMapper: (ChartSampleData data, _) => data.x,
         yValueMapper: (ChartSampleData data, _) => data.y,
         pointColorMapper: (ChartSampleData data, _) => data.pointColor,
-        dataLabelMapper: (ChartSampleData data, _) => data.text,
-        legendIconType: LegendIconType.seriesType,
         dataLabelSettings: const DataLabelSettings(
             isVisible: true, labelPosition: ChartDataLabelPosition.inside),
       ),
@@ -95,9 +89,8 @@ class _ExportState extends State {
 class ChartSampleData {
   final String x;
   final num y;
-  final String text;
   final Color? pointColor;
 
   ChartSampleData(
-      {required this.x, required this.y, required this.text, this.pointColor});
+      {required this.x, required this.y, this.pointColor});
 }
