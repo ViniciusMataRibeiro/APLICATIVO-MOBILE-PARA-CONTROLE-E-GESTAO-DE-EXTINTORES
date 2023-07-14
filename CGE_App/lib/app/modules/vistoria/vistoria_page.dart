@@ -461,7 +461,7 @@ class Vistoria extends State<VistoriaState>
                       leading: const Icon(Ionicons.thumbs_up_outline,
                           color: Colors.black, size: 35),
                       title: const Text(
-                        'Lacre',
+                        'Aprovado',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,

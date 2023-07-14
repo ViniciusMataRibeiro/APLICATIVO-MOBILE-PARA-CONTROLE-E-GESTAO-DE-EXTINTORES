@@ -474,7 +474,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    content: Column(
+                                    content: Column(                                     
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         const Align(

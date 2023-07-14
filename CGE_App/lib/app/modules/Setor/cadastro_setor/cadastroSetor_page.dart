@@ -136,7 +136,7 @@ class CadastroSetor extends State<CadastroSetorState> {
                           style: const TextStyle(
                               wordSpacing: 1,
                               fontSize: 18,
-                              color: Colors.white),
+                              color: Colors.black),
                           decoration: const InputDecoration(
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.only(
