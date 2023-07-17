@@ -53,6 +53,7 @@ class Vistoria extends State<VistoriaState>
   bool isSelectlacre = false;
   bool isSelectaprovado = false;
 
+  // ignore: unused_element
   Future<void> _data(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -479,8 +480,9 @@ class Vistoria extends State<VistoriaState>
                           duration: const Duration(milliseconds: 400),
                           curve: Curves.fastLinearToSlowEaseIn,
                           decoration: BoxDecoration(
-                            color:
-                                isSelectaprovado ? Colors.red : Colors.transparent,
+                            color: isSelectaprovado
+                                ? Colors.red
+                                : Colors.transparent,
                             borderRadius: BorderRadius.circular(5.0),
                             border: isSelectaprovado
                                 ? null

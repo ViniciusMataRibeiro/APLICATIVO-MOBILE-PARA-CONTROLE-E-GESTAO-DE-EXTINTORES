@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../Empresa/cadastro_empresa/CadastroEmpresa_controller.dart';
+import '../Empresa/cadastro_empresa/cadastroEmpresa_controller.dart';
 import '../Empresa/perfil_empresa/perfilEmpresa_controller.dart';
 import '../Extintor/cadastro_extintor/cadastroExtintor_controller.dart';
 import '../Extintor/extintores/extintores_controller.dart';
@@ -30,7 +30,7 @@ class SplashBinding implements Bindings {
 
     Get.lazyPut<CadastroSetorController>(() => CadastroSetorController());
     Get.lazyPut<SetorController>(() => SetorController());
-    
+
     Get.lazyPut<SplashController>(() => SplashController());
 
     Get.lazyPut<PerfilTecnicoController>(() => PerfilTecnicoController());

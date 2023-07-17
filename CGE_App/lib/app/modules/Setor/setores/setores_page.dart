@@ -54,6 +54,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
 
   DateTime selectedDate = DateTime.now();
 
+  // ignore: unused_element
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,

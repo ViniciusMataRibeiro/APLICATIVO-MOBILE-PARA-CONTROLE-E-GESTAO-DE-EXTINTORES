@@ -3,6 +3,9 @@ import 'package:cge_app/app/data/Models/setor_request.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../Models/empresa_request_model.dart';
+import '../Models/empresa_response_model.dart';
+import '../Models/endereco_request_model.dart';
 import '../Models/extintor_request_model.dart';
 import '../Models/tecnico_request.dart';
 import '../Models/user.dart';
@@ -12,7 +15,7 @@ import '../services/config/service.dart';
 
 class Api {
   final _configService = Get.find<ConfigService>();
-  final baseUrl = "http://192.168.0.134:3333";
+  final baseUrl = "http://192.168.0.116:3333";
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     var url = Uri.parse("$baseUrl/login");
@@ -180,16 +183,16 @@ class Api {
 
   Future<bool> insertExtintor(ExtintorRequestModel extintor) async {
     var url = Uri.parse("$baseUrl/extintor");
-    var response = await http.post(url, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'authorization': 'Bearer ${_configService.token}',
-    },
-    body: jsonEncode(extintor.toJson()));
-    if(response.statusCode == 201){
+    var response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(extintor.toJson()));
+    if (response.statusCode == 201) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -197,18 +200,80 @@ class Api {
   Future<bool> updateExtintor(ExtintorRequestModel extintor) async {
     var url = Uri.parse("$baseUrl/extintor/${extintor.id}");
     var response = await http.put(url,
-     headers: {
+        headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'authorization': 'Bearer ${_configService.token}',
         },
         body: jsonEncode(extintor.toJson()));
-      if(response.statusCode == 200) {
-        return true;
-      }
-      else{
-        return false;
-      }
-        
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<EmpresaResponseModel> insertEmpresa(EmpresaResquestModel data) async {
+    var url = Uri.parse("$baseUrl/empresa");
+    var response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(data.toJson()));
+    if (response.statusCode == 200) {
+      return EmpresaResponseModel.fromJson(jsonDecode(response.body));
+    } else {
+      return EmpresaResponseModel(id: 0, nome: '', email: '', telefone: '');
+    }
+  }
+
+  Future<EmpresaResponseModel> updateEmpresa(EmpresaResquestModel data) async {
+    var url = Uri.parse("$baseUrl/empresa/${data.id}");
+    var response = await http.put(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(data.toJson()));
+    if (response.statusCode == 200) {
+      return EmpresaResponseModel.fromJson(jsonDecode(response.body));
+    } else {
+      return EmpresaResponseModel(id: 0, nome: '', email: '', telefone: '');
+    }
+  }
+
+  Future<bool> insertEndereco(EnderecoRequestModel data) async {
+    var url = Uri.parse("$baseUrl/endereco");
+    var response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(data.toJson()));
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> updateEndereco(EnderecoRequestModel data) async {
+    var url = Uri.parse("$baseUrl/endereco/${data.id}");
+    var response = await http.put(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(data.toJson()));
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
