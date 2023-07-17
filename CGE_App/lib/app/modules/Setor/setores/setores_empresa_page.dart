@@ -21,7 +21,7 @@ List dados = [];
 class SetorEmpresa extends GetView<SetorController> {
   const SetorEmpresa({super.key});
 
- @override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: themeData,
@@ -56,6 +56,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
 
   DateTime selectedDate = DateTime.now();
 
+  // ignore: unused_element
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -298,7 +299,6 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                       _buildCardGrafico(item),
                     ],
                   ),
-                  
                 ],
               ),
             ),

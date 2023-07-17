@@ -7,6 +7,8 @@ import 'package:cge_app/app/modules/vistoria/vistoria_page.dart';
 import 'package:cge_app/app/routes/routes.dart';
 import 'package:get/get.dart';
 
+import '../modules/Admin/admin_binding.dart';
+import '../modules/Admin/admin_page.dart';
 import '../modules/Extintor/cadastro_extintor/cadastroExtintor_binding.dart';
 import '../modules/Extintor/cadastro_extintor/cadastroExtintor_page.dart';
 import '../modules/Setor/cadastro_setor/cadastroSetor_binding.dart';
@@ -50,6 +52,11 @@ abstract class AppPages {
       name: Routes.perfiltecnico,
       page: () => PerfilTecnicoPage(),
       binding: PerfilTecnicoBinding(),
+    ),
+    GetPage(
+      name: Routes.perfiladmin,
+      page: () => AdminPage(),
+      binding: AdminBinding(),
     ),
     GetPage(
       name: Routes.cadExtintor,

@@ -1,39 +1,71 @@
 // ignore_for_file: file_names
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
-import 'CadastroEmpresa_controller.dart';
+import '../../../core/app_theme.dart';
+import 'cadastroEmpresa_controller.dart';
 
 class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
   const CadastroEmpresaPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: themeData,
+      debugShowCheckedModeBanner: false,
+      home: const Directionality(
+        textDirection: ui.TextDirection.ltr,
+        child: CadastroEmpresaState(
+          title: '',
+        ),
+      ),
+    );
+  }
+}
+
+class CadastroEmpresaState extends StatefulWidget {
+  const CadastroEmpresaState({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  CadastroEmpresa createState() => CadastroEmpresa();
+}
+
+class CadastroEmpresa extends State<CadastroEmpresaState> {
+  final CadastroEmpresaController controller =
+      Get.put(CadastroEmpresaController());
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 175, 31, 21),
         title: Row(
           children: [
-            Container(
-              margin: const EdgeInsets.only(right: 30),
-              width: 40,
-              height: 40,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100.0),
-                child: Image.asset(
-                  'assets/image/cge.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            const Text(
-              'Cadastro Empresa',
-              style: TextStyle(
-                fontSize: 25,
+            IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
                 color: Colors.white,
-                fontStyle: FontStyle.italic,
               ),
-            )
+              onPressed: () {
+                Get.offAllNamed('/perfiladmin');
+              },
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              width: size.width * 0.05,
+              height: 40,
+            ),
+            Text(
+              controller.alterando ? 'Editar Empresa' : 'Cadastro Empresa',
+              style: const TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic),
+            ),
           ],
         ),
         centerTitle: true,
@@ -42,7 +74,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
         child: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets/image/registro.jpeg'),
+                  image: AssetImage('assets/image/LogOut.png'),
                   fit: BoxFit.cover)),
           child: ListView(
             children: [
@@ -79,6 +111,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                     ),
                     Form(
                       child: TextFormField(
+                        controller: controller.name,
                         style: const TextStyle(
                           fontSize: 18,
                           color: Colors.white,
@@ -97,6 +130,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                     ),
                     Form(
                       child: TextFormField(
+                        controller: controller.email,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -110,6 +144,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                     ),
                     Form(
                         child: TextFormField(
+                      controller: controller.password,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -122,6 +157,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                     )),
                     Form(
                         child: TextFormField(
+                      controller: controller.telefone,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -161,6 +197,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                       ),
                       Form(
                           child: TextFormField(
+                        controller: controller.cidade,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -173,6 +210,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                       )),
                       Form(
                           child: TextFormField(
+                        controller: controller.cep,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -185,6 +223,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                       )),
                       Form(
                           child: TextFormField(
+                        controller: controller.bairro,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -197,6 +236,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                       )),
                       Form(
                           child: TextFormField(
+                        controller: controller.rua,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -209,6 +249,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                       )),
                       Form(
                           child: TextFormField(
+                        controller: controller.numero,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -216,7 +257,7 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                         decoration: const InputDecoration(
                           labelStyle:
                               TextStyle(color: Colors.white, fontSize: 15),
-                          labelText: 'Numero',
+                          labelText: 'Número',
                         ),
                       )),
                     ],
@@ -227,7 +268,27 @@ class CadastroEmpresaPage extends GetView<CadastroEmpresaController> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 50),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    var result = await controller.goToInsert();
+                    if (result == 'true') {
+                      controller.toast('Gravado com sucesso!');
+                    } else {
+                      final snackBar = SnackBar(
+                        elevation: 0,
+                        behavior: SnackBarBehavior.floating,
+                        backgroundColor: Colors.transparent,
+                        content: AwesomeSnackbarContent(
+                          title: 'Alerta',
+                          message: result.toString(),
+                          contentType: ContentType.failure,
+                        ),
+                      );
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(snackBar);
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     shape: const RoundedRectangleBorder(

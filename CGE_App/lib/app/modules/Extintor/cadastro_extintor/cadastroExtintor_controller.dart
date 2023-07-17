@@ -15,6 +15,7 @@ class CadastroExtintorController extends GetxController {
   String selectedTipo = '';
 
   var id = 0;
+  // ignore: non_constant_identifier_names
   var setor_id = 0;
 
   var nome = TextEditingController(text: '');
@@ -46,7 +47,7 @@ class CadastroExtintorController extends GetxController {
     } else {
       dt = DateTime.now();
       dt2 = DateTime.now();
-      
+
       alterando = false;
     }
 
@@ -79,7 +80,7 @@ class CadastroExtintorController extends GetxController {
       nome: nome.text,
       validadeCasco: DateFormat('dd/MM/yyyy').parse(validadeCasco.text),
       validadeExtintor: DateFormat('dd/MM/yyyy').parse(validadeExtintor.text),
-      tamanho: int.parse(selectedTamanho.replaceAll(RegExp(r'[^0-9]'),'')) ,
+      tamanho: int.parse(selectedTamanho.replaceAll(RegExp(r'[^0-9]'), '')),
       tipo: selectedTipo,
       ativo: true,
       setor_id: 1,
