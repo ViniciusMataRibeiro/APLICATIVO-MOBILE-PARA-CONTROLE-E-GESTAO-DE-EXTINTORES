@@ -229,7 +229,7 @@ class Vistoria extends State<VistoriaState>
                             borderRadius: BorderRadius.circular(5.0),
                             border: isSelectmanometro
                                 ? null
-                                : Border.all(color: Colors.black54, width: 2),
+                                : Border.all(color: Colors.black, width: 2),
                           ),
                           width: 25,
                           height: 25,
@@ -272,7 +272,7 @@ class Vistoria extends State<VistoriaState>
                             borderRadius: BorderRadius.circular(5.0),
                             border: isSelectparede
                                 ? null
-                                : Border.all(color: Colors.black54, width: 2),
+                                : Border.all(color: Colors.black, width: 2),
                           ),
                           width: 25,
                           height: 25,
@@ -314,7 +314,7 @@ class Vistoria extends State<VistoriaState>
                             borderRadius: BorderRadius.circular(5.0),
                             border: isSelectpiso
                                 ? null
-                                : Border.all(color: Colors.black54, width: 2),
+                                : Border.all(color: Colors.black, width: 2),
                           ),
                           width: 25,
                           height: 25,
@@ -357,7 +357,7 @@ class Vistoria extends State<VistoriaState>
                             borderRadius: BorderRadius.circular(5.0),
                             border: isSelectacesso
                                 ? null
-                                : Border.all(color: Colors.black54, width: 2),
+                                : Border.all(color: Colors.black, width: 2),
                           ),
                           width: 25,
                           height: 25,
@@ -373,8 +373,18 @@ class Vistoria extends State<VistoriaState>
                     const Divider(color: Colors.black, thickness: 1),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      leading: const Icon(Ionicons.headset_outline,
-                          color: Colors.black, size: 35),
+                      leading: Container(
+                        width: size.width * 0.1,
+                        height: 45,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image:
+                                AssetImage('assets/image/icon_mangueira.png'),
+                            fit: BoxFit
+                                .contain, // Ajuste da imagem dentro do contêiner
+                          ),
+                        ),
+                      ),
                       title: const Text(
                         'Mangueira',
                         style: TextStyle(
@@ -400,7 +410,7 @@ class Vistoria extends State<VistoriaState>
                             borderRadius: BorderRadius.circular(5.0),
                             border: isSelectmangueira
                                 ? null
-                                : Border.all(color: Colors.black54, width: 2),
+                                : Border.all(color: Colors.black, width: 2),
                           ),
                           width: 25,
                           height: 25,
@@ -416,8 +426,18 @@ class Vistoria extends State<VistoriaState>
                     const Divider(color: Colors.black, thickness: 1),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      leading: const Icon(Ionicons.headset_outline,
-                          color: Colors.black, size: 35),
+                      leading: Container(
+                        width: size.width * 0.1,
+                        height: size.height*0.1,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image:
+                                AssetImage('assets/image/icon_lacre.png'),
+                            fit: BoxFit
+                                .contain, // Ajuste da imagem dentro do contêiner
+                          ),
+                        ),
+                      ),
                       title: const Text(
                         'Lacre',
                         style: TextStyle(
@@ -442,7 +462,7 @@ class Vistoria extends State<VistoriaState>
                             borderRadius: BorderRadius.circular(5.0),
                             border: isSelectlacre
                                 ? null
-                                : Border.all(color: Colors.black54, width: 2),
+                                : Border.all(color: Colors.black, width: 2),
                           ),
                           width: 25,
                           height: 25,
@@ -456,47 +476,48 @@ class Vistoria extends State<VistoriaState>
                       ),
                     ),
                     const Divider(color: Colors.black, thickness: 1),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: const Icon(Ionicons.thumbs_up_outline,
-                          color: Colors.black, size: 35),
-                      title: const Text(
-                        'Aprovado',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                        ),
-                      ),
-                      trailing: GestureDetector(
-                        onTap: () {
-                          setState(
-                            () {
-                              isSelectaprovado = !isSelectaprovado;
-                            },
-                          );
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 400),
-                          curve: Curves.fastLinearToSlowEaseIn,
-                          decoration: BoxDecoration(
-                            color:
-                                isSelectaprovado ? Colors.red : Colors.transparent,
-                            borderRadius: BorderRadius.circular(5.0),
-                            border: isSelectaprovado
-                                ? null
-                                : Border.all(color: Colors.black54, width: 2),
-                          ),
-                          width: 25,
-                          height: 25,
-                          child: isSelectaprovado
-                              ? const Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                )
-                              : null,
-                        ),
-                      ),
-                    ),
+                    // ListTile(
+                    //   contentPadding: EdgeInsets.zero,
+                    //   leading: const Icon(Ionicons.thumbs_up_outline,
+                    //       color: Colors.black, size: 35),
+                    //   title: const Text(
+                    //     'Aprovado',
+                    //     style: TextStyle(
+                    //       fontSize: 20,
+                    //       color: Colors.black,
+                    //     ),
+                    //   ),
+                    //   trailing: GestureDetector(
+                    //     onTap: () {
+                    //       setState(
+                    //         () {
+                    //           isSelectaprovado = !isSelectaprovado;
+                    //         },
+                    //       );
+                    //     },
+                    //     child: AnimatedContainer(
+                    //       duration: const Duration(milliseconds: 400),
+                    //       curve: Curves.fastLinearToSlowEaseIn,
+                    //       decoration: BoxDecoration(
+                    //         color: isSelectaprovado
+                    //             ? Colors.red
+                    //             : Colors.transparent,
+                    //         borderRadius: BorderRadius.circular(5.0),
+                    //         border: isSelectaprovado
+                    //             ? null
+                    //             : Border.all(color: Colors.black, width: 2),
+                    //       ),
+                    //       width: 25,
+                    //       height: 25,
+                    //       child: isSelectaprovado
+                    //           ? const Icon(
+                    //               Icons.check,
+                    //               color: Colors.white,
+                    //             )
+                    //           : null,
+                    //     ),
+                    //   ),
+                    // ),
                     const SizedBox(height: 30),
                     Container(
                       padding: const EdgeInsets.all(20.0),

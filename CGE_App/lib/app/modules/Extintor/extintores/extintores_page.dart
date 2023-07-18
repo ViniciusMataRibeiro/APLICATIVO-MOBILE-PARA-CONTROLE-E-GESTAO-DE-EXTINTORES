@@ -224,14 +224,28 @@ class ExtintorPage extends State<ExtintorState>
               },
             );
             return Scaffold(
-              body: Center(
-                child: _mostradados(dados: dados),
+              body: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/image/LogOut.png'),
+                      fit: BoxFit.cover),
+                ),
+                child: Center(
+                  child: _mostradados(dados: dados),
+                ),
               ),
             );
           } else {
-            return const Scaffold(
-              body: Center(
-                child: Text('Nenhum dado encontrado'),
+            return Scaffold(
+              body: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/image/LogOut.png'),
+                      fit: BoxFit.cover),
+                ),
+                child: const Center(
+                  child: Text('Nenhum dado encontrado'),
+                ),
               ),
             );
           }
@@ -256,7 +270,12 @@ class ExtintorPage extends State<ExtintorState>
           onTap: () {},
           child: Container(
             margin: const EdgeInsets.all(10),
-            child: Card(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/image/LogOut.png'),
+                fit: BoxFit.cover),
+          ),
+          child: Card(
               elevation: 5,
               child: Column(
                 children: [
@@ -270,7 +289,7 @@ class ExtintorPage extends State<ExtintorState>
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFB2505C),
+                          color: Colors.black,
                         ),
                       ),
                       Flexible(
@@ -296,9 +315,6 @@ class ExtintorPage extends State<ExtintorState>
                         ),
                         Text(
                           'Próxima Manutenção: ${item['proximaManutencao']}',
-                        ),
-                        Text(
-                          'Descrição: ${item['descricao']}',
                         ),
                       ],
                     ),
