@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../../Icones/icones_personalizado.dart';
 import '../../../data/services/auth/service.dart';
 
 String nome = "";
@@ -53,6 +52,7 @@ class PerfilTecnicoPage extends GetView<PerfilTecnicoController> {
                       const SizedBox(height: 30),
                       const Icon(Icons.person_pin,
                           size: 150, color: Colors.white),
+                      const SizedBox(height: 5),
                       Text(
                         nome,
                         style: const TextStyle(

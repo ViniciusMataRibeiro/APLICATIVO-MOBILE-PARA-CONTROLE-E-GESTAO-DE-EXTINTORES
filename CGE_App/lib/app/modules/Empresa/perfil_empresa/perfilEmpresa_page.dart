@@ -47,8 +47,10 @@ class PerfilPage extends GetView<PerfilEmpresaController> {
                 child: Center(
                   child: Column(
                     children: [
+                      const SizedBox(height: 30),
                       const Icon(Icons.person_pin,
                           size: 150, color: Colors.white),
+                      const SizedBox(height: 5),
                       Text(
                         nome,
                         style: const TextStyle(
@@ -60,69 +62,115 @@ class PerfilPage extends GetView<PerfilEmpresaController> {
                   ),
                 ),
               ),
-              Column(
-                children: [
-                  Card(
-                    margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
-                    color: const Color(0xFFD7CCC8),
-                    elevation: 5,
-                    child: ListTile(
-                      title: const Text(
-                        "Logout",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
+              Container(
+                padding: const EdgeInsets.all(0),
+                margin: const EdgeInsets.only(
+                    top: 40, left: 40, right: 40, bottom: 40),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(
+                        Icons.engineering_sharp,
+                        size: 40,
+                        color: Colors.black,
                       ),
-                      leading: const Icon(Icons.person_pin, size: 40),
-                      trailing: const Icon(Icons.logout, color: Colors.black),
+                      title: const Text(
+                        "Consultar Técnicos",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      isThreeLine: false,
+                      trailing: const Icon(Icons.arrow_forward_ios,
+                          color: Colors.black),
                       onTap: () {
                         controller.goTologout();
                       },
                     ),
-                  ),
-                  Card(
-                    margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
-                    color: const Color(0xFFD7CCC8),
-                    elevation: 5,
-                    child: ListTile(
-                      title: const Text(
-                        "Cadastrar Técnico",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
+                    const Divider(color: Colors.black, thickness: 1),
+                    const SizedBox(height: 15),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
                       leading: const Icon(
-                        Icons.person_add_alt_1_rounded,
+                        Ionicons.document_text_outline,
                         size: 40,
+                        color: Colors.black,
                       ),
+                      title: const Text(
+                        "Consultar Vistoria",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      isThreeLine: false,
+                      trailing: const Icon(Icons.arrow_forward_ios,
+                          color: Colors.black),
+                      onTap: () {
+                        controller.goTologout();
+                      },
+                    ),
+                    const Divider(color: Colors.black, thickness: 1),
+                    const SizedBox(height: 15),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(
+                        Ionicons.earth_outline,
+                        size: 40,
+                        color: Colors.black,
+                      ),
+                      title: const Text(
+                        "Editar Endereço",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      isThreeLine: false,
                       trailing: const Icon(
-                        Icons.arrow_forward,
+                        Icons.arrow_forward_ios,
                         color: Colors.black,
                       ),
                       onTap: () {
-                        Get.toNamed('/cadTecnico');
+                        controller.goTologout();
                       },
                     ),
-                  ),
-                  Card(
-                    margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
-                    color: const Color(0xFFD7CCC8),
-                    elevation: 5,
-                    child: ListTile(
-                      title: const Text(
-                        "Consultar Técnicos",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
+                    const Divider(color: Colors.black, thickness: 1),
+                    const SizedBox(height: 15),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(
+                        Icons.person,
+                        size: 40,
+                        color: Colors.black,
                       ),
-                      leading:
-                          const Icon(Ionicons.document_text_outline, size: 40),
-                      trailing:
-                          const Icon(Icons.arrow_forward, color: Colors.black),
+                      title: const Text(
+                        "Logout",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      isThreeLine: false,
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.black,
+                      ),
                       onTap: () {
-                        Get.toNamed('/listTecnico');
+                        controller.goTologout();
                       },
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                ],
+                    const Divider(color: Colors.black, thickness: 1),
+                  ],
+                ),
               ),
             ],
           ),

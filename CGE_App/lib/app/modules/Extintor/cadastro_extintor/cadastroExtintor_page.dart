@@ -175,7 +175,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
               height: 40,
             ),
             Text(
-              controller.alterando ? 'Alterar Extintor' : 'Cadastrar Extintor',
+              controller.alterando ? 'Editar Extintor' : 'Cadastrar Extintor',
               style: const TextStyle(
                   fontSize: 25,
                   color: Colors.white,
