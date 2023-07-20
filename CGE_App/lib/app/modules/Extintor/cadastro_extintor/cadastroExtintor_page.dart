@@ -63,7 +63,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: controller.dt,
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2500),
       cancelText: "CANCELAR",
       builder: (context, child) => Theme(
@@ -94,7 +94,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: controller.dt2,
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2500),
       cancelText: "CANCELAR",
       builder: (context, child) => Theme(

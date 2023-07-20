@@ -3,7 +3,7 @@ class ExtintorRequestModel {
   String nome;
   DateTime validadeCasco;
   DateTime validadeExtintor;
-  DateTime? proximaManutencao;
+  DateTime proximaManutencao;
   int tamanho;
   String tipo;
   bool ativo;
@@ -16,6 +16,7 @@ class ExtintorRequestModel {
     required this.nome,
     required this.validadeCasco,
     required this.validadeExtintor,
+    required this.proximaManutencao,
     required this.tamanho,
     required this.tipo,
     required this.ativo,
@@ -29,6 +30,7 @@ class ExtintorRequestModel {
         'nome': nome.toString(),
         'validadeCasco': validadeCasco.toIso8601String(),
         'validadeExtintor': validadeExtintor.toIso8601String(),       
+        'proximaManutencao': proximaManutencao.toIso8601String(),
         'tamanho': tamanho,
         'tipoExtintor': tipo.toString(),
         'ativo': ativo,
