@@ -474,7 +474,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    content: Column(                                     
+                                    content: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         const Align(
@@ -575,6 +575,38 @@ class CadastroExtintor extends State<CadastroExtintorState>
                         ),
                         controller: TextEditingController(
                             text: controller.selectedTipo),
+                      ),
+                    ),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(
+                        Icons.trending_up_outlined,
+                        color: Colors.black,
+                        size: 40,
+                      ),
+                      title: TextFormField(
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 18,
+                        ),
+                        readOnly: true,
+                        decoration: InputDecoration(
+                          labelText: 'Selecione o Setor',
+                          labelStyle: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
+                          suffixIcon: InkWell(
+                            onTap: () {},
+                            child: const Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        // controller: TextEditingController(
+                        //     text: controller.selectedTipo),
                       ),
                     ),
                     const SizedBox(height: 25),
