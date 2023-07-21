@@ -186,7 +186,7 @@ class ExtintorPage extends State<ExtintorState>
                 title: "Realizar Vistoria",
                 iconColor: Colors.white,
                 bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_circle_outline,
+                icon: Icons.check_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
                   Get.toNamed('/vistoria');

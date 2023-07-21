@@ -13,7 +13,6 @@ import 'setores_controller.dart';
 
 DateTime selectedDate = DateTime.now();
 String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
-String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
 List dados = [];
 
 class Setor extends GetView<SetorController> {
@@ -54,44 +53,14 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
 
   DateTime selectedDate = DateTime.now();
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime.now(),
-      cancelText: "CANCELAR",
-      builder: (context, child) => Theme(
-        data: ThemeData.light().copyWith(
-          primaryColor: const Color(0xFF4C131A),
-          buttonTheme:
-              const ButtonThemeData(textTheme: ButtonTextTheme.primary),
-          colorScheme: const ColorScheme.light(
-            primary: Color.fromARGB(255, 190, 0, 0),
-          ).copyWith(
-            secondary: const Color(0xFF4C131A),
-          ),
-        ),
-        child: child!,
-      ),
-    );
-    if (picked != null && picked != selectedDate) {
-      setState(
-        () {
-          _refresh(data: picked);
-        },
-      );
-    }
-  }
-
-  _refresh({DateTime? data}) async {
+  _refresh() async {
     try {
-      data ??= DateTime.parse(updatedDt2);
-
       setState(() {
-        selectedDate = data!;
-        updatedDt = DateFormat("dd/MM/y").format(data);
-        updatedDt2 = DateFormat("y-MM-dd").format(data);
+        mapa = controller.getResumoSetor();
+        Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => super.widget));
       });
       // ignore: empty_catches
     } catch (e) {}

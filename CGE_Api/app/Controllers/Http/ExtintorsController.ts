@@ -80,7 +80,7 @@ export default class ExtintorsController {
                 proximaManutencao: new Date(payload.proximaManutencao!.toISODate()),
                 ativo: payload.ativo,
                 setor_id: setor.id,
-                descricao: payload.descricao,
+                descricao: payload.descricao ?? "",
             });
 
             return response.status(201).json({
