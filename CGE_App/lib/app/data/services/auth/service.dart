@@ -19,7 +19,7 @@ class AuthService extends GetxService {
   @override
   void onInit() async {
     if (_configService.token != null) {
-      await _getUser();
+      await _getUser(); 
     }
 
     super.onInit();
@@ -70,7 +70,7 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<bool> updateTecnico(TecnicoRequestModel tecnico) async {
+  Future<bool> updateTecnico(TecnicoRequestModel tecnico) async { //Develop
     var result = await _repository.updateTecnico(tecnico);
     if (result) {
       Future.delayed(const Duration(milliseconds: 1), () {
