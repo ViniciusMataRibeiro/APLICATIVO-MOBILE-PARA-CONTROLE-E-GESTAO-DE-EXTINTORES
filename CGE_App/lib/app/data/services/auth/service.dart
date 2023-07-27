@@ -30,7 +30,7 @@ class AuthService extends GetxService {
     if (userLoginResponse.expiresAt == 'Invalid email/password') {
       return 'Usuário ou senha inválidos';
     } else if (userLoginResponse.expiresAt == 'Técnico bloqueado') {
-      return 'Técnico bloqueado';
+      return 'Técnico está bloqueado';
     } else {
       await _configService.saveToken(userLoginResponse.token);
       var user = await _getUser();
