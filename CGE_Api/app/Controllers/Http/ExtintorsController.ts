@@ -77,11 +77,10 @@ export default class ExtintorsController {
                 tamanho: payload.tamanho,
                 validadeCasco: new Date(payload.validadeCasco.toISODate()),
                 validadeExtintor: new Date(payload.validadeExtintor.toISODate()),
-                proximaManutencao: payload.proximaManutencao ?? null,
+                proximaManutencao: new Date(payload.proximaManutencao!.toISODate()),
                 ativo: payload.ativo,
                 setor_id: setor.id,
-                descricao: payload.descricao,
-                
+                descricao: payload.descricao ?? "",
             });
 
             return response.status(201).json({

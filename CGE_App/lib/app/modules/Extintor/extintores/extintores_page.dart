@@ -44,6 +44,30 @@ class ExtintorPage extends State<ExtintorState>
   ExtintorController controller = Get.put(
     ExtintorController(),
   );
+
+  String obterImagem(String tipoExtintor) {
+    switch (tipoExtintor) {
+      case 'Tipo A':
+        return 'assets/image/ExtintorClassesA.png';
+      case 'Tipo B':
+        return 'assets/image/ExtintorClassesB.png';
+      case 'Tipo ABC':
+        return 'assets/image/ExtintorClassesABC.png';
+      case 'Tipo AB':
+        return 'assets/image/ExtintorClassesAB.png';
+      case 'Tipo BC':
+        return 'assets/image/ExtintorClassesBC.png';
+      case 'Tipo C':
+        return 'assets/image/ExtintorClassesC.png';
+      case 'Tipo D':
+        return 'assets/image/ExtintorClassesD.png';
+      case 'Tipo K':
+        return 'assets/image/ExtintorClassesK.png';
+      default:
+        return 'Imagem não encontrada';
+    }
+  }
+
   var number = faker.randomGenerator.integer(50);
   late Animation<double> _animation;
   late AnimationController _animationController;
@@ -186,7 +210,7 @@ class ExtintorPage extends State<ExtintorState>
                 title: "Realizar Vistoria",
                 iconColor: Colors.white,
                 bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_circle_outline,
+                icon: Icons.check_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
                   Get.toNamed('/vistoria');
@@ -224,14 +248,28 @@ class ExtintorPage extends State<ExtintorState>
               },
             );
             return Scaffold(
-              body: Center(
-                child: _mostradados(dados: dados),
+              body: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/image/LogOut.png'),
+                      fit: BoxFit.cover),
+                ),
+                child: Center(
+                  child: _mostradados(dados: dados),
+                ),
               ),
             );
           } else {
-            return const Scaffold(
-              body: Center(
-                child: Text('Nenhum dado encontrado'),
+            return Scaffold(
+              body: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/image/LogOut.png'),
+                      fit: BoxFit.cover),
+                ),
+                child: const Center(
+                  child: Text('Nenhum dado encontrado'),
+                ),
               ),
             );
           }
@@ -251,61 +289,158 @@ class ExtintorPage extends State<ExtintorState>
       itemCount: dados.length,
       padding: const EdgeInsets.only(bottom: 52, top: 50),
       itemBuilder: (BuildContext context, index) {
+        var size = MediaQuery.of(context).size;
         Map item = dados[index];
-        return GestureDetector(
-          onTap: () {},
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            child: Card(
-              elevation: 5,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        return Container(
+          margin: const EdgeInsets.only(top: 10, left: 12, right: 12),
+          height: size.height * 0.22,
+          child: Stack(
+            children: [
+              Card(
+                elevation: 4.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                      image: const DecorationImage(
+                        image: AssetImage('assets/image/card.png'),
+                        fit: BoxFit.fill,
+                      ),
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 141, 19, 19),
+                        width: 1,
+                      )
+
+                      //borderRadius: BorderRadius.circular(10),
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.grey.withOpacity(0.5),
+                      //     spreadRadius: 3,
+                      //     blurRadius: 2,
+                      //     offset: const Offset(0, 3),
+                      //   )
+                      // ]),
+                      ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 0),
-                      Text(
-                        dados[index]['nome'],
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFB2505C),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                dados[index]['nome'],
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                            // IconButton(
+                            //   icon: const Icon(
+                            //     Icons.edit,
+                            //     size: 25,
+                            //     color: Color.fromARGB(255, 224, 79, 79),//Color.fromARGB(255, 148, 28, 28),
+                            //   ),
+                            //   onPressed: () =>
+                            //       controller.gotoEditExtintor(item),
+                            // ),
+                          ],
                         ),
                       ),
-                      Flexible(
-                        flex: 5,
-                        child: IconButton(
-                          icon: const Icon(Icons.edit,
-                              size: 25, color: Colors.black),
-                          onPressed: () => controller.gotoEditExtintor(item),
+                      Container(
+                        height: 2,
+                        color: Colors.grey,
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 7.0),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0, left: 5.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(obterImagem(item['tipoExtintor']),
+                                height: size.height * 0.12,
+                                width: size.width * 0.24,
+                                fit: BoxFit.fill),
+                            SizedBox(width: size.width * 0.02),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    const Icon(
+                                      Icons.date_range_outlined,
+                                      size: 38,
+                                      color: Colors.black,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          'Data Vencimento',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontStyle: FontStyle.italic,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                        Text(
+                                            DateFormat('dd/MM/yyyy').format(
+                                                DateTime.parse(
+                                                    item['validadeCasco'])),
+                                            style: const TextStyle(
+                                              color: Colors.black54,
+                                              fontSize: 15,
+                                            )),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(height: 9.0),
+                                const Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Icon(
+                                      Icons.trending_up_outlined,
+                                      size: 38,
+                                      color: Colors.black,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Setor Responsável',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontStyle: FontStyle.italic,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                        Text('Setor A',
+                                            style: TextStyle(
+                                              color: Colors.black54,
+                                              fontSize: 15,
+                                            )),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
+                          ],
                         ),
                       ),
                     ],
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Tipo de Extintor: ${item['tipoExtintor']}',
-                        ),
-                        Text(
-                          'Validade do Casco: ${item['validadeCasco']}',
-                        ),
-                        Text(
-                          'Próxima Manutenção: ${item['proximaManutencao']}',
-                        ),
-                        Text(
-                          'Descrição: ${item['descricao']}',
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         );
       },

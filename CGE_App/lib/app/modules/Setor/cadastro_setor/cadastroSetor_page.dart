@@ -39,6 +39,7 @@ class CadastroSetor extends State<CadastroSetorState> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 175, 31, 21),
@@ -53,20 +54,10 @@ class CadastroSetor extends State<CadastroSetorState> {
                 Get.offAllNamed('/dashboard');
               },
             ),
-            const SizedBox(
-              width: 5,
-            ),
             Container(
               margin: const EdgeInsets.only(right: 10),
-              width: 40,
+              width: size.width * 0.05,
               height: 40,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100.0),
-                child: Image.asset(
-                  'assets/image/cge.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
             ),
             Text(
               controller.alterando ? 'Editar Setor' : 'Cadastro Setor',
@@ -83,7 +74,7 @@ class CadastroSetor extends State<CadastroSetorState> {
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/image/registro.jpeg'),
+                image: AssetImage('assets/image/LogOut.png'),
                 fit: BoxFit.cover),
           ),
           child: ListView(
@@ -114,60 +105,10 @@ class CadastroSetor extends State<CadastroSetorState> {
                 margin: const EdgeInsets.only(bottom: 100, left: 20, right: 20),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: Color.fromARGB(80, 0, 0, 0),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 8.0,
-                        right: 15.0,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          const Text(
-                            'Ativo  ',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              setState(
-                                () {
-                                  controller.ativo.value =
-                                      !controller.ativo.value;
-                                },
-                              );
-                            },
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 400),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              decoration: BoxDecoration(
-                                color: controller.ativo.value
-                                    ? Colors.red
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(5.0),
-                                border: controller.ativo.value
-                                    ? null
-                                    : Border.all(color: Colors.white, width: 2),
-                              ),
-                              width: 25,
-                              height: 25,
-                              child: controller.ativo.value
-                                  ? const Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                    )
-                                  : null,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     Container(
                       margin:
                           const EdgeInsets.only(top: 20, left: 30, right: 30),
@@ -175,41 +116,27 @@ class CadastroSetor extends State<CadastroSetorState> {
                         child: TextFormField(
                           controller: controller.name,
                           style: const TextStyle(
-                              wordSpacing: 1,
-                              fontSize: 18,
-                              color: Colors.white),
+                              color: Colors.black, fontStyle: FontStyle.italic),
                           decoration: const InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                              borderSide:
-                                  BorderSide(color: Colors.white, width: 0.9),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                            ),
+                            labelText: 'Nome Setor',
                             labelStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
+                              color: Colors.black,
+                              fontSize: 20,
                             ),
-                            labelText: 'Nome',
                           ),
                         ),
                       ),
                     ),
                     Container(
                       margin:
-                          const EdgeInsets.only(top: 15, left: 30, right: 30),
+                          const EdgeInsets.only(top: 15, left: 20, right: 20),
                       child: Form(
                         child: TextFormField(
                           controller: controller.descricao,
                           style: const TextStyle(
                               wordSpacing: 1,
                               fontSize: 18,
-                              color: Colors.white),
+                              color: Colors.black),
                           decoration: const InputDecoration(
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.only(
@@ -219,7 +146,7 @@ class CadastroSetor extends State<CadastroSetorState> {
                                 bottomRight: Radius.circular(25),
                               ),
                               borderSide:
-                                  BorderSide(color: Colors.white, width: 0.9),
+                                  BorderSide(color: Colors.black, width: 0.9),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.only(
@@ -230,7 +157,7 @@ class CadastroSetor extends State<CadastroSetorState> {
                               ),
                             ),
                             labelStyle: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontSize: 18,
                             ),
                             labelText: 'Descrição',

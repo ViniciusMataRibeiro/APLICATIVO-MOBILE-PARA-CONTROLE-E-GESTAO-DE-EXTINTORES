@@ -13,7 +13,6 @@ import 'setores_controller.dart';
 
 DateTime selectedDate = DateTime.now();
 String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
-String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
 List dados = [];
 
 class Setor extends GetView<SetorController> {
@@ -54,44 +53,14 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
 
   DateTime selectedDate = DateTime.now();
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime.now(),
-      cancelText: "CANCELAR",
-      builder: (context, child) => Theme(
-        data: ThemeData.light().copyWith(
-          primaryColor: const Color(0xFF4C131A),
-          buttonTheme:
-              const ButtonThemeData(textTheme: ButtonTextTheme.primary),
-          colorScheme: const ColorScheme.light(
-            primary: Color.fromARGB(255, 190, 0, 0),
-          ).copyWith(
-            secondary: const Color(0xFF4C131A),
-          ),
-        ),
-        child: child!,
-      ),
-    );
-    if (picked != null && picked != selectedDate) {
-      setState(
-        () {
-          _refresh(data: picked);
-        },
-      );
-    }
-  }
-
-  _refresh({DateTime? data}) async {
+  _refresh() async {
     try {
-      data ??= DateTime.parse(updatedDt2);
-
       setState(() {
-        selectedDate = data!;
-        updatedDt = DateFormat("dd/MM/y").format(data);
-        updatedDt2 = DateFormat("y-MM-dd").format(data);
+        mapa = controller.getResumoSetor();
+        Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => super.widget));
       });
       // ignore: empty_catches
     } catch (e) {}
@@ -168,26 +137,39 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
         child: FloatingActionBubble(
           herotag: UniqueKey(),
           items: <Bubble>[
-            Bubble(
-              title: "Cadastrar Setor",
-              iconColor: Colors.white,
-              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-              icon: Icons.add_rounded,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              onPress: () {
-                Get.toNamed('/cadSetor');
-              },
-            ),
-            Bubble(
-              title: "Realizar Vistoria",
-              iconColor: Colors.white,
-              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-              icon: Icons.check_rounded,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              onPress: () {
-                Get.toNamed('/vistoria');
-              },
-            ),
+            if (obj!.tipo == 'empresa') ...[
+              Bubble(
+                title: "Cadastrar Tecnico",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.check_circle_outline,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Get.toNamed('/cadTecnico');
+                },
+              ),
+            ] else ...[
+              Bubble(
+                title: "Cadastrar Setor",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.add_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Get.toNamed('/cadSetor');
+                },
+              ),
+              Bubble(
+                title: "Realizar Vistoria",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.check_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Get.toNamed('/vistoria');
+                },
+              ),
+            ],
           ],
           animation: _animation,
           onPress: () => _animationController.isCompleted
@@ -248,48 +230,94 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
       itemBuilder: (BuildContext context, index) {
         Map item = dados[index];
         return GestureDetector(
-          onTap: () {
-            if (kDebugMode) {
-              print("cliquei no card");
-            }
-          },
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            child: Card(
-              elevation: 5,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const SizedBox(width: 25),
-                      Text(
-                        '${item['setor']}',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFB2505C),
+            onTap: () {
+              if (kDebugMode) {
+                print("cliquei no card");
+              }
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                  child: Card(
+                    elevation: 5,
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 5,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                            image: const DecorationImage(
+                              image: AssetImage('assets/image/LogOut.png'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const SizedBox(width: 25),
+                              Text(
+                                '${item['setor']}',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Flexible(
+                                flex: 5,
+                                child: IconButton(
+                                    icon: const Icon(Icons.edit,
+                                        size: 25, color: Colors.black),
+                                    onPressed: () =>
+                                        controller.gotoEditSetor(item)),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  child: Card(
+                    elevation: 5,
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 5,
+                                offset: Offset(0, 5),
+                              ),
+                            ],
+                            image: const DecorationImage(
+                              image: AssetImage('assets/image/LogOut.png'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: ExportCircular(item),
                         ),
-                      ),
-                      Flexible(
-                        flex: 5,
-                        child: IconButton(
-                            icon: const Icon(Icons.edit,
-                                size: 25, color: Colors.black),
-                            onPressed: () => controller.gotoEditSetor(item)),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Grafico(item),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
+                ),
+              ],
+            ));
       },
     );
   }
