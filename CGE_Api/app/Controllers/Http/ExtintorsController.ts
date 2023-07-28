@@ -89,11 +89,6 @@ export default class ExtintorsController {
             });
         }
         catch (error) {
-            if(error.sqlMessage.includes('Duplicate entry')){
-                return response.status(401).json({
-                    message: 'Extintor já cadastrado com este indentificador',
-                });
-            }
             return response.badRequest({
                 message: 'Erro ao cadastrar Extintor',
             });
@@ -118,8 +113,8 @@ export default class ExtintorsController {
                 proximaManutencao = null;
             }
 
-            const sql = 'UPDATE extintors SET nome = ?, tipoExtintor = ?, tamanho = ?, validadeCasco = ?, validadeExtintor = ?, proximaManutencao = ? , ativo = ?, descricao = ? WHERE id = ?';
-            await Database.rawQuery(sql, [payload.nome, payload.tipoExtintor, payload.tamanho, new Date(payload.validadeCasco.toISO()), (new Date(payload.validadeExtintor.toISO())) ?? null , proximaManutencao , payload.ativo, payload.descricao, params.id]);
+            const sql = 'UPDATE extintors SET setor_id = ?, nome = ?, tipoExtintor = ?, tamanho = ?, validadeCasco = ?, validadeExtintor = ?, proximaManutencao = ? , ativo = ?, descricao = ? WHERE id = ?';
+            await Database.rawQuery(sql, [payload.setor_id ,payload.nome, payload.tipoExtintor, payload.tamanho, new Date(payload.validadeCasco.toISO()), (new Date(payload.validadeExtintor.toISO())) ?? null , proximaManutencao , payload.ativo, payload.descricao, params.id]);
 
             return response.status(200).json({
                 message: 'Extintor Editado com sucesso',
