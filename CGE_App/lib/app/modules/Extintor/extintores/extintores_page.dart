@@ -271,12 +271,12 @@ class ExtintorPage extends State<ExtintorState>
           onTap: () {},
           child: Container(
             margin: const EdgeInsets.all(10),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/image/LogOut.png'),
-                fit: BoxFit.cover),
-          ),
-          child: Card(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/image/LogOut.png'),
+                  fit: BoxFit.cover),
+            ),
+            child: Card(
               elevation: 5,
               child: Column(
                 children: [
@@ -312,7 +312,7 @@ class ExtintorPage extends State<ExtintorState>
                           'Tipo de Extintor: ${item['tipoExtintor']}',
                         ),
                         Text(
-                          'Validade do Casco: ${item['validadeCasco']}',
+                          'Validade do Casco: ${DateFormat("dd/MM/y").format(DateTime.parse(item['validadeCasco']))}',
                         ),
                         Text(
                           'Próxima Manutenção: ${item['proximaManutencao']}',

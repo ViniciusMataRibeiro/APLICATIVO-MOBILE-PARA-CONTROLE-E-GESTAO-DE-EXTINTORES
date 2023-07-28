@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../../Icones/icones_personalizado.dart';
 import '../../../data/services/auth/service.dart';
 
 String nome = "";

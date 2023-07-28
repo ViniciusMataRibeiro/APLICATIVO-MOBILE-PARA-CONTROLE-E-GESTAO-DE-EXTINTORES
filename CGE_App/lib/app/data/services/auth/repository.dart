@@ -56,4 +56,6 @@ class AuthRepository {
 
   Future<bool> updateEndereco(EnderecoRequestModel endereco) =>
       _api.updateEndereco(endereco);
+
+  Future<List> getSetores() => _api.getSetores();
 }

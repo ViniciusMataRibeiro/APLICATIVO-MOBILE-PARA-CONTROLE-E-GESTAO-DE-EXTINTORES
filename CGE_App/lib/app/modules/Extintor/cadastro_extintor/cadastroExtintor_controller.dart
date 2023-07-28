@@ -23,15 +23,20 @@ class CadastroExtintorController extends GetxController {
   var validadeExtintor = TextEditingController(text: '');
   var proximaManutencao = TextEditingController(text: '');
   var descricao = TextEditingController(text: '');
+  var setor = '';
   var ativo = true.obs;
+
+  List setores = [];
+  List setoresAux = [];
 
   var alterando = false;
 
   late Map _extintor;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     if (Get.arguments != null) {
+      alterando = true;
       _extintor = Get.arguments;
       id = _extintor['id'];
       nome.text = _extintor['nome'];
@@ -42,16 +47,21 @@ class CadastroExtintorController extends GetxController {
 
       dt = DateTime.parse(_extintor['validadeCasco']);
       dt2 = DateTime.parse(_extintor['validadeExtintor']);
-
-      alterando = true;
     } else {
       dt = DateTime.now();
       dt2 = DateTime.now();
-
       alterando = false;
     }
 
     super.onInit();
+  }
+
+  Future<List> getSetores() async {
+    var res = (await _authService.getSetores()).toList();
+    for (var item in res) {
+      setores.add(item);
+    }
+    return setores;
   }
 
   Future<String> goToInsert() async {
@@ -75,6 +85,10 @@ class CadastroExtintorController extends GetxController {
       validadeExtintor.text = DateFormat('dd/MM/yyyy').format(dt2);
     }
 
+    if (setor == '') {
+      return 'informe o setor';
+    }
+
     var extintorResquestModel = ExtintorRequestModel(
       id: id,
       nome: nome.text,
@@ -83,8 +97,8 @@ class CadastroExtintorController extends GetxController {
       tamanho: int.parse(selectedTamanho.replaceAll(RegExp(r'[^0-9]'), '')),
       tipo: selectedTipo,
       ativo: true,
-      setor_id: 1,
-      descricao: "Extintor Ativo no setor id 1",
+      setor_id: getIdSetor(setor),
+      descricao: "Teste",
     );
 
     bool res = false;
@@ -96,6 +110,26 @@ class CadastroExtintorController extends GetxController {
     }
 
     return res == true ? 'true' : 'Algo deu Errado';
+  }
+
+  int getIdSetor(String aux) {
+    var id = 0;
+    for (var item in setores) {
+      if (item['nome'] == aux) {
+        id = item['id'];
+      }
+    }
+    return id;
+  }
+
+  String getNomeSetor(int aux) {
+    var nomeSetor = '';
+    for (var item in setores) {
+      if (item['id'] == aux) {
+        nomeSetor = item['nome'];
+      }
+    }
+    return nomeSetor;
   }
 
   Future<bool?> toast(String message) {

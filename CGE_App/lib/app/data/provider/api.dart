@@ -276,4 +276,20 @@ class Api {
       return false;
     }
   }
+
+  Future<List> getSetores() async {
+    var url = Uri.parse("$baseUrl/setors");
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization': 'Bearer ${_configService.token}',
+    });
+    if (response.statusCode == 200) {
+      List dados = await jsonDecode(response.body);
+
+      return dados;
+    } else {
+      throw Exception('Falha ao carregar culturas');
+    }
+  }
 }

@@ -133,6 +133,12 @@ class CadastroExtintor extends State<CadastroExtintorState>
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
     super.initState();
+
+    controller.getSetores().then((value) {
+      setState(() {
+        controller.setores = value;
+      });
+    });
   }
 
   @override
@@ -175,7 +181,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
               height: 40,
             ),
             Text(
-              controller.alterando ? 'Alterar Extintor' : 'Cadastrar Extintor',
+              controller.alterando ? 'Editar Extintor' : 'Cadastrar Extintor',
               style: const TextStyle(
                   fontSize: 25,
                   color: Colors.white,
@@ -584,29 +590,57 @@ class CadastroExtintor extends State<CadastroExtintorState>
                         color: Colors.black,
                         size: 40,
                       ),
-                      title: TextFormField(
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 18,
-                        ),
-                        readOnly: true,
-                        decoration: InputDecoration(
-                          labelText: 'Selecione o Setor',
-                          labelStyle: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                          ),
-                          suffixIcon: InkWell(
-                            onTap: () {},
-                            child: const Icon(
-                              Icons.arrow_drop_down,
-                              color: Colors.black,
+                      selected: true,
+                      selectedColor: Colors.black,
+                      subtitle: DropdownSearch(
+                        popupProps: const PopupProps.dialog(
+                          fit: FlexFit.loose,
+                          dialogProps: DialogProps(
+                            backgroundColor: Colors.white,
+                            insetPadding: EdgeInsets.only(
+                              left: 50,
+                              right: 50,
                             ),
                           ),
                         ),
-                        // controller: TextEditingController(
-                        //     text: controller.selectedTipo),
+                        items: controller.setores
+                            .map(
+                              (e) => e['nome'],
+                            )
+                            .toList(),
+                        selectedItem:
+                            controller.getNomeSetor(controller.setor_id),
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                          dropdownSearchDecoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: Colors.black,
+                                width: 1.0,
+                              ),
+                            ),
+                            contentPadding: const EdgeInsets.all(10),
+                            labelText: 'Setores',
+                            labelStyle: const TextStyle(
+                              color: Colors.black,
+                              fontStyle: FontStyle.italic,
+                            ),
+                            disabledBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: Colors.green,
+                                width: 1.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(
+                            () {
+                              controller.setor = value.toString();
+                            },
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(height: 25),
