@@ -443,7 +443,7 @@ class ExtintorPage extends State<ExtintorState>
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         );
       },

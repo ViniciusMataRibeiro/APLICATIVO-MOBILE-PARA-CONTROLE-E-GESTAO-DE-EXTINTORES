@@ -11,6 +11,7 @@ class CadastroExtintorController extends GetxController {
   final _authService = Get.find<AuthService>();
   DateTime dt = DateTime.now();
   DateTime dt2 = DateTime.now();
+  DateTime dt3 = DateTime.now();
   String selectedTamanho = '';
   String selectedTipo = '';
 
@@ -47,6 +48,7 @@ class CadastroExtintorController extends GetxController {
 
       dt = DateTime.parse(_extintor['validadeCasco']);
       dt2 = DateTime.parse(_extintor['validadeExtintor']);
+      dt3 = DateTime.parse(_extintor['proximaManutencao']);
     } else {
       dt = DateTime.now();
       dt2 = DateTime.now();
@@ -89,11 +91,21 @@ class CadastroExtintorController extends GetxController {
       return 'informe o setor';
     }
 
+    String data;
+    if (!alterando) {
+      DateTime d = DateTime(dt3.year, dt3.month + 1, dt3.day);
+      data = DateFormat('dd/MM/yyyy').format(d);
+    }
+    else{
+      data = DateFormat('dd/MM/yyyy').format(dt3);
+    }
+
     var extintorResquestModel = ExtintorRequestModel(
       id: id,
       nome: nome.text,
       validadeCasco: DateFormat('dd/MM/yyyy').parse(validadeCasco.text),
       validadeExtintor: DateFormat('dd/MM/yyyy').parse(validadeExtintor.text),
+      proximaManutencao: DateFormat('dd/MM/yyyy').parse(data),
       tamanho: int.parse(selectedTamanho.replaceAll(RegExp(r'[^0-9]'), '')),
       tipo: selectedTipo,
       ativo: true,
