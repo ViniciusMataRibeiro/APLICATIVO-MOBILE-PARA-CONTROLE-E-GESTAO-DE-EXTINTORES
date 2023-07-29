@@ -11,11 +11,11 @@ class CadastroExtintorController extends GetxController {
   final _authService = Get.find<AuthService>();
   DateTime dt = DateTime.now();
   DateTime dt2 = DateTime.now();
-  DateTime dt3 = DateTime.now();
   String selectedTamanho = '';
   String selectedTipo = '';
 
   var id = 0;
+  // ignore: non_constant_identifier_names
   var setor_id = 0;
 
   var nome = TextEditingController(text: '');
@@ -23,15 +23,20 @@ class CadastroExtintorController extends GetxController {
   var validadeExtintor = TextEditingController(text: '');
   var proximaManutencao = TextEditingController(text: '');
   var descricao = TextEditingController(text: '');
+  var setor = '';
   var ativo = true.obs;
+
+  List setores = [];
+  List setoresAux = [];
 
   var alterando = false;
 
   late Map _extintor;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     if (Get.arguments != null) {
+      alterando = true;
       _extintor = Get.arguments;
       id = _extintor['id'];
       nome.text = _extintor['nome'];
@@ -42,17 +47,21 @@ class CadastroExtintorController extends GetxController {
 
       dt = DateTime.parse(_extintor['validadeCasco']);
       dt2 = DateTime.parse(_extintor['validadeExtintor']);
-      dt3 = DateTime.parse(_extintor['proximaManutencao']);
-
-      alterando = true;
     } else {
       dt = DateTime.now();
       dt2 = DateTime.now();
-
       alterando = false;
     }
 
     super.onInit();
+  }
+
+  Future<List> getSetores() async {
+    var res = (await _authService.getSetores()).toList();
+    for (var item in res) {
+      setores.add(item);
+    }
+    return setores;
   }
 
   Future<String> goToInsert() async {
@@ -76,13 +85,8 @@ class CadastroExtintorController extends GetxController {
       validadeExtintor.text = DateFormat('dd/MM/yyyy').format(dt2);
     }
 
-    String data;
-    if (!alterando) {
-      DateTime d = DateTime(dt3.year, dt3.month + 1, dt3.day);
-      data = DateFormat('dd/MM/yyyy').format(d);
-    }
-    else{
-      data = DateFormat('dd/MM/yyyy').format(dt3);
+    if (setor == '') {
+      return 'informe o setor';
     }
 
     var extintorResquestModel = ExtintorRequestModel(
@@ -90,12 +94,11 @@ class CadastroExtintorController extends GetxController {
       nome: nome.text,
       validadeCasco: DateFormat('dd/MM/yyyy').parse(validadeCasco.text),
       validadeExtintor: DateFormat('dd/MM/yyyy').parse(validadeExtintor.text),
-      proximaManutencao: DateFormat('dd/MM/yyyy').parse(data),
       tamanho: int.parse(selectedTamanho.replaceAll(RegExp(r'[^0-9]'), '')),
       tipo: selectedTipo,
       ativo: true,
-      setor_id: 1,
-      descricao: "Extintor Ativo no setor id 1",
+      setor_id: getIdSetor(setor),
+      descricao: "Teste",
     );
 
     bool res = false;
@@ -107,6 +110,26 @@ class CadastroExtintorController extends GetxController {
     }
 
     return res == true ? 'true' : 'Algo deu Errado';
+  }
+
+  int getIdSetor(String aux) {
+    var id = 0;
+    for (var item in setores) {
+      if (item['nome'] == aux) {
+        id = item['id'];
+      }
+    }
+    return id;
+  }
+
+  String getNomeSetor(int aux) {
+    var nomeSetor = '';
+    for (var item in setores) {
+      if (item['id'] == aux) {
+        nomeSetor = item['nome'];
+      }
+    }
+    return nomeSetor;
   }
 
   Future<bool?> toast(String message) {

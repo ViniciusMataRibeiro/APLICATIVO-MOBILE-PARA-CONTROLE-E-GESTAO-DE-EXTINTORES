@@ -53,6 +53,7 @@ class Vistoria extends State<VistoriaState>
   bool isSelectlacre = false;
   bool isSelectaprovado = false;
 
+  // ignore: unused_element
   Future<void> _data(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,

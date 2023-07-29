@@ -1,3 +1,6 @@
+import '../../Models/empresa_request_model.dart';
+import '../../Models/empresa_response_model.dart';
+import '../../Models/endereco_request_model.dart';
 import '../../Models/extintor_request_model.dart';
 import '../../Models/setor_request.dart';
 import '../../Models/tecnico_request.dart';
@@ -34,9 +37,25 @@ class AuthRepository {
 
   Future<bool> updateSetor(SetorRequestModel setor) => _api.updateSetor(setor);
 
-  Future<bool> insertExtintor(ExtintorRequestModel extintor) => _api.insertExtintor(extintor);
+  Future<bool> insertExtintor(ExtintorRequestModel extintor) =>
+      _api.insertExtintor(extintor);
 
-  Future<bool> updateExtintor(ExtintorRequestModel extintor) => _api.updateExtintor(extintor);
+  Future<bool> updateExtintor(ExtintorRequestModel extintor) =>
+      _api.updateExtintor(extintor);
 
   Future<Map> getAllExtintor() => _api.getAllExtintor();
+
+  Future<EmpresaResponseModel> insertEmpresa(EmpresaResquestModel empresa) =>
+      _api.insertEmpresa(empresa);
+
+  Future<EmpresaResponseModel> updateEmpresa(EmpresaResquestModel empresa) =>
+      _api.updateEmpresa(empresa);
+
+  Future<bool> insertEndereco(EnderecoRequestModel endereco) =>
+      _api.insertEndereco(endereco);
+
+  Future<bool> updateEndereco(EnderecoRequestModel endereco) =>
+      _api.updateEndereco(endereco);
+
+  Future<List> getSetores() => _api.getSetores();
 }

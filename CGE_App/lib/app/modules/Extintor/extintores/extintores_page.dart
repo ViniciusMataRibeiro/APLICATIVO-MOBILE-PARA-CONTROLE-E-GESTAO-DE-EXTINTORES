@@ -75,6 +75,7 @@ class ExtintorPage extends State<ExtintorState>
 
   DateTime selectedDate = DateTime.now();
 
+  // ignore: unused_element
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
@@ -291,36 +292,21 @@ class ExtintorPage extends State<ExtintorState>
       itemBuilder: (BuildContext context, index) {
         var size = MediaQuery.of(context).size;
         Map item = dados[index];
-        return Container(
-          margin: const EdgeInsets.only(top: 10, left: 12, right: 12),
-          height: size.height * 0.22,
-          child: Stack(
-            children: [
-              Card(
-                elevation: 4.0,
-                child: Container(
-                  decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: AssetImage('assets/image/card.png'),
-                        fit: BoxFit.fill,
-                      ),
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 141, 19, 19),
-                        width: 1,
-                      )
-
-                      //borderRadius: BorderRadius.circular(10),
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Colors.grey.withOpacity(0.5),
-                      //     spreadRadius: 3,
-                      //     blurRadius: 2,
-                      //     offset: const Offset(0, 3),
-                      //   )
-                      // ]),
-                      ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+        return GestureDetector(
+          onTap: () {},
+          child: Container(
+            margin: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/image/LogOut.png'),
+                  fit: BoxFit.cover),
+            ),
+            child: Card(
+              elevation: 5,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 5.0),
@@ -438,7 +424,24 @@ class ExtintorPage extends State<ExtintorState>
                       ),
                     ],
                   ),
-                ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Tipo de Extintor: ${item['tipoExtintor']}',
+                        ),
+                        Text(
+                          'Validade do Casco: ${DateFormat("dd/MM/y").format(DateTime.parse(item['validadeCasco']))}',
+                        ),
+                        Text(
+                          'Próxima Manutenção: ${item['proximaManutencao']}',
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
