@@ -250,11 +250,6 @@ class ExtintorPage extends State<ExtintorState>
             );
             return Scaffold(
               body: Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/image/LogOut.png'),
-                      fit: BoxFit.cover),
-                ),
                 child: Center(
                   child: _mostradados(dados: dados),
                 ),
@@ -263,11 +258,6 @@ class ExtintorPage extends State<ExtintorState>
           } else {
             return Scaffold(
               body: Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/image/LogOut.png'),
-                      fit: BoxFit.cover),
-                ),
                 child: const Center(
                   child: Text('Nenhum dado encontrado'),
                 ),
@@ -292,156 +282,166 @@ class ExtintorPage extends State<ExtintorState>
       itemBuilder: (BuildContext context, index) {
         var size = MediaQuery.of(context).size;
         Map item = dados[index];
-        return Container(
-          margin: const EdgeInsets.only(top: 10, left: 12, right: 12),
-          height: size.height * 0.22,
-          child: Stack(
-            children: [
-              Card(
-                elevation: 4.0,
-                child: Container(
-                  decoration: BoxDecoration(
+        return InkWell(
+          child: Container(
+            margin: const EdgeInsets.only(top: 10, left: 12, right: 12),
+            height: size.height * 0.22,
+            child: Stack(
+              children: [
+                Card(
+                  elevation: 4.0,
+                  child: Container(
+                    decoration: BoxDecoration(
                       image: const DecorationImage(
                         image: AssetImage('assets/image/card.png'),
                         fit: BoxFit.fill,
                       ),
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 141, 19, 19),
-                        width: 1,
-                      )
-
-                      //borderRadius: BorderRadius.circular(10),
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Colors.grey.withOpacity(0.5),
-                      //     spreadRadius: 3,
-                      //     blurRadius: 2,
-                      //     offset: const Offset(0, 3),
-                      //   )
-                      // ]),
-                      ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                dados[index]['nome'],
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 3,
+                          blurRadius: 2,
+                          offset: const Offset(0, 3),
+                        )
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  dados[index]['nome'],
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
-                            ),
-                            // IconButton(
-                            //   icon: const Icon(
-                            //     Icons.edit,
-                            //     size: 25,
-                            //     color: Color.fromARGB(255, 224, 79, 79),//Color.fromARGB(255, 148, 28, 28),
-                            //   ),
-                            //   onPressed: () =>
-                            //       controller.gotoEditExtintor(item),
-                            // ),
-                          ],
+                              // IconButton(
+                              //   icon: const Icon(
+                              //     Icons.edit,
+                              //     size: 25,
+                              //     color: Color.fromARGB(255, 224, 79, 79),//Color.fromARGB(255, 148, 28, 28),
+                              //   ),
+                              //   onPressed: () =>
+                              //       controller.gotoEditExtintor(item),
+                              // ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        height: 2,
-                        color: Colors.grey,
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 7.0),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, left: 5.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(obterImagem(item['tipoExtintor']),
-                                height: size.height * 0.12,
-                                width: size.width * 0.24,
-                                fit: BoxFit.fill),
-                            SizedBox(width: size.width * 0.02),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    const Icon(
-                                      Icons.date_range_outlined,
-                                      size: 38,
-                                      color: Colors.black,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Text(
-                                          'Data Vencimento',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                        Text(
-                                            DateFormat('dd/MM/yyyy').format(
-                                                DateTime.parse(
-                                                    item['validadeCasco'])),
-                                            style: const TextStyle(
-                                              color: Colors.black54,
+                        Container(
+                          height: 2,
+                          color: Colors.grey,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 7.0),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0, left: 5.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 12),
+                                child: Image.asset(
+                                    obterImagem(item['tipoExtintor']),
+                                    height: size.height * 0.10,
+                                    width: size.width * 0.17,
+                                    fit: BoxFit.contain),
+                              ),
+                              SizedBox(width: size.width * 0.1),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Icon(
+                                        Icons.date_range_outlined,
+                                        size: 38,
+                                        color: Colors.black,
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.03,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'Data Vencimento',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontStyle: FontStyle.italic,
                                               fontSize: 15,
-                                            )),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 9.0),
-                                const Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Icon(
-                                      Icons.trending_up_outlined,
-                                      size: 38,
-                                      color: Colors.black,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Setor Responsável',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 15,
+                                            ),
                                           ),
-                                        ),
-                                        Text('Setor A',
+                                          Text(
+                                              DateFormat('dd/MM/yyyy').format(
+                                                  DateTime.parse(
+                                                      item['validadeCasco'])),
+                                              style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 15,
+                                              )),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 9.0),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Icon(
+                                        Icons.trending_up_outlined,
+                                        size: 38,
+                                        color: Colors.black,
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.03,
+                                      ),
+                                      const Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Setor Responsável',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Setor A',
                                             style: TextStyle(
                                               color: Colors.black54,
                                               fontSize: 15,
-                                            )),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
