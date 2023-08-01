@@ -316,98 +316,153 @@ class ExtintorPage extends State<ExtintorState>
                           color: Colors.black54,
                           thickness: 2,
                         ),
-                        ListTile(
-                          leading: const Icon(Icons.date_range_outlined,
-                              color: Colors.black54, size: 35),
-                          title: const Text(
-                            'Ultima Vistoria',
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                          ),
-                          subtitle: Text(
-                            DateFormat('dd/MM/yyyy').format(
-                              DateTime.parse(
-                                item['validadeExtintor'],
+                        Container(
+                          margin: EdgeInsets.only(left: size.width * 0.05),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: const Icon(Icons.date_range_outlined,
+                                color: Colors.black54, size: 35),
+                            title: const Text(
+                              'Ultima Vistoria',
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            subtitle: Text(
+                              DateFormat('dd/MM/yyyy').format(
+                                DateTime.parse(
+                                  item['validadeExtintor'],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                        ListTile(
-                          leading: const Icon(Icons.date_range_outlined,
-                              color: Colors.black54, size: 35),
-                          title: const Text(
-                            'Validade Extintor',
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                          ),
-                          subtitle: Text(
-                            DateFormat('dd/MM/yyyy').format(
-                              DateTime.parse(
-                                item['validadeExtintor'],
+                        Container(
+                          margin: EdgeInsets.only(left: size.width * 0.05),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: const Icon(Icons.date_range_outlined,
+                                color: Colors.black54, size: 35),
+                            title: const Text(
+                              'Validade Extintor',
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            subtitle: Text(
+                              DateFormat('dd/MM/yyyy').format(
+                                DateTime.parse(
+                                  item['validadeExtintor'],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                        ListTile(
-                          leading: const Icon(Icons.date_range_outlined,
-                              color: Colors.black54, size: 35),
-                          title: const Text(
-                            'Venc. Hidrostatico',
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                          ),
-                          subtitle: Text(
-                            DateFormat('dd/MM/yyyy').format(
-                              DateTime.parse(
-                                item['validadeCasco'],
+                        Container(
+                          margin: EdgeInsets.only(left: size.width * 0.05),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: const Icon(Icons.date_range_outlined,
+                                color: Colors.black54, size: 35),
+                            title: const Text(
+                              'Venc. Hidrostatico',
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            subtitle: Text(
+                              DateFormat('dd/MM/yyyy').format(
+                                DateTime.parse(
+                                  item['validadeCasco'],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                        ListTile(
-                          leading: const Icon(
-                              Icones_Personalizado.fire_extinguisher,
-                              color: Colors.black54,
-                              size: 35),
-                          title: const Text(
-                            'Tipo Extintor',
-                            style: TextStyle(
+                        Container(
+                          margin: EdgeInsets.only(left: size.width * 0.05),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: const Icon(
+                                Icones_Personalizado.fire_extinguisher,
                                 color: Colors.black54,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
+                                size: 35),
+                            title: const Text(
+                              'Tipo Extintor',
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            subtitle: Text(
+                                '${item['tipoExtintor']}\t${item['tamanho']} Kg'),
                           ),
-                          subtitle: Text(
-                              '${item['tipoExtintor']}\t${item['tamanho']} Kg'),
                         ),
-                        const ListTile(
-                          leading: Icon(Icons.trending_up_outlined,
-                              color: Colors.black54, size: 35),
-                          title: Text(
-                            'Setor Responsavel',
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
+                        Container(
+                          margin: EdgeInsets.only(left: size.width * 0.05),
+                          child: const ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: Icon(Icons.trending_up_outlined,
+                                color: Colors.black54, size: 35),
+                            title: Text(
+                              'Setor Responsavel',
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            subtitle: Text('Setor A'),
                           ),
-                          subtitle: Text('Setor A'),
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             ElevatedButton(
-                              onPressed: () {},
-                              child: const Text('teste'),
-                            )
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 190, 0, 0),
+                              ),
+                              onPressed: () {
+                                // Ação do primeiro botão
+                              },
+                              child: const Text(
+                                'Editar',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.05,
+                              child: const VerticalDivider(
+                                thickness: 2,
+                                color: Colors.black54,
+                              ),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color.fromARGB(255, 190, 0, 0),
+                              ),
+                              onPressed: () {
+                                // Ação do segundo botão
+                              },
+                              child: const Text('Excluir',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontStyle: FontStyle.italic
+                              )),
+                            ),
                           ],
                         )
                       ],
