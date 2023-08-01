@@ -92,7 +92,7 @@ class PerfilPage extends GetView<PerfilEmpresaController> {
                       trailing: const Icon(Icons.arrow_forward_ios,
                           color: Colors.black),
                       onTap: () {
-                        controller.goTologout();
+                        Get.offAllNamed('/listTecnico');
                       },
                     ),
                     const Divider(color: Colors.black, thickness: 1),

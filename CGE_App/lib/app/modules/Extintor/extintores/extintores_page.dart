@@ -430,8 +430,8 @@ class ExtintorPage extends State<ExtintorState>
                                 backgroundColor:
                                     const Color.fromARGB(255, 190, 0, 0),
                               ),
-                              onPressed: () {
-                                // Ação do primeiro botão
+                              onPressed: () => {
+                                controller.gotoEditExtintor(item)
                               },
                               child: const Text(
                                 'Editar',
@@ -453,8 +453,8 @@ class ExtintorPage extends State<ExtintorState>
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color.fromARGB(255, 190, 0, 0),
                               ),
-                              onPressed: () {
-                                // Ação do segundo botão
+                              onPressed: () => {
+                                
                               },
                               child: const Text('Excluir',
                               style: TextStyle(

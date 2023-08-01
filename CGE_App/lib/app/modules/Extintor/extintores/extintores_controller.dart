@@ -14,6 +14,7 @@ class ExtintorController extends GetxController {
   }
 
   
+  
   Future<void> gotoEditExtintor(Map item) async {
     await Get.toNamed(Routes.cadExtintor, arguments: item);
   }
