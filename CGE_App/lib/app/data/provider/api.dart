@@ -15,7 +15,7 @@ import '../services/config/service.dart';
 
 class Api {
   final _configService = Get.find<ConfigService>();
-  final baseUrl = "http://192.168.0.116:3333";
+  final baseUrl = "http://192.168.0.134:3333";
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     var url = Uri.parse("$baseUrl/login");
@@ -162,6 +162,27 @@ class Api {
 
   Future<Map> getAllExtintor() async {
     var url = Uri.parse("$baseUrl/extintorsAll");
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization': 'Bearer ${_configService.token}',
+    });
+    if (response.statusCode == 200) {
+      List d = [];
+      List dados = await jsonDecode(response.body);
+      await Future.forEach(dados, (element) {
+        Map<String, dynamic> t = Map.from(element);
+        d.add(t);
+      });
+
+      return {"dados": d};
+    } else {
+      return {"dados": []};
+    }
+  }
+
+  Future<Map> getExtintorSetor(int idSetor) async {
+    var url = Uri.parse("$baseUrl/extintorsSetor/$idSetor");
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',

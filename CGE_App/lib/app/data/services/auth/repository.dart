@@ -45,6 +45,8 @@ class AuthRepository {
 
   Future<Map> getAllExtintor() => _api.getAllExtintor();
 
+  Future<Map> getExtintorSetor(int idSetor) => _api.getExtintorSetor(idSetor);
+
   Future<EmpresaResponseModel> insertEmpresa(EmpresaResquestModel empresa) =>
       _api.insertEmpresa(empresa);
 

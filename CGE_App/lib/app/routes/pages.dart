@@ -1,5 +1,6 @@
 import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_binding.dart';
 import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_page.dart';
+import 'package:cge_app/app/modules/Setor/ExtintorSetor/extintores_setor_page.dart';
 import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
 import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastrotecnico_binding.dart';
 import 'package:cge_app/app/modules/vistoria/vistoria_binding.dart';
@@ -11,6 +12,7 @@ import '../modules/Admin/admin_binding.dart';
 import '../modules/Admin/admin_page.dart';
 import '../modules/Extintor/cadastro_extintor/cadastroExtintor_binding.dart';
 import '../modules/Extintor/cadastro_extintor/cadastroExtintor_page.dart';
+import '../modules/Setor/ExtintorSetor/extintores_setor_binding.dart';
 import '../modules/Setor/cadastro_setor/cadastroSetor_binding.dart';
 import '../modules/Setor/cadastro_setor/cadastroSetor_page.dart';
 import '../modules/Tecnico/ListTecnico/ListTecnico_binding.dart';
@@ -87,6 +89,11 @@ abstract class AppPages {
       name: Routes.listTecnico,
       page: () => const ListTecnico(),
       binding: ListTecnicoBinding(),
+    ),
+    GetPage(
+      name: Routes.extintorSetor,
+      page: () => const ExtintorSetor(),
+      binding: ExtintorSetorBinding(),
     ),
   ];
 }

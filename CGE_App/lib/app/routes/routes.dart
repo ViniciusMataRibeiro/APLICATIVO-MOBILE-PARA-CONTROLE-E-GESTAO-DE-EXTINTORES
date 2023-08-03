@@ -11,4 +11,5 @@ abstract class Routes {
   static const vistoria = '/vistoria';
   static const cadTecnico = '/cadTecnico';
   static const listTecnico = '/listTecnico';
+  static const extintorSetor = '/extintorSetor';
 }
