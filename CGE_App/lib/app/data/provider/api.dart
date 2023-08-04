@@ -234,6 +234,21 @@ class Api {
     }
   }
 
+  Future<bool> deleteExtintor(int idExtintor) async {
+    var url = Uri.parse("$baseUrl/extintor/$idExtintor");
+    var response = await http.delete(
+      url,
+      headers: {
+        'authorization': 'Bearer ${_configService.token}',
+      },
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<EmpresaResponseModel> insertEmpresa(EmpresaResquestModel data) async {
     var url = Uri.parse("$baseUrl/empresa");
     var response = await http.post(url,

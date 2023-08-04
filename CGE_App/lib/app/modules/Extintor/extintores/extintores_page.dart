@@ -250,18 +250,14 @@ class ExtintorPage extends State<ExtintorState>
               },
             );
             return Scaffold(
-              body: Container(
-                child: Center(
-                  child: _mostradados(dados: dados),
-                ),
+              body: Center(
+                child: _mostradados(dados: dados),
               ),
             );
           } else {
-            return Scaffold(
-              body: Container(
-                child: const Center(
-                  child: Text('Nenhum dado encontrado'),
-                ),
+            return const Scaffold(
+              body: Center(
+                child: Text('Nenhum dado encontrado'),
               ),
             );
           }
@@ -292,7 +288,7 @@ class ExtintorPage extends State<ExtintorState>
                   contentPadding: EdgeInsets.zero,
                   content: Container(
                     padding: const EdgeInsets.all(10.0),
-                    height: size.height * 0.66,
+                    height: size.height * 0.59,
                     decoration: BoxDecoration(
                         image: const DecorationImage(
                           image: AssetImage('assets/image/modal.png'),
@@ -407,19 +403,19 @@ class ExtintorPage extends State<ExtintorState>
                         ),
                         Container(
                           margin: EdgeInsets.only(left: size.width * 0.05),
-                          child: const ListTile(
+                          child:  ListTile(
                             contentPadding: EdgeInsets.zero,
-                            leading: Icon(Icons.trending_up_outlined,
+                            leading: const Icon(Icons.trending_up_outlined,
                                 color: Colors.black54, size: 35),
-                            title: Text(
-                              'Setor Responsavel',
+                            title: const Text(
+                              'Setor',
                               style: TextStyle(
                                   color: Colors.black54,
                                   fontStyle: FontStyle.italic,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
                             ),
-                            subtitle: Text('Setor A'),
+                            subtitle: Text(item['setor']),
                           ),
                         ),
                         Row(
@@ -453,8 +449,8 @@ class ExtintorPage extends State<ExtintorState>
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color.fromARGB(255, 190, 0, 0),
                               ),
-                              onPressed: () => {
-                                
+                              onPressed: () async => {
+                                await controller.gotoDeleteExtintor(item['id'])
                               },
                               child: const Text('Excluir',
                               style: TextStyle(
@@ -473,8 +469,8 @@ class ExtintorPage extends State<ExtintorState>
             );
           },
           child: Container(
-            margin: const EdgeInsets.only(top: 10, left: 12, right: 12),
-            height: size.height * 0.22,
+            margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
+            height: size.height * 0.30,
             child: Stack(
               children: [
                 Card(
@@ -498,6 +494,7 @@ class ExtintorPage extends State<ExtintorState>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        SizedBox(height: size.height * 0.01),
                         Padding(
                           padding: const EdgeInsets.only(top: 5.0),
                           child: Row(
@@ -514,24 +511,17 @@ class ExtintorPage extends State<ExtintorState>
                                   ),
                                 ),
                               ),
-                              // IconButton(
-                              //   icon: const Icon(
-                              //     Icons.edit,
-                              //     size: 25,
-                              //     color: Color.fromARGB(255, 224, 79, 79),//Color.fromARGB(255, 148, 28, 28),
-                              //   ),
-                              //   onPressed: () =>
-                              //       controller.gotoEditExtintor(item),
-                              // ),
                             ],
                           ),
                         ),
+                        SizedBox(height: size.height * 0.01),
                         Container(
                           height: 2,
                           color: Colors.grey,
                           margin: const EdgeInsets.symmetric(
                               vertical: 0, horizontal: 7.0),
                         ),
+                        SizedBox(height: size.height * 0.01),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0, left: 5.0),
                           child: Row(
@@ -539,7 +529,7 @@ class ExtintorPage extends State<ExtintorState>
                             children: [
                               Container(
                                 padding:
-                                    const EdgeInsets.only(left: 15, top: 12),
+                                    const EdgeInsets.only(left: 30, top: 35),
                                 child: Image.asset(
                                     obterImagem(item['tipoExtintor']),
                                     height: size.height * 0.10,
@@ -550,6 +540,44 @@ class ExtintorPage extends State<ExtintorState>
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Icon(
+                                        Icons.engineering,
+                                        size: 38,
+                                        color: Colors.red,
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.03,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'Ultima Vistoria',
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          Text(
+                                            DateFormat('dd/MM/yyyy').format(
+                                              DateTime.parse(
+                                                  item['validadeCasco']),
+                                            ),
+                                            style: const TextStyle(
+                                              color: Colors.redAccent,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 15),
                                   Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
@@ -566,7 +594,7 @@ class ExtintorPage extends State<ExtintorState>
                                             CrossAxisAlignment.start,
                                         children: [
                                           const Text(
-                                            'Data Vencimento',
+                                            'Proxima Manutenção',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontStyle: FontStyle.italic,
@@ -574,35 +602,37 @@ class ExtintorPage extends State<ExtintorState>
                                             ),
                                           ),
                                           Text(
-                                              DateFormat('dd/MM/yyyy').format(
-                                                  DateTime.parse(
-                                                      item['validadeCasco'])),
-                                              style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 15,
-                                              )),
+                                            DateFormat('dd/MM/yyyy').format(
+                                              DateTime.parse(
+                                                  item['validadeCasco']),
+                                            ),
+                                            style: const TextStyle(
+                                              color: Colors.black54,
+                                              fontSize: 15,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 9.0),
+                                  const SizedBox(height: 15),
                                   Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       const Icon(
-                                        Icons.trending_up_outlined,
+                                        Icons.location_on_sharp,
                                         size: 38,
                                         color: Colors.black,
                                       ),
                                       SizedBox(
                                         width: size.width * 0.03,
                                       ),
-                                      const Column(
+                                      Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            'Setor Responsável',
+                                          const Text(
+                                            'Setor',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontStyle: FontStyle.italic,
@@ -610,8 +640,8 @@ class ExtintorPage extends State<ExtintorState>
                                             ),
                                           ),
                                           Text(
-                                            'Setor A',
-                                            style: TextStyle(
+                                            item['setor'],
+                                            style: const TextStyle(
                                               color: Colors.black54,
                                               fontSize: 15,
                                             ),

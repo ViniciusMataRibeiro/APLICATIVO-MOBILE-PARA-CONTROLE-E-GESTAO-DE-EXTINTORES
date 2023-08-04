@@ -18,17 +18,22 @@ export default class ExtintorsController {
                 case 'empresa':
                     const empresa = await Empresa.findByOrFail("user_id", userAuth.id);
 
-                    setores = await Database.query().select('id').from('setors').where('empresa_id', empresa.id).where('ativo', true);
+                    setores = await Database.query().select('*').from('setors').where('empresa_id', empresa.id).where('ativo', true);
                     break;
                 case 'tecnico':
                     const tecnico = await Tecnico.findByOrFail("user_id", userAuth.id);
 
-                    setores = await Database.query().select('id').from('setors').where('empresa_id', tecnico.empresa_id).where('ativo', true);
+                    setores = await Database.query().select('*').from('setors').where('empresa_id', tecnico.empresa_id).where('ativo', true);
                     break;
             }
 
             const setoresId = setores.map((setor) => setor.id);
             const extintores = await Database.query().select('*').from('extintors').whereIn('setor_id', setoresId).where('ativo', true);
+
+            extintores.forEach((extintor) => {
+                const set = setores.find((setor) => setor.id == extintor.setor_id);
+                extintor.setor = set.nome;
+            });
 
             return response.status(200).json(extintores);
 

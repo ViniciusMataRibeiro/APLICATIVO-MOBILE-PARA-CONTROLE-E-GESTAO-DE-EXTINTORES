@@ -149,6 +149,15 @@ class AuthService extends GetxService {
     }
   }
 
+  Future<bool> deleteExtintor(int idExtintor) async {
+    var result = await _repository.deleteExtintor(idExtintor);
+    if (result) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<EmpresaResponseModel> insertEmpresa(
       EmpresaResquestModel empresa) async {
     var result = await _repository.insertEmpresa(empresa);
