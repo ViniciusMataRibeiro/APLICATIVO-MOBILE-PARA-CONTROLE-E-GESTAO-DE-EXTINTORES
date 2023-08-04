@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 
 import '../modules/Admin/admin_binding.dart';
 import '../modules/Admin/admin_page.dart';
+import '../modules/Empresa/endereco_empresa/enderecoEmpresa_binding.dart';
+import '../modules/Empresa/endereco_empresa/enderecoEmpresa_page.dart';
 import '../modules/Extintor/cadastro_extintor/cadastroExtintor_binding.dart';
 import '../modules/Extintor/cadastro_extintor/cadastroExtintor_page.dart';
 import '../modules/Setor/ExtintorSetor/extintores_setor_binding.dart';
@@ -94,6 +96,11 @@ abstract class AppPages {
       name: Routes.extintorSetor,
       page: () => const ExtintorSetor(),
       binding: ExtintorSetorBinding(),
+    ),
+    GetPage(
+      name: Routes.enderecoEmpresa,
+      page: () => const EnderecoEmpresaPage(),
+      binding: EnderecoEmpresaBinding(),
     ),
   ];
 }
