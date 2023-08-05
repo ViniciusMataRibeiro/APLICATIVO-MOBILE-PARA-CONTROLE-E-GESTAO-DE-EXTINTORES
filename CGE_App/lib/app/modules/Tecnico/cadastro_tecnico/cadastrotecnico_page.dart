@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'dart:ui' as ui;
 
+import '../../../Icones/icones_personalizado.dart';
 import 'cadastrotecnico_controller.dart';
 
 class CadastroTecnicoPage extends GetView<CadastroTecnicoController> {
@@ -113,11 +114,11 @@ class CadastroExtintor extends State<CadastroExtintorState>
         ),
         centerTitle: true,
       ),
-      body: Center(
+      body: Form(
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/image/registro.jpeg'),
+                image: AssetImage('assets/image/LogOut.png'),
                 fit: BoxFit.cover),
           ),
           child: ListView(
@@ -144,149 +145,124 @@ class CadastroExtintor extends State<CadastroExtintorState>
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(15.0),
-                margin: const EdgeInsets.only(bottom: 100, left: 20, right: 20),
+                padding: const EdgeInsets.all(0),
+                margin: const EdgeInsets.only(left: 30, right: 30, bottom: 50),
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                  color: Color.fromARGB(80, 0, 0, 0),
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(
-                              () {
-                                isSelectbloqueado = !isSelectbloqueado;
-                                cadastroTecnicoController.bloqueado.value =
-                                    isSelectbloqueado;
-                              },
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            decoration: BoxDecoration(
-                              color: isSelectbloqueado
-                                  ? Colors.red
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(5.0),
-                              border: isSelectbloqueado
-                                  ? null
-                                  : Border.all(color: Colors.white, width: 2),
-                            ),
-                            width: 25,
-                            height: 25,
-                            child: isSelectbloqueado
-                                ? const Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                  )
-                                : null,
+                    ListTile(
+                      contentPadding: const EdgeInsets.only(left: 5),
+                      leading: GestureDetector(
+                        onTap: () {
+                          setState(
+                            () {
+                              isSelectbloqueado = !isSelectbloqueado;
+                              cadastroTecnicoController.bloqueado.value =
+                                  isSelectbloqueado;
+                            },
+                          );
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          decoration: BoxDecoration(
+                            color: isSelectbloqueado
+                                ? Colors.red
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(5.0),
+                            border: isSelectbloqueado
+                                ? null
+                                : Border.all(color: Colors.black, width: 2),
                           ),
+                          width: 25,
+                          height: 25,
+                          child: isSelectbloqueado
+                              ? const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                )
+                              : null,
                         ),
-                        const SizedBox(
-                          width: 10,
+                      ),
+                      title: const Text(
+                        'Inativo',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
                         ),
-                        const Text(
-                          'Inativo',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 0),
-                      child: Form(
-                        child: TextFormField(
-                          controller: cadastroTecnicoController.name,
-                          style: const TextStyle(
-                              wordSpacing: 1,
-                              fontSize: 18,
-                              color: Colors.white),
-                          decoration: const InputDecoration(
-                            icon: Icon(
-                              Icons.verified_user,
-                              color: Colors.white,
-                              size: 27,
-                            ),
-                            labelStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                            labelText: 'Nome',
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(
+                        Icons.verified_user_outlined,
+                        color: Colors.black,
+                        size: 40,
+                      ),
+                      title: TextFormField(
+                        //controller: controller.nome,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 18,
+                        ),
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Nome',
+                          labelStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
                           ),
                         ),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 0),
-                      child: Form(
-                        child: TextFormField(
-                          controller: cadastroTecnicoController.email,
-                          style: const TextStyle(
-                              wordSpacing: 1,
-                              fontSize: 18,
-                              color: Colors.white),
-                          decoration: const InputDecoration(
-                            hintStyle: TextStyle(color: Colors.white),
-                            icon: Icon(
-                              Icons.email,
-                              color: Colors.white,
-                              size: 27,
-                            ),
-                            labelStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                            labelText: 'Email',
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(
+                        Icons.email_outlined,
+                        color: Colors.black,
+                        size: 40,
+                      ),
+                      title: TextFormField(
+                        //controller: controller.nome,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 18,
+                        ),
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          labelStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
                           ),
                         ),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 0),
-                      child: Obx(
-                        () => TextFormField(
-                          controller: cadastroTecnicoController.password,
-                          style: const TextStyle(
-                              wordSpacing: 1,
-                              fontSize: 18,
-                              color: Colors.white),
-                          obscureText:
-                              cadastroTecnicoController.showPassword.value,
-                          decoration: InputDecoration(
-                            hintStyle: const TextStyle(
-                              color: Colors.white,
-                            ),
-                            icon: const Icon(
-                              Icons.lock_rounded,
-                              color: Colors.white,
-                              size: 27,
-                            ),
-                            labelStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                            labelText: 'Senha',
-                            suffixIcon: GestureDetector(
-                              child: Icon(
-                                  cadastroTecnicoController
-                                              .showPassword.value ==
-                                          false
-                                      ? Icons.visibility_off_rounded
-                                      : Icons.visibility_rounded,
-                                  color: Colors.white),
-                              onTap: () {
-                                cadastroTecnicoController.toggleShowPassword();
-                              },
-                            ),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(
+                        Icons.lock_open_rounded,
+                        color: Colors.black,
+                        size: 40,
+                      ),
+                      title: TextFormField(
+                        //controller: controller.nome,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 18,
+                        ),
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Senha',
+                          labelStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
                           ),
                         ),
                       ),
@@ -301,7 +277,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                 await cadastroTecnicoController.goToInsert();
                             if (result == 'true') {
                               cadastroTecnicoController
-                                  .toast('Gravado com sucesso!');
+                                  .toast('Registrado com sucesso');
                             } else {
                               final snackBar = SnackBar(
                                 elevation: 0,
@@ -313,7 +289,6 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                   contentType: ContentType.failure,
                                 ),
                               );
-
                               // ignore: use_build_context_synchronously
                               ScaffoldMessenger.of(context)
                                 ..hideCurrentSnackBar()
@@ -323,10 +298,10 @@ class CadastroExtintor extends State<CadastroExtintorState>
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromARGB(255, 175, 31, 21),
-                            fixedSize: const Size(300, 50),
+                            fixedSize: const Size(250, 50),
                           ),
                           child: const Text(
-                            'Gravar',
+                            'Registrar',
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Roboto-BoldItalic',
