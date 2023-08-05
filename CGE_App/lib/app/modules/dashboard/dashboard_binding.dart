@@ -12,7 +12,7 @@ import '../Tecnico/cadastro_tecnico/cadastrotecnico_controller.dart';
 import '../Tecnico/perfil_tecnico/perfilTecnico_controller.dart';
 import '../login/login_controller.dart';
 import '../splash/splash_controller.dart';
-import '../vistoria/vistoria_controller.dart';
+import '../vistoria/vistoria/vistoria_controller.dart';
 import 'dashboard_Controller.dart';
 
 class DashboardBinding implements Bindings {

@@ -10,7 +10,7 @@ import '../Setor/setores/setores_controller.dart';
 import '../Tecnico/ListTecnico/ListTecnico_controller.dart';
 import '../Tecnico/cadastro_tecnico/cadastrotecnico_controller.dart';
 import '../Tecnico/perfil_tecnico/perfilTecnico_controller.dart';
-import '../vistoria/vistoria_controller.dart';
+import '../vistoria/vistoria/vistoria_controller.dart';
 import '../dashboard/dashboard_Controller.dart';
 import '../login/login_controller.dart';
 import 'splash_controller.dart';

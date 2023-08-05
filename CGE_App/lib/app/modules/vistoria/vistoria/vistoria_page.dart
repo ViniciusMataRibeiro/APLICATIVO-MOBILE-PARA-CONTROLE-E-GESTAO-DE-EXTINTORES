@@ -1,11 +1,15 @@
 import 'package:cge_app/app/core/app_theme.dart';
-import 'package:cge_app/app/modules/vistoria/vistoria_controller.dart';
+import 'package:cge_app/app/modules/vistoria/vistoria/vistoria_controller.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'dart:ui' as ui;
+
+import '../../../Icones/icones_personalizado.dart';
+import '../../Extintor/cadastro_extintor/cadastroExtintor_controller.dart';
 
 var newFormat = DateFormat("dd/MM/y");
 var dt = DateTime.now();
@@ -40,6 +44,7 @@ class VistoriaState extends StatefulWidget {
 
 class Vistoria extends State<VistoriaState>
     with SingleTickerProviderStateMixin {
+  CadastroExtintorController controller = Get.put(CadastroExtintorController());
   var number = faker.randomGenerator.integer(50);
   // ignore: unused_field
   late Animation<double> _animation;
@@ -181,7 +186,7 @@ class Vistoria extends State<VistoriaState>
                       contentPadding: EdgeInsets.zero,
                       leading: const Icon(
                         Icons.date_range_outlined,
-                        size: 40,
+                        size: 35,
                         color: Colors.black,
                       ),
                       title: const Text(
@@ -198,6 +203,72 @@ class Vistoria extends State<VistoriaState>
                             fontSize: 20,
                             color: Colors.black,
                             fontStyle: FontStyle.italic),
+                      ),
+                    ),
+                    const Divider(color: Colors.black, thickness: 1),
+                    const ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Icon(
+                          Icons.trending_up_outlined,
+                          color: Colors.black,
+                          size: 35,
+                        ),
+                        selected: true,
+                        selectedTileColor: Colors.black,
+                        title: Text(
+                          'Setor',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                          ),
+                        ),
+                        trailing: Expanded(
+                          child: Icon(Icons.arrow_drop_down,
+                              size: 30, color: Colors.black),
+                        )),
+                    const Divider(color: Colors.black, thickness: 1),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(
+                        Icones_Personalizado.fire_extinguisher,
+                        color: Colors.black,
+                        size: 35,
+                      ),
+                      selected: true,
+                      selectedTileColor: Colors.black,
+                      title: DropdownButton<String>(
+                        value: controller.getNomeSetor(controller.setor_id),
+                        items: controller.setores.map((e) {
+                          return DropdownMenuItem<String>(
+                            value: e['nome'] as String,
+                            child: Text(e['nome'] as String),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            controller.setor = value ?? '';
+                          });
+                        },
+                        underline: Container(),
+                        dropdownColor: Colors.white,
+                        iconSize: 30,
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black,
+                        ),
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                        isExpanded: true,
+                        hint: const Text(
+                          'Selecione o Extintor',
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
+                        ),
                       ),
                     ),
                     const Divider(color: Colors.black, thickness: 1),
@@ -429,11 +500,10 @@ class Vistoria extends State<VistoriaState>
                       contentPadding: EdgeInsets.zero,
                       leading: Container(
                         width: size.width * 0.1,
-                        height: size.height*0.1,
+                        height: size.height * 0.1,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
-                            image:
-                                AssetImage('assets/image/icon_lacre.png'),
+                            image: AssetImage('assets/image/icon_lacre.png'),
                             fit: BoxFit
                                 .contain, // Ajuste da imagem dentro do contêiner
                           ),
@@ -477,6 +547,45 @@ class Vistoria extends State<VistoriaState>
                       ),
                     ),
                     const Divider(color: Colors.black, thickness: 1),
+                    Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      child: Form(
+                        child: TextFormField(
+                          controller: controller.descricao,
+                          style: const TextStyle(
+                              wordSpacing: 1,
+                              fontSize: 18,
+                              color: Colors.black),
+                          decoration: const InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(25),
+                                topRight: Radius.circular(25),
+                                bottomLeft: Radius.circular(25),
+                                bottomRight: Radius.circular(25),
+                              ),
+                              borderSide:
+                                  BorderSide(color: Colors.black, width: 1.0),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(25),
+                                topRight: Radius.circular(25),
+                                bottomLeft: Radius.circular(25),
+                                bottomRight: Radius.circular(25),
+                              ),
+                            ),
+                            labelStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                            labelText: 'Observações',
+                            alignLabelWithHint: true,
+                          ),
+                          maxLines: 4,
+                        ),
+                      ),
+                    ),
                     // ListTile(
                     //   contentPadding: EdgeInsets.zero,
                     //   leading: const Icon(Ionicons.thumbs_up_outline,
