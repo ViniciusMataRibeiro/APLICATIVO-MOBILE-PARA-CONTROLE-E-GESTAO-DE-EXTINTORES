@@ -154,7 +154,7 @@ class EnderecoEmpresa extends State<EnderecoEmpresaState> {
                             children: [
                               Expanded(
                                 child: TextFormField(
-                                  //controller: controller.cepController,
+                                  controller: controller.cep,
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
                                     labelText: 'CEP',
@@ -180,7 +180,7 @@ class EnderecoEmpresa extends State<EnderecoEmpresaState> {
                             children: [
                               Expanded(
                                 child: TextFormField(
-                                  //controller: controller.cepController,
+                                  controller: controller.bairro,
                                   keyboardType: TextInputType.text,
                                   decoration: const InputDecoration(
                                     labelText: 'Bairro',
@@ -206,10 +206,36 @@ class EnderecoEmpresa extends State<EnderecoEmpresaState> {
                             children: [
                               Expanded(
                                 child: TextFormField(
-                                  //controller: controller.cepController,
+                                  controller: controller.rua,
                                   keyboardType: TextInputType.text,
                                   decoration: const InputDecoration(
                                     labelText: 'Rua',
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 5.0, left: 35, right: 35, bottom: 5.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  controller: controller.cidade,
+                                  keyboardType: TextInputType.text,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Cidade',
                                     labelStyle: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
@@ -232,7 +258,7 @@ class EnderecoEmpresa extends State<EnderecoEmpresaState> {
                             children: [
                               Expanded(
                                 child: TextFormField(
-                                  //controller: controller.cepController,
+                                  controller: controller.uf,
                                   keyboardType: TextInputType.text,
                                   decoration: const InputDecoration(
                                     labelText: 'UF',
@@ -250,7 +276,7 @@ class EnderecoEmpresa extends State<EnderecoEmpresaState> {
                               SizedBox(width: size.width * 0.05),
                               Expanded(
                                 child: TextFormField(
-                                  //controller: controller.cepController,
+                                  controller: controller.numero,
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
                                     labelText: 'Número',
@@ -276,8 +302,8 @@ class EnderecoEmpresa extends State<EnderecoEmpresaState> {
                             children: [
                               Expanded(
                                 child: TextFormField(
-                                  //controller: controller.cepController,
-                                  keyboardType: TextInputType.number,
+                                  controller: controller.referencia,
+                                  keyboardType: TextInputType.text,
                                   decoration: const InputDecoration(
                                     labelText: 'Ponto de Referência',
                                     labelStyle: TextStyle(

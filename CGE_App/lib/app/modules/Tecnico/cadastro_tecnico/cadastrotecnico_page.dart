@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'dart:ui' as ui;
 
-import '../../../Icones/icones_personalizado.dart';
 import 'cadastrotecnico_controller.dart';
 
 class CadastroTecnicoPage extends GetView<CadastroTecnicoController> {
@@ -82,19 +81,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
             const SizedBox(
               width: 5,
             ),
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              width: 40,
-              height: 40,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100.0),
-                child: Image.asset(
-                  'assets/image/cge.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            if (cadastroTecnicoController.alterando)
+            if (cadastroTecnicoController.alterando.value)
               const Text(
                 'Alterando Tecnico',
                 style: TextStyle(
@@ -102,7 +89,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                     color: Colors.white,
                     fontStyle: FontStyle.italic),
               ),
-            if (!cadastroTecnicoController.alterando)
+            if (!cadastroTecnicoController.alterando.value)
               const Text(
                 'Cadastro Tecnico',
                 style: TextStyle(
@@ -153,48 +140,58 @@ class CadastroExtintor extends State<CadastroExtintorState>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ListTile(
-                      contentPadding: const EdgeInsets.only(left: 5),
-                      leading: GestureDetector(
-                        onTap: () {
-                          setState(
-                            () {
-                              isSelectbloqueado = !isSelectbloqueado;
-                              cadastroTecnicoController.bloqueado.value =
-                                  isSelectbloqueado;
-                            },
-                          );
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 400),
-                          curve: Curves.fastLinearToSlowEaseIn,
-                          decoration: BoxDecoration(
-                            color: isSelectbloqueado
-                                ? Colors.red
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(5.0),
-                            border: isSelectbloqueado
-                                ? null
-                                : Border.all(color: Colors.black, width: 2),
+                    Visibility(
+                      visible: cadastroTecnicoController.alterando.value,
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.only(left: 5),
+                        leading: GestureDetector(
+                          onTap: () {
+                            setState(
+                              () {
+                                isSelectbloqueado = !isSelectbloqueado;
+                                cadastroTecnicoController.bloqueado.value =
+                                    isSelectbloqueado;
+                              },
+                            );
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.fastLinearToSlowEaseIn,
+                            decoration: BoxDecoration(
+                              color: isSelectbloqueado
+                                  ? Colors.red
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(5.0),
+                              border: isSelectbloqueado
+                                  ? null
+                                  : Border.all(color: Colors.black, width: 2),
+                            ),
+                            width: 25,
+                            height: 25,
+                            child: isSelectbloqueado
+                                ? const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                  )
+                                : null,
                           ),
-                          width: 25,
-                          height: 25,
-                          child: isSelectbloqueado
-                              ? const Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                )
-                              : null,
                         ),
-                      ),
-                      title: const Text(
-                        'Inativo',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
+                        title: const Text(
+                          'Inativo',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                     ),
+                    cadastroTecnicoController.alterando.value
+                        ? const SizedBox(
+                            height: 0,
+                          )
+                        : const SizedBox(
+                            height: 20,
+                          ),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       leading: const Icon(
@@ -203,13 +200,13 @@ class CadastroExtintor extends State<CadastroExtintorState>
                         size: 40,
                       ),
                       title: TextFormField(
-                        //controller: controller.nome,
+                        controller: cadastroTecnicoController.name,
                         style: const TextStyle(
                           color: Colors.black,
                           fontStyle: FontStyle.italic,
                           fontSize: 18,
                         ),
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
                           labelText: 'Nome',
                           labelStyle: TextStyle(
@@ -227,13 +224,13 @@ class CadastroExtintor extends State<CadastroExtintorState>
                         size: 40,
                       ),
                       title: TextFormField(
-                        //controller: controller.nome,
+                        controller: cadastroTecnicoController.email,
                         style: const TextStyle(
                           color: Colors.black,
                           fontStyle: FontStyle.italic,
                           fontSize: 18,
                         ),
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
                           labelText: 'Email',
                           labelStyle: TextStyle(
@@ -251,13 +248,13 @@ class CadastroExtintor extends State<CadastroExtintorState>
                         size: 40,
                       ),
                       title: TextFormField(
-                        //controller: controller.nome,
+                        controller: cadastroTecnicoController.password,
                         style: const TextStyle(
                           color: Colors.black,
                           fontStyle: FontStyle.italic,
                           fontSize: 18,
                         ),
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
                           labelText: 'Senha',
                           labelStyle: TextStyle(

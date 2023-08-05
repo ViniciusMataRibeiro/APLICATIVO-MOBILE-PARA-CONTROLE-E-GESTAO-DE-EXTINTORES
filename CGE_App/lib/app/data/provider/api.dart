@@ -280,9 +280,24 @@ class Api {
       return EmpresaResponseModel(id: 0, nome: '', email: '', telefone: '');
     }
   }
+  
+  Future<Map> getEnderecoEmpresa() async {
+    var url = Uri.parse("$baseUrl/empresaEndereco");
+    var response = await http.get(url, headers: {
+      'authorization': 'Bearer ${_configService.token}',
+    });
+    if (response.statusCode == 200) {
+      var a = await jsonDecode(response.body);
+
+      return {"dados": a};
+    } else {
+      return {"dados": []};
+    }
+  }
+
 
   Future<bool> insertEndereco(EnderecoRequestModel data) async {
-    var url = Uri.parse("$baseUrl/endereco");
+    var url = Uri.parse("$baseUrl/empresaEndereco");
     var response = await http.post(url,
         headers: {
           'Content-Type': 'application/json',
@@ -298,7 +313,7 @@ class Api {
   }
 
   Future<bool> updateEndereco(EnderecoRequestModel data) async {
-    var url = Uri.parse("$baseUrl/endereco/${data.id}");
+    var url = Uri.parse("$baseUrl/empresaEndereco/${data.id}");
     var response = await http.put(url,
         headers: {
           'Content-Type': 'application/json',

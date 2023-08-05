@@ -9,6 +9,7 @@ class EnderecoRequestModel {
   String numero;
   // ignore: non_constant_identifier_names
   String ponto_referencia;
+  String uf;
 
   EnderecoRequestModel({
     required this.id,
@@ -21,6 +22,7 @@ class EnderecoRequestModel {
     required this.numero,
     // ignore: non_constant_identifier_names
     required this.ponto_referencia,
+    required this.uf,
   });
 
   Map<String, dynamic> toJson() => {
@@ -32,5 +34,6 @@ class EnderecoRequestModel {
         'cidade': cidade.toString(),
         'numero': numero.toString(),
         'ponto_referencia': ponto_referencia.toString(),
+        'uf': uf.toString(),
       };
 }

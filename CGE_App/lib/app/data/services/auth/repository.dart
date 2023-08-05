@@ -56,6 +56,8 @@ class AuthRepository {
   Future<EmpresaResponseModel> updateEmpresa(EmpresaResquestModel empresa) =>
       _api.updateEmpresa(empresa);
 
+  Future<Map> getEnderecoEmpresa() => _api.getEnderecoEmpresa();
+
   Future<bool> insertEndereco(EnderecoRequestModel endereco) =>
       _api.insertEndereco(endereco);
 

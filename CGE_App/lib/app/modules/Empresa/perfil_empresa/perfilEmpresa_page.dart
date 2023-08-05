@@ -140,7 +140,7 @@ class PerfilPage extends GetView<PerfilEmpresaController> {
                         color: Colors.black,
                       ),
                       onTap: () {
-                        Get.offAllNamed('/enderecoEmpresa');
+                        controller.goToEditEndereco();
                       },
                     ),
                     const Divider(color: Colors.black, thickness: 1),

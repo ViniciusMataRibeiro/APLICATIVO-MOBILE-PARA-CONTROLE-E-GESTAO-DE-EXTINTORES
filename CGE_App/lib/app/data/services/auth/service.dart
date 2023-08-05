@@ -184,6 +184,10 @@ class AuthService extends GetxService {
     }
   }
 
+  Future<Map> getEnderecoEmpresa() async {
+    return await _repository.getEnderecoEmpresa();
+  }
+
   Future<bool> insertEndereco(EnderecoRequestModel endereco) async {
     var result = await _repository.insertEndereco(endereco);
     if (result) {

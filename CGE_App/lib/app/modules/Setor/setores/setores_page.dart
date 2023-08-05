@@ -1,7 +1,6 @@
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/routes/routes.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:faker/faker.dart';

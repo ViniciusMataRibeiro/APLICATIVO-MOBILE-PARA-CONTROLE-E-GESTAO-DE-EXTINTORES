@@ -26,6 +26,7 @@ class CadastroEmpresaController extends GetxController {
   var bairro = TextEditingController(text: '');
   var numero = TextEditingController(text: '');
   var referencia = TextEditingController(text: '');
+  var uf = TextEditingController(text: '');
 
   Future<String> goToInsert() async {
     if (name.text == '') {
@@ -66,6 +67,7 @@ class CadastroEmpresaController extends GetxController {
       bairro: bairro.text,
       numero: numero.text,
       ponto_referencia: referencia.text,
+      uf: uf.text,
     );
 
     if (idEndereco > 0) {

@@ -12,4 +12,8 @@ class PerfilEmpresaController extends GetxController {
   void goTologout() {
     _authService.logout().then((value) => null);
   }
+
+  void goToEditEndereco() {
+    Get.toNamed('/enderecoEmpresa');
+  }
 }
