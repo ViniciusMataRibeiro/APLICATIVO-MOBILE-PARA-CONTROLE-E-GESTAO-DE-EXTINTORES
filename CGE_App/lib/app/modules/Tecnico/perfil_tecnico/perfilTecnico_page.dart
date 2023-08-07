@@ -117,7 +117,7 @@ class PerfilTecnicoPage extends GetView<PerfilTecnicoController> {
                       trailing: const Icon(Icons.arrow_forward_ios,
                           color: Colors.black),
                       onTap: () {
-                        controller.goTologout();
+                        Get.offAllNamed('/consultaVistoria');
                       },
                     ),
                     const Divider(color: Colors.black, thickness: 1),

@@ -470,7 +470,7 @@ class ExtintorPage extends State<ExtintorState>
           },
           child: Container(
             margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
-            height: size.height * 0.30,
+            height: size.height * 0.35,
             child: Stack(
               children: [
                 Card(
@@ -519,24 +519,24 @@ class ExtintorPage extends State<ExtintorState>
                           height: 2,
                           color: Colors.grey,
                           margin: const EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 7.0),
+                              vertical: 0, horizontal: 15),
                         ),
-                        SizedBox(height: size.height * 0.01),
+                        //SizedBox(height: size.height * 0.01),
                         Padding(
-                          padding: const EdgeInsets.only(top: 8.0, left: 5.0),
+                          padding: const EdgeInsets.only(top: 8.0, left: 4.0),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                 padding:
-                                    const EdgeInsets.only(left: 30, top: 35),
+                                    const EdgeInsets.only(left: 20, top: 35),
                                 child: Image.asset(
                                     obterImagem(item['tipoExtintor']),
                                     height: size.height * 0.10,
                                     width: size.width * 0.17,
                                     fit: BoxFit.contain),
                               ),
-                              SizedBox(width: size.width * 0.1),
+                              SizedBox(width: size.width * 0.08),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

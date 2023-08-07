@@ -106,7 +106,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.consultaVistoria,
-      page: () => const ConsultaVistoriaPage(),
+      page: () => const ConsultaVistoria(),
       binding: ConsultaVistoriaBinding(),
     )
   ];
