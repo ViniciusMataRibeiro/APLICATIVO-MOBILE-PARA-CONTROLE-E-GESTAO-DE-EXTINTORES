@@ -1,4 +1,3 @@
-import 'package:cge_app/app/modules/vistoria/consulta_vistoria/consulta_vistoria_controller.dart';
 import 'package:faker/faker.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +6,9 @@ import 'package:intl/intl.dart';
 import '../../../Icones/icones_personalizado.dart';
 import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
-import 'dart:ui' as ui;
-
 import '../../Extintor/extintores/extintores_controller.dart';
+import 'consulta_vistoria_controller.dart';
+import 'dart:ui' as ui;
 
 DateTime selectedDate = DateTime.now();
 String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
@@ -34,7 +33,8 @@ class ConsultaVistoria extends GetView<ConsultaVistoriaController> {
 }
 
 class ConsultaVistoriaState extends StatefulWidget {
-  const ConsultaVistoriaState({Key? key, required this.title}) : super(key: key);
+  const ConsultaVistoriaState({Key? key, required this.title})
+      : super(key: key);
   final String title;
 
   @override
@@ -136,7 +136,8 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
 
   @override
   Widget build(BuildContext context) {
-    var obj = aux.user.value;
+    var size = MediaQuery.of(context).size;
+    //var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -147,12 +148,22 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
               children: [
                 Row(
                   children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_outlined,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        Get.offAllNamed('/perfil');
+                      },
+                    ),
+                    SizedBox(width: size.width * 0.01),
                     Image.asset(
                       'assets/image/cge.png',
                       fit: BoxFit.contain,
                       height: 45,
                     ),
-                    const SizedBox(width: 60),
+                    SizedBox(width: size.width * 0.09),
                     Text(
                       textAlign: TextAlign.center,
                       updatedDt,
@@ -185,51 +196,51 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: Container(
         margin: const EdgeInsets.only(bottom: 70),
-        child: FloatingActionBubble(
-          herotag: UniqueKey(),
-          items: <Bubble>[
-            if (obj!.tipo == 'empresa') ...[
-              Bubble(
-                title: "Cadastrar Tecnico",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_circle_outline,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadTecnico');
-                },
-              ),
-            ] else ...[
-              Bubble(
-                title: "Cadastrar Extintor",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.add_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadExtintor');
-                },
-              ),
-              Bubble(
-                title: "Realizar Vistoria",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/vistoria');
-                },
-              ),
-            ],
-          ],
-          animation: _animation,
-          onPress: () => _animationController.isCompleted
-              ? _animationController.reverse()
-              : _animationController.forward(),
-          iconColor: Colors.white,
-          iconData: Icons.handyman_outlined,
-          backGroundColor: const Color.fromARGB(255, 190, 0, 0),
-        ),
+        // child: FloatingActionBubble(
+        //   herotag: UniqueKey(),
+        //   items: <Bubble>[
+        //     if (obj!.tipo == 'empresa') ...[
+        //       Bubble(
+        //         title: "Cadastrar Tecnico",
+        //         iconColor: Colors.white,
+        //         bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+        //         icon: Icons.check_circle_outline,
+        //         titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+        //         onPress: () {
+        //           Get.toNamed('/cadTecnico');
+        //         },
+        //       ),
+        //     ] else ...[
+        //       Bubble(
+        //         title: "Cadastrar Extintor",
+        //         iconColor: Colors.white,
+        //         bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+        //         icon: Icons.add_rounded,
+        //         titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+        //         onPress: () {
+        //           Get.toNamed('/cadExtintor');
+        //         },
+        //       ),
+        //       Bubble(
+        //         title: "Realizar Vistoria",
+        //         iconColor: Colors.white,
+        //         bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+        //         icon: Icons.check_rounded,
+        //         titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+        //         onPress: () {
+        //           Get.toNamed('/vistoria');
+        //         },
+        //       ),
+        //     ],
+        //   ],
+        //   animation: _animation,
+        //   onPress: () => _animationController.isCompleted
+        //       ? _animationController.reverse()
+        //       : _animationController.forward(),
+        //   iconColor: Colors.white,
+        //   iconData: Icons.handyman_outlined,
+        //   backGroundColor: const Color.fromARGB(255, 190, 0, 0),
+        // ),
       ),
       body: buildContainer(),
     );
@@ -290,7 +301,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                   contentPadding: EdgeInsets.zero,
                   content: Container(
                     padding: const EdgeInsets.all(10.0),
-                    height: size.height * 0.59,
+                    height: size.height * 0.6,
                     decoration: BoxDecoration(
                         image: const DecorationImage(
                           image: AssetImage('assets/image/modal.png'),
@@ -405,7 +416,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                         ),
                         Container(
                           margin: EdgeInsets.only(left: size.width * 0.05),
-                          child:  ListTile(
+                          child: ListTile(
                             contentPadding: EdgeInsets.zero,
                             leading: const Icon(Icons.trending_up_outlined,
                                 color: Colors.black54, size: 35),
@@ -420,49 +431,6 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                             subtitle: Text(item['setor']),
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 190, 0, 0),
-                              ),
-                              onPressed: () => {
-                                controller.gotoEditExtintor(item)
-                              },
-                              child: const Text(
-                                'Editar',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: size.height * 0.05,
-                              child: const VerticalDivider(
-                                thickness: 2,
-                                color: Colors.black54,
-                              ),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(255, 190, 0, 0),
-                              ),
-                              onPressed: () async => {
-                                await controller.gotoDeleteExtintor(item['id'])
-                              },
-                              child: const Text('Excluir',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontStyle: FontStyle.italic
-                              )),
-                            ),
-                          ],
-                        )
                       ],
                     ),
                   ),
@@ -472,7 +440,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
           },
           child: Container(
             margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
-            height: size.height * 0.30,
+            height: size.height * 0.47,
             child: Stack(
               children: [
                 Card(
@@ -480,8 +448,8 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                   child: Container(
                     decoration: BoxDecoration(
                       image: const DecorationImage(
-                        image: AssetImage('assets/image/card.png'),
-                        fit: BoxFit.fill,
+                        image: AssetImage('assets/image/modal_vistoria.png'),
+                        fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
@@ -500,11 +468,13 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                         Padding(
                           padding: const EdgeInsets.only(top: 5.0),
                           child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Expanded(
                                 child: Text(
-                                  dados[index]['nome'],
+                                  DateFormat('dd/MM/yyyy').format(
+                                    DateTime.parse(item['validadeCasco']),
+                                  ),
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 20,
@@ -521,70 +491,25 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                           height: 2,
                           color: Colors.grey,
                           margin: const EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 7.0),
+                              vertical: 0, horizontal: 15),
                         ),
-                        SizedBox(height: size.height * 0.01),
+                        //SizedBox(height: size.height * 0.01),
                         Padding(
-                          padding: const EdgeInsets.only(top: 8.0, left: 5.0),
+                          padding: EdgeInsets.only(
+                              top: 8.0, left: size.width * 0.05),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                padding:
-                                    const EdgeInsets.only(left: 30, top: 35),
-                                child: Image.asset(
-                                    obterImagem(item['tipoExtintor']),
-                                    height: size.height * 0.10,
-                                    width: size.width * 0.17,
-                                    fit: BoxFit.contain),
-                              ),
-                              SizedBox(width: size.width * 0.1),
+                              //SizedBox(width: size.width * 0.08),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  SizedBox(height: size.width * 0.01),
                                   Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       const Icon(
-                                        Icons.engineering,
-                                        size: 38,
-                                        color: Colors.red,
-                                      ),
-                                      SizedBox(
-                                        width: size.width * 0.03,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Text(
-                                            'Ultima Vistoria',
-                                            style: TextStyle(
-                                              color: Colors.red,
-                                              fontStyle: FontStyle.italic,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                          Text(
-                                            DateFormat('dd/MM/yyyy').format(
-                                              DateTime.parse(
-                                                  item['validadeCasco']),
-                                            ),
-                                            style: const TextStyle(
-                                              color: Colors.redAccent,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 15),
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      const Icon(
-                                        Icons.date_range_outlined,
+                                        Icones_Personalizado.fire_extinguisher,
                                         size: 38,
                                         color: Colors.black,
                                       ),
@@ -596,7 +521,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                             CrossAxisAlignment.start,
                                         children: [
                                           const Text(
-                                            'Proxima Manutenção',
+                                            'Numero Extintor',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontStyle: FontStyle.italic,
@@ -604,10 +529,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                             ),
                                           ),
                                           Text(
-                                            DateFormat('dd/MM/yyyy').format(
-                                              DateTime.parse(
-                                                  item['validadeCasco']),
-                                            ),
+                                            dados[index]['nome'],
                                             style: const TextStyle(
                                               color: Colors.black54,
                                               fontSize: 15,
@@ -617,7 +539,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 15),
+                                  const SizedBox(height: 10),
                                   Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
@@ -652,10 +574,128 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                       ),
                                     ],
                                   ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Icon(
+                                        Icons.engineering,
+                                        size: 38,
+                                        color: Colors.black,
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.03,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'Técnico Responsavel',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          Text(
+                                            item['setor'],
+                                            style: const TextStyle(
+                                              color: Colors.black54,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Icon(
+                                        Icons.date_range_outlined,
+                                        size: 38,
+                                        color: Colors.black,
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.03,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'Proxima Manutenção',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          Text(
+                                            item['setor'],
+                                            style: const TextStyle(
+                                              color: Colors.black54,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Icon(
+                                        Icons.check_outlined,
+                                        size: 38,
+                                        color: Colors.black,
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.03,
+                                      ),
+                                      const Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Apto para uso',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          Text(
+                                            'OK',
+                                            style: TextStyle(
+                                              color: Colors.black54,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                              // decoration:
+                                              //     TextDecoration.underline,
+                                              // decorationColor: Colors.green,
+                                              // decorationStyle:
+                                              //     TextDecorationStyle.solid,
+                                              // decorationThickness: 3,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               )
                             ],
                           ),
+                        ),
+                        Container(
+                          height: 3,
+                          color: Colors.green,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 15),
                         ),
                       ],
                     ),
