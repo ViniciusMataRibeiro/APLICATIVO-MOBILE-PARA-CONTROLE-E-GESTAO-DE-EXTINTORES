@@ -140,7 +140,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 title: "Cadastrar Tecnico",
                 iconColor: Colors.white,
                 bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_circle_outline,
+                icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
                   Get.toNamed('/cadTecnico');

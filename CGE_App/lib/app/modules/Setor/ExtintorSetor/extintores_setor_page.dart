@@ -98,6 +98,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
 
   @override
   Widget build(BuildContext context) {
+    var obj = aux.user.value;
     var size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -140,26 +141,39 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
         child: FloatingActionBubble(
           herotag: UniqueKey(),
           items: <Bubble>[
-            Bubble(
-              title: "Cadastrar Extintor",
-              iconColor: Colors.white,
-              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-              icon: Icons.add_rounded,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              onPress: () {
-                Get.toNamed('/cadExtintor');
-              },
-            ),
-            Bubble(
-              title: "Realizar Vistoria",
-              iconColor: Colors.white,
-              bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-              icon: Icons.check_rounded,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              onPress: () {
-                Get.toNamed('/vistoria');
-              },
-            ),
+            if (obj!.tipo == 'empresa') ...[
+              Bubble(
+                title: "Cadastrar Tecnico",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.add_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Get.toNamed('/cadTecnico');
+                },
+              ),
+            ] else ...[
+              Bubble(
+                title: "Cadastrar Extintor",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.add_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Get.toNamed('/cadExtintor');
+                },
+              ),
+              Bubble(
+                title: "Realizar Vistoria",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                icon: Icons.check_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  Get.toNamed('/vistoria');
+                },
+              ),
+            ],
           ],
           animation: _animation,
           onPress: () => _animationController.isCompleted

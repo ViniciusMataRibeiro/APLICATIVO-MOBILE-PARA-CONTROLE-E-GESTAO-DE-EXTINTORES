@@ -1,5 +1,6 @@
+// ignore_for_file: unused_field
+
 import 'package:faker/faker.dart';
-import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -140,7 +141,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        Get.offAllNamed('/perfil');
+                        Get.offAllNamed('/dashboard');
                       },
                     ),
                     SizedBox(width: size.width * 0.01),

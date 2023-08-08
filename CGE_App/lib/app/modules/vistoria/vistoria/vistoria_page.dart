@@ -1,6 +1,5 @@
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/modules/vistoria/vistoria/vistoria_controller.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
