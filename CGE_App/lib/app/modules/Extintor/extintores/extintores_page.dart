@@ -481,7 +481,7 @@ class ExtintorPage extends State<ExtintorState>
           },
           child: Container(
             margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
-            height: size.height * 0.35,
+            height: 230,
             child: Stack(
               children: [
                 Card(
@@ -530,7 +530,7 @@ class ExtintorPage extends State<ExtintorState>
                           height: 2,
                           color: Colors.grey,
                           margin: const EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 15),
+                              vertical: 0, horizontal: 7.0),
                         ),
                         //SizedBox(height: size.height * 0.01),
                         Padding(
@@ -547,7 +547,7 @@ class ExtintorPage extends State<ExtintorState>
                                     width: size.width * 0.17,
                                     fit: BoxFit.contain),
                               ),
-                              SizedBox(width: size.width * 0.08),
+                              SizedBox(width: size.width * 0.11),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
