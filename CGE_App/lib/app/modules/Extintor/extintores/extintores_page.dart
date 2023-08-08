@@ -481,7 +481,7 @@ class ExtintorPage extends State<ExtintorState>
           },
           child: Container(
             margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
-            height: 230,
+            height: 240,
             child: Stack(
               children: [
                 Card(
