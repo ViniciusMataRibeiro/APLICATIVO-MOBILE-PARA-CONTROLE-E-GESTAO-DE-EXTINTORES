@@ -316,23 +316,35 @@ class ExtintorPage extends State<ExtintorState>
                           margin: EdgeInsets.only(left: size.width * 0.05),
                           child: ListTile(
                             contentPadding: EdgeInsets.zero,
-                            leading: const Icon(Icons.date_range_outlined,
-                                color: Colors.black54, size: 35),
+                            leading: const Icon(Icons.engineering,
+                                color: Colors.red, size: 35),
                             title: const Text(
                               'Ultima Vistoria',
                               style: TextStyle(
-                                  color: Colors.black54,
+                                  color: Colors.red,
                                   fontStyle: FontStyle.italic,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
                             ),
-                            subtitle: Text(
-                              DateFormat('dd/MM/yyyy').format(
-                                DateTime.parse(
-                                  item['validadeExtintor'],
-                                ),
-                              ),
-                            ),
+                            subtitle: item['ultimaVistoria'] == null
+                                ? const Text('Sem dados',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15))
+                                : Text(
+                                    DateFormat('dd/MM/yyyy').format(
+                                      DateTime.parse(
+                                        item['ultimaVistoria'],
+                                      ),
+                                    ),
+                                    style: const TextStyle(
+                                        color: Colors.red,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  ),
                           ),
                         ),
                         Container(
@@ -403,7 +415,7 @@ class ExtintorPage extends State<ExtintorState>
                         ),
                         Container(
                           margin: EdgeInsets.only(left: size.width * 0.05),
-                          child:  ListTile(
+                          child: ListTile(
                             contentPadding: EdgeInsets.zero,
                             leading: const Icon(Icons.trending_up_outlined,
                                 color: Colors.black54, size: 35),
@@ -426,9 +438,8 @@ class ExtintorPage extends State<ExtintorState>
                                 backgroundColor:
                                     const Color.fromARGB(255, 190, 0, 0),
                               ),
-                              onPressed: () => {
-                                controller.gotoEditExtintor(item)
-                              },
+                              onPressed: () =>
+                                  {controller.gotoEditExtintor(item)},
                               child: const Text(
                                 'Editar',
                                 style: TextStyle(
@@ -447,17 +458,17 @@ class ExtintorPage extends State<ExtintorState>
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(255, 190, 0, 0),
+                                backgroundColor:
+                                    const Color.fromARGB(255, 190, 0, 0),
                               ),
                               onPressed: () async => {
                                 await controller.gotoDeleteExtintor(item['id'])
                               },
                               child: const Text('Excluir',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontStyle: FontStyle.italic
-                              )),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontStyle: FontStyle.italic)),
                             ),
                           ],
                         )
@@ -563,16 +574,30 @@ class ExtintorPage extends State<ExtintorState>
                                               fontSize: 15,
                                             ),
                                           ),
-                                          Text(
-                                            DateFormat('dd/MM/yyyy').format(
-                                              DateTime.parse(
-                                                  item['validadeCasco']),
-                                            ),
-                                            style: const TextStyle(
-                                              color: Colors.redAccent,
-                                              fontSize: 15,
-                                            ),
-                                          ),
+                                          item['ultimaVistoria'] == null
+                                              ? const Text('Sem dados',
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 15))
+                                              : Text(
+                                                  DateFormat('dd/MM/yyyy')
+                                                      .format(
+                                                    DateTime.parse(
+                                                      item['ultimaVistoria'],
+                                                    ),
+                                                  ),
+                                                  style: const TextStyle(
+                                                      color: Colors.red,
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 15),
+                                                ),
                                         ],
                                       ),
                                     ],
@@ -604,7 +629,7 @@ class ExtintorPage extends State<ExtintorState>
                                           Text(
                                             DateFormat('dd/MM/yyyy').format(
                                               DateTime.parse(
-                                                  item['validadeCasco']),
+                                                  item['proximaManutencao']),
                                             ),
                                             style: const TextStyle(
                                               color: Colors.black54,

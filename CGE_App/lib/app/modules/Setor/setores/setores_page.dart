@@ -57,10 +57,8 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
     try {
       setState(() {
         mapa = controller.getResumoSetor();
-        Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (BuildContext context) => super.widget));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext context) => super.widget));
       });
       // ignore: empty_catches
     } catch (e) {}
@@ -230,92 +228,92 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
       itemBuilder: (BuildContext context, index) {
         Map item = dados[index];
         return GestureDetector(
-            onTap: () async {
-              await Get.toNamed(Routes.extintorSetor, arguments: item);
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: Card(
-                    elevation: 5,
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                            image: const DecorationImage(
-                              image: AssetImage('assets/image/LogOut.png'),
-                              fit: BoxFit.cover,
+          onTap: () async {
+            await Get.toNamed(Routes.extintorSetor, arguments: item);
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                child: Card(
+                  elevation: 5,
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
                             ),
+                          ],
+                          image: const DecorationImage(
+                            image: AssetImage('assets/image/LogOut.png'),
+                            fit: BoxFit.cover,
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const SizedBox(width: 25),
-                              Text(
-                                '${item['setor']}',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Flexible(
-                                flex: 5,
-                                child: IconButton(
-                                    icon: const Icon(Icons.edit,
-                                        size: 25, color: Colors.black),
-                                    onPressed: () =>
-                                        controller.gotoEditSetor(item)),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  margin:
-                      const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                  child: Card(
-                    elevation: 5,
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5,
-                                offset: Offset(0, 5),
-                              ),
-                            ],
-                            image: const DecorationImage(
-                              image: AssetImage('assets/image/LogOut.png'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: ExportCircular(item),
                         ),
-                      ],
-                    ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SizedBox(width: 25),
+                            Text(
+                              '${item['setor']}',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                            Flexible(
+                              flex: 5,
+                              child: IconButton(
+                                icon: const Icon(Icons.edit,
+                                    size: 25, color: Colors.black),
+                                onPressed: () => controller.gotoEditSetor(item),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              ],
-            ));
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                child: Card(
+                  elevation: 5,
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 5,
+                              offset: Offset(0, 5),
+                            ),
+                          ],
+                          image: const DecorationImage(
+                            image: AssetImage('assets/image/LogOut.png'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: ExportCircular(item),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
       },
     );
   }

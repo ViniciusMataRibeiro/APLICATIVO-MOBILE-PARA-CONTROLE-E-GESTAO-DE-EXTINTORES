@@ -260,18 +260,27 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
                             ),
-                            subtitle: Text(
-                              DateFormat('dd/MM/yyyy').format(
-                                DateTime.parse(
-                                  item['validadeExtintor'],
-                                ),
-                              ),
-                              style: const TextStyle(
-                                  color: Colors.red,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            ),
+                            subtitle: item['ultimaVistoria'] == null
+                                ? const Text(
+                                    'Sem dados',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  )
+                                : Text(
+                                    DateFormat('dd/MM/yyyy').format(
+                                      DateTime.parse(
+                                        item['ultimaVistoria'],
+                                      ),
+                                    ),
+                                    style: const TextStyle(
+                                        color: Colors.red,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  ),
                           ),
                         ),
                         Container(
@@ -506,16 +515,32 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                                               fontSize: 15,
                                             ),
                                           ),
-                                          Text(
-                                            DateFormat('dd/MM/yyyy').format(
-                                              DateTime.parse(
-                                                  item['validadeCasco']),
-                                            ),
-                                            style: const TextStyle(
-                                              color: Colors.redAccent,
-                                              fontSize: 15,
-                                            ),
-                                          ),
+                                          item['ultimaVistoria'] == null
+                                              ? const Text(
+                                                  'Sem dados',
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 15),
+                                                )
+                                              : Text(
+                                                  DateFormat('dd/MM/yyyy')
+                                                      .format(
+                                                    DateTime.parse(
+                                                      item['ultimaVistoria'],
+                                                    ),
+                                                  ),
+                                                  style: const TextStyle(
+                                                      color: Colors.red,
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 15),
+                                                ),
                                         ],
                                       ),
                                     ],
@@ -547,7 +572,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                                           Text(
                                             DateFormat('dd/MM/yyyy').format(
                                               DateTime.parse(
-                                                  item['validadeCasco']),
+                                                  item['proximaManutencao']),
                                             ),
                                             style: const TextStyle(
                                               color: Colors.black54,

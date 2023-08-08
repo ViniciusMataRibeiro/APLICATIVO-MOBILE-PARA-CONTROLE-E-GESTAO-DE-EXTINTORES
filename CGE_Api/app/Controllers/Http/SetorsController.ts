@@ -29,7 +29,7 @@ export default class SetorsController {
             for (const element of Setores) {
                 let obj;
 
-                const result = await Database.rawQuery('SELECT * FROM extintors WHERE setor_id = ? AND ativo = ?', [element.id, true]);
+                const result = await Database.rawQuery('SELECT * FROM extintors WHERE setor_id = ? AND ativo = ? order by proximaManutencao asc', [element.id, true]);
                 if (result[0].length == 0) {
                     continue;
                 }
@@ -49,6 +49,15 @@ export default class SetorsController {
                 //let cont = 0;
 
                 for (const element of obj.extintores) {
+                    const vistoria = await Database.rawQuery('Select * from manutencoes where extintor_id = ? order by dataManutencao desc limit 1', [element.id]);
+
+                    if (vistoria[0].length > 0) {
+                        element.ultimaVistoria = vistoria[0][0].dataManutencao;
+                    }
+                    else {
+                        element.ultimaVistoria = null;
+                    }
+
                     //cont++;
                     var dateAtual = new Date();
                     var dataLimite = new Date(dateAtual.getFullYear(), dateAtual.getMonth(), dateAtual.getDate() + 15);

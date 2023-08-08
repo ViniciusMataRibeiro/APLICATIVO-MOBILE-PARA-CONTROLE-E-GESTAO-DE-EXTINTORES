@@ -28,12 +28,21 @@ export default class ExtintorsController {
             }
 
             const setoresId = setores.map((setor) => setor.id);
-            const extintores = await Database.query().select('*').from('extintors').whereIn('setor_id', setoresId).where('ativo', true);
+            const extintores = await Database.query().select('*').from('extintors').whereIn('setor_id', setoresId).where('ativo', true).orderBy('setor_id', 'asc').orderBy('proximaManutencao', 'asc');
+            
+            for (const element of extintores) {
+                const vistoria = await Database.rawQuery('Select * from manutencoes where extintor_id = ? order by dataManutencao desc limit 1', [element.id]);
 
-            extintores.forEach((extintor) => {
-                const set = setores.find((setor) => setor.id == extintor.setor_id);
-                extintor.setor = set.nome;
-            });
+                if (vistoria[0].length > 0) {
+                    element.ultimaVistoria = vistoria[0][0].dataManutencao;
+                }
+                else {
+                    element.ultimaVistoria = null;
+                }
+
+                const set = setores.find((setor) => setor.id == element.setor_id);
+                element.setor = set.nome;
+            }
 
             return response.status(200).json(extintores);
 
@@ -47,9 +56,19 @@ export default class ExtintorsController {
 
     public async indexExtintoresSetor({ response, params }: HttpContextContract) {
         try {
-            const extintores = await Database.query().select('*').from('extintors').where('setor_id', params.id).where('ativo', true);
+            const extintores = await Database.query().select('*').from('extintors').where('setor_id', params.id).where('ativo', true).orderBy('proximaManutencao', 'asc');
 
             if (extintores.length > 0) {
+                for (const element of extintores) {
+                    const vistoria = await Database.rawQuery('Select * from manutencoes where extintor_id = ? order by dataManutencao desc limit 1', [element.id]);
+    
+                    if (vistoria[0].length > 0) {
+                        element.ultimaVistoria = vistoria[0][0].dataManutencao;
+                    }
+                    else {
+                        element.ultimaVistoria = null;
+                    }
+                }
                 return response.status(200).json(extintores);
             } else {
                 return response.status(204).json({
