@@ -3,6 +3,7 @@ import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:ionicons/ionicons.dart';
 import '../../../Icones/icones_personalizado.dart';
 import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
@@ -48,33 +49,18 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
     ExtintorController(),
   );
 
-  String obterImagem(String tipoExtintor) {
-    switch (tipoExtintor) {
-      case 'Tipo A':
-        return 'assets/image/ExtintorClassesA.png';
-      case 'Tipo B':
-        return 'assets/image/ExtintorClassesB.png';
-      case 'Tipo ABC':
-        return 'assets/image/ExtintorClassesABC.png';
-      case 'Tipo AB':
-        return 'assets/image/ExtintorClassesAB.png';
-      case 'Tipo BC':
-        return 'assets/image/ExtintorClassesBC.png';
-      case 'Tipo C':
-        return 'assets/image/ExtintorClassesC.png';
-      case 'Tipo D':
-        return 'assets/image/ExtintorClassesD.png';
-      case 'Tipo K':
-        return 'assets/image/ExtintorClassesK.png';
-      default:
-        return 'Imagem não encontrada';
-    }
-  }
-
   var number = faker.randomGenerator.integer(50);
   late Animation<double> _animation;
   late AnimationController _animationController;
   late Future mapa;
+
+  bool isSelectmanometro = false;
+  bool isSelectparede = false;
+  bool isSelectpiso = false;
+  bool isSelectacesso = false;
+  bool isSelectmangueira = false;
+  bool isSelectlacre = false;
+  bool isSelectaprovado = false;
 
   DateTime selectedDate = DateTime.now();
 
@@ -196,51 +182,6 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: Container(
         margin: const EdgeInsets.only(bottom: 70),
-        // child: FloatingActionBubble(
-        //   herotag: UniqueKey(),
-        //   items: <Bubble>[
-        //     if (obj!.tipo == 'empresa') ...[
-        //       Bubble(
-        //         title: "Cadastrar Tecnico",
-        //         iconColor: Colors.white,
-        //         bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-        //         icon: Icons.check_circle_outline,
-        //         titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-        //         onPress: () {
-        //           Get.toNamed('/cadTecnico');
-        //         },
-        //       ),
-        //     ] else ...[
-        //       Bubble(
-        //         title: "Cadastrar Extintor",
-        //         iconColor: Colors.white,
-        //         bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-        //         icon: Icons.add_rounded,
-        //         titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-        //         onPress: () {
-        //           Get.toNamed('/cadExtintor');
-        //         },
-        //       ),
-        //       Bubble(
-        //         title: "Realizar Vistoria",
-        //         iconColor: Colors.white,
-        //         bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-        //         icon: Icons.check_rounded,
-        //         titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-        //         onPress: () {
-        //           Get.toNamed('/vistoria');
-        //         },
-        //       ),
-        //     ],
-        //   ],
-        //   animation: _animation,
-        //   onPress: () => _animationController.isCompleted
-        //       ? _animationController.reverse()
-        //       : _animationController.forward(),
-        //   iconColor: Colors.white,
-        //   iconData: Icons.handyman_outlined,
-        //   backGroundColor: const Color.fromARGB(255, 190, 0, 0),
-        // ),
       ),
       body: buildContainer(),
     );
@@ -301,7 +242,6 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                   contentPadding: EdgeInsets.zero,
                   content: Container(
                     padding: const EdgeInsets.all(10.0),
-                    height: size.height * 0.6,
                     decoration: BoxDecoration(
                         image: const DecorationImage(
                           image: AssetImage('assets/image/modal.png'),
@@ -325,112 +265,287 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                           color: Colors.black54,
                           thickness: 2,
                         ),
-                        Container(
-                          margin: EdgeInsets.only(left: size.width * 0.05),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            leading: const Icon(Icons.date_range_outlined,
-                                color: Colors.black54, size: 35),
-                            title: const Text(
-                              'Ultima Vistoria',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: const Icon(Icons.speed_outlined,
+                              color: Colors.black, size: 30),
+                          title: const Text(
+                            'Manômetro',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
                             ),
-                            subtitle: Text(
-                              DateFormat('dd/MM/yyyy').format(
-                                DateTime.parse(
-                                  item['validadeExtintor'],
-                                ),
+                          ),
+                          trailing: GestureDetector(
+                            onTap: () {
+                              setState(
+                                () {
+                                  isSelectmanometro = !isSelectmanometro;
+                                },
+                              );
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectmanometro
+                                    ? Colors.green
+                                    : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectmanometro
+                                    ? null
+                                    : Border.all(color: Colors.black, width: 1),
+                              ),
+                              width: 20,
+                              height: 20,
+                              child: isSelectmanometro
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                      size: 20,
+                                    )
+                                  : null,
+                            ),
+                          ),
+                        ),
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: const Icon(Icons.fire_extinguisher_outlined,
+                              color: Colors.black, size: 30),
+                          title: const Text(
+                            'Sinalização Parede',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
+                          ),
+                          trailing: GestureDetector(
+                            onTap: () {
+                              setState(
+                                () {
+                                  isSelectparede = !isSelectparede;
+                                },
+                              );
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectparede
+                                    ? Colors.green
+                                    : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectparede
+                                    ? null
+                                    : Border.all(color: Colors.black, width: 1),
+                              ),
+                              width: 20,
+                              height: 20,
+                              child: isSelectparede
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                      size: 20,
+                                    )
+                                  : null,
+                            ),
+                          ),
+                        ),
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: const Icon(Ionicons.footsteps_outline,
+                              color: Colors.black, size: 30),
+                          title: const Text(
+                            'Sinalização Piso',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
+                          ),
+                          trailing: GestureDetector(
+                            onTap: () {
+                              setState(
+                                () {
+                                  isSelectpiso = !isSelectpiso;
+                                },
+                              );
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectpiso
+                                    ? Colors.green
+                                    : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectpiso
+                                    ? null
+                                    : Border.all(color: Colors.black, width: 1),
+                              ),
+                              width: 20,
+                              height: 20,
+                              child: isSelectpiso
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                      size: 20,
+                                    )
+                                  : null,
+                            ),
+                          ),
+                        ),
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: const Icon(Ionicons.enter_outline,
+                              color: Colors.black, size: 30),
+                          title: const Text(
+                            'Acesso',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
+                          ),
+                          trailing: GestureDetector(
+                            onTap: () {
+                              setState(
+                                () {
+                                  isSelectacesso = !isSelectacesso;
+                                },
+                              );
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectacesso
+                                    ? Colors.green
+                                    : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectacesso
+                                    ? null
+                                    : Border.all(color: Colors.black, width: 1),
+                              ),
+                              width: 20,
+                              height: 20,
+                              child: isSelectacesso
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                      size: 20,
+                                    )
+                                  : null,
+                            ),
+                          ),
+                        ),
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: Container(
+                            width: size.width * 0.09,
+                            height: 30,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/image/icon_mangueira.png'),
+                                fit: BoxFit
+                                    .contain, // Ajuste da imagem dentro do contêiner
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: size.width * 0.05),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            leading: const Icon(Icons.date_range_outlined,
-                                color: Colors.black54, size: 35),
-                            title: const Text(
-                              'Validade Extintor',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
+                          title: const Text(
+                            'Mangueira',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
                             ),
-                            subtitle: Text(
-                              DateFormat('dd/MM/yyyy').format(
-                                DateTime.parse(
-                                  item['validadeExtintor'],
-                                ),
+                          ),
+                          trailing: GestureDetector(
+                            onTap: () {
+                              setState(
+                                () {
+                                  isSelectmangueira = !isSelectmangueira;
+                                },
+                              );
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectmangueira
+                                    ? Colors.green
+                                    : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectmangueira
+                                    ? null
+                                    : Border.all(color: Colors.black, width: 1),
+                              ),
+                              width: 20,
+                              height: 20,
+                              child: isSelectmangueira
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                      size: 20,
+                                    )
+                                  : null,
+                            ),
+                          ),
+                        ),
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: Container(
+                            width: size.width * 0.09,
+                            height: 30,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image:
+                                    AssetImage('assets/image/icon_lacre.png'),
+                                fit: BoxFit
+                                    .contain, // Ajuste da imagem dentro do contêiner
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: size.width * 0.05),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            leading: const Icon(Icons.date_range_outlined,
-                                color: Colors.black54, size: 35),
-                            title: const Text(
-                              'Venc. Hidrostatico',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
+                          title: const Text(
+                            'Lacre',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
                             ),
-                            subtitle: Text(
-                              DateFormat('dd/MM/yyyy').format(
-                                DateTime.parse(
-                                  item['validadeCasco'],
-                                ),
+                          ),
+                          trailing: GestureDetector(
+                            onTap: () {
+                              setState(
+                                () {
+                                  isSelectlacre = !isSelectlacre;
+                                },
+                              );
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              decoration: BoxDecoration(
+                                color: isSelectlacre
+                                    ? Colors.green
+                                    : Colors.transparent,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: isSelectlacre
+                                    ? null
+                                    : Border.all(color: Colors.black, width: 1),
                               ),
+                              width: 20,
+                              height: 20,
+                              child: isSelectlacre
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                      size: 20,
+                                    )
+                                  : null,
                             ),
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(left: size.width * 0.05),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            leading: const Icon(
-                                Icones_Personalizado.fire_extinguisher,
-                                color: Colors.black54,
-                                size: 35),
-                            title: const Text(
-                              'Tipo Extintor',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            ),
-                            subtitle: Text(
-                                '${item['tipoExtintor']}\t${item['tamanho']} Kg'),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: size.width * 0.05),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            leading: const Icon(Icons.trending_up_outlined,
-                                color: Colors.black54, size: 35),
-                            title: const Text(
-                              'Setor',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            ),
-                            subtitle: Text(item['setor']),
-                          ),
-                        ),
+                        const SizedBox(
+                          height: 5,
+                        )
                       ],
                     ),
                   ),
@@ -440,7 +555,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
           },
           child: Container(
             margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
-            height: size.height * 0.47,
+            height: 335,
             child: Stack(
               children: [
                 Card(
