@@ -205,26 +205,82 @@ class Vistoria extends State<VistoriaState>
                       ),
                     ),
                     const Divider(color: Colors.black, thickness: 1),
-                    const ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        leading: Icon(
-                          Icons.trending_up_outlined,
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(
+                        Icones_Personalizado.fire_extinguisher,
+                        color: Colors.black,
+                        size: 35,
+                      ),
+                      selected: true,
+                      selectedTileColor: Colors.black,
+                      title: const Text(
+                        'Selecione o Setor',
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
                           color: Colors.black,
-                          size: 35,
+                          fontSize: 20,
                         ),
-                        selected: true,
-                        selectedTileColor: Colors.black,
-                        title: Text(
-                          'Setor',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                          ),
+                      ),
+                      trailing: IconButton(
+                        padding: EdgeInsets.only(left: size.width * 0.05),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                contentPadding: EdgeInsets.zero,
+                                content: Container(
+                                  padding: const EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                    image: const DecorationImage(
+                                      image:
+                                          AssetImage('assets/image/LogOut.png'),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Text(
+                                          'Selecione o Setor',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontStyle: FontStyle.italic,
+                                          ),
+                                        ),
+                                      ),
+                                      Divider(
+                                        color: Colors.black,
+                                        thickness: 2,
+                                      ),
+                                      InkWell(
+                                        child: ListTile(
+                                          title: Text('Setor A'),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        child: ListTile(
+                                          title: Text('Setor F'),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                          size: 30,
+                          color: Colors.black,
                         ),
-                        trailing: Expanded(
-                          child: Icon(Icons.arrow_drop_down,
-                              size: 30, color: Colors.black),
-                        )),
+                      ),
+                    ),
                     const Divider(color: Colors.black, thickness: 1),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
@@ -235,38 +291,70 @@ class Vistoria extends State<VistoriaState>
                       ),
                       selected: true,
                       selectedTileColor: Colors.black,
-                      title: DropdownButton<String>(
-                        value: controller.getNomeSetor(controller.setor_id),
-                        items: controller.setores.map((e) {
-                          return DropdownMenuItem<String>(
-                            value: e['nome'] as String,
-                            child: Text(e['nome'] as String),
+                      title: const Text(
+                        'Selecione o Extintor',
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
+                      trailing: IconButton(
+                        padding: EdgeInsets.only(left: size.width * 0.05),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                contentPadding: EdgeInsets.zero,
+                                content: Container(
+                                  padding: const EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                    image: const DecorationImage(
+                                      image:
+                                          AssetImage('assets/image/LogOut.png'),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Text(
+                                          'Selecione o Extintor',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontStyle: FontStyle.italic,
+                                          ),
+                                        ),
+                                      ),
+                                      Divider(
+                                        color: Colors.black,
+                                        thickness: 2,
+                                      ),
+                                      InkWell(
+                                        child: ListTile(
+                                          title: Text('27888901'),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        child: ListTile(
+                                          title: Text('12345679'),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
                           );
-                        }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            controller.setor = value ?? '';
-                          });
                         },
-                        underline: Container(),
-                        dropdownColor: Colors.white,
-                        iconSize: 30,
                         icon: const Icon(
                           Icons.arrow_drop_down,
+                          size: 30,
                           color: Colors.black,
-                        ),
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                        ),
-                        isExpanded: true,
-                        hint: const Text(
-                          'Selecione o Extintor',
-                          style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            color: Colors.black,
-                            fontSize: 20,
-                          ),
                         ),
                       ),
                     ),
