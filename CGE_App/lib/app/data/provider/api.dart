@@ -343,4 +343,25 @@ class Api {
       throw Exception('Falha ao carregar culturas');
     }
   }
+
+  Future<Map> getAllManutencao() async {
+    var url = Uri.parse("$baseUrl/manutencao");
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization': 'Bearer ${_configService.token}',
+    });
+    if (response.statusCode == 200) {
+      List d = [];
+      List dados = await jsonDecode(response.body);
+      await Future.forEach(dados, (element) {
+        Map<String, dynamic> t = Map.from(element);
+        d.add(t);
+      });
+
+      return {"dados": d};
+    } else {
+      return {"dados": []};
+    }
+  }
 }

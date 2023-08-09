@@ -8,13 +8,9 @@ import 'package:ionicons/ionicons.dart';
 import '../../../Icones/icones_personalizado.dart';
 import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
-import '../../Extintor/extintores/extintores_controller.dart';
 import 'consulta_vistoria_controller.dart';
 import 'dart:ui' as ui;
 
-DateTime selectedDate = DateTime.now();
-String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
-String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
 List dados = [];
 
 class ConsultaVistoria extends GetView<ConsultaVistoriaController> {
@@ -46,64 +42,14 @@ class ConsultaVistoriaState extends StatefulWidget {
 class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
     with SingleTickerProviderStateMixin {
   AuthService aux = Get.find<AuthService>();
-  ExtintorController controller = Get.put(
-    ExtintorController(),
+  ConsultaVistoriaController controller = Get.put(
+    ConsultaVistoriaController(),
   );
 
   var number = faker.randomGenerator.integer(50);
   late Animation<double> _animation;
   late AnimationController _animationController;
   late Future mapa;
-
-  bool isSelectmanometro = false;
-  bool isSelectparede = false;
-  bool isSelectpiso = false;
-  bool isSelectacesso = false;
-  bool isSelectmangueira = false;
-  bool isSelectlacre = false;
-  bool isSelectaprovado = false;
-
-  DateTime selectedDate = DateTime.now();
-
-  // ignore: unused_element
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2000),
-        lastDate: DateTime.now(),
-        cancelText: "CANCELAR",
-        builder: (context, child) => Theme(
-              data: ThemeData.light().copyWith(
-                  primaryColor: const Color(0xFF4C131A),
-                  buttonTheme:
-                      const ButtonThemeData(textTheme: ButtonTextTheme.primary),
-                  colorScheme: const ColorScheme.light(
-                          primary: Color.fromARGB(255, 190, 0, 0))
-                      .copyWith(secondary: const Color(0xFF4C131A))),
-              child: child!,
-            ));
-    if (picked != null && picked != selectedDate) {
-      setState(
-        () {
-          _refresh(data: picked);
-        },
-      );
-    }
-  }
-
-  _refresh({DateTime? data}) async {
-    try {
-      data ??= DateTime.parse(updatedDt2);
-
-      setState(() {
-        selectedDate = data!;
-        updatedDt = DateFormat("dd/MM/y").format(data);
-        updatedDt2 = DateFormat("y-MM-dd").format(data);
-      });
-      // ignore: empty_catches
-    } catch (e) {}
-  }
 
   @override
   void initState() {
@@ -116,69 +62,41 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
         CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
-    mapa = controller.getAllExtintor();
+    mapa = controller.getAllManutencao();
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    //var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back_outlined,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        Get.offAllNamed('/dashboard');
-                      },
-                    ),
-                    SizedBox(width: size.width * 0.01),
-                    Image.asset(
-                      'assets/image/cge.png',
-                      fit: BoxFit.contain,
-                      height: 45,
-                    ),
-                    SizedBox(width: size.width * 0.09),
-                    Text(
-                      textAlign: TextAlign.center,
-                      updatedDt,
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                  ],
-                )
-              ],
+            IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Get.offAllNamed('/dashboard');
+              },
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            const Text(
+              "Manutenções",
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic),
             ),
           ],
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.notification_important, color: Colors.white),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.refresh_rounded, color: Colors.white),
-            onPressed: () => _refresh(),
-          ),
-        ],
-        backgroundColor: const Color.fromARGB(255, 190, 0, 0),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(25),
-            bottomRight: Radius.circular(25),
-          ),
-        ),
+        centerTitle: true,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: Container(
@@ -196,14 +114,6 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
           Map temp = snapshot.data;
           dados = temp['dados'];
           if (dados.isNotEmpty) {
-            Future.delayed(
-              const Duration(minutes: 1),
-              () {
-                if (mounted) {
-                  _refresh();
-                }
-              },
-            );
             return Scaffold(
               body: Center(
                 child: _mostradados(dados: dados),
@@ -255,7 +165,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: Text(
-                            item['nome'],
+                            item['numeroExtintor'],
                             style: const TextStyle(
                                 fontSize: 20,
                                 fontStyle: FontStyle.italic,
@@ -278,28 +188,21 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                             ),
                           ),
                           trailing: GestureDetector(
-                            onTap: () {
-                              setState(
-                                () {
-                                  isSelectmanometro = !isSelectmanometro;
-                                },
-                              );
-                            },
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.fastLinearToSlowEaseIn,
                               decoration: BoxDecoration(
-                                color: isSelectmanometro
+                                color: item['manometro']
                                     ? Colors.green
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectmanometro
+                                border: item['manometro']
                                     ? null
                                     : Border.all(color: Colors.black, width: 1),
                               ),
                               width: 20,
                               height: 20,
-                              child: isSelectmanometro
+                              child: item['manometro']
                                   ? const Icon(
                                       Icons.check,
                                       color: Colors.white,
@@ -321,28 +224,21 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                             ),
                           ),
                           trailing: GestureDetector(
-                            onTap: () {
-                              setState(
-                                () {
-                                  isSelectparede = !isSelectparede;
-                                },
-                              );
-                            },
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.fastLinearToSlowEaseIn,
                               decoration: BoxDecoration(
-                                color: isSelectparede
+                                color: item['sinalizacaoParede']
                                     ? Colors.green
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectparede
+                                border: item['sinalizacaoParede']
                                     ? null
                                     : Border.all(color: Colors.black, width: 1),
                               ),
                               width: 20,
                               height: 20,
-                              child: isSelectparede
+                              child: item['sinalizacaoParede']
                                   ? const Icon(
                                       Icons.check,
                                       color: Colors.white,
@@ -364,28 +260,21 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                             ),
                           ),
                           trailing: GestureDetector(
-                            onTap: () {
-                              setState(
-                                () {
-                                  isSelectpiso = !isSelectpiso;
-                                },
-                              );
-                            },
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.fastLinearToSlowEaseIn,
                               decoration: BoxDecoration(
-                                color: isSelectpiso
+                                color: item['sinalizacaoPiso']
                                     ? Colors.green
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectpiso
+                                border: item['sinalizacaoPiso']
                                     ? null
                                     : Border.all(color: Colors.black, width: 1),
                               ),
                               width: 20,
                               height: 20,
-                              child: isSelectpiso
+                              child: item['sinalizacaoPiso']
                                   ? const Icon(
                                       Icons.check,
                                       color: Colors.white,
@@ -407,28 +296,21 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                             ),
                           ),
                           trailing: GestureDetector(
-                            onTap: () {
-                              setState(
-                                () {
-                                  isSelectacesso = !isSelectacesso;
-                                },
-                              );
-                            },
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.fastLinearToSlowEaseIn,
                               decoration: BoxDecoration(
-                                color: isSelectacesso
+                                color: item['acesso']
                                     ? Colors.green
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectacesso
+                                border: item['acesso']
                                     ? null
                                     : Border.all(color: Colors.black, width: 1),
                               ),
                               width: 20,
                               height: 20,
-                              child: isSelectacesso
+                              child: item['acesso']
                                   ? const Icon(
                                       Icons.check,
                                       color: Colors.white,
@@ -460,28 +342,21 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                             ),
                           ),
                           trailing: GestureDetector(
-                            onTap: () {
-                              setState(
-                                () {
-                                  isSelectmangueira = !isSelectmangueira;
-                                },
-                              );
-                            },
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.fastLinearToSlowEaseIn,
                               decoration: BoxDecoration(
-                                color: isSelectmangueira
+                                color: item['mangueira']
                                     ? Colors.green
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectmangueira
+                                border: item['mangueira']
                                     ? null
                                     : Border.all(color: Colors.black, width: 1),
                               ),
                               width: 20,
                               height: 20,
-                              child: isSelectmangueira
+                              child: item['mangueira']
                                   ? const Icon(
                                       Icons.check,
                                       color: Colors.white,
@@ -513,28 +388,21 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                             ),
                           ),
                           trailing: GestureDetector(
-                            onTap: () {
-                              setState(
-                                () {
-                                  isSelectlacre = !isSelectlacre;
-                                },
-                              );
-                            },
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.fastLinearToSlowEaseIn,
                               decoration: BoxDecoration(
-                                color: isSelectlacre
+                                color: item['lacre']
                                     ? Colors.green
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(5.0),
-                                border: isSelectlacre
+                                border: item['lacre']
                                     ? null
                                     : Border.all(color: Colors.black, width: 1),
                               ),
                               width: 20,
                               height: 20,
-                              child: isSelectlacre
+                              child: item['lacre']
                                   ? const Icon(
                                       Icons.check,
                                       color: Colors.white,
@@ -556,7 +424,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
           },
           child: Container(
             margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
-            height: 335,
+            height: 360,
             child: Stack(
               children: [
                 Card(
@@ -589,7 +457,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                               Expanded(
                                 child: Text(
                                   DateFormat('dd/MM/yyyy').format(
-                                    DateTime.parse(item['validadeCasco']),
+                                    DateTime.parse(item['dataManutencao']),
                                   ),
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
@@ -637,7 +505,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                             CrossAxisAlignment.start,
                                         children: [
                                           const Text(
-                                            'Numero Extintor',
+                                            'Número Extintor',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontStyle: FontStyle.italic,
@@ -645,7 +513,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                             ),
                                           ),
                                           Text(
-                                            dados[index]['nome'],
+                                            item['numeroExtintor'],
                                             style: const TextStyle(
                                               color: Colors.black54,
                                               fontSize: 15,
@@ -715,7 +583,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                             ),
                                           ),
                                           Text(
-                                            item['setor'],
+                                            item['tecnico'],
                                             style: const TextStyle(
                                               color: Colors.black54,
                                               fontSize: 15,
@@ -750,10 +618,14 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                             ),
                                           ),
                                           Text(
-                                            item['setor'],
+                                            DateFormat('dd/MM/yyyy').format(
+                                              DateTime.parse(
+                                                  item['dataManutencao']),
+                                            ),
+                                            textAlign: TextAlign.center,
                                             style: const TextStyle(
-                                              color: Colors.black54,
                                               fontSize: 15,
+                                              color: Colors.black,
                                             ),
                                           ),
                                         ],
@@ -772,11 +644,11 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                       SizedBox(
                                         width: size.width * 0.03,
                                       ),
-                                      const Column(
+                                      Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
+                                          const Text(
                                             'Apto para uso',
                                             style: TextStyle(
                                               color: Colors.black,
@@ -784,20 +656,23 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                               fontSize: 15,
                                             ),
                                           ),
-                                          Text(
-                                            'OK',
-                                            style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold,
-                                              // decoration:
-                                              //     TextDecoration.underline,
-                                              // decorationColor: Colors.green,
-                                              // decorationStyle:
-                                              //     TextDecorationStyle.solid,
-                                              // decorationThickness: 3,
-                                            ),
-                                          ),
+                                          item['apto']
+                                              ? const Text(
+                                                  'Sim',
+                                                  style: TextStyle(
+                                                    color: Colors.green,
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                )
+                                              : const Text(
+                                                  'Não',
+                                                  style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
                                         ],
                                       ),
                                     ],
@@ -807,12 +682,19 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                             ],
                           ),
                         ),
-                        Container(
-                          height: 3,
-                          color: Colors.green,
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 15),
-                        ),
+                        item['apto']
+                            ? Container(
+                                height: 3,
+                                color: Colors.green,
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 17, horizontal: 15),
+                              )
+                            : Container(
+                                height: 3,
+                                color: Colors.red,
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 17, horizontal: 15),
+                              ),
                       ],
                     ),
                   ),

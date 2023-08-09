@@ -65,4 +65,6 @@ class AuthRepository {
       _api.updateEndereco(endereco);
 
   Future<List> getSetores() => _api.getSetores();
+
+  Future<Map> getAllManutencao() => _api.getAllManutencao();
 }
