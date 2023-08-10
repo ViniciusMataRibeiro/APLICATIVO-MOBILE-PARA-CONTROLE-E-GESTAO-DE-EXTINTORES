@@ -212,8 +212,12 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<List> getSetores() async {
+  Future<Map> getSetores() async {
     return await _repository.getSetores();
+  }
+
+  Future<List> getExtintorVistoria(int idSetor) async {
+    return await _repository.getExtintorVistoria(idSetor);
   }
 
   Future<Map> getAllManutencao() async {

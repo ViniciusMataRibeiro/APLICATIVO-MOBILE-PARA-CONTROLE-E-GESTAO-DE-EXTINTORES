@@ -328,8 +328,29 @@ class Api {
     }
   }
 
-  Future<List> getSetores() async {
+  Future<Map> getSetores() async {
     var url = Uri.parse("$baseUrl/setors");
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization': 'Bearer ${_configService.token}',
+    });
+    if (response.statusCode == 200) {
+      List d = [];
+      List dados = await jsonDecode(response.body);
+      await Future.forEach(dados, (element) {
+        Map<String, dynamic> t = Map.from(element);
+        d.add(t);
+      });
+
+      return {"dadosSetores": d};
+    } else {
+      return {"dadosSetores": []};
+    }
+  }
+
+  Future<List> getExtintorVistoria(int idSetor) async {
+    var url = Uri.parse("$baseUrl/extintorsSetor/$idSetor");
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -340,7 +361,7 @@ class Api {
 
       return dados;
     } else {
-      throw Exception('Falha ao carregar culturas');
+      throw Exception('Falha ao carregar extintores');
     }
   }
 

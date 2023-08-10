@@ -58,12 +58,10 @@ class CadastroExtintorController extends GetxController {
     super.onInit();
   }
 
-  Future<List> getSetores() async {
-    var res = (await _authService.getSetores()).toList();
-    for (var item in res) {
-      setores.add(item);
-    }
-    return setores;
+  Future<Map> getSetor() async {
+    Map t = await _authService.getSetores();
+
+    return t;
   }
 
   Future<String> goToInsert() async {

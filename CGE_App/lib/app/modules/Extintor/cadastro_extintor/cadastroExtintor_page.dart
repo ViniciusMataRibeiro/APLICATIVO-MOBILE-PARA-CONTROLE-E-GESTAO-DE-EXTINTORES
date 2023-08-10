@@ -134,9 +134,9 @@ class CadastroExtintor extends State<CadastroExtintorState>
 
     super.initState();
 
-    controller.getSetores().then((value) {
+    controller.getSetor().then((value) {
       setState(() {
-        controller.setores = value;
+        //controller.setores = value;
       });
     });
   }
