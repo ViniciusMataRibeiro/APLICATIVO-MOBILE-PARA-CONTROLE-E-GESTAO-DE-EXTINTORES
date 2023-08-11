@@ -42,7 +42,7 @@ class CadastroSetor extends State<CadastroSetorState> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         title: Row(
           children: [
             IconButton(

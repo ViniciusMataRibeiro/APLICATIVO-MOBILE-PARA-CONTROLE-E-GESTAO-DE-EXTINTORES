@@ -160,7 +160,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         title: Row(
           children: [
             IconButton(
@@ -176,8 +176,8 @@ class CadastroExtintor extends State<CadastroExtintorState>
               width: 5,
             ),
             Container(
-              margin: const EdgeInsets.only(right: 10),
-              width: size.width * 0.05,
+              margin: const EdgeInsets.only(right: 0),
+              width: size.width * 0.06,
               height: 40,
             ),
             Text(
@@ -215,7 +215,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black,
-                        blurRadius: 10,
+                        blurRadius: 5,
                       ),
                     ],
                   ),
@@ -671,7 +671,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromARGB(255, 175, 31, 21),
+                                const Color.fromARGB(255, 116, 7, 7),
                             fixedSize: const Size(250, 50),
                           ),
                           child: const Text(

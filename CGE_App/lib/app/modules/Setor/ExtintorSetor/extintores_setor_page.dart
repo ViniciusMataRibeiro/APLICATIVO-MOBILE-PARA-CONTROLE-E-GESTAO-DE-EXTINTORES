@@ -104,8 +104,8 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
-        title: Row(
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
+        title:  Row(
           children: [
             IconButton(
               icon: const Icon(
@@ -120,14 +120,14 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
               width: 5,
             ),
             Container(
-              margin: const EdgeInsets.only(right: 10),
+              margin: const EdgeInsets.only(right: 0),
               width: size.width * 0.05,
               height: 40,
             ),
             Text(
-              "Extintores do ${controller.nomeSetor}",
+              'Extintores do ${controller.nomeSetor}',
               style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 25,
                   color: Colors.white,
                   fontStyle: FontStyle.italic),
             ),
@@ -135,55 +135,55 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
         ),
         centerTitle: true,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: Container(
-        margin: const EdgeInsets.only(bottom: 30),
-        child: FloatingActionBubble(
-          herotag: UniqueKey(),
-          items: <Bubble>[
-            if (obj!.tipo == 'empresa') ...[
-              Bubble(
-                title: "Cadastrar Tecnico",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.add_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadTecnico');
-                },
-              ),
-            ] else ...[
-              Bubble(
-                title: "Cadastrar Extintor",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.add_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadExtintor');
-                },
-              ),
-              Bubble(
-                title: "Realizar Vistoria",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/vistoria');
-                },
-              ),
-            ],
-          ],
-          animation: _animation,
-          onPress: () => _animationController.isCompleted
-              ? _animationController.reverse()
-              : _animationController.forward(),
-          iconColor: Colors.white,
-          iconData: Icons.handyman_outlined,
-          backGroundColor: const Color.fromARGB(255, 190, 0, 0),
-        ),
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      // floatingActionButton: Container(
+      //   margin: const EdgeInsets.only(bottom: 30),
+      //   child: FloatingActionBubble(
+      //     herotag: UniqueKey(),
+      //     items: <Bubble>[
+      //       if (obj!.tipo == 'empresa') ...[
+      //         Bubble(
+      //           title: "Cadastrar Tecnico",
+      //           iconColor: Colors.white,
+      //           bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+      //           icon: Icons.add_rounded,
+      //           titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+      //           onPress: () {
+      //             Get.toNamed('/cadTecnico');
+      //           },
+      //         ),
+      //       ] else ...[
+      //         Bubble(
+      //           title: "Cadastrar Extintor",
+      //           iconColor: Colors.white,
+      //           bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+      //           icon: Icons.add_rounded,
+      //           titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+      //           onPress: () {
+      //             Get.toNamed('/cadExtintor');
+      //           },
+      //         ),
+      //         Bubble(
+      //           title: "Realizar Vistoria",
+      //           iconColor: Colors.white,
+      //           bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+      //           icon: Icons.check_rounded,
+      //           titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+      //           onPress: () {
+      //             Get.toNamed('/vistoria');
+      //           },
+      //         ),
+      //       ],
+      //     ],
+      //     animation: _animation,
+      //     onPress: () => _animationController.isCompleted
+      //         ? _animationController.reverse()
+      //         : _animationController.forward(),
+      //     iconColor: Colors.white,
+      //     iconData: Icons.handyman_outlined,
+      //     backGroundColor: const Color.fromARGB(255, 190, 0, 0),
+      //   ),
+      // ),
       body: buildContainer(),
     );
   }
@@ -235,7 +235,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                   contentPadding: EdgeInsets.zero,
                   content: Container(
                     padding: const EdgeInsets.all(10.0),
-                    height: size.height * 0.60,
+                    height: 485,
                     decoration: BoxDecoration(
                       image: const DecorationImage(
                         image: AssetImage('assets/image/modal.png'),
@@ -389,7 +389,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
-                                    const Color.fromARGB(255, 190, 0, 0),
+                                    const Color.fromARGB(255, 116, 7, 7),
                               ),
                               onPressed: () =>
                                   {controller.gotoEditExtintor(item)},
@@ -412,7 +412,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
-                                    const Color.fromARGB(255, 190, 0, 0),
+                                    const Color.fromARGB(255, 116, 7, 7),
                               ),
                               onPressed: () async => {
                                 await controller.gotoDeleteExtintor(item['id'])
@@ -436,7 +436,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
           },
           child: Container(
             margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
-            height: size.height * 0.25,
+            height: 180,
             child: Stack(
               children: [
                 Card(
@@ -495,7 +495,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                             children: [
                               Container(
                                 padding:
-                                    const EdgeInsets.only(left: 30, top: 15),
+                                    const EdgeInsets.only(left: 20, top: 10),
                                 child: Image.asset(
                                     obterImagem(item['tipoExtintor']),
                                     height: size.height * 0.10,

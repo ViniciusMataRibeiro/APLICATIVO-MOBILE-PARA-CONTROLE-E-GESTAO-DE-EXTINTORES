@@ -36,7 +36,7 @@ class DashboardPage extends GetView<DashboardController> {
             onTap: controller.changePage,
             height: 50,
             backgroundColor: Colors.transparent,
-            color: const Color.fromARGB(255, 190, 0, 0),
+            color: const Color.fromARGB(255, 116, 7, 7),
             index: controller.currentPage.value,
             items: Items,
           ),

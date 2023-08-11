@@ -64,9 +64,10 @@ class CadastroExtintor extends State<CadastroExtintorState>
   @override
   Widget build(BuildContext context) {
     bool isSelectbloqueado = cadastroTecnicoController.bloqueado.value;
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         title: Row(
           children: [
             IconButton(
@@ -81,22 +82,18 @@ class CadastroExtintor extends State<CadastroExtintorState>
             const SizedBox(
               width: 5,
             ),
-            if (cadastroTecnicoController.alterando.value)
-              const Text(
-                'Alterando Tecnico',
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontStyle: FontStyle.italic),
-              ),
-            if (!cadastroTecnicoController.alterando.value)
-              const Text(
-                'Cadastro Tecnico',
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontStyle: FontStyle.italic),
-              ),
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              width: size.width * 0.05,
+              height: 40,
+            ),
+            const Text(
+              'Cadastro Tecnico',
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic),
+            ),
           ],
         ),
         centerTitle: true,
@@ -125,7 +122,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black,
-                        blurRadius: 10,
+                        blurRadius: 5,
                       ),
                     ],
                   ),
@@ -197,21 +194,21 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       leading: const Icon(
                         Icons.verified_user_outlined,
                         color: Colors.black,
-                        size: 40,
+                        size: 35,
                       ),
                       title: TextFormField(
                         controller: cadastroTecnicoController.name,
                         style: const TextStyle(
                           color: Colors.black,
                           fontStyle: FontStyle.italic,
-                          fontSize: 18,
+                          fontSize: 15,
                         ),
                         keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
                           labelText: 'Nome',
                           labelStyle: TextStyle(
                             color: Colors.black,
-                            fontSize: 20,
+                            fontSize: 18,
                           ),
                         ),
                       ),
@@ -221,7 +218,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       leading: const Icon(
                         Icons.email_outlined,
                         color: Colors.black,
-                        size: 40,
+                        size: 35,
                       ),
                       title: TextFormField(
                         controller: cadastroTecnicoController.email,
@@ -235,7 +232,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                           labelText: 'Email',
                           labelStyle: TextStyle(
                             color: Colors.black,
-                            fontSize: 20,
+                            fontSize: 18,
                           ),
                         ),
                       ),
@@ -245,7 +242,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       leading: const Icon(
                         Icons.lock_open_rounded,
                         color: Colors.black,
-                        size: 40,
+                        size: 35,
                       ),
                       title: TextFormField(
                         controller: cadastroTecnicoController.password,
@@ -259,7 +256,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                           labelText: 'Senha',
                           labelStyle: TextStyle(
                             color: Colors.black,
-                            fontSize: 20,
+                            fontSize: 18,
                           ),
                         ),
                       ),
@@ -294,7 +291,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromARGB(255, 175, 31, 21),
+                                const Color.fromARGB(255, 116, 7, 7),
                             fixedSize: const Size(250, 50),
                           ),
                           child: const Text(

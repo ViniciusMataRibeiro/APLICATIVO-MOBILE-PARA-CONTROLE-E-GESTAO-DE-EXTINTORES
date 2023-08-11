@@ -69,10 +69,12 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
 
   @override
   Widget build(BuildContext context) {
+
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         title: Row(
           children: [
             IconButton(
@@ -87,10 +89,15 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
             const SizedBox(
               width: 5,
             ),
+            Container(
+              margin: const EdgeInsets.only(right: 0),
+              width: size.width * 0.12,
+              height: 40,
+            ),
             const Text(
-              "Manutenções",
+              'Manutenções',
               style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 25,
                   color: Colors.white,
                   fontStyle: FontStyle.italic),
             ),

@@ -37,7 +37,7 @@ class LoginPage extends GetView<LoginController> {
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black,
-                          blurRadius: 10,
+                          blurRadius: 5,
                         ),
                       ]),
                 ),
@@ -121,14 +121,15 @@ class LoginPage extends GetView<LoginController> {
                   ),
                 ),
               ),
+              const SizedBox(height: 25),
               Padding(
-                padding: const EdgeInsets.only(top: 15, left: 30, right: 30),
+                padding: const EdgeInsets.only(top: 15, left: 70, right: 70),
                 child: ElevatedButton(
                   onPressed: () async {
                     var result = await controller.goTologin();
                     if (result != 'true') {
                       final snackBar = SnackBar(
-                        elevation: 0,
+                        elevation: 1,
                         behavior: SnackBarBehavior.floating,
                         backgroundColor: Colors.transparent,
                         content: AwesomeSnackbarContent(
@@ -147,7 +148,9 @@ class LoginPage extends GetView<LoginController> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+                    minimumSize: const Size(60, 50),
+                    maximumSize: const Size(70, 60),
+                    backgroundColor: Colors.white,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(100),
@@ -157,7 +160,10 @@ class LoginPage extends GetView<LoginController> {
                   ),
                   child: const Text(
                     'Entrar',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 25, 
+                      color: Color.fromARGB(255, 116, 7, 7),
+                      fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

@@ -134,32 +134,33 @@ class ExtintorPage extends State<ExtintorState>
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/image/cge.png',
-                      fit: BoxFit.contain,
-                      height: 45,
-                    ),
-                    const SizedBox(width: 60),
-                    Text(
-                      textAlign: TextAlign.center,
-                      updatedDt,
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                  ],
-                )
-              ],
-            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 0, right: 0),
+              child: Row(
+                children: [
+                  Image.asset(
+                    'assets/image/cge.png',
+                    fit: BoxFit.contain,
+                    height: 45,
+                  ),
+                  SizedBox(width: size.width * 0.17),
+                  Text(
+                    textAlign: TextAlign.center,
+                    updatedDt,
+                    style: const TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
         actions: <Widget>[
@@ -172,7 +173,7 @@ class ExtintorPage extends State<ExtintorState>
             onPressed: () => _refresh(),
           ),
         ],
-        backgroundColor: const Color.fromARGB(255, 190, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(25),
@@ -190,7 +191,7 @@ class ExtintorPage extends State<ExtintorState>
               Bubble(
                 title: "Cadastrar Tecnico",
                 iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
@@ -201,7 +202,7 @@ class ExtintorPage extends State<ExtintorState>
               Bubble(
                 title: "Cadastrar Extintor",
                 iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
@@ -211,7 +212,7 @@ class ExtintorPage extends State<ExtintorState>
               Bubble(
                 title: "Realizar Vistoria",
                 iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.check_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
@@ -226,7 +227,7 @@ class ExtintorPage extends State<ExtintorState>
               : _animationController.forward(),
           iconColor: Colors.white,
           iconData: Icons.handyman_outlined,
-          backGroundColor: const Color.fromARGB(255, 190, 0, 0),
+          backGroundColor: const Color.fromARGB(255, 116, 7, 7),
         ),
       ),
       body: buildContainer(),
@@ -288,7 +289,7 @@ class ExtintorPage extends State<ExtintorState>
                   contentPadding: EdgeInsets.zero,
                   content: Container(
                     padding: const EdgeInsets.all(10.0),
-                    height: size.height * 0.59,
+                    height: 480,
                     decoration: BoxDecoration(
                         image: const DecorationImage(
                           image: AssetImage('assets/image/modal.png'),
@@ -436,7 +437,7 @@ class ExtintorPage extends State<ExtintorState>
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
-                                    const Color.fromARGB(255, 190, 0, 0),
+                                    const Color.fromARGB(255, 116, 7, 7),
                               ),
                               onPressed: () =>
                                   {controller.gotoEditExtintor(item)},
@@ -459,7 +460,7 @@ class ExtintorPage extends State<ExtintorState>
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
-                                    const Color.fromARGB(255, 190, 0, 0),
+                                    const Color.fromARGB(255, 116, 7, 7),
                               ),
                               onPressed: () async => {
                                 await controller.gotoDeleteExtintor(item['id'])

@@ -82,34 +82,36 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+
+    var size = MediaQuery.of(context).size;
     // ignore: unused_local_variable
     var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/image/cge.png',
-                      fit: BoxFit.contain,
-                      height: 45,
-                    ),
-                    const SizedBox(width: 60),
-                    Text(
-                      textAlign: TextAlign.center,
-                      updatedDt,
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 0, right: 0),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/image/cge.png',
+                        fit: BoxFit.contain,
+                        height: 45,
+                      ),
+                      SizedBox(width: size.width*0.17),
+                      Text(
+                        textAlign: TextAlign.center,
+                        updatedDt,
+                        style: const TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    ],
+                  ),
                 )
               ],
-            ),
-          ],
         ),
         actions: <Widget>[
           IconButton(
@@ -121,7 +123,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
             onPressed: () => _refresh(),
           ),
         ],
-        backgroundColor: const Color.fromARGB(255, 190, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(25),
@@ -139,7 +141,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               Bubble(
                 title: "Cadastrar Tecnico",
                 iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
@@ -150,7 +152,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               Bubble(
                 title: "Cadastrar Setor",
                 iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
@@ -160,7 +162,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               Bubble(
                 title: "Realizar Vistoria",
                 iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.check_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
@@ -175,7 +177,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               : _animationController.forward(),
           iconColor: Colors.white,
           iconData: Icons.handyman_outlined,
-          backGroundColor: const Color.fromARGB(255, 190, 0, 0),
+          backGroundColor: const Color.fromARGB(255, 116, 7, 7),
         ),
       ),
       body: buildContainer(),
