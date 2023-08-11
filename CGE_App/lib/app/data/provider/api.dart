@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cge_app/app/data/Models/setor_request.dart';
+import 'package:cge_app/app/data/Models/vistoria_request_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -383,6 +384,38 @@ class Api {
       return {"dados": d};
     } else {
       return {"dados": []};
+    }
+  }
+
+  Future<bool> insertVistoria(VistoriaRequestModel vistoria) async {
+    var url = Uri.parse("$baseUrl/manutencao");
+    var response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(vistoria.toJson()));
+    if (response.statusCode == 201) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> updateVistoria(VistoriaRequestModel vistoria) async {
+    var url = Uri.parse("$baseUrl/manutencao/${vistoria.id}");
+    var response = await http.put(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(vistoria.toJson()));
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

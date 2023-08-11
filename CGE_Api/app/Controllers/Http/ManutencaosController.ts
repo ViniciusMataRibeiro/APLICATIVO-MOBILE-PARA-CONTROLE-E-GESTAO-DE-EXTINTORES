@@ -1,5 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database';
+import Tecnico from 'App/Models/Tecnico';
+import CreateManutencaoValidator from 'App/Validators/CreateManutencaoValidator';
 
 export default class ManutencaosController {
     public async index({ response, auth }: HttpContextContract) {
@@ -47,6 +49,38 @@ export default class ManutencaosController {
         } catch (error) {
             return response.badRequest({
                 message: 'Erro ao buscar as manutenções',
+            });
+        }
+    }
+
+    public async store({ request, response, auth }: HttpContextContract) {
+        try {
+            const payload = await request.validate(CreateManutencaoValidator);
+            const userAuth = await auth.use('api').authenticate();
+            const tecnico = await Tecnico.findByOrFail("user_id", userAuth.id);
+
+            await Database.insertQuery().table('manutencoes').insert({
+                extintor_id: payload.extintor_id,
+                tecnico_id: tecnico.id,
+                dataManutencao: new Date(payload.dataManutencao.toISODate()),
+                manimetro: payload.manimetro,
+                sinalizacaoParede: payload.sinalizacaoParede,
+                sinalizacaoPiso: payload.sinalizacaoPiso,
+                acesso: payload.acesso,
+                mangueira: payload.mangueira,
+                lacre: payload.lacre,
+                aprovado: payload.aprovado,
+                observacao: payload.descricao ?? "",
+                created_at: new Date(payload.dataManutencao.toISODate()),
+            });
+
+            return response.status(201).json({
+                message: 'vistoria cadastrada com sucesso',
+            });
+        }
+        catch (error) {
+            return response.badRequest({
+                message: 'Erro ao cadastrar vistoria',
             });
         }
     }

@@ -35,5 +35,7 @@ Route.group(() => {
   Route.delete('/extintor/:id', 'ExtintorsController.destroy');
 
   Route.get('/manutencao', 'ManutencaosController.index');
+  Route.post('/manutencao', 'ManutencaosController.store');
+  Route.put('/manutencao/:id', 'ManutencaosController.update');
 
 }).middleware('auth');

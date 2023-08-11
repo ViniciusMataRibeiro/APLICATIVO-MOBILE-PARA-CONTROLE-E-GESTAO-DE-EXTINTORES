@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/modules/vistoria/vistoria/vistoria_controller.dart';
 import 'package:faker/faker.dart';
@@ -286,12 +287,14 @@ class Vistoria extends State<VistoriaState>
                                                           child:
                                                               ListView.builder(
                                                             itemCount:
-                                                                dadosSetor.length,
+                                                                dadosSetor
+                                                                    .length,
                                                             itemBuilder:
                                                                 (context,
                                                                     index) {
                                                               Map item =
-                                                                  dadosSetor[index];
+                                                                  dadosSetor[
+                                                                      index];
                                                               return InkWell(
                                                                 onTap: () {
                                                                   setState(() {
@@ -403,13 +406,15 @@ class Vistoria extends State<VistoriaState>
                                                           fillOverscroll: true,
                                                           child:
                                                               ListView.builder(
-                                                            itemCount:
-                                                                controller.dadosExtintor.length,
+                                                            itemCount: controller
+                                                                .dadosExtintor
+                                                                .length,
                                                             itemBuilder:
                                                                 (context,
                                                                     index) {
-                                                              Map item =
-                                                                  controller.dadosExtintor[index];
+                                                              Map item = controller
+                                                                      .dadosExtintor[
+                                                                  index];
                                                               return InkWell(
                                                                 onTap: () {
                                                                   setState(() {
@@ -786,11 +791,32 @@ class Vistoria extends State<VistoriaState>
                               padding: const EdgeInsets.all(20.0),
                               child: Center(
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    var result = await controller.goToInsert();
+                                    if (result == 'true') {
+                                      controller
+                                          .toast('Registrado com sucesso');
+                                    } else {
+                                      final snackBar = SnackBar(
+                                        elevation: 0,
+                                        behavior: SnackBarBehavior.floating,
+                                        backgroundColor: Colors.transparent,
+                                        content: AwesomeSnackbarContent(
+                                          title: 'Alerta',
+                                          message: result.toString(),
+                                          contentType: ContentType.failure,
+                                        ),
+                                      );
+                                      // ignore: use_build_context_synchronously
+                                      ScaffoldMessenger.of(context)
+                                        ..hideCurrentSnackBar()
+                                        ..showSnackBar(snackBar);
+                                    }
+                                  },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor:
                                         const Color.fromARGB(255, 175, 31, 21),
-                                    fixedSize: const Size(200, 50),
+                                    fixedSize: const Size(250, 50),
                                   ),
                                   child: const Text(
                                     'Registrar',
@@ -802,7 +828,7 @@ class Vistoria extends State<VistoriaState>
                                   ),
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),

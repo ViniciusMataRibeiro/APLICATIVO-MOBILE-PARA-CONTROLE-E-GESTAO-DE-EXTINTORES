@@ -7,6 +7,7 @@ import '../../Models/tecnico_request.dart';
 import '../../Models/user.dart';
 import '../../Models/user_login_request.dart';
 import '../../Models/user_login_response.dart';
+import '../../Models/vistoria_request_model.dart';
 import '../../provider/api.dart';
 
 class AuthRepository {
@@ -68,4 +69,10 @@ class AuthRepository {
   Future<List> getExtintorVistoria(int idSetor) => _api.getExtintorVistoria(idSetor);
 
   Future<Map> getAllManutencao() => _api.getAllManutencao();
+
+  Future<bool> insertVistoria(VistoriaRequestModel vistoria) =>
+      _api.insertVistoria(vistoria);
+
+  Future<bool> updateVistoria(VistoriaRequestModel vistoria) =>
+      _api.updateVistoria(vistoria);
 }

@@ -1,5 +1,6 @@
 import 'package:cge_app/app/data/Models/empresa_request_model.dart';
 import 'package:cge_app/app/data/Models/tecnico_request.dart';
+import 'package:cge_app/app/data/Models/vistoria_request_model.dart';
 import 'package:cge_app/app/data/services/auth/repository.dart';
 import 'package:get/get.dart';
 
@@ -222,6 +223,30 @@ class AuthService extends GetxService {
 
   Future<Map> getAllManutencao() async {
     return await _repository.getAllManutencao();
+  }
+
+  Future<bool> insertVistoria(VistoriaRequestModel vistoria) async {
+    var result = await _repository.insertVistoria(vistoria);
+    if (result) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> updateVistoria(VistoriaRequestModel vistoria) async {
+    var result = await _repository.updateVistoria(vistoria);
+    if (result) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
