@@ -1,5 +1,6 @@
+// ignore_for_file: unused_field
+
 import 'package:faker/faker.dart';
-import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -97,8 +98,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
   }
 
   @override
-  Widget build(BuildContext context) {
-    var obj = aux.user.value;
+  Widget build(BuildContext context) {;
     var size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -135,55 +135,6 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
         ),
         centerTitle: true,
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      // floatingActionButton: Container(
-      //   margin: const EdgeInsets.only(bottom: 30),
-      //   child: FloatingActionBubble(
-      //     herotag: UniqueKey(),
-      //     items: <Bubble>[
-      //       if (obj!.tipo == 'empresa') ...[
-      //         Bubble(
-      //           title: "Cadastrar Tecnico",
-      //           iconColor: Colors.white,
-      //           bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-      //           icon: Icons.add_rounded,
-      //           titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-      //           onPress: () {
-      //             Get.toNamed('/cadTecnico');
-      //           },
-      //         ),
-      //       ] else ...[
-      //         Bubble(
-      //           title: "Cadastrar Extintor",
-      //           iconColor: Colors.white,
-      //           bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-      //           icon: Icons.add_rounded,
-      //           titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-      //           onPress: () {
-      //             Get.toNamed('/cadExtintor');
-      //           },
-      //         ),
-      //         Bubble(
-      //           title: "Realizar Vistoria",
-      //           iconColor: Colors.white,
-      //           bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-      //           icon: Icons.check_rounded,
-      //           titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-      //           onPress: () {
-      //             Get.toNamed('/vistoria');
-      //           },
-      //         ),
-      //       ],
-      //     ],
-      //     animation: _animation,
-      //     onPress: () => _animationController.isCompleted
-      //         ? _animationController.reverse()
-      //         : _animationController.forward(),
-      //     iconColor: Colors.white,
-      //     iconData: Icons.handyman_outlined,
-      //     backGroundColor: const Color.fromARGB(255, 190, 0, 0),
-      //   ),
-      // ),
       body: buildContainer(),
     );
   }

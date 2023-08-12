@@ -14,21 +14,21 @@ class CadastroExtintorController extends GetxController {
   DateTime dt3 = DateTime.now();
   String selectedTamanho = '';
   String selectedTipo = '';
+  int idSetor = 0;
+  String nomeSetor = '';
 
   var id = 0;
-  // ignore: non_constant_identifier_names
-  var setor_id = 0;
 
   var nome = TextEditingController(text: '');
   var validadeCasco = TextEditingController(text: '');
   var validadeExtintor = TextEditingController(text: '');
   var proximaManutencao = TextEditingController(text: '');
   var descricao = TextEditingController(text: '');
-  var setor = '';
+
   var ativo = true.obs;
 
-  List setores = [];
-  List setoresAux = [];
+  List dadosExtintorTamanho = [];
+  List dadosExtintorTipo = [];
 
   var alterando = false;
 
@@ -43,7 +43,8 @@ class CadastroExtintorController extends GetxController {
       nome.text = _extintor['nome'];
       selectedTamanho = "${_extintor['tamanho'] ?? 0} Kg";
       selectedTipo = _extintor['tipoExtintor'];
-      setor_id = _extintor['setor_id'];
+      idSetor = _extintor['setor_id'];
+      nomeSetor = _extintor['setor'];
       ativo = _extintor['ativo'] == 1 ? true.obs : false.obs;
 
       dt = DateTime.parse(_extintor['validadeCasco']);
@@ -58,7 +59,53 @@ class CadastroExtintorController extends GetxController {
     super.onInit();
   }
 
-  Future<Map> getSetor() async {
+  Future<void> getTamanhoExtintor() async {
+    int j = 0;
+    for (var i = 2; j < 4; i++) {
+      j++;
+      var kg = i + 2;
+      i++;
+      Map<String, dynamic> t = {
+        "id": id,
+        "nome": "$kg Kg",
+      };
+      dadosExtintorTamanho.add(t);
+    }
+  }
+
+  Future<void> getTipoExtintor() async {
+    Map<String, dynamic> t1 = {
+      "id": 1,
+      "nome": "Tipo A",
+    };
+    dadosExtintorTipo.add(t1);
+
+    Map<String, dynamic> t2 = {
+      "id": 2,
+      "nome": "Tipo BC",
+    };
+    dadosExtintorTipo.add(t2);
+
+    Map<String, dynamic> t3 = {
+      "id": 3,
+      "nome": "Tipo ABC",
+    };
+    dadosExtintorTipo.add(t3);
+
+    Map<String, dynamic> t4 = {
+      "id": 4,
+      "nome": "Tipo K",
+    };
+    dadosExtintorTipo.add(t4);
+
+    Map<String, dynamic> t5 = {
+      "id": 5,
+      "nome": "Tipo CO²",
+    };
+    dadosExtintorTipo.add(t5);
+  }
+
+  Future<Map> getSetores() async {
     Map t = await _authService.getSetores();
 
     return t;
@@ -85,7 +132,7 @@ class CadastroExtintorController extends GetxController {
       validadeExtintor.text = DateFormat('dd/MM/yyyy').format(dt2);
     }
 
-    if (setor == '') {
+    if (nomeSetor == '') {
       return 'informe o setor';
     }
 
@@ -93,8 +140,7 @@ class CadastroExtintorController extends GetxController {
     if (!alterando) {
       DateTime d = DateTime(dt3.year, dt3.month + 1, dt3.day);
       data = DateFormat('dd/MM/yyyy').format(d);
-    }
-    else{
+    } else {
       data = DateFormat('dd/MM/yyyy').format(dt3);
     }
 
@@ -107,7 +153,7 @@ class CadastroExtintorController extends GetxController {
       tamanho: int.parse(selectedTamanho.replaceAll(RegExp(r'[^0-9]'), '')),
       tipo: selectedTipo,
       ativo: true,
-      setor_id: getIdSetor(setor),
+      setor_id: idSetor,
       descricao: "Teste",
     );
 
@@ -120,26 +166,6 @@ class CadastroExtintorController extends GetxController {
     }
 
     return res == true ? 'true' : 'Algo deu Errado';
-  }
-
-  int getIdSetor(String aux) {
-    var id = 0;
-    for (var item in setores) {
-      if (item['nome'] == aux) {
-        id = item['id'];
-      }
-    }
-    return id;
-  }
-
-  String getNomeSetor(int aux) {
-    var nomeSetor = '';
-    for (var item in setores) {
-      if (item['id'] == aux) {
-        nomeSetor = item['nome'];
-      }
-    }
-    return nomeSetor;
   }
 
   Future<bool?> toast(String message) {
