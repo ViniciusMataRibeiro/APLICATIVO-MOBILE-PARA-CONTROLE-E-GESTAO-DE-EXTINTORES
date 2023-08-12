@@ -33,7 +33,6 @@ class CadastroExtintorController extends GetxController {
   var alterando = false;
 
   late Map _extintor;
-
   @override
   Future<void> onInit() async {
     if (Get.arguments != null) {
