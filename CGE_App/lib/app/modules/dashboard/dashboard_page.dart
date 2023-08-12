@@ -1,4 +1,5 @@
 import 'package:cge_app/app/data/services/auth/service.dart';
+import 'package:cge_app/app/modules/Admin/admin_page.dart';
 import 'package:cge_app/app/modules/Extintor/extintores/extintores_page.dart';
 import 'package:cge_app/app/modules/Setor/setores/setores_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -35,7 +36,7 @@ class DashboardPage extends GetView<DashboardController> {
             onTap: controller.changePage,
             height: 50,
             backgroundColor: Colors.transparent,
-            color: const Color.fromARGB(255, 190, 0, 0),
+            color: const Color.fromARGB(255, 116, 7, 7),
             index: controller.currentPage.value,
             items: Items,
           ),
@@ -50,7 +51,11 @@ class DashboardPage extends GetView<DashboardController> {
               if (obj!.tipo == 'empresa') ...[
                 PerfilPage(),
               ] else ...[
-                PerfilTecnicoPage(),
+                if (obj.tipo == 'admin') ...[
+                  AdminPage(),
+                ] else ...[
+                  PerfilTecnicoPage(),
+                ],
               ],
             ],
           ),

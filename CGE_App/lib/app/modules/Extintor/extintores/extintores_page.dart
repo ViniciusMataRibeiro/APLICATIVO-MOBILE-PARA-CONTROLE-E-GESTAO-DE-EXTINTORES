@@ -3,6 +3,7 @@ import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../../Icones/icones_personalizado.dart';
 import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
 import 'extintores_controller.dart';
@@ -75,6 +76,7 @@ class ExtintorPage extends State<ExtintorState>
 
   DateTime selectedDate = DateTime.now();
 
+  // ignore: unused_element
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
@@ -132,32 +134,33 @@ class ExtintorPage extends State<ExtintorState>
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/image/cge.png',
-                      fit: BoxFit.contain,
-                      height: 45,
-                    ),
-                    const SizedBox(width: 60),
-                    Text(
-                      textAlign: TextAlign.center,
-                      updatedDt,
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                  ],
-                )
-              ],
-            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 0, right: 0),
+              child: Row(
+                children: [
+                  Image.asset(
+                    'assets/image/cge.png',
+                    fit: BoxFit.contain,
+                    height: 45,
+                  ),
+                  SizedBox(width: size.width * 0.17),
+                  Text(
+                    textAlign: TextAlign.center,
+                    updatedDt,
+                    style: const TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
         actions: <Widget>[
@@ -170,7 +173,7 @@ class ExtintorPage extends State<ExtintorState>
             onPressed: () => _refresh(),
           ),
         ],
-        backgroundColor: const Color.fromARGB(255, 190, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(25),
@@ -188,8 +191,8 @@ class ExtintorPage extends State<ExtintorState>
               Bubble(
                 title: "Cadastrar Tecnico",
                 iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_circle_outline,
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
+                icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
                   Get.toNamed('/cadTecnico');
@@ -199,7 +202,7 @@ class ExtintorPage extends State<ExtintorState>
               Bubble(
                 title: "Cadastrar Extintor",
                 iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
@@ -209,7 +212,7 @@ class ExtintorPage extends State<ExtintorState>
               Bubble(
                 title: "Realizar Vistoria",
                 iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.check_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
@@ -224,7 +227,7 @@ class ExtintorPage extends State<ExtintorState>
               : _animationController.forward(),
           iconColor: Colors.white,
           iconData: Icons.handyman_outlined,
-          backGroundColor: const Color.fromARGB(255, 190, 0, 0),
+          backGroundColor: const Color.fromARGB(255, 116, 7, 7),
         ),
       ),
       body: buildContainer(),
@@ -248,28 +251,14 @@ class ExtintorPage extends State<ExtintorState>
               },
             );
             return Scaffold(
-              body: Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/image/LogOut.png'),
-                      fit: BoxFit.cover),
-                ),
-                child: Center(
-                  child: _mostradados(dados: dados),
-                ),
+              body: Center(
+                child: _mostradados(dados: dados),
               ),
             );
           } else {
-            return Scaffold(
-              body: Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/image/LogOut.png'),
-                      fit: BoxFit.cover),
-                ),
-                child: const Center(
-                  child: Text('Nenhum dado encontrado'),
-                ),
+            return const Scaffold(
+              body: Center(
+                child: Text('Nenhum dado encontrado'),
               ),
             );
           }
@@ -291,156 +280,413 @@ class ExtintorPage extends State<ExtintorState>
       itemBuilder: (BuildContext context, index) {
         var size = MediaQuery.of(context).size;
         Map item = dados[index];
-        return Container(
-          margin: const EdgeInsets.only(top: 10, left: 12, right: 12),
-          height: size.height * 0.22,
-          child: Stack(
-            children: [
-              Card(
-                elevation: 4.0,
-                child: Container(
-                  decoration: BoxDecoration(
+        return InkWell(
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  contentPadding: EdgeInsets.zero,
+                  content: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    height: 480,
+                    decoration: BoxDecoration(
+                        image: const DecorationImage(
+                          image: AssetImage('assets/image/modal.png'),
+                          fit: BoxFit.fill,
+                        ),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Text(
+                            item['nome'],
+                            style: const TextStyle(
+                                fontSize: 20,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const Divider(
+                          color: Colors.black54,
+                          thickness: 2,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: size.width * 0.05),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: const Icon(Icons.engineering,
+                                color: Colors.red, size: 35),
+                            title: const Text(
+                              'Ultima Vistoria',
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            subtitle: item['ultimaVistoria'] == null
+                                ? const Text('Sem dados',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15))
+                                : Text(
+                                    DateFormat('dd/MM/yyyy').format(
+                                      DateTime.parse(
+                                        item['ultimaVistoria'],
+                                      ),
+                                    ),
+                                    style: const TextStyle(
+                                        color: Colors.red,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: size.width * 0.05),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: const Icon(Icons.date_range_outlined,
+                                color: Colors.black54, size: 35),
+                            title: const Text(
+                              'Validade Extintor',
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            subtitle: Text(
+                              DateFormat('dd/MM/yyyy').format(
+                                DateTime.parse(
+                                  item['validadeExtintor'],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: size.width * 0.05),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: const Icon(Icons.date_range_outlined,
+                                color: Colors.black54, size: 35),
+                            title: const Text(
+                              'Venc. Hidrostatico',
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            subtitle: Text(
+                              DateFormat('dd/MM/yyyy').format(
+                                DateTime.parse(
+                                  item['validadeCasco'],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: size.width * 0.05),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: const Icon(
+                                Icones_Personalizado.fire_extinguisher,
+                                color: Colors.black54,
+                                size: 35),
+                            title: const Text(
+                              'Tipo Extintor',
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            subtitle: Text(
+                                '${item['tipoExtintor']}\t${item['tamanho']} Kg'),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: size.width * 0.05),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: const Icon(Icons.trending_up_outlined,
+                                color: Colors.black54, size: 35),
+                            title: const Text(
+                              'Setor',
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            subtitle: Text(item['setor']),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 116, 7, 7),
+                              ),
+                              onPressed: () =>
+                                  {controller.gotoEditExtintor(item)},
+                              child: const Text(
+                                'Editar',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.05,
+                              child: const VerticalDivider(
+                                thickness: 2,
+                                color: Colors.black54,
+                              ),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 116, 7, 7),
+                              ),
+                              onPressed: () async => {
+                                await controller.gotoDeleteExtintor(item['id'])
+                              },
+                              child: const Text('Excluir',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontStyle: FontStyle.italic)),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+          child: Container(
+            margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
+            height: 240,
+            child: Stack(
+              children: [
+                Card(
+                  elevation: 4.0,
+                  child: Container(
+                    decoration: BoxDecoration(
                       image: const DecorationImage(
                         image: AssetImage('assets/image/card.png'),
                         fit: BoxFit.fill,
                       ),
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 141, 19, 19),
-                        width: 1,
-                      )
-
-                      //borderRadius: BorderRadius.circular(10),
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Colors.grey.withOpacity(0.5),
-                      //     spreadRadius: 3,
-                      //     blurRadius: 2,
-                      //     offset: const Offset(0, 3),
-                      //   )
-                      // ]),
-                      ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                dados[index]['nome'],
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 3,
+                          blurRadius: 2,
+                          offset: const Offset(0, 3),
+                        )
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: size.height * 0.01),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  dados[index]['nome'],
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
-                            ),
-                            // IconButton(
-                            //   icon: const Icon(
-                            //     Icons.edit,
-                            //     size: 25,
-                            //     color: Color.fromARGB(255, 224, 79, 79),//Color.fromARGB(255, 148, 28, 28),
-                            //   ),
-                            //   onPressed: () =>
-                            //       controller.gotoEditExtintor(item),
-                            // ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        height: 2,
-                        color: Colors.grey,
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 7.0),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, left: 5.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(obterImagem(item['tipoExtintor']),
-                                height: size.height * 0.12,
-                                width: size.width * 0.24,
-                                fit: BoxFit.fill),
-                            SizedBox(width: size.width * 0.02),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    const Icon(
-                                      Icons.date_range_outlined,
-                                      size: 38,
-                                      color: Colors.black,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Text(
-                                          'Data Vencimento',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 15,
+                        SizedBox(height: size.height * 0.01),
+                        Container(
+                          height: 2,
+                          color: Colors.grey,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 7.0),
+                        ),
+                        //SizedBox(height: size.height * 0.01),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0, left: 4.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding:
+                                    const EdgeInsets.only(left: 20, top: 35),
+                                child: Image.asset(
+                                    obterImagem(item['tipoExtintor']),
+                                    height: size.height * 0.10,
+                                    width: size.width * 0.17,
+                                    fit: BoxFit.contain),
+                              ),
+                              SizedBox(width: size.width * 0.11),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Icon(
+                                        Icons.engineering,
+                                        size: 38,
+                                        color: Colors.red,
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.03,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'Ultima Vistoria',
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 15,
+                                            ),
                                           ),
-                                        ),
-                                        Text(
+                                          item['ultimaVistoria'] == null
+                                              ? const Text('Sem dados',
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 15))
+                                              : Text(
+                                                  DateFormat('dd/MM/yyyy')
+                                                      .format(
+                                                    DateTime.parse(
+                                                      item['ultimaVistoria'],
+                                                    ),
+                                                  ),
+                                                  style: const TextStyle(
+                                                      color: Colors.red,
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 15),
+                                                ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 15),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Icon(
+                                        Icons.date_range_outlined,
+                                        size: 38,
+                                        color: Colors.black,
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.03,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'Proxima Manutenção',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          Text(
                                             DateFormat('dd/MM/yyyy').format(
-                                                DateTime.parse(
-                                                    item['validadeCasco'])),
+                                              DateTime.parse(
+                                                  item['proximaManutencao']),
+                                            ),
                                             style: const TextStyle(
                                               color: Colors.black54,
                                               fontSize: 15,
-                                            )),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 9.0),
-                                const Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Icon(
-                                      Icons.trending_up_outlined,
-                                      size: 38,
-                                      color: Colors.black,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Setor Responsável',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 15,
+                                            ),
                                           ),
-                                        ),
-                                        Text('Setor A',
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 15),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Icon(
+                                        Icons.location_on_sharp,
+                                        size: 38,
+                                        color: Colors.black,
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.03,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'Setor',
                                             style: TextStyle(
+                                              color: Colors.black,
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          Text(
+                                            item['setor'],
+                                            style: const TextStyle(
                                               color: Colors.black54,
                                               fontSize: 15,
-                                            )),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

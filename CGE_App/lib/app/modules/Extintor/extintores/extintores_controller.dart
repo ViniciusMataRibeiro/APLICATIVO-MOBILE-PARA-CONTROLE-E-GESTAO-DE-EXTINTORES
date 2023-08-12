@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/services/auth/service.dart';
@@ -13,7 +12,10 @@ class ExtintorController extends GetxController {
     return t;
   }
 
-  
+  Future<void> gotoDeleteExtintor(int idExtintor) async {
+    await _authService.deleteExtintor(idExtintor);
+  }
+
   Future<void> gotoEditExtintor(Map item) async {
     await Get.toNamed(Routes.cadExtintor, arguments: item);
   }

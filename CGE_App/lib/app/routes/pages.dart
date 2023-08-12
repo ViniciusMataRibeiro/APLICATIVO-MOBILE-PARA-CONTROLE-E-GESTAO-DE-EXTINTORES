@@ -1,14 +1,20 @@
 import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_binding.dart';
 import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_page.dart';
+import 'package:cge_app/app/modules/Setor/ExtintorSetor/extintores_setor_page.dart';
 import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
 import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastrotecnico_binding.dart';
-import 'package:cge_app/app/modules/vistoria/vistoria_binding.dart';
-import 'package:cge_app/app/modules/vistoria/vistoria_page.dart';
+import 'package:cge_app/app/modules/vistoria/consulta_vistoria/consulta_vistoria_binding.dart';
+import 'package:cge_app/app/modules/vistoria/consulta_vistoria/consulta_vistoria_page.dart';
 import 'package:cge_app/app/routes/routes.dart';
 import 'package:get/get.dart';
 
+import '../modules/Admin/admin_binding.dart';
+import '../modules/Admin/admin_page.dart';
+import '../modules/Empresa/endereco_empresa/enderecoEmpresa_binding.dart';
+import '../modules/Empresa/endereco_empresa/enderecoEmpresa_page.dart';
 import '../modules/Extintor/cadastro_extintor/cadastroExtintor_binding.dart';
 import '../modules/Extintor/cadastro_extintor/cadastroExtintor_page.dart';
+import '../modules/Setor/ExtintorSetor/extintores_setor_binding.dart';
 import '../modules/Setor/cadastro_setor/cadastroSetor_binding.dart';
 import '../modules/Setor/cadastro_setor/cadastroSetor_page.dart';
 import '../modules/Tecnico/ListTecnico/ListTecnico_binding.dart';
@@ -23,6 +29,8 @@ import '../modules/Tecnico/perfil_tecnico/perfilTecnico_binding.dart';
 import '../modules/Tecnico/perfil_tecnico/perfilTecnico_page.dart';
 import '../modules/splash/splash_binding.dart';
 import '../modules/splash/splash_page.dart';
+import '../modules/vistoria/vistoria/vistoria_binding.dart';
+import '../modules/vistoria/vistoria/vistoria_page.dart';
 
 abstract class AppPages {
   static final pages = [
@@ -50,6 +58,11 @@ abstract class AppPages {
       name: Routes.perfiltecnico,
       page: () => PerfilTecnicoPage(),
       binding: PerfilTecnicoBinding(),
+    ),
+    GetPage(
+      name: Routes.perfiladmin,
+      page: () => AdminPage(),
+      binding: AdminBinding(),
     ),
     GetPage(
       name: Routes.cadExtintor,
@@ -81,5 +94,20 @@ abstract class AppPages {
       page: () => const ListTecnico(),
       binding: ListTecnicoBinding(),
     ),
+    GetPage(
+      name: Routes.extintorSetor,
+      page: () => const ExtintorSetor(),
+      binding: ExtintorSetorBinding(),
+    ),
+    GetPage(
+      name: Routes.enderecoEmpresa,
+      page: () => const EnderecoEmpresaPage(),
+      binding: EnderecoEmpresaBinding(),
+    ),
+    GetPage(
+      name: Routes.consultaVistoria,
+      page: () => const ConsultaVistoria(),
+      binding: ConsultaVistoriaBinding(),
+    )
   ];
 }

@@ -13,6 +13,7 @@ export default class extends BaseSchema {
       table.string('bairro', 50).notNullable()
       table.string('cidade', 50).notNullable()
       table.string('ponto_referencia', 50).nullable()
+      table.string('uf', 2).notNullable()
     })
   }
 

@@ -1,7 +1,11 @@
+import 'package:cge_app/app/data/Models/empresa_request_model.dart';
 import 'package:cge_app/app/data/Models/tecnico_request.dart';
+import 'package:cge_app/app/data/Models/vistoria_request_model.dart';
 import 'package:cge_app/app/data/services/auth/repository.dart';
 import 'package:get/get.dart';
 
+import '../../Models/empresa_response_model.dart';
+import '../../Models/endereco_request_model.dart';
 import '../../Models/extintor_request_model.dart';
 import '../../Models/setor_request.dart';
 import '../../Models/user.dart';
@@ -19,7 +23,7 @@ class AuthService extends GetxService {
   @override
   void onInit() async {
     if (_configService.token != null) {
-      await _getUser();
+      await _getUser(); 
     }
 
     super.onInit();
@@ -70,7 +74,7 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<bool> updateTecnico(TecnicoRequestModel tecnico) async {
+  Future<bool> updateTecnico(TecnicoRequestModel tecnico) async { //Develop
     var result = await _repository.updateTecnico(tecnico);
     if (result) {
       Future.delayed(const Duration(milliseconds: 1), () {
@@ -118,29 +122,131 @@ class AuthService extends GetxService {
     return await _repository.getAllExtintor();
   }
 
-   Future<bool> insertExtintor(ExtintorRequestModel extintor) async {
-      var result = await _repository.insertExtintor(extintor);
-      if(result){
-        Future.delayed(const Duration(milliseconds: 1), () {
-          Get.offAllNamed('/dashboard');
-        });
-        return true;
-      }
-      else {
-        return false;
-      }
-   }
+  Future<Map> getExtintorSetor(int idSetor) async {
+    return await _repository.getExtintorSetor(idSetor);
+  }
 
-   Future<bool> updateExtintor(ExtintorRequestModel extintor) async {
-    var result = await _repository.updateExtintor(extintor);
-    if(result){
+  Future<bool> insertExtintor(ExtintorRequestModel extintor) async {
+    var result = await _repository.insertExtintor(extintor);
+    if (result) {
       Future.delayed(const Duration(milliseconds: 1), () {
         Get.offAllNamed('/dashboard');
       });
       return true;
-    }
-    else {
+    } else {
       return false;
     }
-   }
+  }
+
+  Future<bool> updateExtintor(ExtintorRequestModel extintor) async {
+    var result = await _repository.updateExtintor(extintor);
+    if (result) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> deleteExtintor(int idExtintor) async {
+    var result = await _repository.deleteExtintor(idExtintor);
+    if (result) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<EmpresaResponseModel> insertEmpresa(
+      EmpresaResquestModel empresa) async {
+    var result = await _repository.insertEmpresa(empresa);
+    if (result.id > 0) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return result;
+    } else {
+      return result;
+    }
+  }
+
+  Future<EmpresaResponseModel> updateEmpresa(
+      EmpresaResquestModel empresa) async {
+    var result = await _repository.updateEmpresa(empresa);
+    if (result.id > 0) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return result;
+    } else {
+      return result;
+    }
+  }
+
+  Future<Map> getEnderecoEmpresa() async {
+    return await _repository.getEnderecoEmpresa();
+  }
+
+  Future<bool> insertEndereco(EnderecoRequestModel endereco) async {
+    var result = await _repository.insertEndereco(endereco);
+    if (result) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> updateEndereco(EnderecoRequestModel endereco) async {
+    var result = await _repository.updateEndereco(endereco);
+    if (result) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<Map> getSetores() async {
+    return await _repository.getSetores();
+  }
+
+  Future<List> getExtintorVistoria(int idSetor) async {
+    return await _repository.getExtintorVistoria(idSetor);
+  }
+
+  Future<Map> getAllManutencao() async {
+    return await _repository.getAllManutencao();
+  }
+
+  Future<bool> insertVistoria(VistoriaRequestModel vistoria) async {
+    var result = await _repository.insertVistoria(vistoria);
+    if (result) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> updateVistoria(VistoriaRequestModel vistoria) async {
+    var result = await _repository.updateVistoria(vistoria);
+    if (result) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      });
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }

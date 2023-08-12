@@ -18,17 +18,31 @@ export default class ExtintorsController {
                 case 'empresa':
                     const empresa = await Empresa.findByOrFail("user_id", userAuth.id);
 
-                    setores = await Database.query().select('id').from('setors').where('empresa_id', empresa.id).where('ativo', true);
+                    setores = await Database.query().select('*').from('setors').where('empresa_id', empresa.id).where('ativo', true);
                     break;
                 case 'tecnico':
                     const tecnico = await Tecnico.findByOrFail("user_id", userAuth.id);
 
-                    setores = await Database.query().select('id').from('setors').where('empresa_id', tecnico.empresa_id).where('ativo', true);
+                    setores = await Database.query().select('*').from('setors').where('empresa_id', tecnico.empresa_id).where('ativo', true);
                     break;
             }
 
             const setoresId = setores.map((setor) => setor.id);
-            const extintores = await Database.query().select('*').from('extintors').whereIn('setor_id', setoresId).where('ativo', true);
+            const extintores = await Database.query().select('*').from('extintors').whereIn('setor_id', setoresId).where('ativo', true).orderBy('setor_id', 'asc').orderBy('proximaManutencao', 'asc');
+            
+            for (const element of extintores) {
+                const vistoria = await Database.rawQuery('Select * from manutencoes where extintor_id = ? order by dataManutencao desc limit 1', [element.id]);
+
+                if (vistoria[0].length > 0) {
+                    element.ultimaVistoria = vistoria[0][0].dataManutencao;
+                }
+                else {
+                    element.ultimaVistoria = null;
+                }
+
+                const set = setores.find((setor) => setor.id == element.setor_id);
+                element.setor = set.nome;
+            }
 
             return response.status(200).json(extintores);
 
@@ -42,9 +56,19 @@ export default class ExtintorsController {
 
     public async indexExtintoresSetor({ response, params }: HttpContextContract) {
         try {
-            const extintores = await Database.query().select('*').from('extintors').where('setor_id', params.id).where('ativo', true);
+            const extintores = await Database.query().select('*').from('extintors').where('setor_id', params.id).where('ativo', true).orderBy('proximaManutencao', 'asc');
 
             if (extintores.length > 0) {
+                for (const element of extintores) {
+                    const vistoria = await Database.rawQuery('Select * from manutencoes where extintor_id = ? order by dataManutencao desc limit 1', [element.id]);
+    
+                    if (vistoria[0].length > 0) {
+                        element.ultimaVistoria = vistoria[0][0].dataManutencao;
+                    }
+                    else {
+                        element.ultimaVistoria = null;
+                    }
+                }
                 return response.status(200).json(extintores);
             } else {
                 return response.status(204).json({
@@ -88,11 +112,6 @@ export default class ExtintorsController {
             });
         }
         catch (error) {
-            if(error.sqlMessage.includes('Duplicate entry')){
-                return response.status(401).json({
-                    message: 'Extintor já cadastrado com este indentificador',
-                });
-            }
             return response.badRequest({
                 message: 'Erro ao cadastrar Extintor',
             });
@@ -117,8 +136,8 @@ export default class ExtintorsController {
                 proximaManutencao = null;
             }
 
-            const sql = 'UPDATE extintors SET nome = ?, tipoExtintor = ?, tamanho = ?, validadeCasco = ?, validadeExtintor = ?, proximaManutencao = ? , ativo = ?, descricao = ? WHERE id = ?';
-            await Database.rawQuery(sql, [payload.nome, payload.tipoExtintor, payload.tamanho, new Date(payload.validadeCasco.toISO()), (new Date(payload.validadeExtintor.toISO())) ?? null , proximaManutencao , payload.ativo, payload.descricao, params.id]);
+            const sql = 'UPDATE extintors SET setor_id = ?, nome = ?, tipoExtintor = ?, tamanho = ?, validadeCasco = ?, validadeExtintor = ?, proximaManutencao = ? , ativo = ?, descricao = ? WHERE id = ?';
+            await Database.rawQuery(sql, [payload.setor_id ,payload.nome, payload.tipoExtintor, payload.tamanho, new Date(payload.validadeCasco.toISO()), (new Date(payload.validadeExtintor.toISO())) ?? null , proximaManutencao , payload.ativo, payload.descricao, params.id]);
 
             return response.status(200).json({
                 message: 'Extintor Editado com sucesso',

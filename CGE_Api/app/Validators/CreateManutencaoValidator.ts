@@ -1,40 +1,53 @@
-import { schema, CustomMessages } from '@ioc:Adonis/Core/Validator'
+import { schema, CustomMessages,rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class CreateManutencaoValidator {
   constructor(protected ctx: HttpContextContract) {}
 
-  /*
-   * Define schema to validate the "shape", "type", "formatting" and "integrity" of data.
-   *
-   * For example:
-   * 1. The username must be of data type string. But then also, it should
-   *    not contain special characters or numbers.
-   *    ```
-   *     schema.string({}, [ rules.alpha() ])
-   *    ```
-   *
-   * 2. The email must be of data type string, formatted as a valid
-   *    email. But also, not used by any other user.
-   *    ```
-   *     schema.string({}, [
-   *       rules.email(),
-   *       rules.unique({ table: 'users', column: 'email' }),
-   *     ])
-   *    ```
-   */
-  public schema = schema.create({})
+  public schema = schema.create({
+    extintor_id: schema.number([
+      rules.unsigned(),
+    ]),
 
-  /**
-   * Custom messages for validation failures. You can make use of dot notation `(.)`
-   * for targeting nested fields and array expressions `(*)` for targeting all
-   * children of an array. For example:
-   *
-   * {
-   *   'profile.username.required': 'Username is required',
-   *   'scores.*.number': 'Define scores as valid numbers'
-   * }
-   *
-   */
-  public messages: CustomMessages = {}
+    tecnico_id: schema.number([
+      rules.unsigned(),
+    ]),
+
+    dataManutencao: schema.date({}),
+
+    manimetro: schema.boolean(),
+
+    sinalizacaoParede: schema.boolean(),
+
+    sinalizacaoPiso: schema.boolean(),
+
+    acesso: schema.boolean(),
+
+    mangueira: schema.boolean(),
+
+    lacre: schema.boolean(),
+
+    aprovado: schema.boolean(),
+
+    descricao: schema.string.nullableAndOptional({ }, [
+      rules.minLength(5),
+      rules.maxLength(100),
+    ]),
+  })
+
+  public messages: CustomMessages = {
+    'extintor_id.required': 'O campo {{ field }} é obrigatório',
+    'tecnico_id.required': 'O campo {{ field }} é obrigatório',
+    'dataManutencao.required': 'O campo {{ field }} é obrigatório',
+    'manimetro.required': 'O campo {{ field }} é obrigatório',
+    'sinalizacaoParede.required': 'O campo {{ field }} é obrigatório',
+    'sinalizacaoPiso.required': 'O campo {{ field }} é obrigatório',
+    'acesso.required': 'O campo {{ field }} é obrigatório',
+    'mangueira.required': 'O campo {{ field }} é obrigatório',
+    'lacre.required': 'O campo {{ field }} é obrigatório',
+    'aprovado.required': 'O campo {{ field }} é obrigatório',
+    'descricao.required': 'O campo {{ field }} é obrigatório',
+    'descricao.minLength': 'O campo {{ field }} deve ter no mínimo 3 caracteres',
+    'descricao.maxLength': 'O campo {{ field }} deve ter no máximo 50 caracteres',
+  }
 }

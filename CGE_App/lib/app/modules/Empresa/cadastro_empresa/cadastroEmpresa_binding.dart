@@ -3,7 +3,7 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'CadastroEmpresa_controller.dart';
+import 'cadastroEmpresa_controller.dart';
 
 class CadastroEmpresaBinding implements Bindings {
   @override

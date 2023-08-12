@@ -1,11 +1,11 @@
-import 'package:cge_app/app/modules/vistoria/vistoria_controller.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'consulta_vistoria_controller.dart';
 
-class VistoriaBinding implements Bindings {
+class ConsultaVistoriaBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<VistoriaController>(() => VistoriaController());
+    Get.lazyPut<ConsultaVistoriaController>(() => ConsultaVistoriaController());
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 }

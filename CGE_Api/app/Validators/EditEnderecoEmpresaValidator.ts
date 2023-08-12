@@ -39,6 +39,11 @@ export default class EditEnderecoEmpresaValidator {
       rules.minLength(5),
       rules.maxLength(50),
     ]),
+
+    uf : schema.string({ trim: true }, [
+      rules.required(),
+      rules.maxLength(3),
+    ]),
   })
 
   public messages: CustomMessages = {}

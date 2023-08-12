@@ -1,6 +1,6 @@
 import 'package:cge_app/app/core/app_theme.dart';
+import 'package:cge_app/app/routes/routes.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:faker/faker.dart';
@@ -57,10 +57,8 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
     try {
       setState(() {
         mapa = controller.getResumoSetor();
-        Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (BuildContext context) => super.widget));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext context) => super.widget));
       });
       // ignore: empty_catches
     } catch (e) {}
@@ -84,34 +82,36 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+
+    var size = MediaQuery.of(context).size;
     // ignore: unused_local_variable
     var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/image/cge.png',
-                      fit: BoxFit.contain,
-                      height: 45,
-                    ),
-                    const SizedBox(width: 60),
-                    Text(
-                      textAlign: TextAlign.center,
-                      updatedDt,
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 0, right: 0),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/image/cge.png',
+                        fit: BoxFit.contain,
+                        height: 45,
+                      ),
+                      SizedBox(width: size.width*0.17),
+                      Text(
+                        textAlign: TextAlign.center,
+                        updatedDt,
+                        style: const TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    ],
+                  ),
                 )
               ],
-            ),
-          ],
         ),
         actions: <Widget>[
           IconButton(
@@ -123,7 +123,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
             onPressed: () => _refresh(),
           ),
         ],
-        backgroundColor: const Color.fromARGB(255, 190, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(25),
@@ -141,8 +141,8 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               Bubble(
                 title: "Cadastrar Tecnico",
                 iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
-                icon: Icons.check_circle_outline,
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
+                icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
                   Get.toNamed('/cadTecnico');
@@ -152,7 +152,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               Bubble(
                 title: "Cadastrar Setor",
                 iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
@@ -162,7 +162,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               Bubble(
                 title: "Realizar Vistoria",
                 iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 190, 0, 0),
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.check_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
@@ -177,7 +177,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               : _animationController.forward(),
           iconColor: Colors.white,
           iconData: Icons.handyman_outlined,
-          backGroundColor: const Color.fromARGB(255, 190, 0, 0),
+          backGroundColor: const Color.fromARGB(255, 116, 7, 7),
         ),
       ),
       body: buildContainer(),
@@ -230,94 +230,92 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
       itemBuilder: (BuildContext context, index) {
         Map item = dados[index];
         return GestureDetector(
-            onTap: () {
-              if (kDebugMode) {
-                print("cliquei no card");
-              }
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: Card(
-                    elevation: 5,
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                            image: const DecorationImage(
-                              image: AssetImage('assets/image/LogOut.png'),
-                              fit: BoxFit.cover,
+          onTap: () async {
+            await Get.toNamed(Routes.extintorSetor, arguments: item);
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                child: Card(
+                  elevation: 5,
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
                             ),
+                          ],
+                          image: const DecorationImage(
+                            image: AssetImage('assets/image/LogOut.png'),
+                            fit: BoxFit.cover,
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const SizedBox(width: 25),
-                              Text(
-                                '${item['setor']}',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Flexible(
-                                flex: 5,
-                                child: IconButton(
-                                    icon: const Icon(Icons.edit,
-                                        size: 25, color: Colors.black),
-                                    onPressed: () =>
-                                        controller.gotoEditSetor(item)),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  margin:
-                      const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                  child: Card(
-                    elevation: 5,
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5,
-                                offset: Offset(0, 5),
-                              ),
-                            ],
-                            image: const DecorationImage(
-                              image: AssetImage('assets/image/LogOut.png'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: ExportCircular(item),
                         ),
-                      ],
-                    ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SizedBox(width: 25),
+                            Text(
+                              '${item['setor']}',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                            Flexible(
+                              flex: 5,
+                              child: IconButton(
+                                icon: const Icon(Icons.edit,
+                                    size: 25, color: Colors.black),
+                                onPressed: () => controller.gotoEditSetor(item),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              ],
-            ));
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                child: Card(
+                  elevation: 5,
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 5,
+                              offset: Offset(0, 5),
+                            ),
+                          ],
+                          image: const DecorationImage(
+                            image: AssetImage('assets/image/LogOut.png'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: ExportCircular(item),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
       },
     );
   }

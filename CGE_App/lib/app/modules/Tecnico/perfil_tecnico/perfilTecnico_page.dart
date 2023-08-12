@@ -77,6 +77,29 @@ class PerfilTecnicoPage extends GetView<PerfilTecnicoController> {
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       leading: const Icon(
+                        Ionicons.document_text_outline,
+                        size: 40,
+                        color: Colors.black,
+                      ),
+                      title: const Text(
+                        "Consultar Vistoria",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      isThreeLine: false,
+                      trailing: const Icon(Icons.arrow_forward_ios,
+                          color: Colors.black),
+                      onTap: () {
+                        Get.offAllNamed('/consultaVistoria');
+                      },
+                    ),
+                    const Divider(color: Colors.black, thickness: 1),
+                    const SizedBox(height: 15),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(
                         Icons.person,
                         size: 40,
                         color: Colors.black,
@@ -93,29 +116,6 @@ class PerfilTecnicoPage extends GetView<PerfilTecnicoController> {
                         Icons.arrow_forward_ios,
                         color: Colors.black,
                       ),
-                      onTap: () {
-                        controller.goTologout();
-                      },
-                    ),
-                    const Divider(color: Colors.black, thickness: 1),
-                    const SizedBox(height: 15),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: const Icon(
-                        Ionicons.document_text_outline,
-                        size: 40,
-                        color: Colors.black,
-                      ),
-                      title: const Text(
-                        "Consultar Vistoria",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      isThreeLine: false,
-                      trailing: const Icon(Icons.arrow_forward_ios,
-                          color: Colors.black),
                       onTap: () {
                         controller.goTologout();
                       },

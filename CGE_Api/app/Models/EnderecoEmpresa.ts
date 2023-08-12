@@ -32,4 +32,7 @@ export default class EnderecoEmpresa extends BaseModel {
 
   @column()
   public ponto_referencia: string | null
+
+  @column()
+  public uf: string
 }

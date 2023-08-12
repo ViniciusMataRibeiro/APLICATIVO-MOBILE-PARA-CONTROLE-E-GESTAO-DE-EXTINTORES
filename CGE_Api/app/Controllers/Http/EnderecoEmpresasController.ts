@@ -11,7 +11,7 @@ export default class EnderecoEmpresasController {
             const userAuth = await auth.use('api').authenticate();
 
             const empresa = await Empresa.findByOrFail("user_id", userAuth.id);
-            const endereco = await Database.query().select('*').from('endereco_empresas').where('empresa_id', empresa.id);
+            const endereco = await Database.query().select('*').from('endereco_empresas').where('empresa_id', empresa.id).firstOrFail();
 
             return response.ok(endereco);
         } catch (error) {
@@ -34,7 +34,8 @@ export default class EnderecoEmpresasController {
                 numero: payload.numero,
                 bairro: payload.bairro,
                 cidade: payload.cidade,
-                ponto_referencia: payload.ponto_referencia
+                ponto_referencia: payload.ponto_referencia,
+                uf: payload.uf
             });
 
             return response.ok({
@@ -44,10 +45,11 @@ export default class EnderecoEmpresasController {
                 numero: endereco.numero,
                 bairro: endereco.bairro,
                 cidade: endereco.cidade,
-                ponto_referencia: endereco.ponto_referencia
+                ponto_referencia: endereco.ponto_referencia,
+                uf: endereco.uf
             });
 
-        } catch {
+        } catch (error) {
             return response.badRequest({
                 message: 'Erro ao Criar Endereço',
             });
@@ -67,7 +69,8 @@ export default class EnderecoEmpresasController {
                 rua: payload.rua,
                 numero: payload.numero,
                 bairro: payload.bairro,
-                ponto_referencia: payload.ponto_referencia
+                ponto_referencia: payload.ponto_referencia,
+                uf: payload.uf
             });
 
             endereco.save();
@@ -78,7 +81,8 @@ export default class EnderecoEmpresasController {
                 rua: endereco.rua,
                 numero: endereco.numero,
                 bairro: endereco.bairro,
-                ponto_referencia: endereco.ponto_referencia
+                ponto_referencia: endereco.ponto_referencia,
+                uf: endereco.uf
             });
 
         } catch {

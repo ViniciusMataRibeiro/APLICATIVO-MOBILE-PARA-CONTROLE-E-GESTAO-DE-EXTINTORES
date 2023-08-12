@@ -1,8 +1,12 @@
 import 'dart:convert';
 import 'package:cge_app/app/data/Models/setor_request.dart';
+import 'package:cge_app/app/data/Models/vistoria_request_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../Models/empresa_request_model.dart';
+import '../Models/empresa_response_model.dart';
+import '../Models/endereco_request_model.dart';
 import '../Models/extintor_request_model.dart';
 import '../Models/tecnico_request.dart';
 import '../Models/user.dart';
@@ -178,18 +182,39 @@ class Api {
     }
   }
 
-  Future<bool> insertExtintor(ExtintorRequestModel extintor) async {
-    var url = Uri.parse("$baseUrl/extintor");
-    var response = await http.post(url, headers: {
+  Future<Map> getExtintorSetor(int idSetor) async {
+    var url = Uri.parse("$baseUrl/extintorsSetor/$idSetor");
+    var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'authorization': 'Bearer ${_configService.token}',
-    },
-    body: jsonEncode(extintor.toJson()));
-    if(response.statusCode == 201){
-      return true;
+    });
+    if (response.statusCode == 200) {
+      List d = [];
+      List dados = await jsonDecode(response.body);
+      await Future.forEach(dados, (element) {
+        Map<String, dynamic> t = Map.from(element);
+        d.add(t);
+      });
+
+      return {"dados": d};
+    } else {
+      return {"dados": []};
     }
-    else {
+  }
+
+  Future<bool> insertExtintor(ExtintorRequestModel extintor) async {
+    var url = Uri.parse("$baseUrl/extintor");
+    var response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(extintor.toJson()));
+    if (response.statusCode == 201) {
+      return true;
+    } else {
       return false;
     }
   }
@@ -197,18 +222,200 @@ class Api {
   Future<bool> updateExtintor(ExtintorRequestModel extintor) async {
     var url = Uri.parse("$baseUrl/extintor/${extintor.id}");
     var response = await http.put(url,
-     headers: {
+        headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'authorization': 'Bearer ${_configService.token}',
         },
         body: jsonEncode(extintor.toJson()));
-      if(response.statusCode == 200) {
-        return true;
-      }
-      else{
-        return false;
-      }
-        
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> deleteExtintor(int idExtintor) async {
+    var url = Uri.parse("$baseUrl/extintor/$idExtintor");
+    var response = await http.delete(
+      url,
+      headers: {
+        'authorization': 'Bearer ${_configService.token}',
+      },
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<EmpresaResponseModel> insertEmpresa(EmpresaResquestModel data) async {
+    var url = Uri.parse("$baseUrl/empresa");
+    var response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(data.toJson()));
+    if (response.statusCode == 200) {
+      return EmpresaResponseModel.fromJson(jsonDecode(response.body));
+    } else {
+      return EmpresaResponseModel(id: 0, nome: '', email: '', telefone: '');
+    }
+  }
+
+  Future<EmpresaResponseModel> updateEmpresa(EmpresaResquestModel data) async {
+    var url = Uri.parse("$baseUrl/empresa/${data.id}");
+    var response = await http.put(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(data.toJson()));
+    if (response.statusCode == 200) {
+      return EmpresaResponseModel.fromJson(jsonDecode(response.body));
+    } else {
+      return EmpresaResponseModel(id: 0, nome: '', email: '', telefone: '');
+    }
+  }
+  
+  Future<Map> getEnderecoEmpresa() async {
+    var url = Uri.parse("$baseUrl/empresaEndereco");
+    var response = await http.get(url, headers: {
+      'authorization': 'Bearer ${_configService.token}',
+    });
+    if (response.statusCode == 200) {
+      var a = await jsonDecode(response.body);
+
+      return {"dados": a};
+    } else {
+      return {"dados": []};
+    }
+  }
+
+
+  Future<bool> insertEndereco(EnderecoRequestModel data) async {
+    var url = Uri.parse("$baseUrl/empresaEndereco");
+    var response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(data.toJson()));
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> updateEndereco(EnderecoRequestModel data) async {
+    var url = Uri.parse("$baseUrl/empresaEndereco/${data.id}");
+    var response = await http.put(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(data.toJson()));
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<Map> getSetores() async {
+    var url = Uri.parse("$baseUrl/setors");
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization': 'Bearer ${_configService.token}',
+    });
+    if (response.statusCode == 200) {
+      List d = [];
+      List dados = await jsonDecode(response.body);
+      await Future.forEach(dados, (element) {
+        Map<String, dynamic> t = Map.from(element);
+        d.add(t);
+      });
+
+      return {"dadosSetores": d};
+    } else {
+      return {"dadosSetores": []};
+    }
+  }
+
+  Future<List> getExtintorVistoria(int idSetor) async {
+    var url = Uri.parse("$baseUrl/extintorsSetor/$idSetor");
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization': 'Bearer ${_configService.token}',
+    });
+    if (response.statusCode == 200) {
+      List dados = await jsonDecode(response.body);
+
+      return dados;
+    } else {
+      throw Exception('Falha ao carregar extintores');
+    }
+  }
+
+  Future<Map> getAllManutencao() async {
+    var url = Uri.parse("$baseUrl/manutencao");
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization': 'Bearer ${_configService.token}',
+    });
+    if (response.statusCode == 200) {
+      List d = [];
+      List dados = await jsonDecode(response.body);
+      await Future.forEach(dados, (element) {
+        Map<String, dynamic> t = Map.from(element);
+        d.add(t);
+      });
+
+      return {"dados": d};
+    } else {
+      return {"dados": []};
+    }
+  }
+
+  Future<bool> insertVistoria(VistoriaRequestModel vistoria) async {
+    var url = Uri.parse("$baseUrl/manutencao");
+    var response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(vistoria.toJson()));
+    if (response.statusCode == 201) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> updateVistoria(VistoriaRequestModel vistoria) async {
+    var url = Uri.parse("$baseUrl/manutencao/${vistoria.id}");
+    var response = await http.put(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': 'Bearer ${_configService.token}',
+        },
+        body: jsonEncode(vistoria.toJson()));
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
