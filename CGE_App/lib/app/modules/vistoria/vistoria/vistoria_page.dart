@@ -105,7 +105,7 @@ class Vistoria extends State<VistoriaState>
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         title: Row(
           children: [
             IconButton(
@@ -174,7 +174,7 @@ class Vistoria extends State<VistoriaState>
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black,
-                                blurRadius: 10,
+                                blurRadius: 5,
                               ),
                             ],
                           ),
@@ -217,14 +217,9 @@ class Vistoria extends State<VistoriaState>
                             const Divider(color: Colors.black, thickness: 1),
                             ListTile(
                               contentPadding: EdgeInsets.zero,
-                              leading: const Icon(
-                                Icones_Personalizado.place,
-                                color: Colors.black,
-                                size: 35,
-                              ),
                               selected: true,
                               selectedTileColor: Colors.black,
-                              subtitle: TextFormField(
+                              title: TextFormField(
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontStyle: FontStyle.italic,
@@ -236,6 +231,11 @@ class Vistoria extends State<VistoriaState>
                                   labelStyle: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
+                                  ),
+                                  prefixIcon: const Icon(
+                                    Icones_Personalizado.place,
+                                    color: Colors.black,
+                                    size: 35,
                                   ),
                                   suffixIcon: InkWell(
                                     onTap: () {
@@ -337,11 +337,6 @@ class Vistoria extends State<VistoriaState>
                             ),
                             ListTile(
                               contentPadding: EdgeInsets.zero,
-                              leading: const Icon(
-                                Icones_Personalizado.fire_extinguisher,
-                                color: Colors.black,
-                                size: 35,
-                              ),
                               selected: true,
                               selectedTileColor: Colors.black,
                               subtitle: TextFormField(
@@ -356,6 +351,11 @@ class Vistoria extends State<VistoriaState>
                                   labelStyle: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
+                                  ),
+                                  prefixIcon: const Icon(
+                                    Icones_Personalizado.fire_extinguisher,
+                                    color: Colors.black,
+                                    size: 35,
                                   ),
                                   suffixIcon: InkWell(
                                     onTap: () {
@@ -815,7 +815,7 @@ class Vistoria extends State<VistoriaState>
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor:
-                                        const Color.fromARGB(255, 175, 31, 21),
+                                        const Color.fromARGB(255, 116, 7, 7),
                                     fixedSize: const Size(250, 50),
                                   ),
                                   child: const Text(
