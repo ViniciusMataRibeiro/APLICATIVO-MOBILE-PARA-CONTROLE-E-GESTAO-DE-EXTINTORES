@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/routes/routes.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
@@ -7,6 +8,7 @@ import 'package:faker/faker.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
+import '../../../Icones/icones_personalizado.dart';
 import '../../../data/services/auth/service.dart';
 import '../../widget/gaficoSetor.dart';
 import 'setores_controller.dart';
@@ -82,7 +84,6 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
     var size = MediaQuery.of(context).size;
     // ignore: unused_local_variable
     var obj = aux.user.value;
@@ -93,25 +94,25 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 0, right: 0),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        'assets/image/cge.png',
-                        fit: BoxFit.contain,
-                        height: 45,
-                      ),
-                      SizedBox(width: size.width*0.17),
-                      Text(
-                        textAlign: TextAlign.center,
-                        updatedDt,
-                        style: const TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    ],
+            Padding(
+              padding: const EdgeInsets.only(left: 0, right: 0),
+              child: Row(
+                children: [
+                  Image.asset(
+                    'assets/image/cge.png',
+                    fit: BoxFit.contain,
+                    height: 45,
                   ),
-                )
-              ],
+                  SizedBox(width: size.width * 0.17),
+                  Text(
+                    textAlign: TextAlign.center,
+                    updatedDt,
+                    style: const TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
         actions: <Widget>[
           IconButton(
@@ -156,7 +157,8 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 icon: Icons.add_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  Get.toNamed('/cadSetor');
+                  //Get.toNamed('/cadSetor');
+                  _modalSetor();
                 },
               ),
               Bubble(
@@ -314,6 +316,148 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
                 ),
               ),
             ],
+          ),
+        );
+      },
+    );
+  }
+
+  _modalSetor() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        var size = MediaQuery.of(context).size;
+        return AlertDialog(
+          contentPadding: EdgeInsets.zero,
+          content: Container(
+            padding: const EdgeInsets.all(10.0),
+            height: 430,
+            decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: AssetImage('assets/image/modal.png'),
+                  fit: BoxFit.fill,
+                ),
+                borderRadius: BorderRadius.circular(10)),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    'Cadastrar Setor',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const Divider(
+                  color: Colors.black54,
+                  thickness: 2,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      left: size.width * 0.05, right: size.width * 0.05),
+                  child: Form(
+                    child: TextFormField(
+                      //controller: controller.name,
+                      style: const TextStyle(
+                          color: Colors.black, fontStyle: FontStyle.italic),
+                      decoration: InputDecoration(
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.only(right: size.width * 0.05),
+                          child: const Icon(Icones_Personalizado.place,
+                              color: Colors.black, size: 35),
+                        ),
+                        labelText: 'Nome Setor',
+                        labelStyle: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
+                  child: Form(
+                    child: TextFormField(
+                      //controller: controller.descricao,
+                      style: const TextStyle(
+                          wordSpacing: 1, fontSize: 18, color: Colors.black),
+                      decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            topRight: Radius.circular(25),
+                            bottomLeft: Radius.circular(25),
+                            bottomRight: Radius.circular(25),
+                          ),
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 0.9),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            topRight: Radius.circular(25),
+                            bottomLeft: Radius.circular(25),
+                            bottomRight: Radius.circular(25),
+                          ),
+                        ),
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                        labelText: 'Descrição',
+                        alignLabelWithHint: true,
+                      ),
+                      maxLines: 5,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Container(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Center(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        // var result = await controller.goToInsert();
+                        // if (result == 'true') {
+                        //   controller.toast('Gravado com sucesso!');
+                        // } else {
+                        //   final snackBar = SnackBar(
+                        //     elevation: 0,
+                        //     behavior: SnackBarBehavior.floating,
+                        //     backgroundColor: Colors.transparent,
+                        //     content: AwesomeSnackbarContent(
+                        //       title: 'Alerta',
+                        //       message: result.toString(),
+                        //       contentType: ContentType.failure,
+                        //     ),
+                        //   );
+                        //   // ignore: use_build_context_synchronously
+                        //   ScaffoldMessenger.of(context)
+                        //     ..hideCurrentSnackBar()
+                        //     ..showSnackBar(snackBar);
+                        // }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
+                        fixedSize: const Size(250, 50),
+                      ),
+                      child: const Text(
+                        'Registrar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Roboto-BoldItalic',
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
