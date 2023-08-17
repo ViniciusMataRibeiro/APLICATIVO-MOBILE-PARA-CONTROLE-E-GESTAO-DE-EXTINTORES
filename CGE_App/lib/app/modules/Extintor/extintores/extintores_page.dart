@@ -274,6 +274,7 @@ class ExtintorPage extends State<ExtintorState>
   }
 
   _mostradados({required List dados}) {
+    var obj = aux.user.value;
     return ListView.builder(
       itemCount: dados.length,
       padding: const EdgeInsets.only(bottom: 52, top: 50),
@@ -431,48 +432,93 @@ class ExtintorPage extends State<ExtintorState>
                             subtitle: Text(item['setor']),
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 116, 7, 7),
+                        obj!.tipo != 'empresa'
+                            ? Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          const Color.fromARGB(255, 116, 7, 7),
+                                    ),
+                                    onPressed: () =>
+                                        {controller.gotoEditExtintor(item)},
+                                    child: const Text(
+                                      'Editar',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.05,
+                                    child: const VerticalDivider(
+                                      thickness: 2,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          const Color.fromARGB(255, 116, 7, 7),
+                                    ),
+                                    onPressed: () async => {
+                                      await controller
+                                          .gotoDeleteExtintor(item['id'])
+                                    },
+                                    child: const Text(
+                                      'Excluir',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.grey,
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text(
+                                      'Editar',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.05,
+                                    child: const VerticalDivider(
+                                      thickness: 2,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.grey,
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text(
+                                      'Excluir',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              onPressed: () =>
-                                  {controller.gotoEditExtintor(item)},
-                              child: const Text(
-                                'Editar',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: size.height * 0.05,
-                              child: const VerticalDivider(
-                                thickness: 2,
-                                color: Colors.black54,
-                              ),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 116, 7, 7),
-                              ),
-                              onPressed: () async => {
-                                await controller.gotoDeleteExtintor(item['id'])
-                              },
-                              child: const Text('Excluir',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontStyle: FontStyle.italic)),
-                            ),
-                          ],
-                        )
                       ],
                     ),
                   ),

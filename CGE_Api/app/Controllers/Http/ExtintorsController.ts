@@ -56,6 +56,7 @@ export default class ExtintorsController {
 
     public async indexExtintoresSetor({ response, params }: HttpContextContract) {
         try {
+            const setor = await Setor.findByOrFail("id", params.id);
             const extintores = await Database.query().select('*').from('extintors').where('setor_id', params.id).where('ativo', true).orderBy('proximaManutencao', 'asc');
 
             if (extintores.length > 0) {
@@ -68,6 +69,8 @@ export default class ExtintorsController {
                     else {
                         element.ultimaVistoria = null;
                     }
+
+                    element.setor = setor.nome;
                 }
                 return response.status(200).json(extintores);
             } else {
