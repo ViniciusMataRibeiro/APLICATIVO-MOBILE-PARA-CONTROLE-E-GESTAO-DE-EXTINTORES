@@ -1,4 +1,3 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/routes/routes.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
