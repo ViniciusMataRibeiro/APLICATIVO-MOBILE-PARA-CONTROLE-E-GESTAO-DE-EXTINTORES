@@ -126,27 +126,19 @@ class AuthService extends GetxService {
     return await _repository.getExtintorSetor(idSetor);
   }
 
-  Future<bool> insertExtintor(ExtintorRequestModel extintor) async {
-    var result = await _repository.insertExtintor(extintor);
-    if (result) {
-      Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
-      });
-      return true;
-    } else {
-      return false;
-    }
+  Future<int> insertExtintor(ExtintorRequestModel extintor) async {
+    return await _repository.insertExtintor(extintor);
   }
 
-  Future<bool> updateExtintor(ExtintorRequestModel extintor) async {
+  Future<int> updateExtintor(ExtintorRequestModel extintor) async {
     var result = await _repository.updateExtintor(extintor);
-    if (result) {
+    if (result > 0) {
       Future.delayed(const Duration(milliseconds: 1), () {
         Get.offAllNamed('/dashboard');
       });
-      return true;
+      return result;
     } else {
-      return false;
+      return 0;
     }
   }
 

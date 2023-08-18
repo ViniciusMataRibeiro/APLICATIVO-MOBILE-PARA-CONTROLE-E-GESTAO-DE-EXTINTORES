@@ -203,7 +203,7 @@ class Api {
     }
   }
 
-  Future<bool> insertExtintor(ExtintorRequestModel extintor) async {
+  Future<int> insertExtintor(ExtintorRequestModel extintor) async {
     var url = Uri.parse("$baseUrl/extintor");
     var response = await http.post(url,
         headers: {
@@ -213,13 +213,14 @@ class Api {
         },
         body: jsonEncode(extintor.toJson()));
     if (response.statusCode == 201) {
-      return true;
+      var resultId = await jsonDecode(response.body);
+      return resultId['id'];
     } else {
-      return false;
+      return 0;
     }
   }
 
-  Future<bool> updateExtintor(ExtintorRequestModel extintor) async {
+  Future<int> updateExtintor(ExtintorRequestModel extintor) async {
     var url = Uri.parse("$baseUrl/extintor/${extintor.id}");
     var response = await http.put(url,
         headers: {
@@ -229,9 +230,10 @@ class Api {
         },
         body: jsonEncode(extintor.toJson()));
     if (response.statusCode == 200) {
-      return true;
+      var resultId = await jsonDecode(response.body);
+      return resultId['id'];
     } else {
-      return false;
+      return 0;
     }
   }
 
@@ -281,7 +283,7 @@ class Api {
       return EmpresaResponseModel(id: 0, nome: '', email: '', telefone: '');
     }
   }
-  
+
   Future<Map> getEnderecoEmpresa() async {
     var url = Uri.parse("$baseUrl/empresaEndereco");
     var response = await http.get(url, headers: {
@@ -295,7 +297,6 @@ class Api {
       return {"dados": []};
     }
   }
-
 
   Future<bool> insertEndereco(EnderecoRequestModel data) async {
     var url = Uri.parse("$baseUrl/empresaEndereco");

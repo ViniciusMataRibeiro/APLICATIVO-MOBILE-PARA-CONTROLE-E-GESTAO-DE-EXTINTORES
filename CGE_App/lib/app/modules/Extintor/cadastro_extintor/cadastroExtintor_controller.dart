@@ -156,7 +156,7 @@ class CadastroExtintorController extends GetxController {
       descricao: "Teste",
     );
 
-    bool res = false;
+    int res = 0;
 
     if (id > 0) {
       res = await _authService.updateExtintor(extintorResquestModel);
@@ -164,7 +164,7 @@ class CadastroExtintorController extends GetxController {
       res = await _authService.insertExtintor(extintorResquestModel);
     }
 
-    return res == true ? 'true' : 'Algo deu Errado';
+    return res > 0 ? 'Extintor - $res' : 'Algo deu Errado';
   }
 
   Future<bool?> toast(String message) {

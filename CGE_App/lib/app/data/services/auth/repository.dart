@@ -38,10 +38,10 @@ class AuthRepository {
 
   Future<bool> updateSetor(SetorRequestModel setor) => _api.updateSetor(setor);
 
-  Future<bool> insertExtintor(ExtintorRequestModel extintor) =>
+  Future<int> insertExtintor(ExtintorRequestModel extintor) =>
       _api.insertExtintor(extintor);
 
-  Future<bool> updateExtintor(ExtintorRequestModel extintor) =>
+  Future<int> updateExtintor(ExtintorRequestModel extintor) =>
       _api.updateExtintor(extintor);
 
   Future<bool> deleteExtintor(int idExtintor) =>

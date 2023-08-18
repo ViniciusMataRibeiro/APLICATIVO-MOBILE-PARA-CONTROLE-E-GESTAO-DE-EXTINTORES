@@ -422,7 +422,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                                     ),
                                   ),
                                 ],
-                              )
+                              ),
                       ],
                     ),
                   ),

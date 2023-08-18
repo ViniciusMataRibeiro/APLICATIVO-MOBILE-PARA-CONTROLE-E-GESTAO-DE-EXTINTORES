@@ -1,3 +1,4 @@
+import 'package:cge_app/app/modules/qrCode/generetor/qr_image.dart';
 import 'package:cge_app/app/modules/vistoria/consulta_vistoria/consulta_vistoria_binding.dart';
 import 'package:cge_app/app/modules/vistoria/consulta_vistoria/consulta_vistoria_page.dart';
 import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_binding.dart';
@@ -18,6 +19,9 @@ import '../modules/Tecnico/perfil_tecnico/perfilTecnico_page.dart';
 import '../modules/Setor/cadastro_setor/cadastroSetor_page.dart';
 import '../modules/Tecnico/ListTecnico/ListTecnico_binding.dart';
 import '../modules/Tecnico/ListTecnico/ListTecnico_page.dart';
+import '../modules/qrCode/generetor/qr_binding_generetor.dart';
+import '../modules/qrCode/scanner/qr_binding_scanner.dart';
+import '../modules/qrCode/scanner/qr_scanner.dart';
 import '../modules/vistoria/vistoria/vistoria_binding.dart';
 import '../modules/vistoria/vistoria/vistoria_page.dart';
 import '../modules/dashboard/dashboard_binding.dart';
@@ -30,7 +34,6 @@ import '../modules/splash/splash_page.dart';
 import '../modules/Admin/admin_page.dart';
 import '../modules/login/login_page.dart';
 import 'package:get/get.dart';
-
 
 abstract class AppPages {
   static final pages = [
@@ -108,6 +111,16 @@ abstract class AppPages {
       name: Routes.consultaVistoria,
       page: () => const ConsultaVistoria(),
       binding: ConsultaVistoriaBinding(),
+    ),
+    GetPage(
+      name: Routes.qrCodeGeneretor,
+      page: () => const QRImage(),
+      binding: QRCodeGeneretorBinding(),
+    ),
+    GetPage(
+      name: Routes.qrCodeScanner,
+      page: () => const QRScanner(),
+      binding: QRCodeScannerBinding(),
     )
   ];
 }

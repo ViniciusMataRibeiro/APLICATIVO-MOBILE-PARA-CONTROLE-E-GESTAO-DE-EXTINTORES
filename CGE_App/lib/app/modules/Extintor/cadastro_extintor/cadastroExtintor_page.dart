@@ -714,9 +714,9 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                 child: ElevatedButton(
                                   onPressed: () async {
                                     var result = await controller.goToInsert();
-                                    if (result == 'true') {
-                                      controller
-                                          .toast('Registrado com sucesso');
+                                    if (result != 'Algo deu Errado') {
+                                      // ignore: use_build_context_synchronously
+                                      showAlertDialog(context, result);
                                     } else {
                                       final snackBar = SnackBar(
                                         elevation: 0,
@@ -772,6 +772,36 @@ class CadastroExtintor extends State<CadastroExtintorState>
             ),
           );
         }
+      },
+    );
+  }
+
+  showAlertDialog(BuildContext context, String result) {
+    Widget cancelButton = TextButton(
+      child: const Text("Cancelar"),
+      onPressed: () => Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/dashboard');
+      }),
+    );
+    Widget continueButton = TextButton(
+      child: const Text("Imprimir"),
+      onPressed: () => Future.delayed(const Duration(milliseconds: 1), () {
+        Get.offAllNamed('/qrCodeGeneretor', arguments: {'dataQrCode': result});
+      }),
+    );
+    AlertDialog alert = AlertDialog(
+      title: const Text("Imprimir"),
+      content:
+          const Text("Deseja imprimir o QRCode referente a esse extintor?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
       },
     );
   }

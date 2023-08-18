@@ -1,9 +1,8 @@
-import 'package:cge_app/app/modules/qrCode/qr_overlay.dart';
-import 'package:cge_app/app/modules/qrCode/scanner_error_widget.dart';
+import 'package:cge_app/app/modules/qrCode/scanner/qr_controller.dart';
+import 'package:cge_app/app/modules/qrCode/scanner/qr_overlay.dart';
+import 'package:cge_app/app/modules/qrCode/scanner/scanner_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-
-import 'qr_image.dart';
 
 const bgColor = Color(0xfffafafa);
 
@@ -16,10 +15,10 @@ class QRScanner extends StatefulWidget {
 
 class _QRScannerState extends State<QRScanner>
     with SingleTickerProviderStateMixin {
-  bool isScanComplete = false;
+  QRCodeScannerController controller = QRCodeScannerController();
 
   void closeScreen() {
-    isScanComplete = false;
+    controller.isScanComplete = false;
   }
 
   @override
@@ -65,16 +64,10 @@ class _QRScannerState extends State<QRScanner>
                     },
                     onDetect: (capture) {
                       setState(
-                        () {
-                          if (capture.barcodes.first.rawValue != null) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => QRImage(
-                                    data:
-                                        capture.barcodes.first.rawValue ?? ''),
-                              ),
-                            );
+                        () async {
+                          if (!controller.isScanComplete) {
+                            await controller.verificaQrCode(
+                                capture.barcodes.first.rawValue);
                           }
                         },
                       );

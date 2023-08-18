@@ -98,7 +98,7 @@ export default class ExtintorsController {
                 });
             }
 
-            await Database.insertQuery().table('extintors').insert({
+            var a = await Database.insertQuery().table('extintors').insert({
                 nome: payload.nome,
                 tipoExtintor: payload.tipoExtintor,
                 tamanho: payload.tamanho,
@@ -111,7 +111,7 @@ export default class ExtintorsController {
             });
 
             return response.status(201).json({
-                message: 'Extintor cadastrado com sucesso',
+                id: a[0],
             });
         }
         catch (error) {
