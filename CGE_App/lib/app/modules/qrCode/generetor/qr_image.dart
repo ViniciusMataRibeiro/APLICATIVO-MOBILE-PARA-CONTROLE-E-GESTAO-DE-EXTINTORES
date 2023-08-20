@@ -1,4 +1,5 @@
 import 'package:cge_app/app/modules/qrCode/generetor/qr_controller_gerenetor.dart';
+import 'package:cge_app/app/modules/qrCode/print_out_qrcode/print.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -33,13 +34,41 @@ class _QRImageState extends State<QRImage> {
         centerTitle: true,
       ),
       body: Center(
-          child: QrImageView(
-        data: controller.data,
-        size: 200,
-        embeddedImageStyle: const QrEmbeddedImageStyle(
-          size: Size(100, 100),
+        child: ListView(
+          children: [
+            QrImageView(
+              data: controller.data,
+              size: 200,
+              embeddedImageStyle: const QrEmbeddedImageStyle(
+                size: Size(100, 100),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              controller.data,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PrintQrCode(
+                      data: [],
+                    ),
+                  ),
+                );
+              },
+              child: const Text('Imprimir'),
+            ),
+          ],
         ),
-      )),
+      ),
     );
   }
 }

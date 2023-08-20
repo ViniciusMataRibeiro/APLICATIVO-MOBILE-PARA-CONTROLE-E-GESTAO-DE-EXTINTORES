@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../../data/services/auth/service.dart';
+import '../../qrCode/print_out_qrcode/print.dart';
 
 String nome = "";
 
@@ -117,7 +118,15 @@ class PerfilTecnicoPage extends GetView<PerfilTecnicoController> {
                         color: Colors.black,
                       ),
                       onTap: () {
-                        controller.goTologout();
+                        //controller.goTologout();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PrintQrCode(
+                              data: [],
+                            ),
+                          ),
+                        );
                       },
                     ),
                     const Divider(color: Colors.black, thickness: 1),

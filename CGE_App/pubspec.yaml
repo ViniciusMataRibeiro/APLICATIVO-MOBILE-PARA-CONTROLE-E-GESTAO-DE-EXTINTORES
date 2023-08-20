@@ -25,6 +25,7 @@ dependencies:
   transparent_image: ^2.0.0
   cupertino_icons: ^1.0.2
   dropdown_search: ^5.0.6
+  bluetooth_print: ^4.3.0
   mobile_scanner: ^3.4.1
   fluttertoast: ^8.2.1
   get_storage: ^2.0.3
