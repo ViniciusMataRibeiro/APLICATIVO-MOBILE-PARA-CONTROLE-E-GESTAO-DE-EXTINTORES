@@ -16,7 +16,7 @@ import '../services/config/service.dart';
 
 class Api {
   final _configService = Get.find<ConfigService>();
-  final baseUrl = "http://192.168.0.134:3333";
+  final baseUrl = "http://18.224.252.57:3333";
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     var url = Uri.parse("$baseUrl/login");
