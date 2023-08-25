@@ -8,8 +8,8 @@ class QRCodeScannerController extends GetxController {
   Future<void> onInit() async {
     if (Get.arguments != null) {
       if (Get.arguments != null) {
-        Map _qrCode = Get.arguments;
-        data = _qrCode['dataQrCode'];
+        Map qrCode = Get.arguments;
+        data = qrCode['dataQrCode'];
       } else {
         data = '';
       }

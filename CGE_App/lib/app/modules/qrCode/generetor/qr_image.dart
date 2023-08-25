@@ -1,5 +1,4 @@
 import 'package:cge_app/app/modules/qrCode/generetor/qr_controller_gerenetor.dart';
-import 'package:cge_app/app/modules/qrCode/print_out_qrcode/print.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -55,14 +54,14 @@ class _QRImageState extends State<QRImage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const PrintQrCode(
-                      data: [],
-                    ),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const PrintQrCode(
+                //       data: [],
+                //     ),
+                //   ),
+                // );
               },
               child: const Text('Imprimir'),
             ),

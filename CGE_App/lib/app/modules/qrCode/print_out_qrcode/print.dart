@@ -3,10 +3,14 @@ import 'package:bluetooth_print/bluetooth_print.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:get/get.dart';
 
 class PrintQrCode extends StatefulWidget {
-  const PrintQrCode({super.key, required this.data});
-  final List<Map<String, dynamic>> data;
+  const PrintQrCode({super.key, required this.data, required this.tipo, required this.nome, this.tipoExtintor});
+  final String data;
+  final String tipo;
+  final String nome;
+  final String? tipoExtintor;
 
   @override
   State<PrintQrCode> createState() => _PrintQrCodeState();
@@ -17,7 +21,7 @@ class _PrintQrCodeState extends State<PrintQrCode> {
 
   bool _connected = false;
   BluetoothDevice? _device;
-  String tips = 'Não há dispositivos conectados';
+  String tips = 'Botão imprimir habilitado = conexão ativa';
 
   @override
   void initState() {
@@ -27,7 +31,7 @@ class _PrintQrCodeState extends State<PrintQrCode> {
   }
 
   Future<void> initBluetooth() async {
-    bluetoothPrint.startScan(timeout: const Duration(seconds: 4));
+    bluetoothPrint.startScan(timeout: const Duration(seconds: 2));
 
     bool isConnected = await bluetoothPrint.isConnected ?? false;
 
@@ -129,59 +133,38 @@ class _PrintQrCodeState extends State<PrintQrCode> {
                 padding: const EdgeInsets.fromLTRB(20, 5, 20, 10),
                 child: Column(
                   children: <Widget>[
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: <Widget>[
-                    //     OutlinedButton(
-                    //       onPressed: _connected
-                    //           ? null
-                    //           : () async {
-                    //               if (_device != null &&
-                    //                   _device!.address != null) {
-                    //                 setState(() {
-                    //                   tips = 'Conectando...';
-                    //                 });
-                    //                 await bluetoothPrint.connect(_device!);
-                    //               } else {
-                    //                 setState(() {
-                    //                   tips =
-                    //                       'Por favor selecione um dispositivo';
-                    //                 });
-                    //                 if (kDebugMode) {
-                    //                   print(
-                    //                       'Por favor selecione um dispositivo');
-                    //                 }
-                    //               }
-                    //             },
-                    //       child: const Text('Conectar'),
-                    //     ),
-                    //     const SizedBox(width: 10.0),
-                    //     OutlinedButton(
-                    //       onPressed: _connected
-                    //           ? () async {
-                    //               setState(() {
-                    //                 tips = 'Desconectando...';
-                    //               });
-                    //               await bluetoothPrint.disconnect();
-                    //             }
-                    //           : null,
-                    //       child: const Text('desconectar'),
-                    //     ),
-                    //   ],
-                    // ),
-                  OutlinedButton(
+                    widget.tipo == 'Setor' ?
+                    OutlinedButton(
                       onPressed:  _connected?() async {
                         Map<String, dynamic> config = {};
 
                         List<LineText> list = [];
                         list.add(LineText(type: LineText.TYPE_TEXT, content: '********************************', weight: 1, align: LineText.ALIGN_CENTER, linefeed: 1));
-                        list.add(LineText(type: LineText.TYPE_TEXT, content: 'Numero Extintor: 81681671', align: LineText.ALIGN_LEFT, x: 500, relativeX: 0, linefeed: 1));
-                        list.add(LineText(type: LineText.TYPE_TEXT, content: 'Tipo: AB', align: LineText.ALIGN_LEFT, x: 500, relativeX: 0, linefeed: 1));
+                        list.add(LineText(type: LineText.TYPE_TEXT, content: 'Nome Setor: ${widget.nome}', align: LineText.ALIGN_LEFT, x: 500, relativeX: 0, linefeed: 1));
                         list.add(LineText(linefeed: 1));
-                        list.add(LineText(type: LineText.TYPE_QRCODE, align: LineText.ALIGN_CENTER, x:10, y:70,size: 12 , content: 'qrcode i\n', linefeed: 1));
+                        list.add(LineText(type: LineText.TYPE_QRCODE, align: LineText.ALIGN_CENTER, x:10, y:70,size: 12 , content: widget.data, linefeed: 1));
                         list.add(LineText(linefeed: 1));
                         list.add(LineText(type: LineText.TYPE_TEXT, content: '********************************', weight: 1, align: LineText.ALIGN_CENTER, linefeed: 1));
                         await bluetoothPrint.printLabel(config, list);
+                        Get.offAllNamed('/dashboard');
+                      }:null,
+                      child: const Text('Imprimir'),
+                    )
+                    : 
+                    OutlinedButton(
+                      onPressed:  _connected?() async {
+                        Map<String, dynamic> config = {};
+
+                        List<LineText> list = [];
+                        list.add(LineText(type: LineText.TYPE_TEXT, content: '********************************', weight: 1, align: LineText.ALIGN_CENTER, linefeed: 1));
+                        list.add(LineText(type: LineText.TYPE_TEXT, content: 'Numero Extintor: ${widget.nome}', align: LineText.ALIGN_LEFT, x: 500, relativeX: 0, linefeed: 1));
+                        list.add(LineText(type: LineText.TYPE_TEXT, content: 'Tipo: ${widget.tipoExtintor}', align: LineText.ALIGN_LEFT, x: 500, relativeX: 0, linefeed: 1));
+                        list.add(LineText(linefeed: 1));
+                        list.add(LineText(type: LineText.TYPE_QRCODE, align: LineText.ALIGN_CENTER, x:10, y:70,size: 12 , content: widget.data, linefeed: 1));
+                        list.add(LineText(linefeed: 1));
+                        list.add(LineText(type: LineText.TYPE_TEXT, content: '********************************', weight: 1, align: LineText.ALIGN_CENTER, linefeed: 1));
+                        await bluetoothPrint.printLabel(config, list);
+                        Get.offAllNamed('/dashboard');
                       }:null,
                       child: const Text('Imprimir'),
                     ),
@@ -206,7 +189,7 @@ class _PrintQrCodeState extends State<PrintQrCode> {
             return FloatingActionButton(
                 child: const Icon(Icons.search),
                 onPressed: () => bluetoothPrint.startScan(
-                    timeout: const Duration(seconds: 4)));
+                    timeout: const Duration(seconds: 2)));
           }
         },
       ),

@@ -16,7 +16,7 @@ import '../services/config/service.dart';
 
 class Api {
   final _configService = Get.find<ConfigService>();
-  final baseUrl = "http://18.224.252.57:3333";
+  final baseUrl = "http://18.188.122.106:3333";
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     var url = Uri.parse("$baseUrl/login");
@@ -129,7 +129,7 @@ class Api {
     }
   }
 
-  Future<bool> insertSetor(SetorRequestModel data) async {
+  Future<int> insertSetor(SetorRequestModel data) async {
     var url = Uri.parse("$baseUrl/setor");
     var response = await http.post(url,
         headers: {
@@ -139,13 +139,14 @@ class Api {
         },
         body: jsonEncode(data.toJson()));
     if (response.statusCode == 200) {
-      return true;
+      var resultId = await jsonDecode(response.body);
+      return resultId['id'];
     } else {
-      return false;
+      return 0;
     }
   }
 
-  Future<bool> updateSetor(SetorRequestModel data) async {
+  Future<int> updateSetor(SetorRequestModel data) async {
     var url = Uri.parse("$baseUrl/setor/${data.id}");
     var response = await http.put(url,
         headers: {
@@ -155,9 +156,9 @@ class Api {
         },
         body: jsonEncode(data.toJson()));
     if (response.statusCode == 200) {
-      return true;
+      return data.id;
     } else {
-      return false;
+      return 0;
     }
   }
 
@@ -230,8 +231,7 @@ class Api {
         },
         body: jsonEncode(extintor.toJson()));
     if (response.statusCode == 200) {
-      var resultId = await jsonDecode(response.body);
-      return resultId['id'];
+      return extintor.id;
     } else {
       return 0;
     }

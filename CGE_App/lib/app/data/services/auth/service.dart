@@ -94,27 +94,19 @@ class AuthService extends GetxService {
     return await _repository.getResumoSetor();
   }
 
-  Future<bool> insertSetor(SetorRequestModel setor) async {
-    var result = await _repository.insertSetor(setor);
-    if (result) {
-      Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
-      });
-      return true;
-    } else {
-      return false;
-    }
+  Future<int> insertSetor(SetorRequestModel setor) async {
+    return await _repository.insertSetor(setor);
   }
 
-  Future<bool> updateSetor(SetorRequestModel setor) async {
+  Future<int> updateSetor(SetorRequestModel setor) async {
     var result = await _repository.updateSetor(setor);
-    if (result) {
+    if (result > 0) {
       Future.delayed(const Duration(milliseconds: 1), () {
         Get.offAllNamed('/dashboard');
       });
-      return true;
+      return result;
     } else {
-      return false;
+      return 0;
     }
   }
 
