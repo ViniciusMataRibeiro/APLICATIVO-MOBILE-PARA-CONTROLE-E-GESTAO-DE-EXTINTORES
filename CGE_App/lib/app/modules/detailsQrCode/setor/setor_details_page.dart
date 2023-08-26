@@ -436,7 +436,7 @@ class SetorDetailsPage extends State<SetorDetailsState>
                                       child:
                                           Icon(Icons.calendar_today_outlined),
                                     ),
-                                    labelText: 'Proxima Manutencão',
+                                    labelText: 'Proxima Vistoria',
                                     labelStyle: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,

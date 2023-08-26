@@ -571,7 +571,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                                             CrossAxisAlignment.start,
                                         children: [
                                           const Text(
-                                            'Proxima Manutenção',
+                                            'Proxima Vistoria',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontStyle: FontStyle.italic,

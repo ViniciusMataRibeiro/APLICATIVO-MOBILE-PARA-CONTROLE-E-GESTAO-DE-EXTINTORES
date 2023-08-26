@@ -210,7 +210,7 @@ class Vistoria extends State<VistoriaState>
                                 color: Colors.black,
                               ),
                               title: const Text(
-                                "Data da Manutenção",
+                                "Data da Vistoria",
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,

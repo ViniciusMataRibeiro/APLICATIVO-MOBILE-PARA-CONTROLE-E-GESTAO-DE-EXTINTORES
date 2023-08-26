@@ -47,6 +47,7 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
   late Animation<double> _animation;
   late AnimationController _animationController;
   late Future mapa;
+  bool atualizou = false;
 
   @override
   void initState() {
@@ -132,6 +133,7 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
                   await controller.gotovistoria(dados[0]);
                   setState(() {
                     mapa = controller.getExtintor();
+                    atualizou = true;
                   });
                 },
               ),
@@ -272,7 +274,8 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
                             children: [
                               Expanded(
                                 child: ListTile(
-                                  contentPadding: const EdgeInsets.only(left: 0, right: 15),
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 0, right: 15),
                                   title: const Text(
                                     'Ativo',
                                     style: TextStyle(
@@ -424,6 +427,9 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
                               Expanded(
                                 child: TextFormField(
                                   readOnly: true,
+                                  key: Key(DateFormat('dd/MM/yyyy').format(
+                                      DateTime.parse(
+                                          item['proximaManutencao']))), //
                                   initialValue: DateFormat('dd/MM/yyyy').format(
                                       DateTime.parse(
                                           item['proximaManutencao'])),
@@ -436,7 +442,7 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
                                       child:
                                           Icon(Icons.calendar_today_outlined),
                                     ),
-                                    labelText: 'Proxima Manutencão',
+                                    labelText: 'Proxima Vistoria',
                                     labelStyle: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,

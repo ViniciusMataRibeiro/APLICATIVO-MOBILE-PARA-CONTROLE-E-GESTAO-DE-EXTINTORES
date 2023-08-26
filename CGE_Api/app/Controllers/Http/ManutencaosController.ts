@@ -74,6 +74,10 @@ export default class ManutencaosController {
                 created_at: new Date(payload.dataManutencao.toISODate()),
             });
 
+            var date = new Date(payload.dataManutencao.toISODate());
+            const sql = 'UPDATE extintors SET proximaManutencao = ? WHERE id = ?';
+            await Database.rawQuery(sql, [new Date(date.getFullYear(), date.getMonth(), date.getDate() + 31), payload.extintor_id]);
+
             return response.status(201).json({
                 message: 'vistoria cadastrada com sucesso',
             });

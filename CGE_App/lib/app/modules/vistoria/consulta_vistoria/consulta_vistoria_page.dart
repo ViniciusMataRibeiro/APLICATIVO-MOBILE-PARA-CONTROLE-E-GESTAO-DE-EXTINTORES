@@ -96,7 +96,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                     height: 40,
                   ),
                   const Text(
-                    'Manutenções',
+                    'Vistorias',
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -627,7 +627,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                             CrossAxisAlignment.start,
                                         children: [
                                           const Text(
-                                            'Proxima Manutenção',
+                                            'Proxima Vistoria',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontStyle: FontStyle.italic,

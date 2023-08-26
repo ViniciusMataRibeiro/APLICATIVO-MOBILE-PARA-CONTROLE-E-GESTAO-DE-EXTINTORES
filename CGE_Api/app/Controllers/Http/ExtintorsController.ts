@@ -169,7 +169,7 @@ export default class ExtintorsController {
     public async update({ request, response, params }: HttpContextContract) {
         const payload = await request.validate(EditExtintorValidator);
         try {
-            const extintores = await Extintor.findByOrFail("id", params.id);
+            const extintores = await Database.query().select('*').from('extintors').where('id', params.id);
             if(extintores == null){
                 return response.badRequest({
                     message: 'Setor não encontrado',
