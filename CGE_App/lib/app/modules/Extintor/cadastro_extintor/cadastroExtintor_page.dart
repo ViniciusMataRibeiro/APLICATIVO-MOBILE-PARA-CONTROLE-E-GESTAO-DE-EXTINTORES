@@ -78,7 +78,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
           buttonTheme:
               const ButtonThemeData(textTheme: ButtonTextTheme.primary),
           colorScheme: const ColorScheme.light(
-            primary: Color.fromARGB(255, 190, 0, 0),
+            primary: Color.fromARGB(255, 116, 7, 7),
           ).copyWith(
             secondary: const Color(0xFF4C131A),
           ),
@@ -109,7 +109,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
           buttonTheme:
               const ButtonThemeData(textTheme: ButtonTextTheme.primary),
           colorScheme: const ColorScheme.light(
-            primary: Color.fromARGB(255, 190, 0, 0),
+            primary: Color.fromARGB(255, 116, 7, 7),
           ).copyWith(
             secondary: const Color(0xFF4C131A),
           ),
@@ -183,7 +183,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                   ),
                   Container(
                     margin: const EdgeInsets.only(right: 10),
-                    width: size.width * 0.05,
+                    width: size.width * 0.08,
                     height: 40,
                   ),
                   Text(

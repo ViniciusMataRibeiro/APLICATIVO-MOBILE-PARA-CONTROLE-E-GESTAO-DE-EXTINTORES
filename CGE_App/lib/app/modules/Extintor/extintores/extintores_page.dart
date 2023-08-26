@@ -111,7 +111,7 @@ class ExtintorPage extends State<ExtintorState>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 0),
+              padding: const EdgeInsets.only(left: 0, right: 0),
               child: Row(
                 children: [
                   Image.asset(

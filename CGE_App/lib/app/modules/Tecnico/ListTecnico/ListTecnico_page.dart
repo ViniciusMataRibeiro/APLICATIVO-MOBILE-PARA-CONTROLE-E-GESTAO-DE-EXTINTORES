@@ -91,7 +91,7 @@ class ListTecnicoPage extends State<ListTecnicoState>
                         ),
                         Container(
                           margin: const EdgeInsets.only(right: 10),
-                          width: size.width * 0.05,
+                          width: size.width * 0.08,
                           height: 40,
                         ),
                         const Text(

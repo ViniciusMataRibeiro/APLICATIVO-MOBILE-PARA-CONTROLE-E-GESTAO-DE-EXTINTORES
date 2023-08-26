@@ -62,7 +62,7 @@ class CadastroSetor extends State<CadastroSetorState> {
                   ),
                   Container(
                     margin: const EdgeInsets.only(right: 10),
-                    width: size.width * 0.05,
+                    width: size.width * 0.1,
                     height: 40,
                   ),
                   Text(
@@ -111,7 +111,7 @@ class CadastroSetor extends State<CadastroSetorState> {
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black,
-                        blurRadius: 10,
+                        blurRadius: 5,
                       ),
                     ],
                   ),
@@ -180,7 +180,7 @@ class CadastroSetor extends State<CadastroSetorState> {
                             labelText: 'Descrição',
                             alignLabelWithHint: true,
                           ),
-                          maxLines: 7,
+                          maxLines: 6,
                         ),
                       ),
                     ),
@@ -213,7 +213,7 @@ class CadastroSetor extends State<CadastroSetorState> {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromARGB(255, 175, 31, 21),
+                                const Color.fromARGB(255, 116, 7, 7),
                             fixedSize: const Size(250, 50),
                           ),
                           child: const Text(

@@ -92,7 +92,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                   ),
                   Container(
                     margin: const EdgeInsets.only(right: 10),
-                    width: size.width * 0.05,
+                    width: size.width * 0.2,
                     height: 40,
                   ),
                   const Text(
