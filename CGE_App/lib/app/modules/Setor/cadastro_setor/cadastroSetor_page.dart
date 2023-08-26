@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:ui' as ui;
 
+import '../../qrCode/print_out_qrcode/print.dart';
 import 'cadastroSetor_controller.dart';
 
 class CadastroSetorPage extends GetView<CadastroSetorController> {
@@ -51,7 +52,7 @@ class CadastroSetor extends State<CadastroSetorState> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.offAllNamed('/dashboard');
+                Get.back();
               },
             ),
             Container(
@@ -174,8 +175,9 @@ class CadastroSetor extends State<CadastroSetorState> {
                         child: ElevatedButton(
                           onPressed: () async {
                             var result = await controller.goToInsert();
-                            if (result == 'true') {
-                              controller.toast('Gravado com sucesso!');
+                            if (result != 'Algo deu Errado') {
+                              // ignore: use_build_context_synchronously
+                              await _showMyDialog(result);
                             } else {
                               final snackBar = SnackBar(
                                 elevation: 0,
@@ -216,6 +218,50 @@ class CadastroSetor extends State<CadastroSetorState> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _showMyDialog(String result) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Atenção'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Deseja imprimir o QRCode referente ao Setor?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Imprimir'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Get.back();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PrintQrCode(
+                      data: result,
+                      tipo: 'Setor',
+                      nome: controller.name.text,
+                    ),
+                  ),
+                );
+              },
+            ),
+            TextButton(
+              child: const Text('Cancelar'),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

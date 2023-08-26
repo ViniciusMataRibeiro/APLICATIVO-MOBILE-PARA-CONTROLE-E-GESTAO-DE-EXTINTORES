@@ -105,7 +105,7 @@ class Vistoria extends State<VistoriaState>
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         title: Row(
           children: [
             IconButton(
@@ -114,7 +114,7 @@ class Vistoria extends State<VistoriaState>
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.offAllNamed('/dashboard');
+                Get.back();
               },
             ),
             const SizedBox(
@@ -174,7 +174,7 @@ class Vistoria extends State<VistoriaState>
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black,
-                                blurRadius: 10,
+                                blurRadius: 5,
                               ),
                             ],
                           ),
@@ -217,14 +217,9 @@ class Vistoria extends State<VistoriaState>
                             const Divider(color: Colors.black, thickness: 1),
                             ListTile(
                               contentPadding: EdgeInsets.zero,
-                              leading: const Icon(
-                                Icones_Personalizado.place,
-                                color: Colors.black,
-                                size: 35,
-                              ),
                               selected: true,
                               selectedTileColor: Colors.black,
-                              subtitle: TextFormField(
+                              title: TextFormField(
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontStyle: FontStyle.italic,
@@ -237,96 +232,107 @@ class Vistoria extends State<VistoriaState>
                                     color: Colors.black,
                                     fontSize: 20,
                                   ),
-                                  suffixIcon: InkWell(
-                                    onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            contentPadding: EdgeInsets.zero,
-                                            content: Container(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              decoration: BoxDecoration(
-                                                image: const DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/image/LogOut.png'),
-                                                  fit: BoxFit.cover,
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(right: size.width*0.04),
+                                    child: const Icon(
+                                      Icones_Personalizado.place,
+                                      color: Colors.black,
+                                      size: 35,
+                                    ),
+                                  ),
+                                  suffixIcon: Padding(
+                                    padding: EdgeInsets.only(left: size.width*0.05),
+                                    child: InkWell(
+                                      onTap: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              contentPadding: EdgeInsets.zero,
+                                              content: Container(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                decoration: BoxDecoration(
+                                                  image: const DecorationImage(
+                                                    image: AssetImage(
+                                                        'assets/image/LogOut.png'),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
                                                 ),
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  const Align(
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    child: Text(
-                                                      'Selecione o Setor',
-                                                      style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontStyle:
-                                                            FontStyle.italic,
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    const Align(
+                                                      alignment:
+                                                          Alignment.bottomCenter,
+                                                      child: Text(
+                                                        'Selecione o Setor',
+                                                        style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontStyle:
+                                                              FontStyle.italic,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  const Divider(
-                                                    color: Colors.black,
-                                                    thickness: 2,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 330,
-                                                    width: 200,
-                                                    child: CustomScrollView(
-                                                      physics:
-                                                          const AlwaysScrollableScrollPhysics(),
-                                                      slivers: [
-                                                        SliverFillRemaining(
-                                                          fillOverscroll: true,
-                                                          child:
-                                                              ListView.builder(
-                                                            itemCount:
-                                                                dadosSetor
-                                                                    .length,
-                                                            itemBuilder:
-                                                                (context,
-                                                                    index) {
-                                                              Map item =
-                                                                  dadosSetor[
-                                                                      index];
-                                                              return InkWell(
-                                                                onTap: () {
-                                                                  setState(() {
-                                                                    _selectItem(
-                                                                        item,
-                                                                        'setor',
-                                                                        controller);
-                                                                  });
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                },
-                                                                child: ListTile(
-                                                                  title: Text(item[
-                                                                      'nome']),
-                                                                ),
-                                                              );
-                                                            },
-                                                          ),
-                                                        )
-                                                      ],
+                                                    const Divider(
+                                                      color: Colors.black,
+                                                      thickness: 2,
                                                     ),
-                                                  ),
-                                                ],
+                                                    SizedBox(
+                                                      height: 330,
+                                                      width: 200,
+                                                      child: CustomScrollView(
+                                                        physics:
+                                                            const AlwaysScrollableScrollPhysics(),
+                                                        slivers: [
+                                                          SliverFillRemaining(
+                                                            fillOverscroll: true,
+                                                            child:
+                                                                ListView.builder(
+                                                              itemCount:
+                                                                  dadosSetor
+                                                                      .length,
+                                                              itemBuilder:
+                                                                  (context,
+                                                                      index) {
+                                                                Map item =
+                                                                    dadosSetor[
+                                                                        index];
+                                                                return InkWell(
+                                                                  onTap: () {
+                                                                    setState(() {
+                                                                      _selectItem(
+                                                                          item,
+                                                                          'setor',
+                                                                          controller);
+                                                                    });
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
+                                                                  child: ListTile(
+                                                                    title: Text(item[
+                                                                        'nome']),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: const Icon(
-                                      Icons.arrow_drop_down,
-                                      color: Colors.black,
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: const Icon(
+                                        Icons.arrow_drop_down,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -337,11 +343,6 @@ class Vistoria extends State<VistoriaState>
                             ),
                             ListTile(
                               contentPadding: EdgeInsets.zero,
-                              leading: const Icon(
-                                Icones_Personalizado.fire_extinguisher,
-                                color: Colors.black,
-                                size: 35,
-                              ),
                               selected: true,
                               selectedTileColor: Colors.black,
                               subtitle: TextFormField(
@@ -357,96 +358,107 @@ class Vistoria extends State<VistoriaState>
                                     color: Colors.black,
                                     fontSize: 20,
                                   ),
-                                  suffixIcon: InkWell(
-                                    onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            contentPadding: EdgeInsets.zero,
-                                            content: Container(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              decoration: BoxDecoration(
-                                                image: const DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/image/LogOut.png'),
-                                                  fit: BoxFit.cover,
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(right: size.width*0.04),
+                                    child: const Icon(
+                                      Icones_Personalizado.fire_extinguisher,
+                                      color: Colors.black,
+                                      size: 35,
+                                    ),
+                                  ),
+                                  suffixIcon: Padding(
+                                    padding: EdgeInsets.only(left: size.width*0.05),
+                                    child: InkWell(
+                                      onTap: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              contentPadding: EdgeInsets.zero,
+                                              content: Container(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                decoration: BoxDecoration(
+                                                  image: const DecorationImage(
+                                                    image: AssetImage(
+                                                        'assets/image/LogOut.png'),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
                                                 ),
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  const Align(
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    child: Text(
-                                                      'Selecione o Extintor',
-                                                      style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontStyle:
-                                                            FontStyle.italic,
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    const Align(
+                                                      alignment:
+                                                          Alignment.bottomCenter,
+                                                      child: Text(
+                                                        'Selecione o Extintor',
+                                                        style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontStyle:
+                                                              FontStyle.italic,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  const Divider(
-                                                    color: Colors.black,
-                                                    thickness: 2,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 330,
-                                                    width: 200,
-                                                    child: CustomScrollView(
-                                                      physics:
-                                                          const AlwaysScrollableScrollPhysics(),
-                                                      slivers: [
-                                                        SliverFillRemaining(
-                                                          fillOverscroll: true,
-                                                          child:
-                                                              ListView.builder(
-                                                            itemCount: controller
-                                                                .dadosExtintor
-                                                                .length,
-                                                            itemBuilder:
-                                                                (context,
-                                                                    index) {
-                                                              Map item = controller
-                                                                      .dadosExtintor[
-                                                                  index];
-                                                              return InkWell(
-                                                                onTap: () {
-                                                                  setState(() {
-                                                                    _selectItem(
-                                                                        item,
-                                                                        'extintor',
-                                                                        controller);
-                                                                  });
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                },
-                                                                child: ListTile(
-                                                                  title: Text(item[
-                                                                      'nome']),
-                                                                ),
-                                                              );
-                                                            },
-                                                          ),
-                                                        )
-                                                      ],
+                                                    const Divider(
+                                                      color: Colors.black,
+                                                      thickness: 2,
                                                     ),
-                                                  ),
-                                                ],
+                                                    SizedBox(
+                                                      height: 330,
+                                                      width: 200,
+                                                      child: CustomScrollView(
+                                                        physics:
+                                                            const AlwaysScrollableScrollPhysics(),
+                                                        slivers: [
+                                                          SliverFillRemaining(
+                                                            fillOverscroll: true,
+                                                            child:
+                                                                ListView.builder(
+                                                              itemCount: controller
+                                                                  .dadosExtintor
+                                                                  .length,
+                                                              itemBuilder:
+                                                                  (context,
+                                                                      index) {
+                                                                Map item = controller
+                                                                        .dadosExtintor[
+                                                                    index];
+                                                                return InkWell(
+                                                                  onTap: () {
+                                                                    setState(() {
+                                                                      _selectItem(
+                                                                          item,
+                                                                          'extintor',
+                                                                          controller);
+                                                                    });
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
+                                                                  child: ListTile(
+                                                                    title: Text(item[
+                                                                        'nome']),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: const Icon(
-                                      Icons.arrow_drop_down,
-                                      color: Colors.black,
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: const Icon(
+                                        Icons.arrow_drop_down,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -815,7 +827,7 @@ class Vistoria extends State<VistoriaState>
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor:
-                                        const Color.fromARGB(255, 175, 31, 21),
+                                        const Color.fromARGB(255, 116, 7, 7),
                                     fixedSize: const Size(250, 50),
                                   ),
                                   child: const Text(

@@ -13,6 +13,8 @@ import 'dart:ui' as ui;
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../../qrCode/print_out_qrcode/print.dart';
+
 var newFormat = DateFormat("dd/MM/yyyy");
 var dt = DateTime.now();
 String updatedDt = newFormat.format(dt);
@@ -171,7 +173,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.offAllNamed('/dashboard');
+                Get.back();
               },
             ),
             const SizedBox(
@@ -714,9 +716,9 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                 child: ElevatedButton(
                                   onPressed: () async {
                                     var result = await controller.goToInsert();
-                                    if (result == 'true') {
-                                      controller
-                                          .toast('Registrado com sucesso');
+                                    if (result != 'Algo deu Errado') {
+                                      // ignore: use_build_context_synchronously
+                                      await _showMyDialog(result);
                                     } else {
                                       final snackBar = SnackBar(
                                         elevation: 0,
@@ -772,6 +774,50 @@ class CadastroExtintor extends State<CadastroExtintorState>
             ),
           );
         }
+      },
+    );
+  }
+
+  Future<void> _showMyDialog(String result) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Atenção'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Deseja imprimir o QRCode referente ao Setor?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Imprimir'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PrintQrCode(
+                      data: result,
+                      tipo: 'Extintor',
+                      nome: controller.nome.text,
+                      tipoExtintor: controller.selectedTipo,
+                    ),
+                  ),
+                );
+              },
+            ),
+            TextButton(
+              child: const Text('Cancelar'),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ],
+        );
       },
     );
   }

@@ -34,14 +34,16 @@ class AuthRepository {
 
   Future<Map> getResumoSetor() => _api.getResumoSetor();
 
-  Future<bool> insertSetor(SetorRequestModel setor) => _api.insertSetor(setor);
+  Future<Map> getByIdExtintor(int id) => _api.getByIdExtintor(id);
 
-  Future<bool> updateSetor(SetorRequestModel setor) => _api.updateSetor(setor);
+  Future<int> insertSetor(SetorRequestModel setor) => _api.insertSetor(setor);
 
-  Future<bool> insertExtintor(ExtintorRequestModel extintor) =>
+  Future<int> updateSetor(SetorRequestModel setor) => _api.updateSetor(setor);
+
+  Future<int> insertExtintor(ExtintorRequestModel extintor) =>
       _api.insertExtintor(extintor);
 
-  Future<bool> updateExtintor(ExtintorRequestModel extintor) =>
+  Future<int> updateExtintor(ExtintorRequestModel extintor) =>
       _api.updateExtintor(extintor);
 
   Future<bool> deleteExtintor(int idExtintor) =>

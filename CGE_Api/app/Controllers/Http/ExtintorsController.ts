@@ -56,6 +56,7 @@ export default class ExtintorsController {
 
     public async indexExtintoresSetor({ response, params }: HttpContextContract) {
         try {
+            const setor = await Setor.findByOrFail("id", params.id);
             const extintores = await Database.query().select('*').from('extintors').where('setor_id', params.id).where('ativo', true).orderBy('proximaManutencao', 'asc');
 
             if (extintores.length > 0) {
@@ -68,6 +69,8 @@ export default class ExtintorsController {
                     else {
                         element.ultimaVistoria = null;
                     }
+
+                    element.setor = setor.nome;
                 }
                 return response.status(200).json(extintores);
             } else {
@@ -79,6 +82,51 @@ export default class ExtintorsController {
         } catch (error) {
             return response.badRequest({
                 message: 'Erro ao listar Extintores',
+            });
+        }
+    }
+
+    public async getExtintor({ response, params }: HttpContextContract) {
+        try {
+            let ResultExtintor = new Array();
+
+            const extintor = await Database.query().select('*').from('extintors').where('id', params.id).first();
+            if (extintor === null) {
+                return response.badRequest({
+                    message: 'Extintor não encontrado',
+                });
+            }
+
+            const setor = await Setor.findByOrFail("id", extintor.setor_id);
+            const vistoria = await Database.rawQuery('Select * from manutencoes where extintor_id = ? order by dataManutencao desc limit 1', [extintor.id]);
+
+            const obj = {
+                extintor_id: extintor.id,
+                setor_id : setor.id,
+                setor: setor.nome,
+                nome: extintor.nome,
+                tipoExtintor: extintor.tipoExtintor,
+                tamanho: extintor.tamanho,
+                validadeCasco: extintor.validadeCasco,
+                validadeExtintor: extintor.validadeExtintor,
+                proximaManutencao: extintor.proximaManutencao,
+                ativo: extintor.ativo == 1 ? true : false,
+                descricao: extintor.descricao,
+                ultimaVistoria: vistoria[0].length > 0 ? vistoria[0][0].dataManutencao : null,
+                manimetro: vistoria[0].length > 0 ? vistoria[0][0].manimetro == 1 ? true : false : false,
+                sinalizacaoParede: vistoria[0].length > 0 ? vistoria[0][0].sinalizacaoParede  == 1 ? true : false: false,
+                sinalizacaoPiso: vistoria[0].length > 0 ? vistoria[0][0].sinalizacaoPiso == 1 ? true : false : false,
+                acesso: vistoria[0].length > 0 ? vistoria[0][0].acesso == 1 ? true : false : false,
+                mangueira: vistoria[0].length > 0 ? vistoria[0][0].mangueira == 1 ? true : false : false,
+                lacre: vistoria[0].length > 0 ? vistoria[0][0].lacre == 1 ? true : false : false,
+            };
+            ResultExtintor.push(obj)
+            
+            return response.ok(ResultExtintor);
+
+        } catch (error) {
+            return response.badRequest({
+                message: 'Erro ao trazer Extintor',
             });
         }
     }
@@ -95,7 +143,7 @@ export default class ExtintorsController {
                 });
             }
 
-            await Database.insertQuery().table('extintors').insert({
+            var a = await Database.insertQuery().table('extintors').insert({
                 nome: payload.nome,
                 tipoExtintor: payload.tipoExtintor,
                 tamanho: payload.tamanho,
@@ -108,7 +156,7 @@ export default class ExtintorsController {
             });
 
             return response.status(201).json({
-                message: 'Extintor cadastrado com sucesso',
+                id: a[0],
             });
         }
         catch (error) {

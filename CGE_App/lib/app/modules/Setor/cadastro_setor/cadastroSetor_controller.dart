@@ -46,7 +46,7 @@ class CadastroSetorController extends GetxController {
         descricao: descricao.text,
         ativo: ativo.value);
 
-    bool res = false;
+    int res = 0;
 
     if (idSetor > 0) {
       res = await _authService.updateSetor(setorRequestModel);
@@ -54,7 +54,7 @@ class CadastroSetorController extends GetxController {
       res = await _authService.insertSetor(setorRequestModel);
     }
 
-    return res == true ? 'true' : 'Algo deu Errado';
+    return res > 0 ? 'Setor-$res' : 'Algo deu Errado';
   }
 
   Future<bool?> toast(String message) {

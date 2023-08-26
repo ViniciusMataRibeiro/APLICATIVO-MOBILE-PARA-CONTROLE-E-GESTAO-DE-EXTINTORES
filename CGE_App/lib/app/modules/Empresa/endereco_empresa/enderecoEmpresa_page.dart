@@ -52,7 +52,7 @@ class EnderecoEmpresa extends State<EnderecoEmpresaState> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.offAllNamed('/dashboard');
+                Get.back();
               },
             ),
             const SizedBox(

@@ -28,6 +28,7 @@ Route.group(() => {
   Route.put('/setor/:id', 'SetorsController.update');
   Route.delete('/setor/:id', 'SetorsController.destroy');
 
+  Route.get('/extintorById/:id', 'ExtintorsController.getExtintor');
   Route.get('/extintorsAll', 'ExtintorsController.indexAllExtintores');
   Route.get('/extintorsSetor/:id', 'ExtintorsController.indexExtintoresSetor');
   Route.post('/extintor', 'ExtintorsController.store');

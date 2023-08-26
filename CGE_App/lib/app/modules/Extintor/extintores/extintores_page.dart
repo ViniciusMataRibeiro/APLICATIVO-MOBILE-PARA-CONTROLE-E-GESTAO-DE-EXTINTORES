@@ -9,9 +9,6 @@ import '../../../data/services/auth/service.dart';
 import 'extintores_controller.dart';
 import 'dart:ui' as ui;
 
-DateTime selectedDate = DateTime.now();
-String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
-String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
 List dados = [];
 
 class Extintor extends GetView<ExtintorController> {
@@ -76,41 +73,12 @@ class ExtintorPage extends State<ExtintorState>
 
   DateTime selectedDate = DateTime.now();
 
-  // ignore: unused_element
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2000),
-        lastDate: DateTime.now(),
-        cancelText: "CANCELAR",
-        builder: (context, child) => Theme(
-              data: ThemeData.light().copyWith(
-                  primaryColor: const Color(0xFF4C131A),
-                  buttonTheme:
-                      const ButtonThemeData(textTheme: ButtonTextTheme.primary),
-                  colorScheme: const ColorScheme.light(
-                          primary: Color.fromARGB(255, 190, 0, 0))
-                      .copyWith(secondary: const Color(0xFF4C131A))),
-              child: child!,
-            ));
-    if (picked != null && picked != selectedDate) {
-      setState(
-        () {
-          _refresh(data: picked);
-        },
-      );
-    }
-  }
-
-  _refresh({DateTime? data}) async {
+  _refresh() async {
     try {
-      data ??= DateTime.parse(updatedDt2);
-
       setState(() {
-        selectedDate = data!;
-        updatedDt = DateFormat("dd/MM/y").format(data);
-        updatedDt2 = DateFormat("y-MM-dd").format(data);
+        mapa = controller.getAllExtintor();
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext context) => super.widget));
       });
       // ignore: empty_catches
     } catch (e) {}
@@ -134,7 +102,6 @@ class ExtintorPage extends State<ExtintorState>
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -144,7 +111,7 @@ class ExtintorPage extends State<ExtintorState>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 0, right: 0),
+              padding: const EdgeInsets.only(left: 20, right: 0),
               child: Row(
                 children: [
                   Image.asset(
@@ -152,18 +119,16 @@ class ExtintorPage extends State<ExtintorState>
                     fit: BoxFit.contain,
                     height: 45,
                   ),
-                  SizedBox(width: size.width * 0.17),
-                  Text(
-                    textAlign: TextAlign.center,
-                    updatedDt,
-                    style: const TextStyle(fontSize: 16, color: Colors.white),
-                  ),
                 ],
               ),
             )
           ],
         ),
         actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.qr_code_scanner, color: Colors.white),
+            onPressed: () => Get.toNamed('/qrCodeScanner'),
+          ),
           IconButton(
             icon: const Icon(Icons.notification_important, color: Colors.white),
             onPressed: () {},
@@ -274,6 +239,7 @@ class ExtintorPage extends State<ExtintorState>
   }
 
   _mostradados({required List dados}) {
+    var obj = aux.user.value;
     return ListView.builder(
       itemCount: dados.length,
       padding: const EdgeInsets.only(bottom: 52, top: 50),
@@ -431,48 +397,93 @@ class ExtintorPage extends State<ExtintorState>
                             subtitle: Text(item['setor']),
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 116, 7, 7),
+                        obj!.tipo != 'empresa'
+                            ? Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          const Color.fromARGB(255, 116, 7, 7),
+                                    ),
+                                    onPressed: () =>
+                                        {controller.gotoEditExtintor(item)},
+                                    child: const Text(
+                                      'Editar',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.05,
+                                    child: const VerticalDivider(
+                                      thickness: 2,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          const Color.fromARGB(255, 116, 7, 7),
+                                    ),
+                                    onPressed: () async => {
+                                      await controller
+                                          .gotoDeleteExtintor(item['id'])
+                                    },
+                                    child: const Text(
+                                      'Excluir',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.grey,
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text(
+                                      'Editar',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.05,
+                                    child: const VerticalDivider(
+                                      thickness: 2,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.grey,
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text(
+                                      'Excluir',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              onPressed: () =>
-                                  {controller.gotoEditExtintor(item)},
-                              child: const Text(
-                                'Editar',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: size.height * 0.05,
-                              child: const VerticalDivider(
-                                thickness: 2,
-                                color: Colors.black54,
-                              ),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 116, 7, 7),
-                              ),
-                              onPressed: () async => {
-                                await controller.gotoDeleteExtintor(item['id'])
-                              },
-                              child: const Text('Excluir',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontStyle: FontStyle.italic)),
-                            ),
-                          ],
-                        )
                       ],
                     ),
                   ),

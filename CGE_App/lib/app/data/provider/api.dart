@@ -129,7 +129,7 @@ class Api {
     }
   }
 
-  Future<bool> insertSetor(SetorRequestModel data) async {
+  Future<int> insertSetor(SetorRequestModel data) async {
     var url = Uri.parse("$baseUrl/setor");
     var response = await http.post(url,
         headers: {
@@ -139,13 +139,14 @@ class Api {
         },
         body: jsonEncode(data.toJson()));
     if (response.statusCode == 200) {
-      return true;
+      var resultId = await jsonDecode(response.body);
+      return resultId['id'];
     } else {
-      return false;
+      return 0;
     }
   }
 
-  Future<bool> updateSetor(SetorRequestModel data) async {
+  Future<int> updateSetor(SetorRequestModel data) async {
     var url = Uri.parse("$baseUrl/setor/${data.id}");
     var response = await http.put(url,
         headers: {
@@ -155,9 +156,9 @@ class Api {
         },
         body: jsonEncode(data.toJson()));
     if (response.statusCode == 200) {
-      return true;
+      return data.id;
     } else {
-      return false;
+      return 0;
     }
   }
 
@@ -203,7 +204,28 @@ class Api {
     }
   }
 
-  Future<bool> insertExtintor(ExtintorRequestModel extintor) async {
+  Future<Map> getByIdExtintor(int id) async {
+    var url = Uri.parse("$baseUrl/extintorById/$id");
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization': 'Bearer ${_configService.token}',
+    });
+    if (response.statusCode == 200) {
+      List d = [];
+      List dados = await jsonDecode(response.body);
+      await Future.forEach(dados, (element) {
+        Map<String, dynamic> t = Map.from(element);
+        d.add(t);
+      });
+
+      return {"dados": d};
+    } else {
+      return {"dados": []};
+    }
+  }
+
+  Future<int> insertExtintor(ExtintorRequestModel extintor) async {
     var url = Uri.parse("$baseUrl/extintor");
     var response = await http.post(url,
         headers: {
@@ -213,13 +235,14 @@ class Api {
         },
         body: jsonEncode(extintor.toJson()));
     if (response.statusCode == 201) {
-      return true;
+      var resultId = await jsonDecode(response.body);
+      return resultId['id'];
     } else {
-      return false;
+      return 0;
     }
   }
 
-  Future<bool> updateExtintor(ExtintorRequestModel extintor) async {
+  Future<int> updateExtintor(ExtintorRequestModel extintor) async {
     var url = Uri.parse("$baseUrl/extintor/${extintor.id}");
     var response = await http.put(url,
         headers: {
@@ -229,9 +252,9 @@ class Api {
         },
         body: jsonEncode(extintor.toJson()));
     if (response.statusCode == 200) {
-      return true;
+      return extintor.id;
     } else {
-      return false;
+      return 0;
     }
   }
 
@@ -281,7 +304,7 @@ class Api {
       return EmpresaResponseModel(id: 0, nome: '', email: '', telefone: '');
     }
   }
-  
+
   Future<Map> getEnderecoEmpresa() async {
     var url = Uri.parse("$baseUrl/empresaEndereco");
     var response = await http.get(url, headers: {
@@ -295,7 +318,6 @@ class Api {
       return {"dados": []};
     }
   }
-
 
   Future<bool> insertEndereco(EnderecoRequestModel data) async {
     var url = Uri.parse("$baseUrl/empresaEndereco");
