@@ -69,41 +69,51 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
 
   @override
   Widget build(BuildContext context) {
-
     var size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.only(left: 0, right: 0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Get.offAllNamed('/dashboard');
+                    },
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    width: size.width * 0.05,
+                    height: 40,
+                  ),
+                  const Text(
+                    'Manutenções',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              onPressed: () {
-                Get.offAllNamed('/dashboard');
-              },
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 0),
-              width: size.width * 0.12,
-              height: 40,
-            ),
-            const Text(
-              'Manutenções',
-              style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic),
-            ),
+            )
           ],
         ),
-        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: Container(

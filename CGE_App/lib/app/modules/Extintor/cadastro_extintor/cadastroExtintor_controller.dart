@@ -81,27 +81,51 @@ class CadastroExtintorController extends GetxController {
 
     Map<String, dynamic> t2 = {
       "id": 2,
-      "nome": "Tipo BC",
+      "nome": "Tipo B",
     };
     dadosExtintorTipo.add(t2);
 
     Map<String, dynamic> t3 = {
       "id": 3,
-      "nome": "Tipo ABC",
+      "nome": "Tipo AB",
     };
     dadosExtintorTipo.add(t3);
 
     Map<String, dynamic> t4 = {
       "id": 4,
-      "nome": "Tipo K",
+      "nome": "Tipo BC",
     };
     dadosExtintorTipo.add(t4);
 
     Map<String, dynamic> t5 = {
       "id": 5,
-      "nome": "Tipo CO²",
+      "nome": "Tipo ABC",
     };
     dadosExtintorTipo.add(t5);
+
+    Map<String, dynamic> t6 = {
+      "id": 6,
+      "nome": "Tipo C",
+    };
+    dadosExtintorTipo.add(t6);
+
+    Map<String, dynamic> t7 = {
+      "id": 7,
+      "nome": "Tipo D",
+    };
+    dadosExtintorTipo.add(t7);
+
+    Map<String, dynamic> t8 = {
+      "id": 8,
+      "nome": "Tipo K",
+    };
+    dadosExtintorTipo.add(t8);
+
+    Map<String, dynamic> t9 = {
+      "id": 9,
+      "nome": "Tipo CO²",
+    };
+    dadosExtintorTipo.add(t9);
   }
 
   Future<Map> getSetores() async {

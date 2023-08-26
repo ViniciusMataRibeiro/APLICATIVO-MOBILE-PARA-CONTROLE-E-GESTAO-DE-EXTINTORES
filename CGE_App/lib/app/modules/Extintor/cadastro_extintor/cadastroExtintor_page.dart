@@ -164,36 +164,49 @@ class CadastroExtintor extends State<CadastroExtintorState>
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.only(left: 0, right: 0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    width: size.width * 0.05,
+                    height: 40,
+                  ),
+                  Text(
+                    controller.alterando
+                        ? 'Editar Extintor'
+                        : 'Cadastrar Extintor',
+                    style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 0),
-              width: size.width * 0.06,
-              height: 40,
-            ),
-            Text(
-              controller.alterando ? 'Editar Extintor' : 'Cadastrar Extintor',
-              style: const TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic),
-            ),
+            )
           ],
         ),
-        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
       ),
       body: buildContainerCombo(),
     );
@@ -532,7 +545,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                                     thickness: 2,
                                                   ),
                                                   SizedBox(
-                                                    height: 280,
+                                                    height: 330,
                                                     width: 200,
                                                     child: CustomScrollView(
                                                       physics:

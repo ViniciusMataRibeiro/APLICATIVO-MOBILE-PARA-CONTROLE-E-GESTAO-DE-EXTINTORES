@@ -64,6 +64,7 @@ class ListTecnicoPage extends State<ListTecnicoState>
   }
 
   buildContainer() {
+    var size = MediaQuery.of(context).size;
     return FutureBuilder(
       future: dadosTecnico,
       builder: (context, snapshot) {
@@ -71,32 +72,47 @@ class ListTecnicoPage extends State<ListTecnicoState>
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
-              backgroundColor: const Color.fromARGB(255, 175, 31, 21),
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 0, right: 0),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            Get.offAllNamed('/dashboard');
+                          },
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(right: 10),
+                          width: size.width * 0.05,
+                          height: 40,
+                        ),
+                        const Text(
+                          'Lista de Tecnicos',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                  const Text(
-                    'Listagem de Técnicos',
-                    style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                        fontStyle: FontStyle.italic),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
+                  )
                 ],
               ),
-              centerTitle: true,
+              backgroundColor: const Color.fromARGB(255, 116, 7, 7),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(25),
+                ),
+              ),
             ),
             body: _mostraDados(
                 dados: snapshot.data, controllerTecnico: controller),
