@@ -4,14 +4,11 @@ import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:faker/faker.dart';
-import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 import '../../../data/services/auth/service.dart';
 import '../../widget/gaficoSetor.dart';
 import 'setores_controller.dart';
 
-DateTime selectedDate = DateTime.now();
-String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
 List dados = [];
 
 class Setor extends GetView<SetorController> {
@@ -81,8 +78,6 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    // ignore: unused_local_variable
     var obj = aux.user.value;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -92,19 +87,13 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 0, right: 0),
+              padding: const EdgeInsets.only(left: 20, right: 0),
               child: Row(
                 children: [
                   Image.asset(
                     'assets/image/cge.png',
                     fit: BoxFit.contain,
                     height: 45,
-                  ),
-                  SizedBox(width: size.width * 0.17),
-                  Text(
-                    textAlign: TextAlign.center,
-                    updatedDt,
-                    style: const TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ],
               ),

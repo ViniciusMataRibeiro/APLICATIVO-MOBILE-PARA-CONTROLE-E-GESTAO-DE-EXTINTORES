@@ -81,7 +81,7 @@ class ListTecnicoPage extends State<ListTecnicoState>
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      Get.offAllNamed('/dashboard');
+                      Get.back();
                     },
                   ),
                   const Text(

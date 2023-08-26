@@ -7,15 +7,13 @@ class QRCodeScannerController extends GetxController {
   @override
   Future<void> onInit() async {
     if (Get.arguments != null) {
-      if (Get.arguments != null) {
-        Map qrCode = Get.arguments;
-        data = qrCode['dataQrCode'];
-      } else {
-        data = '';
-      }
+      Map qrCode = Get.arguments;
+      data = qrCode['dataQrCode'];
     } else {
-      super.onInit();
+      data = '';
     }
+
+    super.onInit();
   }
 
   Future<void> verificaQrCode(String? rawValue) async {
@@ -25,9 +23,7 @@ class QRCodeScannerController extends GetxController {
 
       if (dataQrCode[0] == 'Extintor') {
         Get.toNamed('/detailsExtintor', arguments: dataQrCode[1]);
-      } else {
-
-      }
+      } else {}
 
       isScanComplete = false;
     }

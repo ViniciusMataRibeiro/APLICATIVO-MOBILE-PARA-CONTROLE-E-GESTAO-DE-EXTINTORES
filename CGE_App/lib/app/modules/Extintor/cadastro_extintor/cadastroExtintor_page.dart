@@ -173,7 +173,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.offAllNamed('/dashboard');
+                Get.back();
               },
             ),
             const SizedBox(
@@ -813,7 +813,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
             TextButton(
               child: const Text('Cancelar'),
               onPressed: () {
-                Get.offAllNamed('/dashboard');
+                Get.back();
               },
             ),
           ],

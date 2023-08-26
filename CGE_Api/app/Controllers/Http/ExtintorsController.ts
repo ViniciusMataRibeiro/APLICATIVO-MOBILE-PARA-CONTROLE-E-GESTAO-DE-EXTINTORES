@@ -110,15 +110,15 @@ export default class ExtintorsController {
                 validadeCasco: extintor.validadeCasco,
                 validadeExtintor: extintor.validadeExtintor,
                 proximaManutencao: extintor.proximaManutencao,
-                ativo: extintor.ativo,
+                ativo: extintor.ativo == 1 ? true : false,
                 descricao: extintor.descricao,
                 ultimaVistoria: vistoria[0].length > 0 ? vistoria[0][0].dataManutencao : null,
-                manimetro: vistoria[0].length > 0 ? vistoria[0][0].manimetro : false,
-                sinalizacaoParede: vistoria[0].length > 0 ? vistoria[0][0].sinalizacaoParede : false,
-                sinalizacaoPiso: vistoria[0].length > 0 ? vistoria[0][0].sinalizacaoPiso : false,
-                acesso: vistoria[0].length > 0 ? vistoria[0][0].acesso : false,
-                mangueira: vistoria[0].length > 0 ? vistoria[0][0].mangueira : false,
-                lacre: vistoria[0].length > 0 ? vistoria[0][0].lacre : false,
+                manimetro: vistoria[0].length > 0 ? vistoria[0][0].manimetro == 1 ? true : false : false,
+                sinalizacaoParede: vistoria[0].length > 0 ? vistoria[0][0].sinalizacaoParede  == 1 ? true : false: false,
+                sinalizacaoPiso: vistoria[0].length > 0 ? vistoria[0][0].sinalizacaoPiso == 1 ? true : false : false,
+                acesso: vistoria[0].length > 0 ? vistoria[0][0].acesso == 1 ? true : false : false,
+                mangueira: vistoria[0].length > 0 ? vistoria[0][0].mangueira == 1 ? true : false : false,
+                lacre: vistoria[0].length > 0 ? vistoria[0][0].lacre == 1 ? true : false : false,
             };
             ResultExtintor.push(obj)
             

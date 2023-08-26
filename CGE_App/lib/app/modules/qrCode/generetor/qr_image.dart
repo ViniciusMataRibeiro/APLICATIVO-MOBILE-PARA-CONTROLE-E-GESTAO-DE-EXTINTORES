@@ -25,7 +25,7 @@ class _QRImageState extends State<QRImage> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.offAllNamed('/dashboard');
+                Get.back();
               },
             ),
           ],

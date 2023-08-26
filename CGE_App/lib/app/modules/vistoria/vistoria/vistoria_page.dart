@@ -114,7 +114,7 @@ class Vistoria extends State<VistoriaState>
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.offAllNamed('/dashboard');
+                Get.back();
               },
             ),
             const SizedBox(

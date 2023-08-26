@@ -52,7 +52,7 @@ class CadastroSetor extends State<CadastroSetorState> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.offAllNamed('/dashboard');
+                Get.back();
               },
             ),
             Container(
@@ -240,7 +240,7 @@ class CadastroSetor extends State<CadastroSetorState> {
               child: const Text('Imprimir'),
               onPressed: () {
                 Navigator.of(context).pop();
-                Get.offAllNamed('/dashboard');
+                Get.back();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -256,7 +256,7 @@ class CadastroSetor extends State<CadastroSetorState> {
             TextButton(
               child: const Text('Cancelar'),
               onPressed: () {
-                Get.offAllNamed('/dashboard');
+                Get.back();
               },
             ),
           ],

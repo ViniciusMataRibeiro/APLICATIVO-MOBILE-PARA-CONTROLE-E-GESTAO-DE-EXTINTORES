@@ -23,7 +23,7 @@ class AuthService extends GetxService {
   @override
   void onInit() async {
     if (_configService.token != null) {
-      await _getUser(); 
+      await _getUser();
     }
 
     super.onInit();
@@ -66,7 +66,7 @@ class AuthService extends GetxService {
     var result = await _repository.InsertTecnico(tecnico);
     if (result) {
       Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
+        Get.back();
       });
       return true;
     } else {
@@ -74,7 +74,8 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<bool> updateTecnico(TecnicoRequestModel tecnico) async { //Develop
+  Future<bool> updateTecnico(TecnicoRequestModel tecnico) async {
+    //Develop
     var result = await _repository.updateTecnico(tecnico);
     if (result) {
       Future.delayed(const Duration(milliseconds: 1), () {
@@ -106,7 +107,7 @@ class AuthService extends GetxService {
     var result = await _repository.updateSetor(setor);
     if (result > 0) {
       Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
+        Get.back();
       });
       return result;
     } else {
@@ -130,7 +131,7 @@ class AuthService extends GetxService {
     var result = await _repository.updateExtintor(extintor);
     if (result > 0) {
       Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
+        Get.back();
       });
       return result;
     } else {
@@ -152,7 +153,7 @@ class AuthService extends GetxService {
     var result = await _repository.insertEmpresa(empresa);
     if (result.id > 0) {
       Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
+        Get.back();
       });
       return result;
     } else {
@@ -165,7 +166,7 @@ class AuthService extends GetxService {
     var result = await _repository.updateEmpresa(empresa);
     if (result.id > 0) {
       Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
+        Get.back();
       });
       return result;
     } else {
@@ -181,7 +182,7 @@ class AuthService extends GetxService {
     var result = await _repository.insertEndereco(endereco);
     if (result) {
       Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
+        Get.back();
       });
       return true;
     } else {
@@ -193,7 +194,7 @@ class AuthService extends GetxService {
     var result = await _repository.updateEndereco(endereco);
     if (result) {
       Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
+        Get.back();
       });
       return true;
     } else {
@@ -217,7 +218,7 @@ class AuthService extends GetxService {
     var result = await _repository.insertVistoria(vistoria);
     if (result) {
       Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
+        Get.back();
       });
       return true;
     } else {
@@ -229,12 +230,11 @@ class AuthService extends GetxService {
     var result = await _repository.updateVistoria(vistoria);
     if (result) {
       Future.delayed(const Duration(milliseconds: 1), () {
-        Get.offAllNamed('/dashboard');
+        Get.back();
       });
       return true;
     } else {
       return false;
     }
   }
-
 }

@@ -1,17 +1,15 @@
-import 'package:faker/faker.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:ionicons/ionicons.dart';
+import '../../../Icones/icones_personalizado.dart';
 import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
 import 'dart:ui' as ui;
 
 import 'extintores_details_controller.dart';
 
-DateTime selectedDate = DateTime.now();
-String updatedDt = DateFormat("dd/MM/y").format(selectedDate);
-String updatedDt2 = DateFormat("y-MM-dd").format(selectedDate);
 List dados = [];
 
 class ExtintorDetails extends GetView<ExtintorDetailsController> {
@@ -46,35 +44,9 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
     ExtintorDetailsController(),
   );
 
-  String obterImagem(String tipoExtintor) {
-    switch (tipoExtintor) {
-      case 'Tipo A':
-        return 'assets/image/ExtintorClassesA.png';
-      case 'Tipo B':
-        return 'assets/image/ExtintorClassesB.png';
-      case 'Tipo ABC':
-        return 'assets/image/ExtintorClassesABC.png';
-      case 'Tipo AB':
-        return 'assets/image/ExtintorClassesAB.png';
-      case 'Tipo BC':
-        return 'assets/image/ExtintorClassesBC.png';
-      case 'Tipo C':
-        return 'assets/image/ExtintorClassesC.png';
-      case 'Tipo D':
-        return 'assets/image/ExtintorClassesD.png';
-      case 'Tipo K':
-        return 'assets/image/ExtintorClassesK.png';
-      default:
-        return 'Imagem não encontrada';
-    }
-  }
-
-  var number = faker.randomGenerator.integer(50);
   late Animation<double> _animation;
   late AnimationController _animationController;
   late Future mapa;
-
-  DateTime selectedDate = DateTime.now();
 
   @override
   void initState() {
@@ -113,7 +85,7 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      Get.offAllNamed('/dashboard');
+                      Get.back();
                     },
                   ),
                   Container(
@@ -143,40 +115,47 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: Container(
-        margin: const EdgeInsets.only(bottom: 70),
+        margin: const EdgeInsets.only(bottom: 30),
         child: FloatingActionBubble(
           herotag: UniqueKey(),
           items: <Bubble>[
-            if (obj!.tipo == 'empresa') ...[
-              Bubble(
-                title: "Cadastrar Tecnico",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
-                icon: Icons.add_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadTecnico');
-                },
-              ),
-            ] else ...[
-              Bubble(
-                title: "Cadastrar Extintor",
-                iconColor: Colors.white,
-                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
-                icon: Icons.add_rounded,
-                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-                onPress: () {
-                  Get.toNamed('/cadExtintor');
-                },
-              ),
+            if (obj!.tipo == 'empresa')
+              ...[]
+            else ...[
               Bubble(
                 title: "Realizar Vistoria",
                 iconColor: Colors.white,
                 bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.check_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () async {
+                  await controller.gotovistoria(dados[0]);
+                  setState(() {
+                    mapa = controller.getExtintor();
+                  });
+                },
+              ),
+              Bubble(
+                title: "Editar Extintor",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
+                icon: Icons.edit,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () async {
+                  await controller.gotoEditExtintor(dados[0]);
+                  setState(() {
+                    mapa = controller.getExtintor();
+                  });
+                },
+              ),
+              Bubble(
+                title: "Excluir Extintor",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
+                icon: Icons.delete,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  Get.toNamed('/vistoria');
+                  controller.gotoDeleteExtintor(dados[0]);
                 },
               ),
             ],
@@ -226,9 +205,10 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
   }
 
   _mostradados({required List dados}) {
+    var size = MediaQuery.of(context).size;
     return ListView.builder(
       itemCount: dados.length,
-      padding: const EdgeInsets.only(bottom: 52, top: 50),
+      padding: const EdgeInsets.only(bottom: 30, top: 50),
       itemBuilder: (BuildContext context, index) {
         Map item = dados[index];
         return GestureDetector(
@@ -236,128 +216,850 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                margin: const EdgeInsets.only(left: 10, right: 10, top: 20),
                 child: Card(
-                  elevation: 5,
-                  child: Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 5,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                          image: const DecorationImage(
-                            image: AssetImage('assets/image/LogOut.png'),
-                            fit: BoxFit.cover,
+                  elevation: 4.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 3,
+                          blurRadius: 2,
+                          offset: const Offset(0, 3),
+                        )
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: size.height * 0.01),
+                        const Padding(
+                          padding: EdgeInsets.only(
+                              top: 5.0, left: 5.0, right: 5.0, bottom: 5.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  "Extintor",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(width: 25),
-                            Text(
-                              'Dados Extintor',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
+                        SizedBox(height: size.height * 0.01),
+                        Container(
+                          height: 2,
+                          color: Colors.grey,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 7.0),
                         ),
-                      )
-                    ],
+                        SizedBox(height: size.height * 0.01),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 5.0, left: 35, right: 35, bottom: 0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: ListTile(
+                                  contentPadding: const EdgeInsets.only(left: 0, right: 15),
+                                  title: const Text(
+                                    'Ativo',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  trailing: GestureDetector(
+                                    child: AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 400),
+                                      curve: Curves.fastLinearToSlowEaseIn,
+                                      decoration: BoxDecoration(
+                                        color: item['ativo']
+                                            ? Colors.green
+                                            : Colors.transparent,
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        border: item['ativo']
+                                            ? null
+                                            : Border.all(
+                                                color: Colors.black, width: 1),
+                                      ),
+                                      width: 20,
+                                      height: 20,
+                                      child: item['manimetro']
+                                          ? const Icon(
+                                              Icons.check,
+                                              color: Colors.white,
+                                              size: 20,
+                                            )
+                                          : null,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 0, left: 35, right: 35, bottom: 5.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  readOnly: true,
+                                  initialValue: item['nome'],
+                                  decoration: const InputDecoration(
+                                    labelText: 'Número Extintor',
+                                    suffixIcon: Padding(
+                                      padding: EdgeInsets.only(
+                                          top:
+                                              15), // add padding to adjust icon
+                                      child: Icon(Icones_Personalizado
+                                          .fire_extinguisher),
+                                    ),
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 5.0, left: 35, right: 35, bottom: 5.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  readOnly: true,
+                                  initialValue: DateFormat('dd/MM/yyyy').format(
+                                      DateTime.parse(item['validadeCasco'])),
+                                  keyboardType: TextInputType.text,
+                                  decoration: const InputDecoration(
+                                    suffixIcon: Padding(
+                                      padding: EdgeInsets.only(
+                                          top:
+                                              15), // add padding to adjust icon
+                                      child:
+                                          Icon(Icons.calendar_today_outlined),
+                                    ),
+                                    labelText: 'Validade do Casco',
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 5.0, left: 35, right: 35, bottom: 5.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  readOnly: true,
+                                  initialValue: DateFormat('dd/MM/yyyy').format(
+                                      DateTime.parse(item['validadeExtintor'])),
+                                  keyboardType: TextInputType.text,
+                                  decoration: const InputDecoration(
+                                    suffixIcon: Padding(
+                                      padding: EdgeInsets.only(
+                                          top:
+                                              15), // add padding to adjust icon
+                                      child:
+                                          Icon(Icons.calendar_today_outlined),
+                                    ),
+                                    labelText: 'Validade do Extintor',
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 5.0, left: 35, right: 35, bottom: 5.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  readOnly: true,
+                                  initialValue: DateFormat('dd/MM/yyyy').format(
+                                      DateTime.parse(
+                                          item['proximaManutencao'])),
+                                  keyboardType: TextInputType.text,
+                                  decoration: const InputDecoration(
+                                    suffixIcon: Padding(
+                                      padding: EdgeInsets.only(
+                                          top:
+                                              15), // add padding to adjust icon
+                                      child:
+                                          Icon(Icons.calendar_today_outlined),
+                                    ),
+                                    labelText: 'Proxima Manutencão',
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 5, left: 35, right: 35, bottom: 15),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  readOnly: true,
+                                  initialValue: item['tipoExtintor'],
+                                  decoration: const InputDecoration(
+                                    labelText: 'Tipo do Extintor',
+                                    suffixIcon: Padding(
+                                      padding: EdgeInsets.only(
+                                          top:
+                                              15), // add padding to adjust icon
+                                      child: Icon(Ionicons.flame_outline),
+                                    ),
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 5, left: 35, right: 35, bottom: 15),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  readOnly: true,
+                                  initialValue: '${item['tamanho'] ?? 0} Kg',
+                                  decoration: const InputDecoration(
+                                    labelText: 'Tamanho do Extintor',
+                                    suffixIcon: Padding(
+                                      padding: EdgeInsets.only(
+                                          top:
+                                              15), // add padding to adjust icon
+                                      child: Icon(Ionicons.resize_outline),
+                                    ),
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 5, left: 35, right: 35, bottom: 15),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  readOnly: true,
+                                  initialValue: item['setor'],
+                                  decoration: const InputDecoration(
+                                    labelText: 'Setor',
+                                    suffixIcon: Padding(
+                                      padding: EdgeInsets.only(
+                                          top:
+                                              15), // add padding to adjust icon
+                                      child: Icon(Icones_Personalizado.place),
+                                    ),
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                child: Card(
-                  elevation: 5,
-                  child: Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 5,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                          image: const DecorationImage(
-                            image: AssetImage('assets/image/LogOut.png'),
-                            fit: BoxFit.cover,
+              item['ultimaVistoria'] == null
+                  ? Container(
+                      margin:
+                          const EdgeInsets.only(left: 10, right: 10, top: 20),
+                      child: Card(
+                        elevation: 4.0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 3,
+                                blurRadius: 2,
+                                offset: const Offset(0, 3),
+                              )
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(height: size.height * 0.01),
+                              const Padding(
+                                padding: EdgeInsets.only(
+                                    top: 5.0,
+                                    left: 5.0,
+                                    right: 5.0,
+                                    bottom: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        "Última Vistoria",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                              Container(
+                                height: 2,
+                                color: Colors.grey,
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 7.0),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                              const Padding(
+                                padding: EdgeInsets.only(
+                                    top: 5.0, left: 35, right: 35, bottom: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Nenhuma Vistoria Realizada',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                            ],
                           ),
                         ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(width: 25),
-                            Text(
-                              'Dados Extintor',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                      ),
+                    )
+                  : Container(
+                      margin:
+                          const EdgeInsets.only(left: 10, right: 10, top: 20),
+                      child: Card(
+                        elevation: 4.0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 3,
+                                blurRadius: 2,
+                                offset: const Offset(0, 3),
+                              )
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(height: size.height * 0.01),
+                              const Padding(
+                                padding: EdgeInsets.only(
+                                    top: 5.0,
+                                    left: 5.0,
+                                    right: 5.0,
+                                    bottom: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        "Última Vistoria",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                child: Card(
-                  elevation: 5,
-                  child: Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 5,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                          image: const DecorationImage(
-                            image: AssetImage('assets/image/LogOut.png'),
-                            fit: BoxFit.cover,
+                              SizedBox(height: size.height * 0.01),
+                              Container(
+                                height: 2,
+                                color: Colors.grey,
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 7.0),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 5.0, left: 35, right: 35, bottom: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: TextFormField(
+                                        readOnly: true,
+                                        initialValue: DateFormat('dd/MM/yyyy')
+                                            .format(DateTime.parse(
+                                                item['ultimaVistoria'])),
+                                        keyboardType: TextInputType.text,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Realizada em',
+                                          labelStyle: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 5.0, left: 35, right: 35, bottom: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        leading: const Icon(
+                                            Icons.speed_outlined,
+                                            color: Colors.black,
+                                            size: 30),
+                                        title: const Text(
+                                          'Manômetro',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        trailing: GestureDetector(
+                                          child: AnimatedContainer(
+                                            duration: const Duration(
+                                                milliseconds: 400),
+                                            curve:
+                                                Curves.fastLinearToSlowEaseIn,
+                                            decoration: BoxDecoration(
+                                              color: item['manimetro']
+                                                  ? Colors.green
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                              border: item['manimetro']
+                                                  ? null
+                                                  : Border.all(
+                                                      color: Colors.black,
+                                                      width: 1),
+                                            ),
+                                            width: 20,
+                                            height: 20,
+                                            child: item['manimetro']
+                                                ? const Icon(
+                                                    Icons.check,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  )
+                                                : null,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 5.0, left: 35, right: 35, bottom: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        leading: const Icon(
+                                            Icons.fire_extinguisher_outlined,
+                                            color: Colors.black,
+                                            size: 30),
+                                        title: const Text(
+                                          'Sinalização na Parede',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        trailing: GestureDetector(
+                                          child: AnimatedContainer(
+                                            duration: const Duration(
+                                                milliseconds: 400),
+                                            curve:
+                                                Curves.fastLinearToSlowEaseIn,
+                                            decoration: BoxDecoration(
+                                              color: item['sinalizacaoParede']
+                                                  ? Colors.green
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                              border: item['sinalizacaoParede']
+                                                  ? null
+                                                  : Border.all(
+                                                      color: Colors.black,
+                                                      width: 1),
+                                            ),
+                                            width: 20,
+                                            height: 20,
+                                            child: item['sinalizacaoParede']
+                                                ? const Icon(
+                                                    Icons.check,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  )
+                                                : null,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 5.0, left: 35, right: 35, bottom: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        leading: const Icon(
+                                            Ionicons.footsteps_outline,
+                                            color: Colors.black,
+                                            size: 30),
+                                        title: const Text(
+                                          'Sinalização do Piso',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        trailing: GestureDetector(
+                                          child: AnimatedContainer(
+                                            duration: const Duration(
+                                                milliseconds: 400),
+                                            curve:
+                                                Curves.fastLinearToSlowEaseIn,
+                                            decoration: BoxDecoration(
+                                              color: item['sinalizacaoPiso']
+                                                  ? Colors.green
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                              border: item['sinalizacaoPiso']
+                                                  ? null
+                                                  : Border.all(
+                                                      color: Colors.black,
+                                                      width: 1),
+                                            ),
+                                            width: 20,
+                                            height: 20,
+                                            child: item['sinalizacaoPiso']
+                                                ? const Icon(
+                                                    Icons.check,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  )
+                                                : null,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 5.0, left: 35, right: 35, bottom: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        leading: const Icon(
+                                            Ionicons.enter_outline,
+                                            color: Colors.black,
+                                            size: 30),
+                                        title: const Text(
+                                          'Acesso',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        trailing: GestureDetector(
+                                          child: AnimatedContainer(
+                                            duration: const Duration(
+                                                milliseconds: 400),
+                                            curve:
+                                                Curves.fastLinearToSlowEaseIn,
+                                            decoration: BoxDecoration(
+                                              color: item['acesso']
+                                                  ? Colors.green
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                              border: item['acesso']
+                                                  ? null
+                                                  : Border.all(
+                                                      color: Colors.black,
+                                                      width: 1),
+                                            ),
+                                            width: 20,
+                                            height: 20,
+                                            child: item['acesso']
+                                                ? const Icon(
+                                                    Icons.check,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  )
+                                                : null,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 5.0, left: 35, right: 35, bottom: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        leading: Container(
+                                          width: size.width * 0.09,
+                                          height: 30,
+                                          decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/image/icon_mangueira.png'),
+                                              fit: BoxFit
+                                                  .contain, // Ajuste da imagem dentro do contêiner
+                                            ),
+                                          ),
+                                        ),
+                                        title: const Text(
+                                          'Mangueira',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        trailing: GestureDetector(
+                                          child: AnimatedContainer(
+                                            duration: const Duration(
+                                                milliseconds: 400),
+                                            curve:
+                                                Curves.fastLinearToSlowEaseIn,
+                                            decoration: BoxDecoration(
+                                              color: item['mangueira']
+                                                  ? Colors.green
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                              border: item['mangueira']
+                                                  ? null
+                                                  : Border.all(
+                                                      color: Colors.black,
+                                                      width: 1),
+                                            ),
+                                            width: 20,
+                                            height: 20,
+                                            child: item['mangueira']
+                                                ? const Icon(
+                                                    Icons.check,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  )
+                                                : null,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 5.0, left: 35, right: 35, bottom: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        leading: Container(
+                                          width: size.width * 0.09,
+                                          height: 30,
+                                          decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/image/icon_lacre.png'),
+                                              fit: BoxFit
+                                                  .contain, // Ajuste da imagem dentro do contêiner
+                                            ),
+                                          ),
+                                        ),
+                                        title: const Text(
+                                          'Lacre',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        trailing: GestureDetector(
+                                          child: AnimatedContainer(
+                                            duration: const Duration(
+                                                milliseconds: 400),
+                                            curve:
+                                                Curves.fastLinearToSlowEaseIn,
+                                            decoration: BoxDecoration(
+                                              color: item['lacre']
+                                                  ? Colors.green
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                              border: item['lacre']
+                                                  ? null
+                                                  : Border.all(
+                                                      color: Colors.black,
+                                                      width: 1),
+                                            ),
+                                            width: 20,
+                                            height: 20,
+                                            child: item['lacre']
+                                                ? const Icon(
+                                                    Icons.check,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  )
+                                                : null,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(width: 25),
-                            Text(
-                              'Dados Extintor',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+                      ),
+                    ),
             ],
           ),
         );

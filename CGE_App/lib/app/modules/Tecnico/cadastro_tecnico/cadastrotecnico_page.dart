@@ -76,7 +76,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.offAllNamed('/dashboard');
+                Get.back();
               },
             ),
             const SizedBox(

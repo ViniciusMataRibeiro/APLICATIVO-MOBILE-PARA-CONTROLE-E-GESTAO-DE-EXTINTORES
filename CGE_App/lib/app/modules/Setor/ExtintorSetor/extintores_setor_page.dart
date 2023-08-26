@@ -113,7 +113,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.offAllNamed('/dashboard');
+                Get.back();
               },
             ),
             const SizedBox(

@@ -25,6 +25,22 @@ class VistoriaController extends GetxController {
   String nomeSetor = '';
 
   var descricao = TextEditingController(text: '');
+  late Map dados;
+
+  @override
+  Future<void> onInit() async {
+    if (Get.arguments != null) {
+      dados = Get.arguments;
+      idExtintor = dados['id'];
+      nomeExtintor = dados['nome'];
+      idSetor = dados['setor_id'];
+      nomeSetor = dados['setor'];
+
+      await getExtintores(idSetor);
+    }
+
+    super.onInit();
+  }
 
   Future<Map> getSetores() async {
     Map t = await _authService.getSetores();
