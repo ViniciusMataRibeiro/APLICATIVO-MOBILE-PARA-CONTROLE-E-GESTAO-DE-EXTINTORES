@@ -1,4 +1,3 @@
-import 'package:cge_app/app/modules/qrCode/generetor/qr_image.dart';
 import 'package:cge_app/app/modules/vistoria/consulta_vistoria/consulta_vistoria_binding.dart';
 import 'package:cge_app/app/modules/vistoria/consulta_vistoria/consulta_vistoria_page.dart';
 import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_binding.dart';
@@ -7,12 +6,15 @@ import 'package:cge_app/app/modules/Empresa/cadastro_empresa/cadastroEmpresa_pag
 import 'package:cge_app/app/modules/Tecnico/cadastro_tecnico/cadastroTecnico_page.dart';
 import 'package:cge_app/app/modules/Setor/ExtintorSetor/extintores_setor_page.dart';
 import '../modules/Extintor/cadastro_extintor/cadastroExtintor_binding.dart';
+import '../modules/detailsQrCode/extintor/extintores_details_binding.dart';
 import '../modules/Extintor/cadastro_extintor/cadastroExtintor_page.dart';
 import '../modules/Empresa/endereco_empresa/enderecoEmpresa_binding.dart';
+import '../modules/detailsQrCode/extintor/extintores_details_page.dart';
 import '../modules/Empresa/endereco_empresa/enderecoEmpresa_page.dart';
 import '../modules/Setor/ExtintorSetor/extintores_setor_binding.dart';
 import '../modules/Empresa/perfil_empresa/perfilEmpresa_binding.dart';
 import '../modules/Tecnico/perfil_tecnico/perfilTecnico_binding.dart';
+import 'package:cge_app/app/modules/qrCode/generetor/qr_image.dart';
 import '../modules/Setor/cadastro_setor/cadastroSetor_binding.dart';
 import '../modules/Empresa/perfil_empresa/perfilEmpresa_page.dart';
 import '../modules/Tecnico/perfil_tecnico/perfilTecnico_page.dart';
@@ -20,11 +22,11 @@ import '../modules/Setor/cadastro_setor/cadastroSetor_page.dart';
 import '../modules/Tecnico/ListTecnico/ListTecnico_binding.dart';
 import '../modules/Tecnico/ListTecnico/ListTecnico_page.dart';
 import '../modules/qrCode/generetor/qr_binding_generetor.dart';
-import '../modules/qrCode/scanner/qr_binding_scanner.dart';
-import '../modules/qrCode/scanner/qr_scanner.dart';
 import '../modules/vistoria/vistoria/vistoria_binding.dart';
+import '../modules/qrCode/scanner/qr_binding_scanner.dart';
 import '../modules/vistoria/vistoria/vistoria_page.dart';
 import '../modules/dashboard/dashboard_binding.dart';
+import '../modules/qrCode/scanner/qr_scanner.dart';
 import '../modules/dashboard/dashboard_page.dart';
 import 'package:cge_app/app/routes/routes.dart';
 import '../modules/splash/splash_binding.dart';
@@ -121,6 +123,11 @@ abstract class AppPages {
       name: Routes.qrCodeScanner,
       page: () => const QRScanner(),
       binding: QRCodeScannerBinding(),
+    ),
+    GetPage(
+      name: Routes.detailsExtintor,
+      page: () => const ExtintorDetails(),
+      binding: ExtintorDetailsBinding(),
     )
   ];
 }

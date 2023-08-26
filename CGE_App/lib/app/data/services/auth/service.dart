@@ -94,6 +94,10 @@ class AuthService extends GetxService {
     return await _repository.getResumoSetor();
   }
 
+  Future<Map> getByIdExtintor(int id) async {
+    return await _repository.getByIdExtintor(id);
+  }
+
   Future<int> insertSetor(SetorRequestModel setor) async {
     return await _repository.insertSetor(setor);
   }

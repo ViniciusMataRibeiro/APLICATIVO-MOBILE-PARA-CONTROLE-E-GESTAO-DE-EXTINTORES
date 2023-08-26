@@ -86,6 +86,51 @@ export default class ExtintorsController {
         }
     }
 
+    public async getExtintor({ response, params }: HttpContextContract) {
+        try {
+            let ResultExtintor = new Array();
+
+            const extintor = await Database.query().select('*').from('extintors').where('id', params.id).first();
+            if (extintor === null) {
+                return response.badRequest({
+                    message: 'Extintor não encontrado',
+                });
+            }
+
+            const setor = await Setor.findByOrFail("id", extintor.setor_id);
+            const vistoria = await Database.rawQuery('Select * from manutencoes where extintor_id = ? order by dataManutencao desc limit 1', [extintor.id]);
+
+            const obj = {
+                extintor_id: extintor.id,
+                setor_id : setor.id,
+                setor: setor.nome,
+                nome: extintor.nome,
+                tipoExtintor: extintor.tipoExtintor,
+                tamanho: extintor.tamanho,
+                validadeCasco: extintor.validadeCasco,
+                validadeExtintor: extintor.validadeExtintor,
+                proximaManutencao: extintor.proximaManutencao,
+                ativo: extintor.ativo,
+                descricao: extintor.descricao,
+                ultimaVistoria: vistoria[0].length > 0 ? vistoria[0][0].dataManutencao : null,
+                manimetro: vistoria[0].length > 0 ? vistoria[0][0].manimetro : false,
+                sinalizacaoParede: vistoria[0].length > 0 ? vistoria[0][0].sinalizacaoParede : false,
+                sinalizacaoPiso: vistoria[0].length > 0 ? vistoria[0][0].sinalizacaoPiso : false,
+                acesso: vistoria[0].length > 0 ? vistoria[0][0].acesso : false,
+                mangueira: vistoria[0].length > 0 ? vistoria[0][0].mangueira : false,
+                lacre: vistoria[0].length > 0 ? vistoria[0][0].lacre : false,
+            };
+            ResultExtintor.push(obj)
+            
+            return response.ok(ResultExtintor);
+
+        } catch (error) {
+            return response.badRequest({
+                message: 'Erro ao trazer Extintor',
+            });
+        }
+    }
+
     public async store({ request, response }: HttpContextContract) {
         try {
             const payload = await request.validate(CreateExtintorValidator);

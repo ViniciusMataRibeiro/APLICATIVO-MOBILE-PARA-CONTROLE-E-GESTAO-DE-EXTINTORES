@@ -56,21 +56,14 @@ class _QRScannerState extends State<QRScanner>
               child: Stack(
                 children: [
                   MobileScanner(
-                    startDelay: true,
-                    controller: MobileScannerController(torchEnabled: true),
+                    startDelay: false,
                     fit: BoxFit.contain,
                     errorBuilder: (context, error, child) {
                       return ScannerErrorWidget(error: error);
                     },
-                    onDetect: (capture) {
-                      setState(
-                        () async {
-                          if (!controller.isScanComplete) {
-                            await controller.verificaQrCode(
-                                capture.barcodes.first.rawValue);
-                          }
-                        },
-                      );
+                    onDetect: (capture) async {
+                      await controller
+                              .verificaQrCode(capture.barcodes.first.rawValue);
                     },
                   ),
                   const QRScannerOverlay(overlayColour: bgColor),

@@ -21,9 +21,14 @@ class QRCodeScannerController extends GetxController {
   Future<void> verificaQrCode(String? rawValue) async {
     if (rawValue != null) {
       isScanComplete = true;
+      final dataQrCode = rawValue.split('-');
 
-      //await Get.toNamed(Routes.cadExtintor);
-    } else {
+      if (dataQrCode[0] == 'Extintor') {
+        Get.toNamed('/detailsExtintor', arguments: dataQrCode[1]);
+      } else {
+
+      }
+
       isScanComplete = false;
     }
   }

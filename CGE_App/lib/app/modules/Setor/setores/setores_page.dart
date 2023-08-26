@@ -113,6 +113,10 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
         ),
         actions: <Widget>[
           IconButton(
+            icon: const Icon(Icons.qr_code_scanner, color: Colors.white),
+            onPressed: () => Get.toNamed('/qrCodeScanner'),
+          ),
+          IconButton(
             icon: const Icon(Icons.notification_important, color: Colors.white),
             onPressed: () {},
           ),
