@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:ui' as ui;
 
+import '../../../Icones/icones_personalizado.dart';
 import '../../qrCode/print_out_qrcode/print.dart';
 import 'cadastroSetor_controller.dart';
 
@@ -66,9 +67,7 @@ class CadastroSetor extends State<CadastroSetorState> {
                     height: 40,
                   ),
                   Text(
-                    controller.alterando
-                        ? 'Editar Setor'
-                        : 'Cadastrar Setor',
+                    controller.alterando ? 'Editar Setor' : 'Cadastrar Setor',
                     style: const TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -135,6 +134,14 @@ class CadastroSetor extends State<CadastroSetorState> {
                           style: const TextStyle(
                               color: Colors.black, fontStyle: FontStyle.italic),
                           decoration: const InputDecoration(
+                            prefixIcon: Padding(
+                              padding: EdgeInsets.only(right: 15),
+                              child: Icon(
+                                Icones_Personalizado.place,
+                                color: Colors.black,
+                                size: 35,
+                              ),
+                            ),
                             labelText: 'Nome Setor',
                             labelStyle: TextStyle(
                               color: Colors.black,

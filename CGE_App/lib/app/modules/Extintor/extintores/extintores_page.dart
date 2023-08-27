@@ -257,11 +257,12 @@ class ExtintorPage extends State<ExtintorState>
                     padding: const EdgeInsets.all(10.0),
                     height: 480,
                     decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: AssetImage('assets/image/modal.png'),
-                          fit: BoxFit.fill,
-                        ),
-                        borderRadius: BorderRadius.circular(10)),
+                      image: const DecorationImage(
+                        image: AssetImage('assets/image/modal.png'),
+                        fit: BoxFit.fill,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [

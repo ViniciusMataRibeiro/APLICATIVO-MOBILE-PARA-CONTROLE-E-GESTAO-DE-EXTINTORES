@@ -797,39 +797,70 @@ class CadastroExtintor extends State<CadastroExtintorState>
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Atenção'),
-          content: const SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Deseja imprimir o QRCode referente ao Setor?'),
-              ],
+          contentPadding: EdgeInsets.zero,
+          content: Container(
+            decoration: BoxDecoration(
+              image: const DecorationImage(
+                image: AssetImage('assets/image/modal_qr.png'),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.circular(10),
             ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Imprimir'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PrintQrCode(
-                      data: result,
-                      tipo: 'Extintor',
-                      nome: controller.nome.text,
-                      tipoExtintor: controller.selectedTipo,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Text(
+                      'Atenção',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                );
-              },
+                  const Text(
+                    'Deseja imprimir o QRCode referente ao Setor?',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        child: const Text('Imprimir'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PrintQrCode(
+                                data: result,
+                                tipo: 'Extintor',
+                                nome: controller.nome.text,
+                                tipoExtintor: controller.selectedTipo,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      TextButton(
+                        child: const Text('Cancelar'),
+                        onPressed: () {
+                          Get.back();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            TextButton(
-              child: const Text('Cancelar'),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-          ],
+          ),
         );
       },
     );
