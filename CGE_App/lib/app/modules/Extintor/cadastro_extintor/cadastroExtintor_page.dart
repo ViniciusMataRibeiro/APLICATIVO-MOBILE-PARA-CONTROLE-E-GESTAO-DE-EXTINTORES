@@ -13,8 +13,6 @@ import 'dart:ui' as ui;
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../qrCode/print_out_qrcode/print.dart';
-
 var newFormat = DateFormat("dd/MM/yyyy");
 var dt = DateTime.now();
 String updatedDt = newFormat.format(dt);
@@ -835,18 +833,9 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       TextButton(
                         child: const Text('Imprimir'),
                         onPressed: () {
-                          Navigator.of(context).pop();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PrintQrCode(
-                                data: result,
-                                tipo: 'Extintor',
-                                nome: controller.nome.text,
-                                tipoExtintor: controller.selectedTipo,
-                              ),
-                            ),
-                          );
+                          //Navigator.of(context).pop();
+                          controller.goToPrintOutQrCode(result, 'Extintor',
+                              controller.nome.text, controller.selectedTipo);
                         },
                       ),
                       TextButton(

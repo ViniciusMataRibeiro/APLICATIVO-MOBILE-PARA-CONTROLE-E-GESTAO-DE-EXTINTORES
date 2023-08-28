@@ -7,6 +7,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../routes/routes.dart';
+
 class CadastroExtintorController extends GetxController {
   final _authService = Get.find<AuthService>();
   DateTime dt = DateTime.now();
@@ -201,5 +203,15 @@ class CadastroExtintorController extends GetxController {
         backgroundColor: Colors.redAccent,
         textColor: Colors.white,
         fontSize: 15.0);
+  }
+
+  Future<void> goToPrintOutQrCode(String result, String tipo, String nome, String tipoExtintor) async {
+    Map<String, dynamic> dados = {
+      "result": result,
+      "tipo": tipo,
+      "nome": nome,
+      "tipoExtintor": tipoExtintor,
+    };
+    await Get.toNamed(Routes.qrCodePrinter, arguments: dados);
   }
 }

@@ -9,8 +9,10 @@ import '../modules/Extintor/cadastro_extintor/cadastroExtintor_binding.dart';
 import '../modules/detailsQrCode/extintor/extintores_details_binding.dart';
 import '../modules/Extintor/cadastro_extintor/cadastroExtintor_page.dart';
 import '../modules/Empresa/endereco_empresa/enderecoEmpresa_binding.dart';
+import '../modules/qrCode/print_out_qrcode/print_out_qrcode_binding.dart';
 import '../modules/detailsQrCode/extintor/extintores_details_page.dart';
 import '../modules/Empresa/endereco_empresa/enderecoEmpresa_page.dart';
+import '../modules/qrCode/print_out_qrcode/print_out_qrcode_page.dart';
 import '../modules/Setor/ExtintorSetor/extintores_setor_binding.dart';
 import '../modules/Empresa/perfil_empresa/perfilEmpresa_binding.dart';
 import '../modules/Tecnico/perfil_tecnico/perfilTecnico_binding.dart';
@@ -128,6 +130,11 @@ abstract class AppPages {
       name: Routes.detailsExtintor,
       page: () => const ExtintorDetails(),
       binding: ExtintorDetailsBinding(),
+    ),
+    GetPage(
+      name: Routes.qrCodePrinter,
+      page: () => const PrintQrCodePage(),
+      binding: PrintQrCodeBinding(),
     )
   ];
 }

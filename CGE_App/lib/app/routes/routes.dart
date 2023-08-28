@@ -17,4 +17,5 @@ abstract class Routes {
   static const qrCodeScanner = '/qrCodeScanner';
   static const qrCodeGeneretor = '/qrCodeGeneretor';
   static const detailsExtintor = '/detailsExtintor';
+  static const qrCodePrinter = '/qrCodePrinter';
 }

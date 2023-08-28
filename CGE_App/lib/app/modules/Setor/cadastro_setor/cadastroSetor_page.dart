@@ -1,14 +1,12 @@
 // ignore_for_file: file_names
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import '../../../Icones/icones_personalizado.dart';
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'cadastroSetor_controller.dart';
 import 'package:get/get.dart';
 import 'dart:ui' as ui;
-
-import '../../../Icones/icones_personalizado.dart';
-import '../../qrCode/print_out_qrcode/print.dart';
-import 'cadastroSetor_controller.dart';
 
 class CadastroSetorPage extends GetView<CadastroSetorController> {
   const CadastroSetorPage({super.key});
@@ -200,7 +198,6 @@ class CadastroSetor extends State<CadastroSetorState> {
                             var result = await controller.goToInsert();
                             if (result != 'Algo deu Errado') {
                               // ignore: use_build_context_synchronously
-                              await _showMyDialog(result);
                             } else {
                               final snackBar = SnackBar(
                                 elevation: 0,
@@ -241,50 +238,6 @@ class CadastroSetor extends State<CadastroSetorState> {
           ),
         ),
       ),
-    );
-  }
-
-  Future<void> _showMyDialog(String result) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Atenção'),
-          content: const SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Deseja imprimir o QRCode referente ao Setor?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Imprimir'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                Get.back();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PrintQrCode(
-                      data: result,
-                      tipo: 'Setor',
-                      nome: controller.name.text,
-                    ),
-                  ),
-                );
-              },
-            ),
-            TextButton(
-              child: const Text('Cancelar'),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 }
