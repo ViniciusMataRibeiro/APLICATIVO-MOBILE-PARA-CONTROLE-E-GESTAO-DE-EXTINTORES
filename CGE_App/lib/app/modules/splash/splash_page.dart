@@ -15,7 +15,7 @@ class SplashPage extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      splash: Lottie.asset('assets/image/loading.json'),
+      splash: Lottie.asset('assets/image/splash.json'),
       backgroundColor: Colors.white,
       nextScreen: const LoginPage(),
       splashTransition: SplashTransition.fadeTransition,

@@ -214,6 +214,9 @@ class CadastroExtintor extends State<CadastroExtintorState>
     return FutureBuilder(
       future: mapa,
       builder: (context, snapshot) {
+        final FocusNode _field1FocusNode = FocusNode();
+        final FocusNode _field2FocusNode = FocusNode();
+        final FocusNode _field3FocusNode = FocusNode();
         var size = MediaQuery.of(context).size;
         if (snapshot.hasData) {
           Map temp = snapshot.data;
@@ -323,6 +326,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
                               ),
                               title: TextFormField(
                                 controller: controller.nome,
+                                textInputAction: TextInputAction.done,                           
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontStyle: FontStyle.italic,
@@ -347,6 +351,11 @@ class CadastroExtintor extends State<CadastroExtintorState>
                               ),
                               isThreeLine: false,
                               subtitle: TextFormField(
+                                focusNode: _field1FocusNode,
+                                textInputAction: TextInputAction.next,
+                                onFieldSubmitted: (_){
+                                  FocusScope.of(context).requestFocus(_field2FocusNode);
+                                },
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontStyle: FontStyle.italic,
@@ -387,6 +396,11 @@ class CadastroExtintor extends State<CadastroExtintorState>
                               ),
                               isThreeLine: false,
                               subtitle: TextFormField(
+                                focusNode: _field2FocusNode,
+                                textInputAction: TextInputAction.next,
+                                onFieldSubmitted: (_){
+                                  FocusScope.of(context).requestFocus(_field3FocusNode);
+                                },
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontStyle: FontStyle.italic,

@@ -39,6 +39,7 @@ class CadastroSetor extends State<CadastroSetorState> {
 
   @override
   Widget build(BuildContext context) {
+    final FocusNode _field1FocusNode = FocusNode();
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -129,6 +130,10 @@ class CadastroSetor extends State<CadastroSetorState> {
                       child: Form(
                         child: TextFormField(
                           controller: controller.name,
+                          textInputAction: TextInputAction.next,
+                          onFieldSubmitted: (_){
+                            FocusScope.of(context).requestFocus(_field1FocusNode);
+                          },
                           style: const TextStyle(
                               color: Colors.black, fontStyle: FontStyle.italic),
                           decoration: const InputDecoration(
@@ -155,6 +160,8 @@ class CadastroSetor extends State<CadastroSetorState> {
                       child: Form(
                         child: TextFormField(
                           controller: controller.descricao,
+                          textInputAction: TextInputAction.done,
+                          focusNode: _field1FocusNode,
                           style: const TextStyle(
                               wordSpacing: 1,
                               fontSize: 18,

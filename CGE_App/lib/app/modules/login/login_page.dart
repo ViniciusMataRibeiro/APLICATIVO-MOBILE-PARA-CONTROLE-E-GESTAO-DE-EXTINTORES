@@ -9,6 +9,8 @@ class LoginPage extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    final FocusNode _field1FocusNode = FocusNode();
+
     if (controller.isLogged) {
       Future.delayed(const Duration(milliseconds: 1), () {
         Get.offAllNamed('/dashboard');
@@ -48,6 +50,10 @@ class LoginPage extends GetView<LoginController> {
                 child: Form(
                   child: TextFormField(
                     controller: controller.emailController,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(_field1FocusNode);
+                    },
                     style: const TextStyle(
                         fontSize: 15,
                         color: Colors.white,
@@ -84,6 +90,8 @@ class LoginPage extends GetView<LoginController> {
                 child: Obx(
                   () => TextFormField(
                     controller: controller.passwordController,
+                    focusNode: _field1FocusNode,
+                    textInputAction: TextInputAction.done,
                     style: const TextStyle(fontSize: 15, color: Colors.white),
                     obscureText: controller.showPassword.value,
                     cursorColor: Colors.white,
