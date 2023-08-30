@@ -91,7 +91,7 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
               child: Row(
                 children: [
                   Image.asset(
-                    'assets/image/cge.png',
+                    'assets/image/login.png',
                     fit: BoxFit.contain,
                     height: 45,
                   ),

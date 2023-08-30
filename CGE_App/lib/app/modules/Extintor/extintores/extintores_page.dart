@@ -115,7 +115,7 @@ class ExtintorPage extends State<ExtintorState>
               child: Row(
                 children: [
                   Image.asset(
-                    'assets/image/cge.png',
+                    'assets/image/login.png',
                     fit: BoxFit.contain,
                     height: 45,
                   ),
@@ -385,7 +385,7 @@ class ExtintorPage extends State<ExtintorState>
                           margin: EdgeInsets.only(left: size.width * 0.05),
                           child: ListTile(
                             contentPadding: EdgeInsets.zero,
-                            leading: const Icon(Icons.trending_up_outlined,
+                            leading: const Icon(Icons.location_on_sharp,
                                 color: Colors.black54, size: 35),
                             title: const Text(
                               'Setor',

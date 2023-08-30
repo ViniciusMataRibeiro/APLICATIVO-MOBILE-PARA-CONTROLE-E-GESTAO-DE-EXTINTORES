@@ -26,8 +26,8 @@ class LoginPage extends GetView<LoginController> {
             children: [
               Center(
                 child: Container(
-                  height: 140,
-                  width: 140,
+                  height: 170,
+                  width: 170,
                   margin: const EdgeInsets.only(top: 50),
                   decoration: const BoxDecoration(
                       image: DecorationImage(
@@ -36,14 +36,14 @@ class LoginPage extends GetView<LoginController> {
                       borderRadius: BorderRadius.all(Radius.circular(100)),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black,
+                          color: Colors.black54,
                           blurRadius: 5,
                         ),
                       ]),
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
+                margin: const EdgeInsets.only(top: 80, left: 20, right: 20),
                 padding: const EdgeInsets.all(8),
                 child: Form(
                   child: TextFormField(
@@ -161,9 +161,9 @@ class LoginPage extends GetView<LoginController> {
                   child: const Text(
                     'Entrar',
                     style: TextStyle(
-                      fontSize: 25, 
-                      color: Color.fromARGB(255, 116, 7, 7),
-                      fontWeight: FontWeight.bold),
+                        fontSize: 25,
+                        color: Color.fromARGB(255, 116, 7, 7),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

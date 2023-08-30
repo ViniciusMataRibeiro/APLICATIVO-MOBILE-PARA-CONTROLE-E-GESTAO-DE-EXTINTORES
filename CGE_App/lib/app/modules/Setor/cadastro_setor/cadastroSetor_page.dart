@@ -100,16 +100,16 @@ class CadastroSetor extends State<CadastroSetorState> {
                   margin: const EdgeInsets.only(top: 40, bottom: 40),
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/image/cge.png'),
+                      image: AssetImage('assets/image/login.png'),
                     ),
                     borderRadius: BorderRadius.all(
                       Radius.circular(100),
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black,
-                        blurRadius: 5,
-                      ),
+                          color: Color.fromARGB(255, 190, 189, 189),
+                          blurRadius: 1,
+                          offset: Offset(1, 0)),
                     ],
                   ),
                 ),
@@ -197,14 +197,15 @@ class CadastroSetor extends State<CadastroSetorState> {
                           onPressed: () async {
                             var result = await controller.goToInsert();
                             if (result != 'Algo deu Errado') {
-                              // ignore: use_build_context_synchronously
+                              controller.toast('Cadastrado com sucesso');
+                              Get.offAllNamed('/dashboard');
                             } else {
                               final snackBar = SnackBar(
-                                elevation: 0,
+                                elevation: 1,
                                 behavior: SnackBarBehavior.floating,
                                 backgroundColor: Colors.transparent,
                                 content: AwesomeSnackbarContent(
-                                  title: 'Alerta',
+                                  title: 'Erro ao Cadastrar',
                                   message: result.toString(),
                                   contentType: ContentType.failure,
                                 ),

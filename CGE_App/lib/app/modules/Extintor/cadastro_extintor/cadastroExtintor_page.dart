@@ -214,6 +214,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
     return FutureBuilder(
       future: mapa,
       builder: (context, snapshot) {
+        var size = MediaQuery.of(context).size;
         if (snapshot.hasData) {
           Map temp = snapshot.data;
           dadosSetor = temp['dadosSetores'];
@@ -235,15 +236,16 @@ class CadastroExtintor extends State<CadastroExtintorState>
                           margin: const EdgeInsets.only(top: 20, bottom: 30),
                           decoration: const BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage('assets/image/cge.png'),
+                              image: AssetImage('assets/image/login.png'),
                             ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(100),
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 5,
+                                color: Color.fromARGB(255, 190, 189, 189),
+                                blurRadius: 1,
+                                offset: Offset(1, 0),
                               ),
                             ],
                           ),
@@ -259,6 +261,59 @@ class CadastroExtintor extends State<CadastroExtintorState>
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Padding(
+                              padding: EdgeInsets.only(right: size.width*0.04),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    width: size.width*0.04,
+                                  ),
+                                  const Text(
+                                    'Ativo',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 15),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(
+                                        () {
+                                          controller.isAtivo =
+                                              !controller.isAtivo;
+                                        },
+                                      );
+                                    },
+                                    child: AnimatedContainer(
+                                      duration: const Duration(milliseconds: 400),
+                                      curve: Curves.fastLinearToSlowEaseIn,
+                                      decoration: BoxDecoration(
+                                        color: controller.isAtivo
+                                            ? Colors.red
+                                            : Colors.transparent,
+                                        borderRadius: BorderRadius.circular(5.0),
+                                        border: controller.isAtivo
+                                            ? null
+                                            : Border.all(
+                                                color: Colors.black, width: 2),
+                                      ),
+                                      width: 25,
+                                      height: 25,
+                                      child: controller.isAtivo
+                                          ? const Icon(
+                                              Icons.check,
+                                              color: Colors.white,
+                                            )
+                                          : null,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             ListTile(
                               contentPadding: EdgeInsets.zero,
                               leading: const Icon(
@@ -841,7 +896,8 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       TextButton(
                         child: const Text('Cancelar'),
                         onPressed: () {
-                          Get.back();
+                          controller.toast('Cadastrado com sucesso');
+                          Get.offAllNamed('/dashboard');
                         },
                       ),
                     ],
