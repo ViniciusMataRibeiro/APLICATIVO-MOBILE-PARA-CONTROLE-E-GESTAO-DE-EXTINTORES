@@ -34,8 +34,10 @@ class CadastroSetorState extends StatefulWidget {
   CadastroSetor createState() => CadastroSetor();
 }
 
-class CadastroSetor extends State<CadastroSetorState> {
+class CadastroSetor extends State<CadastroSetorState>{
+
   final CadastroSetorController controller = Get.put(CadastroSetorController());
+  final GlobalKey<FormState> validar = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -128,11 +130,19 @@ class CadastroSetor extends State<CadastroSetorState> {
                       margin:
                           const EdgeInsets.only(top: 20, left: 30, right: 30),
                       child: Form(
+                        key: validar,
                         child: TextFormField(
                           controller: controller.name,
+                          validator: (String? value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Este campo é obrigatorio';
+                            }
+                            return null;
+                          },
                           textInputAction: TextInputAction.next,
-                          onFieldSubmitted: (_){
-                            FocusScope.of(context).requestFocus(_field1FocusNode);
+                          onFieldSubmitted: (_) {
+                            FocusScope.of(context)
+                                .requestFocus(_field1FocusNode);
                           },
                           style: const TextStyle(
                               color: Colors.black, fontStyle: FontStyle.italic),
@@ -202,26 +212,27 @@ class CadastroSetor extends State<CadastroSetorState> {
                       child: Center(
                         child: ElevatedButton(
                           onPressed: () async {
+                            validar.currentState?.validate();
                             var result = await controller.goToInsert();
                             if (result != 'Algo deu Errado') {
                               controller.toast('Cadastrado com sucesso');
                               Get.offAllNamed('/dashboard');
-                            } else {
-                              final snackBar = SnackBar(
-                                elevation: 1,
-                                behavior: SnackBarBehavior.floating,
-                                backgroundColor: Colors.transparent,
-                                content: AwesomeSnackbarContent(
-                                  title: 'Erro ao Cadastrar',
-                                  message: result.toString(),
-                                  contentType: ContentType.failure,
-                                ),
-                              );
-                              // ignore: use_build_context_synchronously
-                              ScaffoldMessenger.of(context)
-                                ..hideCurrentSnackBar()
-                                ..showSnackBar(snackBar);
                             }
+                            //else {
+                            //   final snackBar = SnackBar(
+                            //     behavior: SnackBarBehavior.floating,
+                            //     backgroundColor: Color.fromARGB(255, 150, 26, 26),
+                            //     content: AwesomeSnackbarContent(
+                            //       title: 'Erro ao Cadastrar',
+                            //       message: result.toString(),
+                            //       contentType: ContentType.failure,
+                            //     ),
+                            //   );
+                            //   // ignore: use_build_context_synchronously
+                            //   ScaffoldMessenger.of(context)
+                            //     ..hideCurrentSnackBar()
+                            //     ..showSnackBar(snackBar);
+                            // }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:

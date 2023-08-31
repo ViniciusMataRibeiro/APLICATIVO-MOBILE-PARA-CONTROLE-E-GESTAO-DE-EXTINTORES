@@ -18,11 +18,11 @@ class CadastroExtintorController extends GetxController {
   String selectedTipo = '';
   int idSetor = 0;
   String nomeSetor = '';
-  bool isAtivo = false;
+  bool isAtivo = true;
 
   var id = 0;
 
-  var nome = TextEditingController(text: '');
+  var nome = TextEditingController();
   var validadeCasco = TextEditingController(text: '');
   var validadeExtintor = TextEditingController(text: '');
   var proximaManutencao = TextEditingController(text: '');
@@ -138,9 +138,9 @@ class CadastroExtintorController extends GetxController {
   }
 
   Future<String> goToInsert() async {
-    if (nome.text == '') {
-      return 'informe o numero do extintor';
-    }
+    // if (nome.text == '') {
+    //   return 'informe o numero do extintor';
+    // }
 
     if (selectedTamanho == '') {
       return 'informe o tamanho do extintor';

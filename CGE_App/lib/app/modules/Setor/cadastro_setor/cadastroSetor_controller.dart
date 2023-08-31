@@ -11,7 +11,7 @@ class CadastroSetorController extends GetxController {
   final _authService = Get.find<AuthService>();
   var idSetor = 0;
 
-  var name = TextEditingController(text: '');
+  var name = TextEditingController();
   var descricao = TextEditingController(text: '');
   var ativo = true.obs;
 
@@ -36,10 +36,7 @@ class CadastroSetorController extends GetxController {
   }
 
   Future<String> goToInsert() async {
-    if (name.text == '') {
-      return 'Informe o nome';
-    }
-
+    
     var setorRequestModel = SetorRequestModel(
         id: idSetor,
         name: name.text,

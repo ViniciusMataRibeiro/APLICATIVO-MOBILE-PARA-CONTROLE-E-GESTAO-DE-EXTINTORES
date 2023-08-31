@@ -93,8 +93,8 @@ class VistoriaController extends GetxController {
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 4,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         textColor: Colors.white,
-        fontSize: 15.0);
+        fontSize: 17.0);
   }
 }

@@ -177,15 +177,16 @@ class Vistoria extends State<VistoriaState>
                           margin: const EdgeInsets.only(top: 30, bottom: 30),
                           decoration: const BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage('assets/image/cge.png'),
+                              image: AssetImage('assets/image/login.png'),
                             ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(100),
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 5,
+                                color: Colors.grey,
+                                offset: Offset(1, 0),
+                                blurRadius: 1,
                               ),
                             ],
                           ),
@@ -518,7 +519,7 @@ class Vistoria extends State<VistoriaState>
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   decoration: BoxDecoration(
                                     color: controller.isSelectmanometro
-                                        ? Colors.red
+                                        ? const Color.fromARGB(255, 116, 7, 7)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(5.0),
                                     border: controller.isSelectmanometro
@@ -565,7 +566,7 @@ class Vistoria extends State<VistoriaState>
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   decoration: BoxDecoration(
                                     color: controller.isSelectparede
-                                        ? Colors.red
+                                        ? const Color.fromARGB(255, 116, 7, 7)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(5.0),
                                     border: controller.isSelectparede
@@ -610,7 +611,7 @@ class Vistoria extends State<VistoriaState>
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   decoration: BoxDecoration(
                                     color: controller.isSelectpiso
-                                        ? Colors.red
+                                        ? const Color.fromARGB(255, 116, 7, 7)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(5.0),
                                     border: controller.isSelectpiso
@@ -655,7 +656,7 @@ class Vistoria extends State<VistoriaState>
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   decoration: BoxDecoration(
                                     color: controller.isSelectacesso
-                                        ? Colors.red
+                                        ? const Color.fromARGB(255, 116, 7, 7)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(5.0),
                                     border: controller.isSelectacesso
@@ -710,7 +711,7 @@ class Vistoria extends State<VistoriaState>
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   decoration: BoxDecoration(
                                     color: controller.isSelectmangueira
-                                        ? Colors.red
+                                        ? const Color.fromARGB(255, 116, 7, 7)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(5.0),
                                     border: controller.isSelectmangueira
@@ -765,7 +766,7 @@ class Vistoria extends State<VistoriaState>
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   decoration: BoxDecoration(
                                     color: controller.isSelectlacre
-                                        ? Colors.red
+                                        ? const Color.fromARGB(255, 116, 7, 7)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(5.0),
                                     border: controller.isSelectlacre

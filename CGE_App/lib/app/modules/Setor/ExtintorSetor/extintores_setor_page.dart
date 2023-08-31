@@ -116,13 +116,6 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                 Get.back();
               },
             ),
-            const SizedBox(
-              width: 5,
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 0),
-              height: 40,
-            ),
             Expanded(
               child: Text(
                 '${controller.nomeSetor}',
