@@ -1,15 +1,13 @@
 // ignore_for_file: unused_field
-
-import 'package:faker/faker.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../../Icones/icones_personalizado.dart';
-import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
-import 'dart:ui' as ui;
-
 import 'extintores_setor_controller.dart';
+import 'package:flutter/material.dart';
+import '../../../core/app_theme.dart';
+import 'package:faker/faker.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
 List dados = [];
 

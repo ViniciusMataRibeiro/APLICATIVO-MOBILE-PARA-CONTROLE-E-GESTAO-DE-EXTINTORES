@@ -1,14 +1,13 @@
 import 'package:floating_action_bubble/floating_action_bubble.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
 import '../../../Icones/icones_personalizado.dart';
-import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
-import 'dart:ui' as ui;
-
 import 'extintores_details_controller.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:flutter/material.dart';
+import '../../../core/app_theme.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
 List dados = [];
 
@@ -47,7 +46,6 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
   late Animation<double> _animation;
   late AnimationController _animationController;
   late Future mapa;
-  bool atualizou = false;
 
   @override
   void initState() {
@@ -131,10 +129,10 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () async {
                   await controller.gotovistoria(dados[0]);
-                  setState(() {
-                    mapa = controller.getExtintor();
-                    atualizou = true;
-                  });
+                  // setState(() {
+                  //   mapa = controller.getExtintor();
+                  //   atualizou = true;
+                  // });
                 },
               ),
               Bubble(
@@ -145,9 +143,9 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () async {
                   await controller.gotoEditExtintor(dados[0]);
-                  setState(() {
-                    mapa = controller.getExtintor();
-                  });
+                  // setState(() {
+                  //   mapa = controller.getExtintor();
+                  // });
                 },
               ),
               Bubble(

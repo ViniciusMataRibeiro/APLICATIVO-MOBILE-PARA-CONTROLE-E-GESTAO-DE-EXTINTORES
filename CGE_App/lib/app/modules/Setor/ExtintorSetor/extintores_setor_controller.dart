@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
-
-import 'package:get/get.dart';
-
 import '../../../data/services/auth/service.dart';
 import '../../../routes/routes.dart';
+import 'package:get/get.dart';
 
 class ExtintorSetorController extends GetxController {
   final _authService = Get.find<AuthService>();

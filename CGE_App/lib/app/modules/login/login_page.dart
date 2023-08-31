@@ -1,15 +1,14 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import 'login_controller.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final FocusNode _field1FocusNode = FocusNode();
+    final FocusNode field1FocusNode = FocusNode();
 
     if (controller.isLogged) {
       Future.delayed(const Duration(milliseconds: 1), () {
@@ -52,7 +51,7 @@ class LoginPage extends GetView<LoginController> {
                     controller: controller.emailController,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_field1FocusNode);
+                      FocusScope.of(context).requestFocus(field1FocusNode);
                     },
                     style: const TextStyle(
                         fontSize: 15,
@@ -90,7 +89,7 @@ class LoginPage extends GetView<LoginController> {
                 child: Obx(
                   () => TextFormField(
                     controller: controller.passwordController,
-                    focusNode: _field1FocusNode,
+                    focusNode: field1FocusNode,
                     textInputAction: TextInputAction.done,
                     style: const TextStyle(fontSize: 15, color: Colors.white),
                     obscureText: controller.showPassword.value,

@@ -1,6 +1,4 @@
 // ignore_for_file: file_names
-
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import '../../../Icones/icones_personalizado.dart';
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +39,7 @@ class CadastroSetor extends State<CadastroSetorState>{
 
   @override
   Widget build(BuildContext context) {
-    final FocusNode _field1FocusNode = FocusNode();
+    final FocusNode field1FocusNode = FocusNode();
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -142,7 +140,7 @@ class CadastroSetor extends State<CadastroSetorState>{
                           textInputAction: TextInputAction.next,
                           onFieldSubmitted: (_) {
                             FocusScope.of(context)
-                                .requestFocus(_field1FocusNode);
+                                .requestFocus(field1FocusNode);
                           },
                           style: const TextStyle(
                               color: Colors.black, fontStyle: FontStyle.italic),
@@ -171,7 +169,7 @@ class CadastroSetor extends State<CadastroSetorState>{
                         child: TextFormField(
                           controller: controller.descricao,
                           textInputAction: TextInputAction.done,
-                          focusNode: _field1FocusNode,
+                          focusNode: field1FocusNode,
                           style: const TextStyle(
                               wordSpacing: 1,
                               fontSize: 18,
@@ -218,21 +216,6 @@ class CadastroSetor extends State<CadastroSetorState>{
                               controller.toast('Cadastrado com sucesso');
                               Get.offAllNamed('/dashboard');
                             }
-                            //else {
-                            //   final snackBar = SnackBar(
-                            //     behavior: SnackBarBehavior.floating,
-                            //     backgroundColor: Color.fromARGB(255, 150, 26, 26),
-                            //     content: AwesomeSnackbarContent(
-                            //       title: 'Erro ao Cadastrar',
-                            //       message: result.toString(),
-                            //       contentType: ContentType.failure,
-                            //     ),
-                            //   );
-                            //   // ignore: use_build_context_synchronously
-                            //   ScaffoldMessenger.of(context)
-                            //     ..hideCurrentSnackBar()
-                            //     ..showSnackBar(snackBar);
-                            // }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:

@@ -1,12 +1,12 @@
-import 'package:faker/faker.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../../Icones/icones_personalizado.dart';
-import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
+import 'package:flutter/material.dart';
+import '../../../core/app_theme.dart';
 import 'extintores_controller.dart';
+import 'package:faker/faker.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 import 'dart:ui' as ui;
 
 List dados = [];
@@ -129,10 +129,10 @@ class ExtintorPage extends State<ExtintorState>
             icon: const Icon(Icons.qr_code_scanner, color: Colors.white),
             onPressed: () => Get.toNamed('/qrCodeScanner'),
           ),
-          IconButton(
-            icon: const Icon(Icons.notification_important, color: Colors.white),
-            onPressed: () {},
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.notification_important, color: Colors.white),
+          //   onPressed: () {},
+          // ),
           IconButton(
             icon: const Icon(Icons.refresh_rounded, color: Colors.white),
             onPressed: () => _refresh(),

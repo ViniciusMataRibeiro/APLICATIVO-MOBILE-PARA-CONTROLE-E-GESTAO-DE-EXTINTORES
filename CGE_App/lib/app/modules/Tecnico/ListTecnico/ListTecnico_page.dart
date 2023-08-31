@@ -1,13 +1,10 @@
 // ignore_for_file: file_names
-
-import 'dart:ui' as ui;
-
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import '../../../Icones/icones_personalizado.dart';
 import '../../../data/services/auth/service.dart';
+import 'package:flutter/material.dart';
 import 'ListTecnico_controller.dart';
+import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
 class ListTecnico extends GetView<ListTecnicoController> {
   const ListTecnico({super.key});

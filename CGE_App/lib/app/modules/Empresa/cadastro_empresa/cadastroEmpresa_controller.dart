@@ -1,13 +1,11 @@
 // ignore_for_file: file_names
-
 import 'package:cge_app/app/data/Models/empresa_request_model.dart';
 import 'package:cge_app/app/data/Models/empresa_response_model.dart';
 import 'package:cge_app/app/data/Models/endereco_request_model.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-
 import '../../../data/services/auth/service.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CadastroEmpresaController extends GetxController {
   final _authService = Get.find<AuthService>();

@@ -1,7 +1,6 @@
+import 'extintores_details_controller.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
-import 'extintores_details_controller.dart';
 
 class ExtintorDetailsBinding implements Bindings {
   @override

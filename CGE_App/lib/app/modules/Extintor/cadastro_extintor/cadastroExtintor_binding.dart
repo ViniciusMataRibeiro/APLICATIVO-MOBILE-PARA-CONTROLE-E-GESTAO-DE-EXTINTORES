@@ -1,9 +1,7 @@
 // ignore_for_file: file_names
-
+import 'cadastroExtintor_controller.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
-import 'cadastroExtintor_controller.dart';
 
 class CadastroExtintorBinding implements Bindings {
   @override

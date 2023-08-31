@@ -1,14 +1,13 @@
 import 'package:floating_action_bubble/floating_action_bubble.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
 import '../../../Icones/icones_personalizado.dart';
-import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
-import 'dart:ui' as ui;
-
+import 'package:ionicons/ionicons.dart';
+import 'package:flutter/material.dart';
 import 'setor_details_controller.dart';
+import '../../../core/app_theme.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
 List dados = [];
 

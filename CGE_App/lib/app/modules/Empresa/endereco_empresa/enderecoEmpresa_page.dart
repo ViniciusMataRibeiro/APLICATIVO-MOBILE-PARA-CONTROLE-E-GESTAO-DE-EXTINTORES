@@ -1,11 +1,10 @@
 // ignore_for_file: file_names
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'enderecoEmpresa_controller.dart';
 import 'package:flutter/material.dart';
+import '../../../core/app_theme.dart';
 import 'package:get/get.dart';
 import 'dart:ui' as ui;
-
-import '../../../core/app_theme.dart';
-import 'enderecoEmpresa_controller.dart';
 
 class EnderecoEmpresaPage extends GetView<EnderecoEmpresaController> {
   const EnderecoEmpresaPage({super.key});

@@ -1,11 +1,9 @@
 // ignore_for_file: file_names
-
 import 'package:cge_app/app/modules/Empresa/perfil_empresa/perfilEmpresa_controller.dart';
+import '../../../data/services/auth/service.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
-
-import '../../../data/services/auth/service.dart';
 
 //ignore: must_be_immutable
 class PerfilPage extends GetView<PerfilEmpresaController> {

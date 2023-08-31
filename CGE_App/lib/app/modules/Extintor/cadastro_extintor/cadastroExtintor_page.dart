@@ -1,17 +1,15 @@
 // ignore_for_file: file_names
-
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:cge_app/app/Icones/icones_personalizado.dart';
-import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/modules/Extintor/cadastro_extintor/cadastroExtintor_controller.dart';
-import 'package:faker/faker.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'dart:ui' as ui;
+import 'package:cge_app/app/Icones/icones_personalizado.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:cge_app/app/core/app_theme.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:flutter/material.dart';
+import 'package:faker/faker.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
 var newFormat = DateFormat("dd/MM/yyyy");
 var dt = DateTime.now();
@@ -863,27 +861,23 @@ class CadastroExtintor extends State<CadastroExtintorState>
                               child: Center(
                                 child: ElevatedButton(
                                   onPressed: () async {
-                                    var result = await controller.goToInsert();
-                                    if (result != 'Algo deu Errado') {
-                                      // ignore: use_build_context_synchronously
-                                      await _showMyDialog(result);
+                                    if (validarNome.currentContext == null) {
+                                      controller.toast('Alterado com sucesso');
+                                      Get.offAllNamed('/dashboard');
+                                    } else if (validarNome.currentState!
+                                            .validate() &&
+                                        validarTam.currentState!.validate() &&
+                                        validarTip.currentState!.validate() &&
+                                        validarSet.currentState!.validate()) {
+                                      var result =
+                                          await controller.goToInsert();
+
+                                      if (result != 'Algo deu Errado') {
+                                        await _showMyDialog(result);
+                                      } else {
+                                        controller.toast(result);
+                                      }
                                     }
-                                    // else {
-                                    //   final snackBar = SnackBar(
-                                    //     elevation: 0,
-                                    //     behavior: SnackBarBehavior.floating,
-                                    //     backgroundColor: Colors.transparent,
-                                    //     content: AwesomeSnackbarContent(
-                                    //       title: 'Alerta',
-                                    //       message: result.toString(),
-                                    //       contentType: ContentType.failure,
-                                    //     ),
-                                    //   );
-                                    //   // ignore: use_build_context_synchronously
-                                    //   ScaffoldMessenger.of(context)
-                                    //     ..hideCurrentSnackBar()
-                                    //     ..showSnackBar(snackBar);
-                                    // }
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor:
@@ -947,6 +941,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  const SizedBox(height: 10),
                   const Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
@@ -958,10 +953,11 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       ),
                     ),
                   ),
+                  const SizedBox(height: 15),
                   Container(
                     margin: const EdgeInsets.all(10.0),
                     child: const Text(
-                      'Deseja imprimir o QRCode referente ao Setor?',
+                      'Deseja imprimir o QRCode referente ao Extintor?',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 15,
@@ -974,29 +970,19 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       TextButton(
                         child: const Text('Imprimir'),
                         onPressed: () {
-                          //Navigator.of(context).pop();
-                          if (validarNome.currentState!.validate() &&
-                              validarTam.currentState!.validate() &&
-                              validarTip.currentState!.validate() &&
-                              validarSet.currentState!.validate()) {
-                            controller.goToPrintOutQrCode(result, 'Extintor',
-                                controller.nome.text, controller.selectedTipo);
-                          } else {
-                            Get.back();
-                          }
+                          controller.goToPrintOutQrCode(result, 'Extintor',
+                              controller.nome.text, controller.selectedTipo);
                         },
                       ),
                       TextButton(
                         child: const Text('Cancelar'),
                         onPressed: () {
-                          if (validarNome.currentState!.validate() &&
-                              validarTam.currentState!.validate() &&
-                              validarTip.currentState!.validate() &&
-                              validarSet.currentState!.validate()) {
-                            controller.toast('Cadastrado com sucesso');
+                          if (validarNome.currentContext == null) {
+                            controller.toast('Alterado com sucesso');
                             Get.offAllNamed('/dashboard');
                           } else {
-                            Get.back();
+                            controller.toast('Cadastrado com sucesso');
+                            Get.offAllNamed('/dashboard');
                           }
                         },
                       ),

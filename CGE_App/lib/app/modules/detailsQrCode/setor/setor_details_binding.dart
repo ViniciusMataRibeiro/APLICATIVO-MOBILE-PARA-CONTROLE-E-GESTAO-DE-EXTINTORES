@@ -1,7 +1,6 @@
+import 'setor_details_controller.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
-import 'setor_details_controller.dart';
 
 class SetorDetailsBinding implements Bindings {
   @override

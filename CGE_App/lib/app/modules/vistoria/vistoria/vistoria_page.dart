@@ -1,14 +1,13 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/modules/vistoria/vistoria/vistoria_controller.dart';
-import 'package:faker/faker.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
-import 'dart:ui' as ui;
-
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import '../../../Icones/icones_personalizado.dart';
+import 'package:cge_app/app/core/app_theme.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:flutter/material.dart';
+import 'package:faker/faker.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
 var newFormat = DateFormat("dd/MM/y");
 var dt = DateTime.now();

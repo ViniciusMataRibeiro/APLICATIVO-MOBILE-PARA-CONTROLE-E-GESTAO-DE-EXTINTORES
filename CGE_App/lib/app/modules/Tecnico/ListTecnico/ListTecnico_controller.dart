@@ -1,16 +1,12 @@
 // ignore_for_file: file_names
-
-import 'package:get/get.dart';
-
-import 'package:cge_app/app/routes/routes.dart';
-
 import '../../../data/services/auth/service.dart';
+import 'package:cge_app/app/routes/routes.dart';
+import 'package:get/get.dart';
 
 class ListTecnicoController extends GetxController {
   final _authService = Get.find<AuthService>();
-  
-  Future<List> getTecnico() async {
 
+  Future<List> getTecnico() async {
     List t = await _authService.getTecnico();
 
     return t;

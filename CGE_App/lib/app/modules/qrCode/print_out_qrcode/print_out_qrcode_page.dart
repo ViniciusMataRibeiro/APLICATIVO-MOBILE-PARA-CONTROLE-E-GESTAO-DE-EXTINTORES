@@ -1,12 +1,12 @@
 import 'package:cge_app/app/modules/qrCode/print_out_qrcode/print_out_qrcode_controller.dart';
-import 'package:get/get.dart';
 import 'package:bluetooth_print/bluetooth_print_model.dart';
 import 'package:bluetooth_print/bluetooth_print.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../../core/app_theme.dart';
-import 'dart:async';
+import 'package:get/get.dart';
 import 'dart:ui' as ui;
+import 'dart:async';
 
 class PrintQrCodePage extends GetView<PrintQrCodeController> {
   const PrintQrCodePage({super.key});

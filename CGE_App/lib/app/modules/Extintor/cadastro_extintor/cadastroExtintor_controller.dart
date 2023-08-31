@@ -1,13 +1,11 @@
 // ignore_for_file: file_names
-
 import 'package:cge_app/app/data/Models/extintor_request_model.dart';
 import 'package:cge_app/app/data/services/auth/service.dart';
-import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-
+import 'package:flutter/material.dart';
 import '../../../routes/routes.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 class CadastroExtintorController extends GetxController {
   final _authService = Get.find<AuthService>();
@@ -28,8 +26,6 @@ class CadastroExtintorController extends GetxController {
   var proximaManutencao = TextEditingController(text: '');
   var descricao = TextEditingController(text: '');
 
-  var ativo = true.obs;
-
   List dadosExtintorTamanho = [];
   List dadosExtintorTipo = [];
 
@@ -47,7 +43,7 @@ class CadastroExtintorController extends GetxController {
       selectedTipo = _extintor['tipoExtintor'];
       idSetor = _extintor['setor_id'];
       nomeSetor = _extintor['setor'];
-      ativo = _extintor['ativo'] == 1 ? true.obs : false.obs;
+      isAtivo = _extintor['ativo'] == 1 ? true : false;
 
       dt = DateTime.parse(_extintor['validadeCasco']);
       dt2 = DateTime.parse(_extintor['validadeExtintor']);
@@ -178,7 +174,7 @@ class CadastroExtintorController extends GetxController {
       proximaManutencao: DateFormat('dd/MM/yyyy').parse(data),
       tamanho: int.parse(selectedTamanho.replaceAll(RegExp(r'[^0-9]'), '')),
       tipo: selectedTipo,
-      ativo: true,
+      ativo: isAtivo,
       setor_id: idSetor,
       descricao: "Teste",
     );
@@ -187,6 +183,7 @@ class CadastroExtintorController extends GetxController {
 
     if (id > 0) {
       res = await _authService.updateExtintor(extintorResquestModel);
+
     } else {
       res = await _authService.insertExtintor(extintorResquestModel);
     }

@@ -130,9 +130,7 @@ class AuthService extends GetxService {
   Future<int> updateExtintor(ExtintorRequestModel extintor) async {
     var result = await _repository.updateExtintor(extintor);
     if (result > 0) {
-      Future.delayed(const Duration(milliseconds: 1), () {
-        Get.back();
-      });
+      Get.back();
       return result;
     } else {
       return 0;

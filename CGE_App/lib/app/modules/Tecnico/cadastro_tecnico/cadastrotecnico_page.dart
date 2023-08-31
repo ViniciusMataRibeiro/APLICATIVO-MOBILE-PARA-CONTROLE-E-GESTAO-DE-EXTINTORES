@@ -1,14 +1,12 @@
 // ignore_for_file: unused_field
-
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cge_app/app/core/app_theme.dart';
-import 'package:faker/faker.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'dart:ui' as ui;
-
 import 'cadastrotecnico_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:faker/faker.dart';
+import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
 class CadastroTecnicoPage extends GetView<CadastroTecnicoController> {
   const CadastroTecnicoPage({super.key});
