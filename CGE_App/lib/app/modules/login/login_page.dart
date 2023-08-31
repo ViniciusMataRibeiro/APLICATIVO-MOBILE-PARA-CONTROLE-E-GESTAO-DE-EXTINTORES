@@ -9,7 +9,7 @@ class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     final FocusNode field1FocusNode = FocusNode();
-
+    var size = MediaQuery.of(context).size;
     if (controller.isLogged) {
       Future.delayed(const Duration(milliseconds: 1), () {
         Get.offAllNamed('/dashboard');
@@ -43,8 +43,9 @@ class LoginPage extends GetView<LoginController> {
                       ]),
                 ),
               ),
+              SizedBox(height: size.height * 0.15),
               Container(
-                margin: const EdgeInsets.only(top: 80, left: 20, right: 20),
+                margin: const EdgeInsets.only(left: 20, right: 20),
                 padding: const EdgeInsets.all(8),
                 child: Form(
                   child: TextFormField(
