@@ -502,7 +502,7 @@ class ExtintorPage extends State<ExtintorState>
                   child: Container(
                     decoration: BoxDecoration(
                       image: const DecorationImage(
-                        image: AssetImage('assets/image/card.png'),
+                        image: AssetImage('assets/image/card_extintor.png'),
                         fit: BoxFit.fill,
                       ),
                       borderRadius: BorderRadius.circular(10),
