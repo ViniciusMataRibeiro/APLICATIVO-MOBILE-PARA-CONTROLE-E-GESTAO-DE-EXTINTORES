@@ -27,7 +27,7 @@ class PerfilPage extends GetView<PerfilEmpresaController> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 3.1,
+                height: MediaQuery.of(context).size.height / 2.7,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,

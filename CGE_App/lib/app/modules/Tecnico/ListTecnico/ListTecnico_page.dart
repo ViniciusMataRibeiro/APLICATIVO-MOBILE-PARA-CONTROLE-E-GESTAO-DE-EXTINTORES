@@ -104,12 +104,12 @@ class ListTecnicoPage extends State<ListTecnicoState>
                 ],
               ),
               backgroundColor: const Color.fromARGB(255, 116, 7, 7),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(25),
-                  bottomRight: Radius.circular(25),
-                ),
-              ),
+              // shape: const RoundedRectangleBorder(
+              //   borderRadius: BorderRadius.only(
+              //     bottomLeft: Radius.circular(25),
+              //     bottomRight: Radius.circular(25),
+              //   ),
+              // ),
             ),
             body: _mostraDados(
                 dados: snapshot.data, controllerTecnico: controller),
