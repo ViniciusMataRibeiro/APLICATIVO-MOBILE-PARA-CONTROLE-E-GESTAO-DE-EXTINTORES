@@ -119,6 +119,10 @@ class AuthService extends GetxService {
     return await _repository.getAllExtintor();
   }
 
+    Future<Map> getExtintorAtivo() async {
+    return await _repository.getExtintorAtivo();
+  }
+
   Future<Map> getExtintorSetor(int idSetor) async {
     return await _repository.getExtintorSetor(idSetor);
   }

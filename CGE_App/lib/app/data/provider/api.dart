@@ -183,6 +183,28 @@ class Api {
     }
   }
 
+  Future<Map> getExtintorAtivo() async {
+    var url = Uri.parse("$baseUrl/extintorsAll");
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization': 'Bearer ${_configService.token}',
+    });
+    if (response.statusCode == 200) {
+      List d = [];
+      List dados = await jsonDecode(response.body);
+      await Future.forEach(dados, (element) {
+        List extintorAtivo =
+            dados.where((element) => element['ativo'] == 1).toList();
+        d.add(extintorAtivo);
+      });
+      return {"dados": d};
+    }
+    else {
+      return {"dados": []};
+    }
+  }
+
   Future<Map> getExtintorSetor(int idSetor) async {
     var url = Uri.parse("$baseUrl/extintorsSetor/$idSetor");
     var response = await http.get(url, headers: {

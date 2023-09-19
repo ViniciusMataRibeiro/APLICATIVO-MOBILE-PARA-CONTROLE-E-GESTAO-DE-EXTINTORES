@@ -11,6 +11,13 @@ class ExtintorController extends GetxController {
     return t;
   }
 
+  Future<Map> getExtintorAtivo() async {
+    Map t = await _authService.getExtintorAtivo();
+
+    return t;
+    
+  }
+
   Future<void> gotoDeleteExtintor(int idExtintor) async {
     await _authService.deleteExtintor(idExtintor);
   }

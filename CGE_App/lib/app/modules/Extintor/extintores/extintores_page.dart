@@ -76,7 +76,7 @@ class ExtintorPage extends State<ExtintorState>
   _refresh() async {
     try {
       setState(() {
-        mapa = controller.getAllExtintor();
+        mapa = controller.getExtintorAtivo();
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (BuildContext context) => super.widget));
       });
@@ -432,8 +432,86 @@ class ExtintorPage extends State<ExtintorState>
                                           const Color.fromARGB(255, 116, 7, 7),
                                     ),
                                     onPressed: () async => {
-                                      await controller
-                                          .gotoDeleteExtintor(item['id'])
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            contentPadding: EdgeInsets.zero,
+                                            content: Container(
+                                              decoration: BoxDecoration(
+                                                image: const DecorationImage(
+                                                  image: AssetImage(
+                                                      'assets/image/modal_qr.png'),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    const SizedBox(height: 10),
+                                                    const Align(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      child: Text(
+                                                        'Atenção',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 15),
+                                                    Container(
+                                                      margin:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: const Text(
+                                                        'Certeza que deseja excluir este extintor?',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 15,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        TextButton(
+                                                          child: const Text(
+                                                              'Confirmar'),
+                                                          onPressed: () {
+                                                            controller
+                                                                .gotoDeleteExtintor(
+                                                                    item['id']);
+                                                            Get.offAllNamed('/dashboard');
+                                                            
+                                                          },
+                                                        ),
+                                                        TextButton(
+                                                          child: const Text(
+                                                              'Cancelar'),
+                                                          onPressed: () {
+                                                            Get.back();
+                                                          },
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },                                       
+                                      )
                                     },
                                     child: const Text(
                                       'Excluir',
