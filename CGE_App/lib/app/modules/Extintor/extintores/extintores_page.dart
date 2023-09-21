@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'dart:ui' as ui;
 
 List dados = [];
+bool ativo = false;
 
 class Extintor extends GetView<ExtintorController> {
   const Extintor({super.key});
@@ -73,10 +74,10 @@ class ExtintorPage extends State<ExtintorState>
 
   DateTime selectedDate = DateTime.now();
 
-  _refresh() async {
+  _refresh(bool parametro) async {
     try {
       setState(() {
-        mapa = controller.getAllExtintor(true);
+        mapa = controller.getAllExtintor(parametro);
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (BuildContext context) => super.widget));
       });
@@ -95,7 +96,7 @@ class ExtintorPage extends State<ExtintorState>
         CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
-    mapa = controller.getAllExtintor(true);
+    mapa = controller.getAllExtintor(ativo);
 
     super.initState();
   }
@@ -135,7 +136,7 @@ class ExtintorPage extends State<ExtintorState>
           // ),
           IconButton(
             icon: const Icon(Icons.refresh_rounded, color: Colors.white),
-            onPressed: () => _refresh(),
+            onPressed: () => _refresh(true),
           ),
         ],
         backgroundColor: const Color.fromARGB(255, 116, 7, 7),
@@ -163,6 +164,17 @@ class ExtintorPage extends State<ExtintorState>
                   Get.toNamed('/cadTecnico');
                 },
               ),
+              Bubble(
+                title: "Mostrar os Inativos",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
+                icon: Icons.add_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                   ativo = !ativo;
+                  _refresh(ativo);
+                },
+              ),
             ] else ...[
               Bubble(
                 title: "Cadastrar Extintor",
@@ -182,6 +194,18 @@ class ExtintorPage extends State<ExtintorState>
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
                   Get.toNamed('/vistoria');
+                },
+              ),
+              Bubble(
+                title:
+                    ativo == true ? "Mostrar os Inativos" : "Mostrar os Ativos",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
+                icon: Icons.add_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  ativo = !ativo;
+                  _refresh(ativo);
                 },
               ),
             ],
@@ -211,7 +235,7 @@ class ExtintorPage extends State<ExtintorState>
               const Duration(minutes: 1),
               () {
                 if (mounted) {
-                  _refresh();
+                  _refresh(ativo);
                 }
               },
             );
@@ -492,8 +516,8 @@ class ExtintorPage extends State<ExtintorState>
                                                             controller
                                                                 .gotoDeleteExtintor(
                                                                     item['id']);
-                                                            Get.offAllNamed('/dashboard');
-                                                            
+                                                            Get.offAllNamed(
+                                                                '/dashboard');
                                                           },
                                                         ),
                                                         TextButton(
@@ -510,7 +534,7 @@ class ExtintorPage extends State<ExtintorState>
                                               ),
                                             ),
                                           );
-                                        },                                       
+                                        },
                                       )
                                     },
                                     child: const Text(

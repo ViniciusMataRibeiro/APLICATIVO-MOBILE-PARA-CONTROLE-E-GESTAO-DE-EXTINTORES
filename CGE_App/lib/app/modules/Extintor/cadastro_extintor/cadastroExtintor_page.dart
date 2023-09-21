@@ -862,8 +862,15 @@ class CadastroExtintor extends State<CadastroExtintorState>
                                 child: ElevatedButton(
                                   onPressed: () async {
                                     if (validarNome.currentContext == null) {
-                                      controller.toast('Alterado com sucesso');
-                                      Get.offAllNamed('/dashboard');
+                                      var result =
+                                          await controller.goToInsert();
+                                      if (result != 'Algo deu Errado') {
+                                        await _showMyDialog(result);
+                                      } else {
+                                        controller
+                                            .toast('Alterado com sucesso');
+                                        Get.offAllNamed('/dashboard');
+                                      }
                                     } else if (validarNome.currentState!
                                             .validate() &&
                                         validarTam.currentState!.validate() &&

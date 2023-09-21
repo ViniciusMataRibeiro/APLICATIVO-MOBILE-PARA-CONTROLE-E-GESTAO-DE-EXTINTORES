@@ -16,7 +16,7 @@ import '../services/config/service.dart';
 
 class Api {
   final _configService = Get.find<ConfigService>();
-  final baseUrl = "http://192.168.1.101:3333";
+  final baseUrl = "http://192.168.0.134:3333";
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     var url = Uri.parse("$baseUrl/login");
@@ -175,17 +175,16 @@ class Api {
       if (isAtivo) {
         await Future.forEach(dados, (element) {
           Map<String, dynamic> t = Map.from(element);
-          if(t['ativo'] == 1){
+          if (t['ativo'] == 1) {
             d.add(t);
-          }                
+          }
         });
-      }
-      else {
+      } else {
         await Future.forEach(dados, (element) {
           Map<String, dynamic> t = Map.from(element);
-          if(t['ativo'] == 0){
+          if (t['ativo'] == 0) {
             d.add(t);
-          }                
+          }
         });
       }
       return {"dados": d};
