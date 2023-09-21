@@ -76,7 +76,7 @@ class ExtintorPage extends State<ExtintorState>
   _refresh() async {
     try {
       setState(() {
-        mapa = controller.getExtintorAtivo();
+        mapa = controller.getAllExtintor(true);
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (BuildContext context) => super.widget));
       });
@@ -95,7 +95,7 @@ class ExtintorPage extends State<ExtintorState>
         CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
-    mapa = controller.getAllExtintor();
+    mapa = controller.getAllExtintor(true);
 
     super.initState();
   }

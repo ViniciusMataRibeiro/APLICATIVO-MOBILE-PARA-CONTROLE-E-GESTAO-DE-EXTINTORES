@@ -111,7 +111,7 @@ class _PrintQrCodeState extends State<PrintQrCodeState>
                   ),
                   Container(
                     margin: const EdgeInsets.only(right: 0),
-                    width: size.width * 0.05,
+                    width: size.width * 0.03,
                     height: 40,
                   ),
                   const Text(

@@ -49,9 +49,8 @@ class AuthRepository {
   Future<bool> deleteExtintor(int idExtintor) =>
       _api.deleteExtintor(idExtintor);
 
-  Future<Map> getAllExtintor() => _api.getAllExtintor();
+  Future<Map> getAllExtintor(bool isAtivo) => _api.getAllExtintor(isAtivo);
 
-  Future<Map> getExtintorAtivo() => _api.getExtintorAtivo();
 
   Future<Map> getExtintorSetor(int idSetor) => _api.getExtintorSetor(idSetor);
 

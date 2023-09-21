@@ -16,7 +16,7 @@ import '../services/config/service.dart';
 
 class Api {
   final _configService = Get.find<ConfigService>();
-  final baseUrl = "http://3.131.91.191:3333";
+  final baseUrl = "http://192.168.1.101:3333";
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     var url = Uri.parse("$baseUrl/login");
@@ -162,7 +162,7 @@ class Api {
     }
   }
 
-  Future<Map> getAllExtintor() async {
+  Future<Map> getAllExtintor(bool isAtivo) async {
     var url = Uri.parse("$baseUrl/extintorsAll");
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -172,35 +172,24 @@ class Api {
     if (response.statusCode == 200) {
       List d = [];
       List dados = await jsonDecode(response.body);
-      await Future.forEach(dados, (element) {
-        Map<String, dynamic> t = Map.from(element);
-        d.add(t);
-      });
-
+      if (isAtivo) {
+        await Future.forEach(dados, (element) {
+          Map<String, dynamic> t = Map.from(element);
+          if(t['ativo'] == 1){
+            d.add(t);
+          }                
+        });
+      }
+      else {
+        await Future.forEach(dados, (element) {
+          Map<String, dynamic> t = Map.from(element);
+          if(t['ativo'] == 0){
+            d.add(t);
+          }                
+        });
+      }
       return {"dados": d};
     } else {
-      return {"dados": []};
-    }
-  }
-
-  Future<Map> getExtintorAtivo() async {
-    var url = Uri.parse("$baseUrl/extintorsAll");
-    var response = await http.get(url, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'authorization': 'Bearer ${_configService.token}',
-    });
-    if (response.statusCode == 200) {
-      List d = [];
-      List dados = await jsonDecode(response.body);
-      await Future.forEach(dados, (element) {
-        List extintorAtivo =
-            dados.where((element) => element['ativo'] == 1).toList();
-        d.add(extintorAtivo);
-      });
-      return {"dados": d};
-    }
-    else {
       return {"dados": []};
     }
   }
