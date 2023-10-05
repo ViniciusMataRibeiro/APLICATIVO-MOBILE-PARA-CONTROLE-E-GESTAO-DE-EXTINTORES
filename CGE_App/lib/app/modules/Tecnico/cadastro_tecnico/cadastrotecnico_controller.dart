@@ -82,6 +82,6 @@ class CadastroTecnicoController extends GetxController {
         timeInSecForIosWeb: 4,
         backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         textColor: Colors.white,
-        fontSize: 17.0);
+        fontSize: 15.0);
   }
 }
