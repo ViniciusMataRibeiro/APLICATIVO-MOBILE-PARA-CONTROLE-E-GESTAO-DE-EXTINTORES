@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'dart:ui' as ui;
 
 List dados = [];
-bool ativo = false;
+bool ativo = true;
 
 class Extintor extends GetView<ExtintorController> {
   const Extintor({super.key});
@@ -165,13 +165,14 @@ class ExtintorPage extends State<ExtintorState>
                 },
               ),
               Bubble(
-                title: "Mostrar os Inativos",
+                title:
+                    ativo == true ? "Mostrar os Inativos" : "Mostrar os Ativos",
                 iconColor: Colors.white,
                 bubbleColor: const Color.fromARGB(255, 116, 7, 7),
-                icon: Icons.add_rounded,
+                icon: Icons.apps_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                   ativo = !ativo;
+                  ativo = !ativo;
                   _refresh(ativo);
                 },
               ),
@@ -201,7 +202,7 @@ class ExtintorPage extends State<ExtintorState>
                     ativo == true ? "Mostrar os Inativos" : "Mostrar os Ativos",
                 iconColor: Colors.white,
                 bubbleColor: const Color.fromARGB(255, 116, 7, 7),
-                icon: Icons.add_rounded,
+                icon: Icons.apps_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
                   ativo = !ativo;
