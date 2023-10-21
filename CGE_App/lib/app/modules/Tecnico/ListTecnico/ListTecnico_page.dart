@@ -6,6 +6,9 @@ import 'ListTecnico_controller.dart';
 import 'package:get/get.dart';
 import 'dart:ui' as ui;
 
+List dados = [];
+bool ativo = true;
+
 class ListTecnico extends GetView<ListTecnicoController> {
   const ListTecnico({super.key});
 
@@ -68,6 +71,8 @@ class ListTecnicoPage extends State<ListTecnicoState>
       future: dadosTecnico,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          Map temp = snapshot.data;
+          dados = temp['dados'];
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
@@ -114,7 +119,7 @@ class ListTecnicoPage extends State<ListTecnicoState>
               // ),
             ),
             body: _mostraDados(
-                dados: snapshot.data, controllerTecnico: controller),
+                dados: dados, controllerTecnico: controller),
           );
         } else {
           return const Scaffold(
@@ -373,7 +378,7 @@ class ListTecnicoPage extends State<ListTecnicoState>
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: 35),
-                    child: Row(                  
+                    child: Row(
                       children: [
                         _icone(item),
                         const SizedBox(width: 10),

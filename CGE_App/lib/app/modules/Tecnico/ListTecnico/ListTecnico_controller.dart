@@ -8,8 +8,8 @@ class ListTecnicoController extends GetxController {
 
   bool get isAtivo => true;
 
-  Future<List> getTecnico() async {
-    List t = await _authService.getTecnico();
+  Future<Map> getTecnico() async {
+    Map t = await _authService.getTecnico();
 
     return t;
   }
