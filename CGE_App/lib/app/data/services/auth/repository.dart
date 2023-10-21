@@ -32,6 +32,9 @@ class AuthRepository {
 
   Future<List> getTecnico() => _api.getTecnico();
 
+    Future<bool> deleteTecnico(int idTecnico) =>
+      _api.deleteTecnico(idTecnico);
+
   Future<Map> getResumoSetor() => _api.getResumoSetor();
 
   Future<Map> getByIdExtintor(int id) => _api.getByIdExtintor(id);

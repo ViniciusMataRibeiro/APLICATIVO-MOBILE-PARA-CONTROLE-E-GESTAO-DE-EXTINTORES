@@ -87,6 +87,15 @@ class AuthService extends GetxService {
     }
   }
 
+  Future<bool> deleteTecnico(int idTecnico) async {
+    var result = await _repository.deleteTecnico(idTecnico);
+    if (result) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<List> getTecnico() async {
     return await _repository.getTecnico();
   }

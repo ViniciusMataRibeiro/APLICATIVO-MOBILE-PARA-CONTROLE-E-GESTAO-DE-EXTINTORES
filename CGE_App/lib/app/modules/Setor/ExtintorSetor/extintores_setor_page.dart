@@ -97,7 +97,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
 
   @override
   Widget build(BuildContext context) {
-    //var size = MediaQuery.of(context).size;
+    var size = MediaQuery.of(context).size;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -111,18 +111,20 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.back();
+                Get.offAllNamed('/dashboard');
               },
             ),
-            Expanded(
-              child: Text(
-                '${controller.nomeSetor}',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontStyle: FontStyle.italic),
-              ),
+            Container(
+              margin: EdgeInsets.only(right: size.width * 0.18),
+              height: 40,
+            ),
+            Text(
+              '${controller.nomeSetor}',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic),
             ),
           ],
         ),

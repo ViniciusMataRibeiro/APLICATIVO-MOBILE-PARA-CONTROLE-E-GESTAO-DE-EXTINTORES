@@ -31,21 +31,14 @@ import '../modules/dashboard/dashboard_binding.dart';
 import '../modules/qrCode/scanner/qr_scanner.dart';
 import '../modules/dashboard/dashboard_page.dart';
 import 'package:cge_app/app/routes/routes.dart';
-import '../modules/splash/splash_binding.dart';
 import '../modules/Admin/admin_binding.dart';
 import '../modules/login/login_binding.dart';
-import '../modules/splash/splash_page.dart';
 import '../modules/Admin/admin_page.dart';
 import '../modules/login/login_page.dart';
 import 'package:get/get.dart';
 
 abstract class AppPages {
   static final pages = [
-    GetPage(
-      name: Routes.inicial,
-      page: () => const SplashPage(),
-      binding: SplashBinding(),
-    ),
     GetPage(
       name: Routes.dashboard,
       page: () => DashboardPage(),

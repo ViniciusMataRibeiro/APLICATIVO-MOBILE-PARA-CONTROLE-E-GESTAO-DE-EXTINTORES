@@ -149,58 +149,58 @@ class CadastroExtintor extends State<CadastroExtintorState>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Visibility(
-                      visible: cadastroTecnicoController.alterando.value,
-                      child: ListTile(
-                        contentPadding: const EdgeInsets.only(left: 5),
-                        leading: GestureDetector(
-                          onTap: () {
-                            setState(
-                              () {
-                                isSelectbloqueado = !isSelectbloqueado;
-                                cadastroTecnicoController.bloqueado.value =
-                                    isSelectbloqueado;
-                              },
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            decoration: BoxDecoration(
-                              color: isSelectbloqueado
-                                  ? Colors.red
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(5.0),
-                              border: isSelectbloqueado
-                                  ? null
-                                  : Border.all(color: Colors.black, width: 2),
-                            ),
-                            width: 25,
-                            height: 25,
-                            child: isSelectbloqueado
-                                ? const Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                  )
-                                : null,
-                          ),
-                        ),
-                        title: const Text(
-                          'Inativo',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                    cadastroTecnicoController.alterando.value
-                        ? const SizedBox(
-                            height: 0,
-                          )
-                        : const SizedBox(
-                            height: 20,
-                          ),
+                    // Visibility(
+                    //   visible: cadastroTecnicoController.alterando.value,
+                    //   child: ListTile(
+                    //     contentPadding: const EdgeInsets.only(left: 5),
+                    //     leading: GestureDetector(
+                    //       onTap: () {
+                    //         setState(
+                    //           () {
+                    //             isSelectbloqueado = !isSelectbloqueado;
+                    //             cadastroTecnicoController.bloqueado.value =
+                    //                 isSelectbloqueado;
+                    //           },
+                    //         );
+                    //       },
+                    //       child: AnimatedContainer(
+                    //         duration: const Duration(milliseconds: 400),
+                    //         curve: Curves.fastLinearToSlowEaseIn,
+                    //         decoration: BoxDecoration(
+                    //           color: isSelectbloqueado
+                    //               ? Colors.red
+                    //               : Colors.transparent,
+                    //           borderRadius: BorderRadius.circular(5.0),
+                    //           border: isSelectbloqueado
+                    //               ? null
+                    //               : Border.all(color: Colors.black, width: 2),
+                    //         ),
+                    //         width: 25,
+                    //         height: 25,
+                    //         child: isSelectbloqueado
+                    //             ? const Icon(
+                    //                 Icons.check,
+                    //                 color: Colors.white,
+                    //               )
+                    //             : null,
+                    //       ),
+                    //     ),
+                    //     // title: const Text(
+                    //     //   'Inativo',
+                    //     //   style: TextStyle(
+                    //     //     color: Colors.black,
+                    //     //     fontSize: 20,
+                    //     //   ),
+                    //     // ),
+                    //   ),
+                    // ),
+                    // cadastroTecnicoController.alterando.value
+                    //     ? const SizedBox(
+                    //         height: 0,
+                    //       )
+                    //     : const SizedBox(
+                    //         height: 20,
+                    //       ),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       leading: const Icon(

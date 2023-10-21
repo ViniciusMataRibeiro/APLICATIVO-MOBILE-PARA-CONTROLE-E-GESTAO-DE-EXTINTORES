@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 class ListTecnicoController extends GetxController {
   final _authService = Get.find<AuthService>();
 
+  bool get isAtivo => true;
+
   Future<List> getTecnico() async {
     List t = await _authService.getTecnico();
 
@@ -14,5 +16,9 @@ class ListTecnicoController extends GetxController {
 
   Future<void> gotoEditTecnico(Map item) async {
     await Get.toNamed(Routes.cadTecnico, arguments: item);
+  }
+
+  Future<void> gotoDeleteTecnico(int idTecnico) async {
+    await _authService.deleteTecnico(idTecnico);
   }
 }

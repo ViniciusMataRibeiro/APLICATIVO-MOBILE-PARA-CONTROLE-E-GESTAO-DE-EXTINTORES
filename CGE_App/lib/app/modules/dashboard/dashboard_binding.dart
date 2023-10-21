@@ -8,7 +8,6 @@ import '../Tecnico/ListTecnico/ListTecnico_controller.dart';
 import '../Extintor/extintores/extintores_controller.dart';
 import '../vistoria/vistoria/vistoria_controller.dart';
 import '../Setor/setores/setores_controller.dart';
-import '../splash/splash_controller.dart';
 import '../login/login_controller.dart';
 import 'package:flutter/services.dart';
 import 'dashboard_Controller.dart';
@@ -30,8 +29,6 @@ class DashboardBinding implements Bindings {
 
     Get.lazyPut<CadastroSetorController>(() => CadastroSetorController());
     Get.lazyPut<SetorController>(() => SetorController());
-
-    Get.lazyPut<SplashController>(() => SplashController());
 
     Get.lazyPut<PerfilTecnicoController>(() => PerfilTecnicoController());
     Get.lazyPut<CadastroTecnicoController>(() => CadastroTecnicoController());
