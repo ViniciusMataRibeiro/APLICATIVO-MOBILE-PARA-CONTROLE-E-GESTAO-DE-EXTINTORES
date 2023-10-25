@@ -118,8 +118,7 @@ class ListTecnicoPage extends State<ListTecnicoState>
               //   ),
               // ),
             ),
-            body: _mostraDados(
-                dados: dados, controllerTecnico: controller),
+            body: _mostraDados(dados: dados, controllerTecnico: controller),
           );
         } else {
           return const Scaffold(
@@ -140,206 +139,8 @@ class ListTecnicoPage extends State<ListTecnicoState>
         var size = MediaQuery.of(context).size;
         Map item = dados[index];
         return GestureDetector(
-          onTap: () {
-            // showDialog(
-            //   context: context,
-            //   builder: (BuildContext context) {
-            //     return AlertDialog(
-            //       contentPadding: EdgeInsets.zero,
-            //       content: Container(
-            //         padding: const EdgeInsets.all(10.0),
-            //         height: 255,
-            //         decoration: BoxDecoration(
-            //           image: const DecorationImage(
-            //             image: AssetImage('assets/image/modal.png'),
-            //             fit: BoxFit.cover,
-            //           ),
-            //           borderRadius: BorderRadius.circular(10),
-            //         ),
-            //         child: Column(
-            //           mainAxisSize: MainAxisSize.min,
-            //           children: [
-            //             Align(
-            //               alignment: Alignment.bottomCenter,
-            //               child: Text(
-            //                 item['nome'],
-            //                 style: const TextStyle(
-            //                     fontSize: 20,
-            //                     fontStyle: FontStyle.italic,
-            //                     fontWeight: FontWeight.bold),
-            //               ),
-            //             ),
-            //             const Divider(
-            //               color: Colors.black54,
-            //               thickness: 2,
-            //             ),
-            //             Container(
-            //               margin: EdgeInsets.only(left: size.width * 0.05),
-            //               child: ListTile(
-            //                 contentPadding: EdgeInsets.zero,
-            //                 leading: const Icon(
-            //                   Icons.email_rounded,
-            //                   color: Colors.black54,
-            //                   size: 35,
-            //                 ),
-            //                 title: const Text(
-            //                   'E-mail',
-            //                   style: TextStyle(
-            //                       color: Colors.black54,
-            //                       fontStyle: FontStyle.italic,
-            //                       fontWeight: FontWeight.bold,
-            //                       fontSize: 15),
-            //                 ),
-            //                 subtitle: Text(
-            //                   item['email'],
-            //                   style: const TextStyle(
-            //                       color: Colors.black54,
-            //                       fontStyle: FontStyle.italic,
-            //                       fontSize: 15),
-            //                 ),
-            //               ),
-            //             ),
-            //             // Container(
-            //             //   margin: EdgeInsets.only(left: size.width * 0.05),
-            //             //   child: const ListTile(
-            //             //     contentPadding: EdgeInsets.zero,
-            //             //     leading: Icon(
-            //             //       Icons.phone_rounded,
-            //             //       color: Colors.black54,
-            //             //       size: 35,
-            //             //     ),
-            //             //     title: Text(
-            //             //       'Telefone',
-            //             //       style: TextStyle(
-            //             //           color: Colors.black54,
-            //             //           fontStyle: FontStyle.italic,
-            //             //           fontWeight: FontWeight.bold,
-            //             //           fontSize: 15),
-            //             //     ),
-            //             //     subtitle: Text('(35) 9 9999-9999'),
-            //             //   ),
-            //             // ),
-            //             // Container(
-            //             //   margin: EdgeInsets.only(left: size.width * 0.05),
-            //             //   child: ListTile(
-            //             //     contentPadding: EdgeInsets.zero,
-            //             //     leading: const Icon(
-            //             //       Icones_Personalizado.fire_extinguisher,
-            //             //       color: Colors.black54,
-            //             //       size: 35,
-            //             //     ),
-            //             //     title: const Text(
-            //             //       'Quantidade de Vistorias',
-            //             //       style: TextStyle(
-            //             //           color: Colors.black54,
-            //             //           fontStyle: FontStyle.italic,
-            //             //           fontWeight: FontWeight.bold,
-            //             //           fontSize: 15),
-            //             //     ),
-            //             //     subtitle: Text(
-            //             //       item['qtdVistorias'],
-            //             //     ),
-            //             //   ),
-            //             // ),
-            //             // Container(
-            //             //   margin: EdgeInsets.only(left: size.width * 0.05),
-            //             //   child: const ListTile(
-            //             //     contentPadding: EdgeInsets.zero,
-            //             //     leading: Icon(
-            //             //         Icones_Personalizado.fire_extinguisher,
-            //             //         color: Colors.black54,
-            //             //         size: 35),
-            //             //     title: Text(
-            //             //       'Extintores Responsáveis',
-            //             //       style: TextStyle(
-            //             //           color: Colors.black54,
-            //             //           fontStyle: FontStyle.italic,
-            //             //           fontWeight: FontWeight.bold,
-            //             //           fontSize: 15),
-            //             //     ),
-            //             //     subtitle: Text('2'),
-            //             //   ),
-            //             // ),
-            //             Container(
-            //               margin: EdgeInsets.only(left: size.width * 0.05),
-            //               child: const ListTile(
-            //                 contentPadding: EdgeInsets.zero,
-            //                 leading: Icon(Icons.trending_up_outlined,
-            //                     color: Colors.black54, size: 35),
-            //                 title: Text(
-            //                   'Exntitores Vencidos',
-            //                   style: TextStyle(
-            //                       color: Colors.black54,
-            //                       fontStyle: FontStyle.italic,
-            //                       fontWeight: FontWeight.bold,
-            //                       fontSize: 15),
-            //                 ),
-            //                 subtitle: Text('2'),
-            //               ),
-            //             ),
-            //             Row(
-            //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //               children: [
-            //                 ElevatedButton(
-            //                   style: ElevatedButton.styleFrom(
-            //                     backgroundColor:
-            //                         const Color.fromARGB(255, 116, 7, 7),
-            //                     shape: RoundedRectangleBorder(
-            //                       borderRadius: BorderRadius.circular(100),
-            //                     ),
-            //                     padding: const EdgeInsets.symmetric(
-            //                         horizontal: 30, vertical: 10),
-            //                   ),
-            //                   onPressed: () {
-            //                     Get.toNamed(
-            //                       '/cadTecnico',
-            //                       arguments: item,
-            //                     );
-            //                   },
-            //                   child: const Text(
-            //                     'Editar',
-            //                     style: TextStyle(
-            //                       color: Colors.white,
-            //                       fontSize: 18,
-            //                       fontStyle: FontStyle.italic,
-            //                     ),
-            //                   ),
-            //                 ),
-            //                 SizedBox(
-            //                   height: size.height * 0.05,
-            //                   child: const VerticalDivider(
-            //                     thickness: 2,
-            //                     color: Colors.black54,
-            //                   ),
-            //                 ),
-            //                 ElevatedButton(
-            //                   style: ElevatedButton.styleFrom(
-            //                     backgroundColor:
-            //                         const Color.fromARGB(255, 116, 7, 7),
-            //                     shape: RoundedRectangleBorder(
-            //                       borderRadius: BorderRadius.circular(100),
-            //                     ),
-            //                     padding: const EdgeInsets.symmetric(
-            //                         horizontal: 30, vertical: 10),
-            //                   ),
-            //                   onPressed: () {},
-            //                   child: const Text('Excluir',
-            //                       style: TextStyle(
-            //                           color: Colors.white,
-            //                           fontSize: 18,
-            //                           fontStyle: FontStyle.italic)),
-            //                 ),
-            //               ],
-            //             )
-            //           ],
-            //         ),
-            //       ),
-            //     );
-            //  },
-            // );
-          },
+          onTap: () {},
           child: Container(
-            height: 120,
             margin: const EdgeInsets.all(10),
             child: Card(
               elevation: 5,
@@ -347,42 +148,197 @@ class ListTecnicoPage extends State<ListTecnicoState>
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 7, left: 7, top: 5),
+                    padding: const EdgeInsets.only(right: 7, left: 7, top: 10),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        InkWell(
-                          onTap: () {
+                        _nome(item),
+                        // InkWell(
+                        //   onTap: () {
+                        //     // Get.toNamed(
+                        //     //   '/cadTecnico',
+                        //     //   arguments: item,
+                        //     // );
+                        //   },
+                        //   child: const Icon(Icons.edit, size: 30),
+                        // ),
+                        // InkWell(
+                        //   onTap: () {
+                        //     {
+                        //       controller.gotoDeleteTecnico(item['id']);
+                        //     }
+                        //   },
+                        //   child: const Icon(
+                        //     Ionicons.close_outline,
+                        //     size: 30,
+                        //     color: Color.fromARGB(255, 116, 7, 7),
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 17, right: 17),
+                    child: const Divider(
+                      thickness: 2,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: 8.0, left: size.width * 0.05, bottom: 10),
+                    child: Column(
+                      children: [
+                        SizedBox(height: size.width * 0.01),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Icon(
+                              Icons.email_outlined,
+                              size: 20,
+                              color: Colors.black,
+                            ),
+                            SizedBox(
+                              width: size.width * 0.03,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Email',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontStyle: FontStyle.italic,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Text(
+                                  item['email'],
+                                  style: const TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: size.width * 0.03),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Icon(
+                              Icons.check_outlined,
+                              size: 20,
+                              color: Colors.black,
+                            ),
+                            SizedBox(
+                              width: size.width * 0.03,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Satus',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontStyle: FontStyle.italic,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                item['status'] == 'Inativo'
+                                    ? const Text(
+                                        'Inativo',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    : const Text(
+                                        'Ativo',
+                                        style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  item['status'] == 'Inativo'
+                      ? Container(
+                          height: 3,
+                          color: Colors.red,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 17, horizontal: 15),
+                        )
+                      : Container(
+                          height: 3,
+                          color: Colors.green,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 17, horizontal: 15),
+                        ),
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 116, 7, 7),
+                          ),
+                          onPressed: () {
                             Get.toNamed(
                               '/cadTecnico',
                               arguments: item,
                             );
                           },
-                          child: const Icon(Icons.edit, size: 30),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            {
-                              controller.gotoDeleteTecnico(item['id']);
-                            }
-                          },
-                          child: const Icon(
-                            Ionicons.close_outline,
-                            size: 30,
-                            color: Color.fromARGB(255, 116, 7, 7),
+                          child: const Text(
+                            'Editar',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontStyle: FontStyle.italic,
+                            ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 35),
-                    child: Row(
-                      children: [
-                        _icone(item),
-                        const SizedBox(width: 10),
-                        _nome(item),
+                        SizedBox(
+                          height: size.height * 0.05,
+                          child: const VerticalDivider(
+                            thickness: 2,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 116, 7, 7),
+                          ),
+                          onPressed: () {
+                            controller.gotoDeleteTecnico(item['id']);
+                          },
+                          child: item['status'] == 'Inativo'
+                              ? const Text(
+                                  'Ativar',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontStyle: FontStyle.italic),
+                                )
+                              : const Text(
+                                  'Inativar',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontStyle: FontStyle.italic),
+                                ),
+                        ),
                       ],
                     ),
                   ),
@@ -396,27 +352,6 @@ class ListTecnicoPage extends State<ListTecnicoState>
   }
 }
 
-Widget _icone(Map item) {
-  return Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(100),
-      border: Border.all(
-        width: 8,
-        color: const Color.fromARGB(255, 175, 31, 21),
-      ),
-    ),
-    child: const Column(
-      children: [
-        Icon(
-          Icons.person,
-          size: 50,
-          color: Color.fromARGB(255, 175, 31, 21),
-        ),
-      ],
-    ),
-  );
-}
-
 Widget _nome(Map item) {
   return Column(
     children: [
@@ -428,7 +363,7 @@ Widget _nome(Map item) {
             Text(
               item['nome'] ?? 'Sem informação',
               style: const TextStyle(
-                fontSize: 25,
+                fontSize: 20,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
