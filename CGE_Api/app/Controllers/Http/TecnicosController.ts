@@ -19,6 +19,7 @@ export default class TecnicosController {
 
             for (const element of tecnicos) {
                 const usertecnico = await User.findByOrFail("id", element.userId);
+                
 
                 let obj = {
                     id: element.id,
@@ -129,7 +130,7 @@ export default class TecnicosController {
 
             if (tecnico) {
                 tecnico.merge({
-                    bloqueado: true,
+                    bloqueado: !tecnico.bloqueado,
                 });
 
                 await tecnico.save();
