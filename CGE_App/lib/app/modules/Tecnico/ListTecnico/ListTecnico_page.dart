@@ -65,6 +65,20 @@ class ListTecnicoPage extends State<ListTecnicoState>
     return buildContainer();
   }
 
+
+  late Future mapa;
+
+    _refresh(bool parametro) async {
+    try {
+      setState(() {
+        mapa = controller.getTecnico();
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext context) => super.widget));
+      });
+      // ignore: empty_catches
+    } catch (e) {}
+  }
+
   buildContainer() {
     var size = MediaQuery.of(context).size;
     return FutureBuilder(
@@ -111,14 +125,10 @@ class ListTecnicoPage extends State<ListTecnicoState>
                 ],
               ),
               backgroundColor: const Color.fromARGB(255, 116, 7, 7),
-              // shape: const RoundedRectangleBorder(
-              //   borderRadius: BorderRadius.only(
-              //     bottomLeft: Radius.circular(25),
-              //     bottomRight: Radius.circular(25),
-              //   ),
-              // ),
             ),
-            body: _mostraDados(dados: dados, controllerTecnico: controller),
+            body: 
+            
+            _mostraDados(dados: dados, controllerTecnico: controller),
           );
         } else {
           return const Scaffold(
@@ -309,7 +319,8 @@ class ListTecnicoPage extends State<ListTecnicoState>
                                 controller.toast('Tecnico Desabilitado!');
                               }
                             });
-                            Get.offAllNamed('/perfil');
+                            //Get.offAllNamed('/perfil');
+                            _refresh(true);
                           },
                           child: item['status'] == 'Inativo'
                               ? const Text(
