@@ -28,7 +28,7 @@ export default class ExtintorsController {
             }
 
             const setoresId = setores.map((setor) => setor.id);
-            const extintores = await Database.query().select('*').from('extintors').whereIn('setor_id', setoresId).where('ativo', true).orderBy('setor_id', 'asc').orderBy('proximaManutencao', 'asc');
+            const extintores = await Database.query().select('*').from('extintors').whereIn('setor_id', setoresId).orderBy('setor_id', 'asc').orderBy('proximaManutencao', 'asc');
             
             for (const element of extintores) {
                 const vistoria = await Database.rawQuery('Select * from manutencoes where extintor_id = ? order by dataManutencao desc limit 1', [element.id]);
@@ -169,7 +169,7 @@ export default class ExtintorsController {
     public async update({ request, response, params }: HttpContextContract) {
         const payload = await request.validate(EditExtintorValidator);
         try {
-            const extintores = await Extintor.findByOrFail("id", params.id);
+            const extintores = await Database.query().select('*').from('extintors').where('id', params.id);
             if(extintores == null){
                 return response.badRequest({
                     message: 'Setor não encontrado',

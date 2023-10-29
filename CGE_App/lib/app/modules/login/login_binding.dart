@@ -1,7 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-
 import 'login_controller.dart';
+import 'package:get/get.dart';
 
 class LoginBinding implements Bindings {
   @override

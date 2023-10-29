@@ -69,7 +69,7 @@ export default class EnderecoEmpresasController {
                 rua: payload.rua,
                 numero: payload.numero,
                 bairro: payload.bairro,
-                ponto_referencia: payload.ponto_referencia,
+                ponto_referencia: payload.ponto_referencia ?? "",
                 uf: payload.uf
             });
 

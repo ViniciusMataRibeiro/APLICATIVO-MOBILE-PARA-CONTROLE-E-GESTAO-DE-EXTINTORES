@@ -1,13 +1,13 @@
 // ignore_for_file: file_names
-
+import '../../../data/services/auth/service.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:flutter/material.dart';
+import 'ListTecnico_controller.dart';
+import 'package:get/get.dart';
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../../Icones/icones_personalizado.dart';
-import '../../../data/services/auth/service.dart';
-import 'ListTecnico_controller.dart';
+List dados = [];
+bool ativo = true;
 
 class ListTecnico extends GetView<ListTecnicoController> {
   const ListTecnico({super.key});
@@ -27,6 +27,7 @@ class ListTecnico extends GetView<ListTecnicoController> {
 
 class ListTecnicoState extends StatefulWidget {
   const ListTecnicoState({Key? key, required this.title}) : super(key: key);
+
   final String title;
 
   @override
@@ -36,6 +37,7 @@ class ListTecnicoState extends StatefulWidget {
 class ListTecnicoPage extends State<ListTecnicoState>
     with SingleTickerProviderStateMixin {
   AuthService aux = Get.find<AuthService>();
+
   final ListTecnicoController controller = Get.put(ListTecnicoController());
   // ignore: unused_field
   late Animation<double> _animation;
@@ -63,43 +65,70 @@ class ListTecnicoPage extends State<ListTecnicoState>
     return buildContainer();
   }
 
+
+  late Future mapa;
+
+    _refresh(bool parametro) async {
+    try {
+      setState(() {
+        mapa = controller.getTecnico();
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext context) => super.widget));
+      });
+      // ignore: empty_catches
+    } catch (e) {}
+  }
+
   buildContainer() {
+    var size = MediaQuery.of(context).size;
     return FutureBuilder(
       future: dadosTecnico,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          Map temp = snapshot.data;
+          dados = temp['dados'];
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
-              backgroundColor: const Color.fromARGB(255, 175, 31, 21),
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 0, right: 0),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            Get.offAllNamed('/dashboard');
+                          },
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(right: 10),
+                          width: size.width * 0.08,
+                          height: 40,
+                        ),
+                        const Text(
+                          'Lista de Tecnicos',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                  const Text(
-                    'Listagem de Técnicos',
-                    style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                        fontStyle: FontStyle.italic),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
+                  )
                 ],
               ),
-              centerTitle: true,
+              backgroundColor: const Color.fromARGB(255, 116, 7, 7),
             ),
-            body: _mostraDados(
-                dados: snapshot.data, controllerTecnico: controller),
+            body: 
+            
+            _mostraDados(dados: dados, controllerTecnico: controller),
           );
         } else {
           return const Scaffold(
@@ -120,200 +149,7 @@ class ListTecnicoPage extends State<ListTecnicoState>
         var size = MediaQuery.of(context).size;
         Map item = dados[index];
         return GestureDetector(
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  contentPadding: EdgeInsets.zero,
-                  content: Container(
-                    padding: const EdgeInsets.all(10.0),
-                    height: 480,
-                    decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: AssetImage('assets/image/modal.png'),
-                          fit: BoxFit.fill,
-                        ),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Text(
-                            item['nome'],
-                            style: const TextStyle(
-                                fontSize: 20,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        const Divider(
-                          color: Colors.black54,
-                          thickness: 2,
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: size.width * 0.05),
-                          child: ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              leading: const Icon(
-                                Icons.email_rounded,
-                                color: Colors.black54,
-                                size: 35,
-                              ),
-                              title: const Text(
-                                'E-mail',
-                                style: TextStyle(
-                                    color: Colors.black54,
-                                    fontStyle: FontStyle.italic,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                              ),
-                              subtitle: Text(item['email'],
-                                  style: const TextStyle(
-                                      color: Colors.black54,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 15))),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: size.width * 0.05),
-                          child: const ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            leading: Icon(
-                              Icons.phone_rounded,
-                              color: Colors.black54,
-                              size: 35,
-                            ),
-                            title: Text(
-                              'Telefone',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            ),
-                            subtitle: Text('(35) 9 9999-9999'),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: size.width * 0.05),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            leading: const Icon(
-                              Icones_Personalizado.fire_extinguisher,
-                              color: Colors.black54,
-                              size: 35,
-                            ),
-                            title: const Text(
-                              'Quantidade de Vistorias',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            ),
-                            subtitle: Text(
-                              item['qtdVistorias'],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: size.width * 0.05),
-                          child: const ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            leading: Icon(
-                                Icones_Personalizado.fire_extinguisher,
-                                color: Colors.black54,
-                                size: 35),
-                            title: Text(
-                              'Extintores Responsáveis',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            ),
-                            subtitle: Text('2'),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: size.width * 0.05),
-                          child: const ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            leading: Icon(Icons.trending_up_outlined,
-                                color: Colors.black54, size: 35),
-                            title: Text(
-                              'Exntitores Vencidos',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            ),
-                            subtitle: Text('2'),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 116, 7, 7),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 10),
-                              ),
-                              onPressed: () {
-                                Get.toNamed(
-                                  '/cadTecnico',
-                                  arguments: item,
-                                );
-                              },
-                              child: const Text(
-                                'Editar',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: size.height * 0.05,
-                              child: const VerticalDivider(
-                                thickness: 2,
-                                color: Colors.black54,
-                              ),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 116, 7, 7),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 10),
-                              ),
-                              onPressed: () {},
-                              child: const Text('Excluir',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontStyle: FontStyle.italic)),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              },
-            );
-          },
+          onTap: () {},
           child: Container(
             margin: const EdgeInsets.all(10),
             child: Card(
@@ -321,11 +157,190 @@ class ListTecnicoPage extends State<ListTecnicoState>
               color: Colors.white,
               child: Column(
                 children: [
-                  const SizedBox(height: 15),
-                  _icone(item),
-                  const SizedBox(height: 10),
-                  _nome(item),
-                  _detalhes(item, controllerTecnico),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 7, left: 7, top: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _nome(item),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 17, right: 17),
+                    child: const Divider(
+                      thickness: 2,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: 8.0, left: size.width * 0.05, bottom: 10),
+                    child: Column(
+                      children: [
+                        SizedBox(height: size.width * 0.01),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Icon(
+                              Icons.email_outlined,
+                              size: 20,
+                              color: Colors.black,
+                            ),
+                            SizedBox(
+                              width: size.width * 0.03,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Email',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontStyle: FontStyle.italic,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Text(
+                                  item['email'],
+                                  style: const TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: size.width * 0.03),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Icon(
+                              Icons.check_outlined,
+                              size: 20,
+                              color: Colors.black,
+                            ),
+                            SizedBox(
+                              width: size.width * 0.03,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Satus',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontStyle: FontStyle.italic,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                item['status'] == 'Inativo'
+                                    ? const Text(
+                                        'Inativo',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    : const Text(
+                                        'Ativo',
+                                        style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  item['status'] == 'Inativo'
+                      ? Container(
+                          height: 3,
+                          color: Colors.red,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 17, horizontal: 15),
+                        )
+                      : Container(
+                          height: 3,
+                          color: Colors.green,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 17, horizontal: 15),
+                        ),
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 116, 7, 7),
+                          ),
+                          onPressed: () {
+                            Get.toNamed(
+                              '/cadTecnico',
+                              arguments: item,
+                            );
+                          },
+                          child: const Text(
+                            'Editar',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.05,
+                          child: const VerticalDivider(
+                            thickness: 2,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 116, 7, 7),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              controller.gotoDeleteTecnico(item['id']);
+                              if(item['status'] == 'Inativo'){
+                                controller.toast('Tecnico Habilitado!');
+                              }
+                              else{
+                                controller.toast('Tecnico Desabilitado!');
+                              }
+                            });
+                            //Get.offAllNamed('/perfil');
+                            _refresh(true);
+                          },
+                          child: item['status'] == 'Inativo'
+                              ? const Text(
+                                  'Ativar',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontStyle: FontStyle.italic),
+                                )
+                              : const Text(
+                                  'Inativar',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontStyle: FontStyle.italic),
+                                ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -334,27 +349,6 @@ class ListTecnicoPage extends State<ListTecnicoState>
       },
     );
   }
-}
-
-Widget _icone(Map item) {
-  return Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(100),
-      border: Border.all(
-        width: 8,
-        color: const Color.fromARGB(255, 175, 31, 21),
-      ),
-    ),
-    child: const Column(
-      children: [
-        Icon(
-          Icons.person,
-          size: 80,
-          color: Color.fromARGB(255, 175, 31, 21),
-        ),
-      ],
-    ),
-  );
 }
 
 Widget _nome(Map item) {
@@ -368,7 +362,7 @@ Widget _nome(Map item) {
             Text(
               item['nome'] ?? 'Sem informação',
               style: const TextStyle(
-                fontSize: 25,
+                fontSize: 20,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
@@ -378,93 +372,5 @@ Widget _nome(Map item) {
         ),
       ),
     ],
-  );
-}
-
-Widget _detalhes(Map item, ListTecnicoController controllerTecnico) {
-  return Card(
-    color: const Color.fromARGB(255, 242, 242, 242),
-    margin: const EdgeInsets.all(10),
-    child: Padding(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        children: [
-          const SizedBox(height: 10),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: Text(
-                  "Status Extintor",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 30),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                flex: 5,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Column(
-                    children: [
-                      const Text(
-                        "Extintores Expirando",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        item['qtdVistorias'] ?? 'Sem informação',
-                        style: const TextStyle(
-                          fontSize: 50,
-                          color: Color.fromARGB(255, 255, 204, 77),
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Flexible(
-                flex: 5,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Column(
-                    children: [
-                      const Text(
-                        "Extintores Expirados",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        item['qtdVistorias'] ?? 'Sem informação',
-                        style: const TextStyle(
-                          fontSize: 50,
-                          color: Color.fromARGB(255, 255, 0, 0),
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    ),
   );
 }

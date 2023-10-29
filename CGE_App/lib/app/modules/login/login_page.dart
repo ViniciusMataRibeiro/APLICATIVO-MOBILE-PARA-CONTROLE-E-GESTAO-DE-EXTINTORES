@@ -1,14 +1,15 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import 'login_controller.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final FocusNode field1FocusNode = FocusNode();
+    var size = MediaQuery.of(context).size;
     if (controller.isLogged) {
       Future.delayed(const Duration(milliseconds: 1), () {
         Get.offAllNamed('/dashboard');
@@ -26,8 +27,8 @@ class LoginPage extends GetView<LoginController> {
             children: [
               Center(
                 child: Container(
-                  height: 140,
-                  width: 140,
+                  height: 170,
+                  width: 170,
                   margin: const EdgeInsets.only(top: 50),
                   decoration: const BoxDecoration(
                       image: DecorationImage(
@@ -36,18 +37,23 @@ class LoginPage extends GetView<LoginController> {
                       borderRadius: BorderRadius.all(Radius.circular(100)),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black,
+                          color: Colors.black54,
                           blurRadius: 5,
                         ),
                       ]),
                 ),
               ),
+              SizedBox(height: size.height * 0.15),
               Container(
-                margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
+                margin: const EdgeInsets.only(left: 20, right: 20),
                 padding: const EdgeInsets.all(8),
                 child: Form(
                   child: TextFormField(
                     controller: controller.emailController,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(field1FocusNode);
+                    },
                     style: const TextStyle(
                         fontSize: 15,
                         color: Colors.white,
@@ -84,6 +90,8 @@ class LoginPage extends GetView<LoginController> {
                 child: Obx(
                   () => TextFormField(
                     controller: controller.passwordController,
+                    focusNode: field1FocusNode,
+                    textInputAction: TextInputAction.done,
                     style: const TextStyle(fontSize: 15, color: Colors.white),
                     obscureText: controller.showPassword.value,
                     cursorColor: Colors.white,
@@ -161,9 +169,9 @@ class LoginPage extends GetView<LoginController> {
                   child: const Text(
                     'Entrar',
                     style: TextStyle(
-                      fontSize: 25, 
-                      color: Color.fromARGB(255, 116, 7, 7),
-                      fontWeight: FontWeight.bold),
+                        fontSize: 25,
+                        color: Color.fromARGB(255, 116, 7, 7),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

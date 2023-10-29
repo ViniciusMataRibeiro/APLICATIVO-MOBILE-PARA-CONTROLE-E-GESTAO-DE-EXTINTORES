@@ -1,14 +1,12 @@
 // ignore_for_file: unused_field
-
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cge_app/app/core/app_theme.dart';
-import 'package:faker/faker.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'dart:ui' as ui;
-
 import 'cadastrotecnico_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:faker/faker.dart';
+import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
 class CadastroTecnicoPage extends GetView<CadastroTecnicoController> {
   const CadastroTecnicoPage({super.key});
@@ -63,40 +61,55 @@ class CadastroExtintor extends State<CadastroExtintorState>
 
   @override
   Widget build(BuildContext context) {
+    final FocusNode _field1FocusNode = FocusNode();
+    final FocusNode _field2FocusNode = FocusNode();
     bool isSelectbloqueado = cadastroTecnicoController.bloqueado.value;
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.only(left: 0, right: 0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    width: size.width * 0.08,
+                    height: 40,
+                  ),
+                  Text(
+                    cadastroTecnicoController.alterandoTexto
+                    ? '\t\tEditar Tecnico'
+                    : 'Cadastrar Tecnico',
+                    style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              width: size.width * 0.05,
-              height: 40,
-            ),
-            const Text(
-              'Cadastro Tecnico',
-              style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic),
-            ),
+            )
           ],
         ),
-        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
       ),
       body: Form(
         child: Container(
@@ -114,15 +127,16 @@ class CadastroExtintor extends State<CadastroExtintorState>
                   margin: const EdgeInsets.only(top: 40, bottom: 40),
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/image/cge.png'),
+                      image: AssetImage('assets/image/login.png'),
                     ),
                     borderRadius: BorderRadius.all(
                       Radius.circular(100),
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black,
-                        blurRadius: 5,
+                        color: Colors.grey,
+                        offset: Offset(1, 0),
+                        blurRadius: 1,
                       ),
                     ],
                   ),
@@ -137,67 +151,19 @@ class CadastroExtintor extends State<CadastroExtintorState>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Visibility(
-                      visible: cadastroTecnicoController.alterando.value,
-                      child: ListTile(
-                        contentPadding: const EdgeInsets.only(left: 5),
-                        leading: GestureDetector(
-                          onTap: () {
-                            setState(
-                              () {
-                                isSelectbloqueado = !isSelectbloqueado;
-                                cadastroTecnicoController.bloqueado.value =
-                                    isSelectbloqueado;
-                              },
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            decoration: BoxDecoration(
-                              color: isSelectbloqueado
-                                  ? Colors.red
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(5.0),
-                              border: isSelectbloqueado
-                                  ? null
-                                  : Border.all(color: Colors.black, width: 2),
-                            ),
-                            width: 25,
-                            height: 25,
-                            child: isSelectbloqueado
-                                ? const Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                  )
-                                : null,
-                          ),
-                        ),
-                        title: const Text(
-                          'Inativo',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                    cadastroTecnicoController.alterando.value
-                        ? const SizedBox(
-                            height: 0,
-                          )
-                        : const SizedBox(
-                            height: 20,
-                          ),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       leading: const Icon(
-                        Icons.verified_user_outlined,
+                        Icons.person,
                         color: Colors.black,
                         size: 35,
                       ),
                       title: TextFormField(
                         controller: cadastroTecnicoController.name,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context).requestFocus(_field1FocusNode);
+                        },
                         style: const TextStyle(
                           color: Colors.black,
                           fontStyle: FontStyle.italic,
@@ -222,6 +188,11 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       ),
                       title: TextFormField(
                         controller: cadastroTecnicoController.email,
+                        textInputAction: TextInputAction.next,
+                        focusNode: _field1FocusNode,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context).requestFocus(_field2FocusNode);
+                        },
                         style: const TextStyle(
                           color: Colors.black,
                           fontStyle: FontStyle.italic,
@@ -238,29 +209,33 @@ class CadastroExtintor extends State<CadastroExtintorState>
                       ),
                     ),
                     ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: const Icon(
-                        Icons.lock_open_rounded,
-                        color: Colors.black,
-                        size: 35,
-                      ),
-                      title: TextFormField(
-                        controller: cadastroTecnicoController.password,
-                        style: const TextStyle(
+                        contentPadding: EdgeInsets.zero,
+                        leading: const Icon(
+                          Icons.lock_outline_rounded,
                           color: Colors.black,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 18,
+                          size: 35,
                         ),
-                        keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          labelText: 'Senha',
-                          labelStyle: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
+                        title: Obx(
+                          () => TextFormField(
+                            controller: cadastroTecnicoController.password,
+                            textInputAction: TextInputAction.done,
+                            focusNode: _field2FocusNode,
+                            obscureText: cadastroTecnicoController.showPassword.value,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontStyle: FontStyle.italic,
+                              fontSize: 18,
+                            ),
+                            keyboardType: TextInputType.text,
+                            decoration: const InputDecoration(
+                              labelText: 'Senha',
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
+                        )),
                     const SizedBox(height: 15),
                     Container(
                       padding: const EdgeInsets.all(20.0),

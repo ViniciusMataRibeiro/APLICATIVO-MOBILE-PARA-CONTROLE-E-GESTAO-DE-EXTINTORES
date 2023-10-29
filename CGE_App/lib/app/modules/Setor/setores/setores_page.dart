@@ -1,13 +1,13 @@
+import 'package:floating_action_bubble/floating_action_bubble.dart';
+import '../../../data/services/auth/service.dart';
 import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/routes/routes.dart';
-import 'package:floating_action_bubble/floating_action_bubble.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:faker/faker.dart';
-import 'dart:ui' as ui;
-import '../../../data/services/auth/service.dart';
 import '../../widget/gaficoSetor.dart';
+import 'package:flutter/material.dart';
+import 'package:faker/faker.dart';
+import 'package:get/get.dart';
 import 'setores_controller.dart';
+import 'dart:ui' as ui;
 
 List dados = [];
 
@@ -87,11 +87,11 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 0),
+              padding: const EdgeInsets.only(left: 0, right: 0),
               child: Row(
                 children: [
                   Image.asset(
-                    'assets/image/cge.png',
+                    'assets/image/login.png',
                     fit: BoxFit.contain,
                     height: 45,
                   ),
@@ -105,10 +105,10 @@ class SetorPage extends State<SetorState> with SingleTickerProviderStateMixin {
             icon: const Icon(Icons.qr_code_scanner, color: Colors.white),
             onPressed: () => Get.toNamed('/qrCodeScanner'),
           ),
-          IconButton(
-            icon: const Icon(Icons.notification_important, color: Colors.white),
-            onPressed: () {},
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.notification_important, color: Colors.white),
+          //   onPressed: () {},
+          // ),
           IconButton(
             icon: const Icon(Icons.refresh_rounded, color: Colors.white),
             onPressed: () => _refresh(),

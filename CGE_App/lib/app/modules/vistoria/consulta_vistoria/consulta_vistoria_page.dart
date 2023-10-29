@@ -1,14 +1,13 @@
 // ignore_for_file: unused_field
-
-import 'package:faker/faker.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
 import '../../../Icones/icones_personalizado.dart';
-import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
 import 'consulta_vistoria_controller.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:flutter/material.dart';
+import '../../../core/app_theme.dart';
+import 'package:faker/faker.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 import 'dart:ui' as ui;
 
 List dados = [];
@@ -69,41 +68,51 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
 
   @override
   Widget build(BuildContext context) {
-
     var size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.only(left: 0, right: 0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Get.offAllNamed('/dashboard');
+                    },
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    width: size.width * 0.2,
+                    height: 40,
+                  ),
+                  const Text(
+                    'Vistorias',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              onPressed: () {
-                Get.offAllNamed('/dashboard');
-              },
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 0),
-              width: size.width * 0.12,
-              height: 40,
-            ),
-            const Text(
-              'Manutenções',
-              style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic),
-            ),
+            )
           ],
         ),
-        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
+        // shape: const RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.only(
+        //     bottomLeft: Radius.circular(25),
+        //     bottomRight: Radius.circular(25),
+        //   ),
+        // ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: Container(
@@ -617,7 +626,7 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                             CrossAxisAlignment.start,
                                         children: [
                                           const Text(
-                                            'Proxima Manutenção',
+                                            'Proxima Vistoria',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontStyle: FontStyle.italic,

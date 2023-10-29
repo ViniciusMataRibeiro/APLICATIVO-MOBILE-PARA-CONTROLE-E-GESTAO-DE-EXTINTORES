@@ -1,8 +1,8 @@
+import 'package:cge_app/app/modules/qrCode/scanner/scanner_error_widget.dart';
 import 'package:cge_app/app/modules/qrCode/scanner/qr_controller.dart';
 import 'package:cge_app/app/modules/qrCode/scanner/qr_overlay.dart';
-import 'package:cge_app/app/modules/qrCode/scanner/scanner_error_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:flutter/material.dart';
 
 const bgColor = Color(0xfffafafa);
 

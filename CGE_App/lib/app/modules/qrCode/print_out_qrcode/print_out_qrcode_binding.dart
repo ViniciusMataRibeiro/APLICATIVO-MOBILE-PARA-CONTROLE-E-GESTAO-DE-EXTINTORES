@@ -1,12 +1,12 @@
 // ignore_for_file: file_names
-import 'package:cge_app/app/modules/qrCode/generetor/qr_controller_gerenetor.dart';
+import 'package:cge_app/app/modules/qrCode/print_out_qrcode/print_out_qrcode_controller.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class QRCodeGeneretorBinding implements Bindings {
+class PrintQrCodeBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<QRCodeGeneretorController>(() => QRCodeGeneretorController());
+    Get.lazyPut<PrintQrCodeController>(() => PrintQrCodeController());
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 }

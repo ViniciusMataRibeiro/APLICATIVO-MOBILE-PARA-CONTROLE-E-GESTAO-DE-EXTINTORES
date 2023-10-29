@@ -1,17 +1,16 @@
 // ignore_for_file: file_names
-
-import 'package:flutter/material.dart';
+import '../../../data/services/auth/service.dart';
+import '../../../data/Models/setor_request.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../data/Models/setor_request.dart';
-import '../../../data/services/auth/service.dart';
 
 class CadastroSetorController extends GetxController {
   final _authService = Get.find<AuthService>();
   var idSetor = 0;
 
-  var name = TextEditingController(text: '');
+  var name = TextEditingController();
   var descricao = TextEditingController(text: '');
   var ativo = true.obs;
 
@@ -36,10 +35,7 @@ class CadastroSetorController extends GetxController {
   }
 
   Future<String> goToInsert() async {
-    if (name.text == '') {
-      return 'Informe o nome';
-    }
-
+    
     var setorRequestModel = SetorRequestModel(
         id: idSetor,
         name: name.text,
@@ -63,8 +59,8 @@ class CadastroSetorController extends GetxController {
         msg: message,
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 4,
-        backgroundColor: Colors.redAccent,
+        timeInSecForIosWeb: 3,
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         textColor: Colors.white,
         fontSize: 15.0);
   }

@@ -1,9 +1,9 @@
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import '../../../Icones/icones_personalizado.dart';
 import '../../../data/services/auth/service.dart';
-import 'extintores_details_controller.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter/material.dart';
+import 'setor_details_controller.dart';
 import '../../../core/app_theme.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
@@ -11,8 +11,8 @@ import 'dart:ui' as ui;
 
 List dados = [];
 
-class ExtintorDetails extends GetView<ExtintorDetailsController> {
-  const ExtintorDetails({super.key});
+class SetorDetails extends GetView<SetorDetailsController> {
+  const SetorDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,26 +21,26 @@ class ExtintorDetails extends GetView<ExtintorDetailsController> {
       debugShowCheckedModeBanner: false,
       home: const Directionality(
           textDirection: ui.TextDirection.ltr,
-          child: ExtintorDetailsState(
+          child: SetorDetailsState(
             title: '',
           )),
     );
   }
 }
 
-class ExtintorDetailsState extends StatefulWidget {
-  const ExtintorDetailsState({Key? key, required this.title}) : super(key: key);
+class SetorDetailsState extends StatefulWidget {
+  const SetorDetailsState({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  ExtintorDetailsPage createState() => ExtintorDetailsPage();
+  SetorDetailsPage createState() => SetorDetailsPage();
 }
 
-class ExtintorDetailsPage extends State<ExtintorDetailsState>
+class SetorDetailsPage extends State<SetorDetailsState>
     with SingleTickerProviderStateMixin {
   AuthService aux = Get.find<AuthService>();
-  ExtintorDetailsController controller = Get.put(
-    ExtintorDetailsController(),
+  SetorDetailsController controller = Get.put(
+    SetorDetailsController(),
   );
 
   late Animation<double> _animation;
@@ -122,40 +122,39 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
               ...[]
             else ...[
               Bubble(
-                title: "Realizar Vistoria",
+                title: "Cadastra Extintor",
                 iconColor: Colors.white,
                 bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.check_rounded,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () async {
-                  await controller.gotovistoria(dados[0]);
-                  // setState(() {
-                  //   mapa = controller.getExtintor();
-                  //   atualizou = true;
-                  // });
+                  await controller.gotoCreateExtintor(dados[0]);
+                  setState(() {
+                    mapa = controller.getExtintor();
+                  });
                 },
               ),
               Bubble(
-                title: "Editar Extintor",
+                title: "Editar Setor",
                 iconColor: Colors.white,
                 bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.edit,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () async {
-                  await controller.gotoEditExtintor(dados[0]);
-                  // setState(() {
-                  //   mapa = controller.getExtintor();
-                  // });
+                  await controller.gotoEditSetor(dados[0]);
+                  setState(() {
+                    mapa = controller.getExtintor();
+                  });
                 },
               ),
               Bubble(
-                title: "Excluir Extintor",
+                title: "Excluir Setor",
                 iconColor: Colors.white,
                 bubbleColor: const Color.fromARGB(255, 116, 7, 7),
                 icon: Icons.delete,
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
-                  controller.gotoDeleteExtintor(dados[0]);
+                  controller.gotoDeleteSetor(dados[0]);
                 },
               ),
             ],
@@ -272,8 +271,7 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
                             children: [
                               Expanded(
                                 child: ListTile(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 0, right: 15),
+                                  contentPadding: const EdgeInsets.only(left: 0, right: 15),
                                   title: const Text(
                                     'Ativo',
                                     style: TextStyle(
@@ -425,9 +423,6 @@ class ExtintorDetailsPage extends State<ExtintorDetailsState>
                               Expanded(
                                 child: TextFormField(
                                   readOnly: true,
-                                  key: Key(DateFormat('dd/MM/yyyy').format(
-                                      DateTime.parse(
-                                          item['proximaManutencao']))), //
                                   initialValue: DateFormat('dd/MM/yyyy').format(
                                       DateTime.parse(
                                           item['proximaManutencao'])),

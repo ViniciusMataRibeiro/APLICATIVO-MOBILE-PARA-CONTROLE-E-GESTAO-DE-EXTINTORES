@@ -1,15 +1,11 @@
-// ignore_for_file: file_names
-
+// ignore_for_file: file_names, must_be_immutable
 import 'package:cge_app/app/modules/Tecnico/perfil_tecnico/perfilTecnico_controller.dart';
+import '../../../data/services/auth/service.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
-
-import '../../../data/services/auth/service.dart';
 
 String nome = "";
-
-//ignore: must_be_immutable
 class PerfilTecnicoPage extends GetView<PerfilTecnicoController> {
   AuthService aux = Get.find<AuthService>();
 
@@ -31,7 +27,7 @@ class PerfilTecnicoPage extends GetView<PerfilTecnicoController> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 3.1,
+                height: MediaQuery.of(context).size.height / 2.7,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,

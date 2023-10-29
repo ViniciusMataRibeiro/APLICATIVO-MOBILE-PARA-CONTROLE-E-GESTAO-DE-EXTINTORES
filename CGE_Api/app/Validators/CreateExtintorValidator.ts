@@ -6,7 +6,7 @@ export default class CreateExtintorValidator {
 
   public schema = schema.create({
     nome: schema.string({ trim: true }, [
-      rules.minLength(5),
+      rules.minLength(1),
       rules.maxLength(100),
     ]),
 

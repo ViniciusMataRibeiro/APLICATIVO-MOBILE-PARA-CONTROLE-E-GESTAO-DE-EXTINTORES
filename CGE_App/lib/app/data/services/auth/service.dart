@@ -34,7 +34,7 @@ class AuthService extends GetxService {
     if (userLoginResponse.expiresAt == 'Invalid email/password') {
       return 'Usuário ou senha inválidos';
     } else if (userLoginResponse.expiresAt == 'Técnico bloqueado') {
-      return 'Técnico está bloqueado';
+      return 'Técnico está inativo';
     } else {
       await _configService.saveToken(userLoginResponse.token);
       var user = await _getUser();
@@ -87,7 +87,16 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<List> getTecnico() async {
+  Future<bool> deleteTecnico(int idTecnico) async {
+    var result = await _repository.deleteTecnico(idTecnico);
+    if (result) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<Map> getTecnico() async {
     return await _repository.getTecnico();
   }
 
@@ -115,9 +124,10 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<Map> getAllExtintor() async {
-    return await _repository.getAllExtintor();
+  Future<Map> getAllExtintor(bool isAtivo) async {
+    return await _repository.getAllExtintor(isAtivo);
   }
+
 
   Future<Map> getExtintorSetor(int idSetor) async {
     return await _repository.getExtintorSetor(idSetor);
@@ -130,9 +140,7 @@ class AuthService extends GetxService {
   Future<int> updateExtintor(ExtintorRequestModel extintor) async {
     var result = await _repository.updateExtintor(extintor);
     if (result > 0) {
-      Future.delayed(const Duration(milliseconds: 1), () {
-        Get.back();
-      });
+      Get.back();
       return result;
     } else {
       return 0;

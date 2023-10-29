@@ -16,7 +16,7 @@ import '../services/config/service.dart';
 
 class Api {
   final _configService = Get.find<ConfigService>();
-  final baseUrl = "http://192.168.0.134:3333";
+  final baseUrl = "http://52.202.214.118:3333";
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     var url = Uri.parse("$baseUrl/login");
@@ -87,7 +87,7 @@ class Api {
     }
   }
 
-  Future<List> getTecnico() async {
+  Future<Map> getTecnico() async {
     var url = Uri.parse("$baseUrl/Tecnicos");
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -101,10 +101,24 @@ class Api {
         Map<String, dynamic> t = Map.from(element);
         d.add(t);
       });
-
-      return d;
+      return {"dados": d};
     } else {
-      return [];
+      return {"dados": []};
+    }
+  }
+
+  Future<bool> deleteTecnico(int idTecnico) async {
+    var url = Uri.parse("$baseUrl/tecnico/$idTecnico");
+    var response = await http.delete(
+      url,
+      headers: {
+        'authorization': 'Bearer ${_configService.token}',
+      },
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -162,7 +176,7 @@ class Api {
     }
   }
 
-  Future<Map> getAllExtintor() async {
+  Future<Map> getAllExtintor(bool isAtivo) async {
     var url = Uri.parse("$baseUrl/extintorsAll");
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -172,11 +186,21 @@ class Api {
     if (response.statusCode == 200) {
       List d = [];
       List dados = await jsonDecode(response.body);
-      await Future.forEach(dados, (element) {
-        Map<String, dynamic> t = Map.from(element);
-        d.add(t);
-      });
-
+      if (isAtivo) {
+        await Future.forEach(dados, (element) {
+          Map<String, dynamic> t = Map.from(element);
+          if (t['ativo'] == 1) {
+            d.add(t);
+          }
+        });
+      } else {
+        await Future.forEach(dados, (element) {
+          Map<String, dynamic> t = Map.from(element);
+          if (t['ativo'] == 0) {
+            d.add(t);
+          }
+        });
+      }
       return {"dados": d};
     } else {
       return {"dados": []};

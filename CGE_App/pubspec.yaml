@@ -36,6 +36,8 @@ dependencies:
   faker: ^2.1.0
   intl: ^0.18.0
   get: ^4.6.3
+  cached_network_image: ^3.3.0
+  flutter_gif: ^0.0.4
 
 dev_dependencies:
   flutter_test:

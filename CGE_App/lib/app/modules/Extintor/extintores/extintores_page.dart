@@ -1,15 +1,16 @@
-import 'package:faker/faker.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../../Icones/icones_personalizado.dart';
-import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
+import 'package:flutter/material.dart';
+import '../../../core/app_theme.dart';
 import 'extintores_controller.dart';
+import 'package:faker/faker.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 import 'dart:ui' as ui;
 
 List dados = [];
+bool ativo = true;
 
 class Extintor extends GetView<ExtintorController> {
   const Extintor({super.key});
@@ -73,10 +74,10 @@ class ExtintorPage extends State<ExtintorState>
 
   DateTime selectedDate = DateTime.now();
 
-  _refresh() async {
+  _refresh(bool parametro) async {
     try {
       setState(() {
-        mapa = controller.getAllExtintor();
+        mapa = controller.getAllExtintor(parametro);
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (BuildContext context) => super.widget));
       });
@@ -95,7 +96,7 @@ class ExtintorPage extends State<ExtintorState>
         CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
-    mapa = controller.getAllExtintor();
+    mapa = controller.getAllExtintor(ativo);
 
     super.initState();
   }
@@ -111,11 +112,11 @@ class ExtintorPage extends State<ExtintorState>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 0),
+              padding: const EdgeInsets.only(left: 0, right: 0),
               child: Row(
                 children: [
                   Image.asset(
-                    'assets/image/cge.png',
+                    'assets/image/login.png',
                     fit: BoxFit.contain,
                     height: 45,
                   ),
@@ -129,13 +130,13 @@ class ExtintorPage extends State<ExtintorState>
             icon: const Icon(Icons.qr_code_scanner, color: Colors.white),
             onPressed: () => Get.toNamed('/qrCodeScanner'),
           ),
-          IconButton(
-            icon: const Icon(Icons.notification_important, color: Colors.white),
-            onPressed: () {},
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.notification_important, color: Colors.white),
+          //   onPressed: () {},
+          // ),
           IconButton(
             icon: const Icon(Icons.refresh_rounded, color: Colors.white),
-            onPressed: () => _refresh(),
+            onPressed: () => _refresh(true),
           ),
         ],
         backgroundColor: const Color.fromARGB(255, 116, 7, 7),
@@ -163,6 +164,18 @@ class ExtintorPage extends State<ExtintorState>
                   Get.toNamed('/cadTecnico');
                 },
               ),
+              Bubble(
+                title:
+                    ativo == true ? "Mostrar os Inativos" : "Mostrar os Ativos",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
+                icon: Icons.apps_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  ativo = !ativo;
+                  _refresh(ativo);
+                },
+              ),
             ] else ...[
               Bubble(
                 title: "Cadastrar Extintor",
@@ -182,6 +195,18 @@ class ExtintorPage extends State<ExtintorState>
                 titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 onPress: () {
                   Get.toNamed('/vistoria');
+                },
+              ),
+              Bubble(
+                title:
+                    ativo == true ? "Mostrar os Inativos" : "Mostrar os Ativos",
+                iconColor: Colors.white,
+                bubbleColor: const Color.fromARGB(255, 116, 7, 7),
+                icon: Icons.apps_rounded,
+                titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+                onPress: () {
+                  ativo = !ativo;
+                  _refresh(ativo);
                 },
               ),
             ],
@@ -211,7 +236,7 @@ class ExtintorPage extends State<ExtintorState>
               const Duration(minutes: 1),
               () {
                 if (mounted) {
-                  _refresh();
+                  _refresh(ativo);
                 }
               },
             );
@@ -257,11 +282,12 @@ class ExtintorPage extends State<ExtintorState>
                     padding: const EdgeInsets.all(10.0),
                     height: 480,
                     decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: AssetImage('assets/image/modal.png'),
-                          fit: BoxFit.fill,
-                        ),
-                        borderRadius: BorderRadius.circular(10)),
+                      image: const DecorationImage(
+                        image: AssetImage('assets/image/modal.png'),
+                        fit: BoxFit.fill,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -384,7 +410,7 @@ class ExtintorPage extends State<ExtintorState>
                           margin: EdgeInsets.only(left: size.width * 0.05),
                           child: ListTile(
                             contentPadding: EdgeInsets.zero,
-                            leading: const Icon(Icons.trending_up_outlined,
+                            leading: const Icon(Icons.location_on_sharp,
                                 color: Colors.black54, size: 35),
                             title: const Text(
                               'Setor',
@@ -431,8 +457,86 @@ class ExtintorPage extends State<ExtintorState>
                                           const Color.fromARGB(255, 116, 7, 7),
                                     ),
                                     onPressed: () async => {
-                                      await controller
-                                          .gotoDeleteExtintor(item['id'])
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            contentPadding: EdgeInsets.zero,
+                                            content: Container(
+                                              decoration: BoxDecoration(
+                                                image: const DecorationImage(
+                                                  image: AssetImage(
+                                                      'assets/image/modal_qr.png'),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    const SizedBox(height: 10),
+                                                    const Align(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      child: Text(
+                                                        'Atenção',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 15),
+                                                    Container(
+                                                      margin:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: const Text(
+                                                        'Certeza que deseja excluir este extintor?',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 15,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        TextButton(
+                                                          child: const Text(
+                                                              'Confirmar'),
+                                                          onPressed: () {
+                                                            controller
+                                                                .gotoDeleteExtintor(
+                                                                    item['id']);
+                                                            Get.offAllNamed(
+                                                                '/dashboard');
+                                                          },
+                                                        ),
+                                                        TextButton(
+                                                          child: const Text(
+                                                              'Cancelar'),
+                                                          onPressed: () {
+                                                            Get.back();
+                                                          },
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      )
                                     },
                                     child: const Text(
                                       'Excluir',
@@ -501,7 +605,7 @@ class ExtintorPage extends State<ExtintorState>
                   child: Container(
                     decoration: BoxDecoration(
                       image: const DecorationImage(
-                        image: AssetImage('assets/image/card.png'),
+                        image: AssetImage('assets/image/card_extintor.png'),
                         fit: BoxFit.fill,
                       ),
                       borderRadius: BorderRadius.circular(10),
@@ -631,7 +735,7 @@ class ExtintorPage extends State<ExtintorState>
                                             CrossAxisAlignment.start,
                                         children: [
                                           const Text(
-                                            'Proxima Manutenção',
+                                            'Proxima Vistoria',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontStyle: FontStyle.italic,

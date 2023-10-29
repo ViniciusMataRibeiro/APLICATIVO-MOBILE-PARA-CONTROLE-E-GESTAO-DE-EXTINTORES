@@ -1,15 +1,13 @@
 // ignore_for_file: unused_field
-
-import 'package:faker/faker.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../../Icones/icones_personalizado.dart';
-import '../../../core/app_theme.dart';
 import '../../../data/services/auth/service.dart';
-import 'dart:ui' as ui;
-
 import 'extintores_setor_controller.dart';
+import 'package:flutter/material.dart';
+import '../../../core/app_theme.dart';
+import 'package:faker/faker.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
 List dados = [];
 
@@ -113,19 +111,16 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.back();
+                Get.offAllNamed('/dashboard');
               },
             ),
-            const SizedBox(
-              width: 5,
-            ),
             Container(
-              margin: const EdgeInsets.only(right: 0),
-              width: size.width * 0.05,
+              margin: EdgeInsets.only(right: size.width * 0.18),
               height: 40,
             ),
             Text(
-              'Extintores do ${controller.nomeSetor}',
+              '${controller.nomeSetor}',
+              textAlign: TextAlign.center,
               style: const TextStyle(
                   fontSize: 25,
                   color: Colors.white,
@@ -319,7 +314,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                           margin: EdgeInsets.only(left: size.width * 0.05),
                           child: const ListTile(
                             contentPadding: EdgeInsets.zero,
-                            leading: Icon(Icons.trending_up_outlined,
+                            leading: Icon(Icons.location_on_sharp,
                                 color: Colors.black54, size: 35),
                             title: Text(
                               'Setor',
@@ -431,7 +426,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
           },
           child: Container(
             margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
-            height: 180,
+            height: 195,
             child: Stack(
               children: [
                 Card(
@@ -571,7 +566,7 @@ class ExtintorSetorPage extends State<ExtintorSetorState>
                                             CrossAxisAlignment.start,
                                         children: [
                                           const Text(
-                                            'Proxima Manutenção',
+                                            'Proxima Vistoria',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontStyle: FontStyle.italic,

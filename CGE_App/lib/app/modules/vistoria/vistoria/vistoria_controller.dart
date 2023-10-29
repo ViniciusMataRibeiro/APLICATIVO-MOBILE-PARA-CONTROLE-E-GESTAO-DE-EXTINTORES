@@ -1,9 +1,9 @@
 import 'package:cge_app/app/data/Models/vistoria_request_model.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../../data/services/auth/service.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 class VistoriaController extends GetxController {
   final _authService = Get.find<AuthService>();
@@ -93,7 +93,7 @@ class VistoriaController extends GetxController {
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 4,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         textColor: Colors.white,
         fontSize: 15.0);
   }

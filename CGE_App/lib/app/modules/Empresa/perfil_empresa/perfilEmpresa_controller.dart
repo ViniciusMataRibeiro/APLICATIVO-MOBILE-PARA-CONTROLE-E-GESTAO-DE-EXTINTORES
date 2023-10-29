@@ -1,8 +1,6 @@
 // ignore_for_file: file_names
-
-import 'package:get/get.dart';
-
 import '../../../data/services/auth/service.dart';
+import 'package:get/get.dart';
 
 class PerfilEmpresaController extends GetxController {
   final _authService = Get.find<AuthService>();

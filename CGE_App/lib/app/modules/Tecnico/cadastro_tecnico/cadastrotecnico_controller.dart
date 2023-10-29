@@ -1,9 +1,8 @@
 import 'package:cge_app/app/data/Models/tecnico_request.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-
 import '../../../data/services/auth/service.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CadastroTecnicoController extends GetxController {
   final _authService = Get.find<AuthService>();
@@ -16,6 +15,7 @@ class CadastroTecnicoController extends GetxController {
   var password = TextEditingController(text: '');
   var bloqueado = false.obs;
   var alterando = false.obs;
+  var alterandoTexto = false;
   late Map _tecnico;
 
   @override
@@ -29,8 +29,10 @@ class CadastroTecnicoController extends GetxController {
       idTecnico = _tecnico['id'];
 
       alterando = true.obs;
+      alterandoTexto = true;
     } else {
       alterando = false.obs;
+      alterandoTexto = false;
     }
 
     super.onInit();
@@ -81,7 +83,7 @@ class CadastroTecnicoController extends GetxController {
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 4,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         textColor: Colors.white,
         fontSize: 15.0);
   }

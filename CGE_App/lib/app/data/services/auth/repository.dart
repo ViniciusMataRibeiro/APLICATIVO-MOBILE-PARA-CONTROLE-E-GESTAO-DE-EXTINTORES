@@ -30,7 +30,10 @@ class AuthRepository {
   Future<bool> updateTecnico(TecnicoRequestModel tecnico) =>
       _api.updateTecnico(tecnico);
 
-  Future<List> getTecnico() => _api.getTecnico();
+  Future<Map> getTecnico() => _api.getTecnico();
+
+    Future<bool> deleteTecnico(int idTecnico) =>
+      _api.deleteTecnico(idTecnico);
 
   Future<Map> getResumoSetor() => _api.getResumoSetor();
 
@@ -49,7 +52,8 @@ class AuthRepository {
   Future<bool> deleteExtintor(int idExtintor) =>
       _api.deleteExtintor(idExtintor);
 
-  Future<Map> getAllExtintor() => _api.getAllExtintor();
+  Future<Map> getAllExtintor(bool isAtivo) => _api.getAllExtintor(isAtivo);
+
 
   Future<Map> getExtintorSetor(int idSetor) => _api.getExtintorSetor(idSetor);
 

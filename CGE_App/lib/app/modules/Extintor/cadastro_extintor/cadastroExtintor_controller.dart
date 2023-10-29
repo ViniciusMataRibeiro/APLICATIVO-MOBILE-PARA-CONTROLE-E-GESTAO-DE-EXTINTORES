@@ -1,11 +1,11 @@
 // ignore_for_file: file_names
-
 import 'package:cge_app/app/data/Models/extintor_request_model.dart';
 import 'package:cge_app/app/data/services/auth/service.dart';
-import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import '../../../routes/routes.dart';
 import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 class CadastroExtintorController extends GetxController {
   final _authService = Get.find<AuthService>();
@@ -16,16 +16,15 @@ class CadastroExtintorController extends GetxController {
   String selectedTipo = '';
   int idSetor = 0;
   String nomeSetor = '';
+  bool isAtivo = true;
 
   var id = 0;
 
-  var nome = TextEditingController(text: '');
+  var nome = TextEditingController();
   var validadeCasco = TextEditingController(text: '');
   var validadeExtintor = TextEditingController(text: '');
   var proximaManutencao = TextEditingController(text: '');
   var descricao = TextEditingController(text: '');
-
-  var ativo = true.obs;
 
   List dadosExtintorTamanho = [];
   List dadosExtintorTipo = [];
@@ -44,7 +43,7 @@ class CadastroExtintorController extends GetxController {
       selectedTipo = _extintor['tipoExtintor'];
       idSetor = _extintor['setor_id'];
       nomeSetor = _extintor['setor'];
-      ativo = _extintor['ativo'] == 1 ? true.obs : false.obs;
+      isAtivo = _extintor['ativo'] == 1 ? true : false;
 
       dt = DateTime.parse(_extintor['validadeCasco']);
       dt2 = DateTime.parse(_extintor['validadeExtintor']);
@@ -81,27 +80,51 @@ class CadastroExtintorController extends GetxController {
 
     Map<String, dynamic> t2 = {
       "id": 2,
-      "nome": "Tipo BC",
+      "nome": "Tipo B",
     };
     dadosExtintorTipo.add(t2);
 
     Map<String, dynamic> t3 = {
       "id": 3,
-      "nome": "Tipo ABC",
+      "nome": "Tipo AB",
     };
     dadosExtintorTipo.add(t3);
 
     Map<String, dynamic> t4 = {
       "id": 4,
-      "nome": "Tipo K",
+      "nome": "Tipo BC",
     };
     dadosExtintorTipo.add(t4);
 
     Map<String, dynamic> t5 = {
       "id": 5,
-      "nome": "Tipo CO²",
+      "nome": "Tipo ABC",
     };
     dadosExtintorTipo.add(t5);
+
+    Map<String, dynamic> t6 = {
+      "id": 6,
+      "nome": "Tipo C",
+    };
+    dadosExtintorTipo.add(t6);
+
+    Map<String, dynamic> t7 = {
+      "id": 7,
+      "nome": "Tipo D",
+    };
+    dadosExtintorTipo.add(t7);
+
+    Map<String, dynamic> t8 = {
+      "id": 8,
+      "nome": "Tipo K",
+    };
+    dadosExtintorTipo.add(t8);
+
+    Map<String, dynamic> t9 = {
+      "id": 9,
+      "nome": "Tipo CO²",
+    };
+    dadosExtintorTipo.add(t9);
   }
 
   Future<Map> getSetores() async {
@@ -111,9 +134,9 @@ class CadastroExtintorController extends GetxController {
   }
 
   Future<String> goToInsert() async {
-    if (nome.text == '') {
-      return 'informe o numero do extintor';
-    }
+    // if (nome.text == '') {
+    //   return 'informe o numero do extintor';
+    // }
 
     if (selectedTamanho == '') {
       return 'informe o tamanho do extintor';
@@ -151,7 +174,7 @@ class CadastroExtintorController extends GetxController {
       proximaManutencao: DateFormat('dd/MM/yyyy').parse(data),
       tamanho: int.parse(selectedTamanho.replaceAll(RegExp(r'[^0-9]'), '')),
       tipo: selectedTipo,
-      ativo: true,
+      ativo: isAtivo,
       setor_id: idSetor,
       descricao: "Teste",
     );
@@ -160,6 +183,7 @@ class CadastroExtintorController extends GetxController {
 
     if (id > 0) {
       res = await _authService.updateExtintor(extintorResquestModel);
+
     } else {
       res = await _authService.insertExtintor(extintorResquestModel);
     }
@@ -173,9 +197,19 @@ class CadastroExtintorController extends GetxController {
         msg: message,
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 4,
-        backgroundColor: Colors.redAccent,
+        timeInSecForIosWeb: 3,
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         textColor: Colors.white,
         fontSize: 15.0);
+  }
+
+  Future<void> goToPrintOutQrCode(String result, String tipo, String nome, String tipoExtintor) async {
+    Map<String, dynamic> dados = {
+      "result": result,
+      "tipo": tipo,
+      "nome": nome,
+      "tipoExtintor": tipoExtintor,
+    };
+    await Get.toNamed(Routes.qrCodePrinter, arguments: dados);
   }
 }

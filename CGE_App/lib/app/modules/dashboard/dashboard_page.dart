@@ -1,15 +1,14 @@
-import 'package:cge_app/app/data/services/auth/service.dart';
-import 'package:cge_app/app/modules/Admin/admin_page.dart';
 import 'package:cge_app/app/modules/Extintor/extintores/extintores_page.dart';
 import 'package:cge_app/app/modules/Setor/setores/setores_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../Icones/icones_personalizado.dart';
+import 'package:cge_app/app/data/services/auth/service.dart';
+import 'package:cge_app/app/modules/Admin/admin_page.dart';
 import '../Empresa/perfil_empresa/perfilEmpresa_page.dart';
 import '../Tecnico/perfil_tecnico/perfilTecnico_page.dart';
+import '../../Icones/icones_personalizado.dart';
+import 'package:flutter/material.dart';
 import 'dashboard_Controller.dart';
+import 'package:get/get.dart';
 
 //ignore: must_be_immutable
 class DashboardPage extends GetView<DashboardController> {

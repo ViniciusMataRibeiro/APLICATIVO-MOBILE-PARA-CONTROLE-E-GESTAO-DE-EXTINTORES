@@ -1,14 +1,13 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:cge_app/app/core/app_theme.dart';
 import 'package:cge_app/app/modules/vistoria/vistoria/vistoria_controller.dart';
-import 'package:faker/faker.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
-import 'dart:ui' as ui;
-
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import '../../../Icones/icones_personalizado.dart';
+import 'package:cge_app/app/core/app_theme.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:flutter/material.dart';
+import 'package:faker/faker.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
 var newFormat = DateFormat("dd/MM/y");
 var dt = DateTime.now();
@@ -105,36 +104,47 @@ class Vistoria extends State<VistoriaState>
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.only(left: 0, right: 0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    width: size.width * 0.2,
+                    height: 40,
+                  ),
+                  const Text(
+                    'Vistoria',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              width: size.width * 0.15,
-              height: 40,
-            ),
-            const Text(
-              'Vistoria',
-              style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic),
-            ),
+            )
           ],
         ),
-        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
+        // shape: const RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.only(
+        //     bottomLeft: Radius.circular(25),
+        //     bottomRight: Radius.circular(25),
+        //   ),
+        // ),
       ),
       body: buildContainerCombo(),
     );
@@ -166,15 +176,16 @@ class Vistoria extends State<VistoriaState>
                           margin: const EdgeInsets.only(top: 30, bottom: 30),
                           decoration: const BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage('assets/image/cge.png'),
+                              image: AssetImage('assets/image/login.png'),
                             ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(100),
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 5,
+                                color: Colors.grey,
+                                offset: Offset(1, 0),
+                                blurRadius: 1,
                               ),
                             ],
                           ),
@@ -199,7 +210,7 @@ class Vistoria extends State<VistoriaState>
                                 color: Colors.black,
                               ),
                               title: const Text(
-                                "Data da Manutenção",
+                                "Data da Vistoria",
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -233,7 +244,8 @@ class Vistoria extends State<VistoriaState>
                                     fontSize: 20,
                                   ),
                                   prefixIcon: Padding(
-                                    padding: EdgeInsets.only(right: size.width*0.04),
+                                    padding: EdgeInsets.only(
+                                        right: size.width * 0.04),
                                     child: const Icon(
                                       Icones_Personalizado.place,
                                       color: Colors.black,
@@ -241,7 +253,8 @@ class Vistoria extends State<VistoriaState>
                                     ),
                                   ),
                                   suffixIcon: Padding(
-                                    padding: EdgeInsets.only(left: size.width*0.05),
+                                    padding: EdgeInsets.only(
+                                        left: size.width * 0.05),
                                     child: InkWell(
                                       onTap: () {
                                         showDialog(
@@ -262,11 +275,12 @@ class Vistoria extends State<VistoriaState>
                                                       BorderRadius.circular(10),
                                                 ),
                                                 child: Column(
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: [
                                                     const Align(
-                                                      alignment:
-                                                          Alignment.bottomCenter,
+                                                      alignment: Alignment
+                                                          .bottomCenter,
                                                       child: Text(
                                                         'Selecione o Setor',
                                                         style: TextStyle(
@@ -288,9 +302,10 @@ class Vistoria extends State<VistoriaState>
                                                             const AlwaysScrollableScrollPhysics(),
                                                         slivers: [
                                                           SliverFillRemaining(
-                                                            fillOverscroll: true,
-                                                            child:
-                                                                ListView.builder(
+                                                            fillOverscroll:
+                                                                true,
+                                                            child: ListView
+                                                                .builder(
                                                               itemCount:
                                                                   dadosSetor
                                                                       .length,
@@ -302,7 +317,8 @@ class Vistoria extends State<VistoriaState>
                                                                         index];
                                                                 return InkWell(
                                                                   onTap: () {
-                                                                    setState(() {
+                                                                    setState(
+                                                                        () {
                                                                       _selectItem(
                                                                           item,
                                                                           'setor',
@@ -311,9 +327,11 @@ class Vistoria extends State<VistoriaState>
                                                                     Navigator.pop(
                                                                         context);
                                                                   },
-                                                                  child: ListTile(
-                                                                    title: Text(item[
-                                                                        'nome']),
+                                                                  child:
+                                                                      ListTile(
+                                                                    title: Text(
+                                                                        item[
+                                                                            'nome']),
                                                                   ),
                                                                 );
                                                               },
@@ -359,7 +377,8 @@ class Vistoria extends State<VistoriaState>
                                     fontSize: 20,
                                   ),
                                   prefixIcon: Padding(
-                                    padding: EdgeInsets.only(right: size.width*0.04),
+                                    padding: EdgeInsets.only(
+                                        right: size.width * 0.04),
                                     child: const Icon(
                                       Icones_Personalizado.fire_extinguisher,
                                       color: Colors.black,
@@ -367,7 +386,8 @@ class Vistoria extends State<VistoriaState>
                                     ),
                                   ),
                                   suffixIcon: Padding(
-                                    padding: EdgeInsets.only(left: size.width*0.05),
+                                    padding: EdgeInsets.only(
+                                        left: size.width * 0.05),
                                     child: InkWell(
                                       onTap: () {
                                         showDialog(
@@ -388,11 +408,12 @@ class Vistoria extends State<VistoriaState>
                                                       BorderRadius.circular(10),
                                                 ),
                                                 child: Column(
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: [
                                                     const Align(
-                                                      alignment:
-                                                          Alignment.bottomCenter,
+                                                      alignment: Alignment
+                                                          .bottomCenter,
                                                       child: Text(
                                                         'Selecione o Extintor',
                                                         style: TextStyle(
@@ -414,21 +435,24 @@ class Vistoria extends State<VistoriaState>
                                                             const AlwaysScrollableScrollPhysics(),
                                                         slivers: [
                                                           SliverFillRemaining(
-                                                            fillOverscroll: true,
-                                                            child:
-                                                                ListView.builder(
+                                                            fillOverscroll:
+                                                                true,
+                                                            child: ListView
+                                                                .builder(
                                                               itemCount: controller
                                                                   .dadosExtintor
                                                                   .length,
                                                               itemBuilder:
                                                                   (context,
                                                                       index) {
-                                                                Map item = controller
-                                                                        .dadosExtintor[
-                                                                    index];
+                                                                Map item =
+                                                                    controller
+                                                                            .dadosExtintor[
+                                                                        index];
                                                                 return InkWell(
                                                                   onTap: () {
-                                                                    setState(() {
+                                                                    setState(
+                                                                        () {
                                                                       _selectItem(
                                                                           item,
                                                                           'extintor',
@@ -437,9 +461,11 @@ class Vistoria extends State<VistoriaState>
                                                                     Navigator.pop(
                                                                         context);
                                                                   },
-                                                                  child: ListTile(
-                                                                    title: Text(item[
-                                                                        'nome']),
+                                                                  child:
+                                                                      ListTile(
+                                                                    title: Text(
+                                                                        item[
+                                                                            'nome']),
                                                                   ),
                                                                 );
                                                               },
@@ -492,7 +518,7 @@ class Vistoria extends State<VistoriaState>
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   decoration: BoxDecoration(
                                     color: controller.isSelectmanometro
-                                        ? Colors.red
+                                        ? const Color.fromARGB(255, 116, 7, 7)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(5.0),
                                     border: controller.isSelectmanometro
@@ -539,7 +565,7 @@ class Vistoria extends State<VistoriaState>
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   decoration: BoxDecoration(
                                     color: controller.isSelectparede
-                                        ? Colors.red
+                                        ? const Color.fromARGB(255, 116, 7, 7)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(5.0),
                                     border: controller.isSelectparede
@@ -584,7 +610,7 @@ class Vistoria extends State<VistoriaState>
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   decoration: BoxDecoration(
                                     color: controller.isSelectpiso
-                                        ? Colors.red
+                                        ? const Color.fromARGB(255, 116, 7, 7)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(5.0),
                                     border: controller.isSelectpiso
@@ -629,7 +655,7 @@ class Vistoria extends State<VistoriaState>
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   decoration: BoxDecoration(
                                     color: controller.isSelectacesso
-                                        ? Colors.red
+                                        ? const Color.fromARGB(255, 116, 7, 7)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(5.0),
                                     border: controller.isSelectacesso
@@ -684,7 +710,7 @@ class Vistoria extends State<VistoriaState>
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   decoration: BoxDecoration(
                                     color: controller.isSelectmangueira
-                                        ? Colors.red
+                                        ? const Color.fromARGB(255, 116, 7, 7)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(5.0),
                                     border: controller.isSelectmangueira
@@ -739,7 +765,7 @@ class Vistoria extends State<VistoriaState>
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   decoration: BoxDecoration(
                                     color: controller.isSelectlacre
-                                        ? Colors.red
+                                        ? const Color.fromARGB(255, 116, 7, 7)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(5.0),
                                     border: controller.isSelectlacre

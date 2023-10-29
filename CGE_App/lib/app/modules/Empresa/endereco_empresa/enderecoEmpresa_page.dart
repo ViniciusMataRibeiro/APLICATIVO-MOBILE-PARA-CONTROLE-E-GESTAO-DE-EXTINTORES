@@ -1,11 +1,10 @@
 // ignore_for_file: file_names
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'enderecoEmpresa_controller.dart';
 import 'package:flutter/material.dart';
+import '../../../core/app_theme.dart';
 import 'package:get/get.dart';
 import 'dart:ui' as ui;
-
-import '../../../core/app_theme.dart';
-import 'enderecoEmpresa_controller.dart';
 
 class EnderecoEmpresaPage extends GetView<EnderecoEmpresaController> {
   const EnderecoEmpresaPage({super.key});
@@ -43,26 +42,39 @@ class EnderecoEmpresa extends State<EnderecoEmpresaState> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 175, 31, 21),
+        backgroundColor: const Color.fromARGB(255, 116, 7, 7),
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.only(left: 0, right: 0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    width: size.width * 0.08,
+                    height: 40,
+                  ),
+                  const Text(
+                    'Endereço Empresa',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              width: size.width * 0.05,
-              height: 40,
-            ),
+            )
           ],
         ),
         centerTitle: true,
@@ -83,22 +95,24 @@ class EnderecoEmpresa extends State<EnderecoEmpresaState> {
                   margin: const EdgeInsets.only(top: 20, bottom: 30),
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/image/cge.png'),
+                      image: AssetImage('assets/image/login.png'),
                     ),
                     borderRadius: BorderRadius.all(
                       Radius.circular(100),
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black,
-                        blurRadius: 10,
+                        color: Colors.grey,
+                        offset: Offset(1, 0),
+                        blurRadius: 1,
                       ),
                     ],
                   ),
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 20),
+                margin: const EdgeInsets.only(
+                    left: 15, right: 15, top: 10, bottom: 20),
                 child: Card(
                   elevation: 4.0,
                   child: Container(
@@ -348,7 +362,7 @@ class EnderecoEmpresa extends State<EnderecoEmpresaState> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
-                                    const Color.fromARGB(255, 175, 31, 21),
+                                    const Color.fromARGB(255, 116, 7, 7),
                                 fixedSize: const Size(250, 50),
                               ),
                               child: const Text(

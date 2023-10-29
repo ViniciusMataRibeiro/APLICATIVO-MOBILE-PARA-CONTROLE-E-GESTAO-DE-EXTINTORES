@@ -1,17 +1,15 @@
 // ignore_for_file: unused_field
-
-import 'package:cge_app/app/core/app_theme.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
+import '../../../data/services/auth/service.dart';
+import 'package:cge_app/app/core/app_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:faker/faker.dart';
-import 'package:intl/intl.dart';
-import 'dart:ui' as ui;
-
-import '../../../data/services/auth/service.dart';
 import '../../widget/gaficoSetor.dart';
+import 'package:faker/faker.dart';
 import 'setores_controller.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+import 'dart:ui' as ui;
 
 DateTime selectedDate = DateTime.now();
 String updatedDt = DateFormat("dd/MM/y").format(selectedDate);

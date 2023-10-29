@@ -1,11 +1,11 @@
-import 'extintores_details_controller.dart';
+import 'setor_details_controller.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class ExtintorDetailsBinding implements Bindings {
+class SetorDetailsBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ExtintorDetailsController>(() => ExtintorDetailsController());
+    Get.lazyPut<SetorDetailsController>(() => SetorDetailsController());
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 }

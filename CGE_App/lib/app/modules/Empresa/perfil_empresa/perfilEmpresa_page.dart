@@ -1,11 +1,9 @@
 // ignore_for_file: file_names
-
 import 'package:cge_app/app/modules/Empresa/perfil_empresa/perfilEmpresa_controller.dart';
+import '../../../data/services/auth/service.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
-
-import '../../../data/services/auth/service.dart';
 
 //ignore: must_be_immutable
 class PerfilPage extends GetView<PerfilEmpresaController> {
@@ -29,7 +27,7 @@ class PerfilPage extends GetView<PerfilEmpresaController> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 3.1,
+                height: MediaQuery.of(context).size.height / 2.7,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
