@@ -15,6 +15,7 @@ class CadastroTecnicoController extends GetxController {
   var password = TextEditingController(text: '');
   var bloqueado = false.obs;
   var alterando = false.obs;
+  var alterandoTexto = false;
   late Map _tecnico;
 
   @override
@@ -28,8 +29,10 @@ class CadastroTecnicoController extends GetxController {
       idTecnico = _tecnico['id'];
 
       alterando = true.obs;
+      alterandoTexto = true;
     } else {
       alterando = false.obs;
+      alterandoTexto = false;
     }
 
     super.onInit();

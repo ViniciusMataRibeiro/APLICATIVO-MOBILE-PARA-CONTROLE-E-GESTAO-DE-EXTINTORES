@@ -153,27 +153,6 @@ class ListTecnicoPage extends State<ListTecnicoState>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         _nome(item),
-                        // InkWell(
-                        //   onTap: () {
-                        //     // Get.toNamed(
-                        //     //   '/cadTecnico',
-                        //     //   arguments: item,
-                        //     // );
-                        //   },
-                        //   child: const Icon(Icons.edit, size: 30),
-                        // ),
-                        // InkWell(
-                        //   onTap: () {
-                        //     {
-                        //       controller.gotoDeleteTecnico(item['id']);
-                        //     }
-                        //   },
-                        //   child: const Icon(
-                        //     Ionicons.close_outline,
-                        //     size: 30,
-                        //     color: Color.fromARGB(255, 116, 7, 7),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
@@ -321,7 +300,16 @@ class ListTecnicoPage extends State<ListTecnicoState>
                                 const Color.fromARGB(255, 116, 7, 7),
                           ),
                           onPressed: () {
-                            controller.gotoDeleteTecnico(item['id']);
+                            setState(() {
+                              controller.gotoDeleteTecnico(item['id']);
+                              if(item['status'] == 'Inativo'){
+                                controller.toast('Tecnico Habilitado!');
+                              }
+                              else{
+                                controller.toast('Tecnico Desabilitado!');
+                              }
+                            });
+                            Get.offAllNamed('/perfil');
                           },
                           child: item['status'] == 'Inativo'
                               ? const Text(
@@ -375,91 +363,3 @@ Widget _nome(Map item) {
     ],
   );
 }
-
-// Widget _detalhes(Map item, ListTecnicoController controllerTecnico) {
-//   return Card(
-//     color: const Color.fromARGB(255, 242, 242, 242),
-//     margin: const EdgeInsets.all(10),
-//     child: Padding(
-//       padding: const EdgeInsets.all(10),
-//       child: Column(
-//         children: [
-//           const SizedBox(height: 10),
-//           const Row(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               Padding(
-//                 padding: EdgeInsets.only(left: 10),
-//                 child: Text(
-//                   "Status Extintor",
-//                   style: TextStyle(
-//                     fontSize: 20,
-//                     fontWeight: FontWeight.bold,
-//                     color: Colors.black,
-//                   ),
-//                   textAlign: TextAlign.center,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(height: 30),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Flexible(
-//                 flex: 5,
-//                 child: Padding(
-//                   padding: const EdgeInsets.only(left: 10),
-//                   child: Column(
-//                     children: [
-//                       const Text(
-//                         "Extintores Expirando",
-//                         textAlign: TextAlign.left,
-//                         style: TextStyle(
-//                           color: Colors.black,
-//                         ),
-//                       ),
-//                       Text(
-//                         item['qtdVistorias'] ?? 'Sem informação',
-//                         style: const TextStyle(
-//                           fontSize: 50,
-//                           color: Color.fromARGB(255, 255, 204, 77),
-//                         ),
-//                         textAlign: TextAlign.center,
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//               Flexible(
-//                 flex: 5,
-//                 child: Padding(
-//                   padding: const EdgeInsets.only(left: 10),
-//                   child: Column(
-//                     children: [
-//                       const Text(
-//                         "Extintores Expirados",
-//                         textAlign: TextAlign.left,
-//                         style: TextStyle(
-//                           color: Colors.black,
-//                         ),
-//                       ),
-//                       Text(
-//                         item['qtdVistorias'] ?? 'Sem informação',
-//                         style: const TextStyle(
-//                           fontSize: 50,
-//                           color: Color.fromARGB(255, 255, 0, 0),
-//                         ),
-//                         textAlign: TextAlign.center,
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     ),
-//   );
-// }
