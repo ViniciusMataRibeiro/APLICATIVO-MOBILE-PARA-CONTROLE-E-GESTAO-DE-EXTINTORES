@@ -672,7 +672,12 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                                               fontSize: 15,
                                             ),
                                           ),
-                                          item['apto']
+                                          item['manometro'] &&
+                                                  item['sinalizacaoParede'] &&
+                                                  item['sinalizacaoPiso'] &&
+                                                  item['acesso'] &&
+                                                  item['mangueira'] &&
+                                                  item['lacre']
                                               ? const Text(
                                                   'Sim',
                                                   style: TextStyle(
@@ -698,7 +703,12 @@ class ConsultaVistoriaPage extends State<ConsultaVistoriaState>
                             ],
                           ),
                         ),
-                        item['apto']
+                        item['manometro'] &&
+                                item['sinalizacaoParede'] &&
+                                item['sinalizacaoPiso'] &&
+                                item['acesso'] &&
+                                item['mangueira'] &&
+                                item['lacre']
                             ? Container(
                                 height: 3,
                                 color: Colors.green,
