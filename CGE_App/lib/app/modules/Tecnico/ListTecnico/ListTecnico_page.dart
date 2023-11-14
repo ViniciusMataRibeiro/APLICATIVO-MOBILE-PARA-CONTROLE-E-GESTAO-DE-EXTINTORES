@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 import '../../../data/services/auth/service.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:flutter/material.dart';
 import 'ListTecnico_controller.dart';
 import 'package:get/get.dart';

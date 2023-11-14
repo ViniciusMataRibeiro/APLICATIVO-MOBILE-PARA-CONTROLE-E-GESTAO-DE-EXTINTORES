@@ -1,4 +1,4 @@
-// ignore_for_file: unused_field
+// ignore_for_file: unused_field, no_leading_underscores_for_local_identifiers
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cge_app/app/core/app_theme.dart';
@@ -63,6 +63,7 @@ class CadastroExtintor extends State<CadastroExtintorState>
   Widget build(BuildContext context) {
     final FocusNode _field1FocusNode = FocusNode();
     final FocusNode _field2FocusNode = FocusNode();
+    // ignore: unused_local_variable
     bool isSelectbloqueado = cadastroTecnicoController.bloqueado.value;
     var size = MediaQuery.of(context).size;
     return Scaffold(

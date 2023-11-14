@@ -62,6 +62,8 @@ class ExtintorPage extends State<ExtintorState>
         return 'assets/image/ExtintorClassesD.png';
       case 'Tipo K':
         return 'assets/image/ExtintorClassesK.png';
+      case 'Tipo CO²':
+        return 'assets/image/ExtintorClassesCO2.png';
       default:
         return 'Imagem não encontrada';
     }
