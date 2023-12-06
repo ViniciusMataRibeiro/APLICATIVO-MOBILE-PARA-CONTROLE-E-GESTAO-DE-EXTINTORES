@@ -9,8 +9,8 @@ class LoginController extends GetxController {
   final _login = Get.find<AuthService>();
 
   var showPassword = true.obs;
-  var emailController = TextEditingController(text: 'elicarlos@email.com');
-  var passwordController = TextEditingController(text: '10205060');
+  var emailController = TextEditingController(text: 'gleison@email.com');
+  var passwordController = TextEditingController(text: '123456');
   bool get isLogged => _login.isLogged;
 
   void toggleShowPassword() {

@@ -5,13 +5,13 @@ import User from 'App/Models/User'
 export default class extends BaseSeeder {
   public async run () {
     const user = await User.create({
-      email: 'tecnico@email.com',
+      email: 'gleison@email.com',
       password: '123456',
       tipo: 'tecnico',
     })
     
     await Tecnico.create({
-      nome: 'Tecnico',
+      nome: 'Gleison',
       online: true,
       bloqueado: false,
       empresa_id: 1,
